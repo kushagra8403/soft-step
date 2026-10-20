@@ -442,7 +442,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ['corrupt', SRC.replace(RE, () => '<!--ss-catalog:start--><script type="application/json" id="ss-catalog">{"v":1,"ranges":{"zig":</script><!--ss-catalog:end-->')],
       ['missing', SRC.replace(RE, '')],
       ['wrong version', variant(c => { c.v = 2; c.ranges.zig.sizes[0].price = 1; })],
-      ['invalid fields', variant(c => { c.ranges.zig.sizes[0].price = 'abc'; c.ranges.sol.sizes[0].price = -5; c.ranges.zig.colours[0].stock = 'bogus'; c.ranges.zig.colours[1].bg = 'red'; c.ranges.chen.colours = 'x'; c.notice = 'x'; })],
+      ['invalid fields', variant(c => { c.ranges.zig.sizes[0].price = 'abc'; c.ranges.sol.sizes[0].price = -5; c.ranges.zig.sizes[0].dims = '<img src=x onerror=alert(1)>'; c.ranges.zig.sizes[0].weight = '<svg onload=alert(1)>'; c.ranges.zig.name = '<img src=x onerror=alert(1)>'; c.ranges.zig.colours[0].n = 'Forest green & black<img src=x onerror=alert(1)>'; c.ranges.zig.colours[0].stock = 'bogus'; c.ranges.zig.colours[1].bg = 'red'; c.ranges.chen.colours = 'x'; c.notice = 'x'; })],
     ]) {
       const L = 'fallback ' + name;
       const { ctx, page, log } = await open(b, s, { html });
@@ -450,6 +450,9 @@ async function checkout(page, { addSel, expectTotal, label }) {
       eq(r.sw, { zig: 10, sol: 6, chen: 10 }, L + ' swatches'); eq(r.price, ['₹249', '₹349', '₹299'], L + ' prices');
       eq(r.stockEls, 0, L + ' no stock marks'); eq(r.slides, 6, L + ' slides'); eq(r.pairs, 8, L + ' pairs');
       if (name === 'invalid fields') eq(await page.evaluate(() => document.querySelector('.prod[data-k="zig"] [data-n="Blush pink & black"]').dataset.bg), '#EBC4BD', L + ' bad colour kept default');
+      if (name === 'invalid fields') {
+        eq(await page.evaluate(() => ({ name: SS.P.zig.name, dims: SS.P.zig.sizes[0][1], weight: SS.P.zig.sizes[0][2], forest: !!document.querySelector('.prod[data-k="zig"] [data-n="Forest green & black"]'), injected: document.querySelectorAll('img[src="x"], svg[onload]').length })), { name: 'Multicolour Zigzag Rug', dims: '16×24 in', weight: '300 g', forest: true, injected: 0 }, L + ' rejects markup from catalogue labels and immutable size metadata');
+      }
       await checkout(page, { addSel: ['.prod[data-k="zig"] [data-add]'], expectTotal: 249, label: L });
       eq(errs(log), [], L + ' console clean');
       await ctx.close();
