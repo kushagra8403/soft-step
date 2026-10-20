@@ -519,6 +519,8 @@
     bed: { t: "Suggested: a 24×60 in XL runner along the side of the bed.", k: "zig", l: "XL" },
     kitchen: { t: "Suggested: a 24×60 in XL runner along the counter.", k: "sol", l: "XL" }
   };
+  /* Shared read-only fit suggestions; extras.js consumes this map rather than duplicating advice. */
+  try { SS.fitSug = SUG; } catch (e) {}
   var FN = { zig: "Zigzag", sol: "Solid Premium", chen: "Chenille" };
   var lastPick = null, patTok = 0, NH = {}, fitState = { spot: "main", size: "M" };
   function setLastPick(k, c) {
