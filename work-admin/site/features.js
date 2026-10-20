@@ -37,7 +37,7 @@
   /* A chenille chip's crop in the photo: data-ci (set by the core, so hiding a colour never shifts the others). */
   function chenIdx(c) {
     var i = -1, cc = cardOf("chen"); if (!cc) return 0;
-    $$$("[data-n]", cc).forEach(function (b, j) { if (b.dataset.n === c) i = b.hasAttribute("data-ci") ? +b.getAttribute("data-ci") : j; });
+    $$("[data-n]", cc).forEach(function (b, j) { if (b.dataset.n === c) i = b.hasAttribute("data-ci") ? +b.getAttribute("data-ci") : j; });
     return i;
   }
   /* Stock as the owner set it (the core's SS.stock); "in" when the core predates the catalog. */
@@ -178,9 +178,9 @@
   safe("index", function () {
     var grid = $("#cgrid"); if (!grid) return;
     var list = [];
-    $$$(".prod").forEach(function (p) {
+    $$(".prod").forEach(function (p) {
       var k = p.dataset.k;
-      $$$("[data-n]", p).forEach(function (b, i) {
+      $$("[data-n]", p).forEach(function (b, i) {
         var n = b.dataset.n, f = famOf(n, b.dataset.bg), fi = FAMORDER.indexOf(f);
         list.push({ k: k, n: n, i: b.hasAttribute("data-ci") ? +b.getAttribute("data-ci") : i, bg: b.dataset.bg, fam: f, ord: (fi < 0 ? 9 : fi) * 1000 + (KORDER[k] || 0) * 100 + i, img: $("img", b), st: stockOf(k, n) });
       });
@@ -198,7 +198,7 @@
         '<button type="button" class="heart tile-heart" aria-pressed="false" aria-label="' + esc("Save " + t.n + " " + P[t.k].name) + '">' + HEART + '</button>' +
       '</div>';
     }).join("");
-    $$$(".tile", grid).forEach(function (el, j) {
+    $$(".tile", grid).forEach(function (el, j) {
       var t = list[j]; t.el = el; tiles.push(t);
       $(".tb", el).addEventListener("click", function () { goToColour(t.k, t.n); });
       $(".tile-heart", el).addEventListener("click", function () { toggleSaved(t.k, t.n); });
@@ -208,7 +208,7 @@
     var fam = $("#fam"), live = $("#fam-live");
     if (!fam) return;
     /* Counts follow the colours on show; a family with none left is dropped. */
-    $$$('[role="radio"]', fam).forEach(function (c) {
+    $$('[role="radio"]', fam).forEach(function (c) {
       var f = c.dataset.fam, n = f === "all" ? tiles.length : tiles.filter(function (t) { return t.fam === f; }).length, ns = $(".n", c);
       if (ns && ns.textContent !== String(n)) ns.textContent = n;
       if (!n && f !== "all") c.remove();
@@ -274,7 +274,7 @@
       if (btn) btn.setAttribute("aria-label", "Saved colours, " + n);
     });
     tiles.forEach(function (t) { var h = $(".tile-heart", t.el); if (h) h.setAttribute("aria-pressed", isSaved(t.k, t.n) ? "true" : "false"); });
-    $$$(".prod").forEach(function (p) { syncCardHeart(p, p.dataset.k); });
+    $$(".prod").forEach(function (p) { syncCardHeart(p, p.dataset.k); });
     syncHeroHeart();
     if (savedDlg && savedDlg.open) renderSaved();
   }
@@ -302,7 +302,7 @@
     }).join("");
     if (empty) empty.hidden = items.length > 0;
     if (foot) foot.hidden = !items.length;
-    $$$(".srow", list).forEach(function (row, j) {
+    $$(".srow", list).forEach(function (row, j) {
       var x = items[j], mini = $(".mini", row), bs = $$(".msz", mini);
       /* A colour or size that cannot be bought says so, and its Add button is off (the footer still asks Jelam). */
       function mark(si) {
@@ -345,7 +345,7 @@
     try { f.focus(); } catch (e) {}
   }
   safe("saved", function () {
-    $$$("[data-save]").forEach(function (h) {
+    $$("[data-save]").forEach(function (h) {
       h.addEventListener("click", function () { var p = h.closest(".prod"); if (p) toggleSaved(p.dataset.k, curColour(p)); });
     });
     var hs = $("#h-save");
@@ -412,7 +412,7 @@
   function pickDock() {
     if (!dock) return;
     var best = null, bd = 1e9;
-    if (!dockBlocked()) $$$(".prod").forEach(function (p) {
+    if (!dockBlocked()) $$(".prod").forEach(function (p) {
       if (cardVis.get(p) && addVis.get(p) === false) {
         var r = p.getBoundingClientRect(), d = Math.abs((r.top + r.bottom) / 2 - window.innerHeight / 2);
         if (d < bd) { bd = d; best = p; }
@@ -430,7 +430,7 @@
     var ioC = makeIO(function (es) { es.forEach(function (e) { cardVis.set(e.target, e.isIntersecting && e.intersectionRatio >= 0.299); }); pickDock(); }, { threshold: [0, 0.3] });
     var ioA = makeIO(function (es) { es.forEach(function (e) { addVis.set(e.target.closest(".prod"), e.isIntersecting); }); pickDock(); }, { threshold: 0, rootMargin: "-56px 0px -84px 0px" });
     if (!ioC || !ioA) return;
-    $$$(".prod").forEach(function (p) { ioC.observe(p); var a = $("[data-add]", p); if (a) ioA.observe(a); });
+    $$(".prod").forEach(function (p) { ioC.observe(p); var a = $("[data-add]", p); if (a) ioA.observe(a); });
     $("#dock-add").addEventListener("click", function () { var a = dockCard && $("[data-add]", dockCard); if (a) a.click(); });
     onMq(PHONE, pickDock);
   });
@@ -589,7 +589,7 @@
     var fl = $("#floors"), floor = $("#floor"), FB = { marble: "#ECE9E3", kota: "#7D8A78", wood: "#A0714B", tile: "#A7ABAE", oxide: "#8E3B2E" };
     if (fl && floor) {
       var pickFloor = function (b) { SS.radio(fl, b); var f = b.dataset.floor; floor.style.fill = "url(#fl-" + f + ") " + (FB[f] || "#ECE9E3"); };
-      $$$('[role="radio"]', fl).forEach(function (b) { b.addEventListener("click", function () { pickFloor(b); }); });
+      $$('[role="radio"]', fl).forEach(function (b) { b.addEventListener("click", function () { pickFloor(b); }); });
       SS.arrows(fl, pickFloor);
     }
     /* Compare all sizes: dashed outlines for M, L, XL and the H arc, labelled in SVG text. */
@@ -631,7 +631,7 @@
   /* ---------- Dialogs: backdrop close, close buttons, copy, dock ---------- */
   safe("dialogs", function () {
     function outside(d, e) { var r = d.getBoundingClientRect(); return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom; }
-    $$$("dialog").forEach(function (d) {
+    $$("dialog").forEach(function (d) {
       var down = false;
       d.addEventListener("pointerdown", function (e) { down = e.target === d && outside(d, e); });
       d.addEventListener("click", function (e) {
@@ -730,7 +730,7 @@
     onRendered(parseInt(($("#cnt") || {}).textContent, 10) || 0);
     if ($("#v-cart .line")) SS.render();
     syncSaved();
-    $$$(".prod").forEach(function (p) { syncCard(p, p.dataset.k); });
+    $$(".prod").forEach(function (p) { syncCard(p, p.dataset.k); });
     var sl = SS.SLIDES[SS.getHi()]; if (sl) setLastPick(sl.k, sl.c);
     var sp = $('#spots [aria-checked="true"]'); if (sp) sp.click(); else onFit(null, { kind: "door", w: 36 }, FS.M);
     var dr = $("#drawer"); if (dr && !dr.hidden) onDrawer(true);
