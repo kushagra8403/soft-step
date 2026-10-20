@@ -340,7 +340,7 @@
     label();
   }
   function markColour() {
-    var b = $$('[role="radio"]', sw).filter(function (x) { return x.dataset.n === st.c; })[0];
+    var b = $$$('[role="radio"]', sw).filter(function (x) { return x.dataset.n === st.c; })[0];
     if (!b) return;
     SS.radio(sw, b);
     sw.scrollLeft = b.offsetLeft - sw.clientWidth / 2 + b.offsetWidth / 2;
