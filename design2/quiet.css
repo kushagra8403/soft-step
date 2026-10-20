@@ -7,6 +7,7 @@
   --kora:#F5F3EE;        /* page ground: warm white paper (OKLCH C .007) */
   --kora-2:#E5DFD5;      /* stone: plinths and inset panels (order, made, pair plinth, tags) */
   --chalk:#FDFCFA;       /* cards, drawer, dialogs, inputs; text on dark. The only white. */
+  --fg:#FDFCFA;--on:#1F1B18; /* field-on-dark and field-on-light text defaults */
   --kajal:#1F1B18;       /* ink: all text on light */
   --mitti:#5F5750;       /* secondary text (>=5.3:1 on every light ground incl. stone) */
   --sut:#E0D9CE;         /* hairlines, decorative only */
