@@ -49,6 +49,7 @@ async function open(b, s, o = {}) {
   }, { lang: o.lang, cart: o.cart, saved: o.saved, claude: o.claude });
   await page.goto(s.url + 'softsteps.html' + (o.hash || ''), { waitUntil: 'load', timeout: 90000 });
   await page.waitForTimeout(o.wait || 1500);
+  if (!(await page.evaluate(() => !!window.SS))) throw new Error('window.SS missing after startup: ' + errs(log).join(' | '));
   return { ctx, page, log, reqs };
 }
 function errs(log) { return log.filter(l => !/REQFAIL.*(img|\.jpg|\.webp|\.avif|_blob)/.test(l)); }
