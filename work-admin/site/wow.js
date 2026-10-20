@@ -402,12 +402,20 @@
     lastOid=orderId();near(box,insertWhenSafe,"400px 0px");idle(insertWhenSafe);
   })();
 
-  /* A language switch should not leave the aria-hidden brushing hint in the old language. */
+  /* Keep visual-only instructions translated even if the language bundle finishes loading after wow.js. */
+  function translateVisualHints(){
+    try {
+      if(!W.SSLANG)return;
+      var c=W.SSLANG.get(),d=W.SSI18N&&W.SSI18N[c];if(!d||!d.text)return;
+      var h=$("#r-sol .wow-hint span"),t=$("#stack .wow-tap"),w=$("#sentbox .wow-wb");
+      if(h&&d.text["Stroke the pile"])h.textContent=d.text["Stroke the pile"];
+      if(t&&d.text["Tap the mat to step on it"])t.textContent=d.text["Tap the mat to step on it"];
+      if(w&&d.text["Welcome back."])w.textContent=d.text["Welcome back."];
+    }catch(e){}
+  }
   try {
-    var langMO = new MutationObserver(function () {
-      var h=$("#r-sol .wow-hint span"); if(!h||!W.SSLANG)return;
-      var c=W.SSLANG.get(),d=W.SSI18N&&W.SSI18N[c]; if(d&&d.text&&d.text["Stroke the pile"])h.textContent=d.text["Stroke the pile"];
-    });
+    var langMO = new MutationObserver(translateVisualHints);
     langMO.observe(D.documentElement,{attributes:true,attributeFilter:["lang"]});
+    setTimeout(translateVisualHints,250);setTimeout(translateVisualHints,1100);
   } catch(e) {}
 })();
