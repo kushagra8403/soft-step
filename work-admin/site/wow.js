@@ -220,7 +220,8 @@
     if(!fit||!svg||!ch||!feet||!mat)return;
     var ready=false,planVisible=false,firstPlayed=false,lastSpot=null,walk=null,chInner=null,ftInner=null,prints=null,allAnims=[];
     function make(){
-      if(ready||RM.matches||typeof Element.prototype.animate!=="function")return;
+      if(ready)return true;
+      if(RM.matches||typeof Element.prototype.animate!=="function")return false;
       ready=true;
       chInner=svgEl("g");chInner.setAttribute("class","wow-ch");while(ch.firstChild)chInner.appendChild(ch.firstChild);ch.appendChild(chInner);
       ftInner=svgEl("g");ftInner.setAttribute("class","wow-ft");while(feet.firstChild)ftInner.appendChild(feet.firstChild);feet.appendChild(ftInner);
@@ -230,6 +231,7 @@
         rect.setAttribute("transform",i%2?"rotate(6 44.2 20)":"rotate(-6 39.8 20)");walk.appendChild(rect);
       }
       svg.insertBefore(walk,ch);
+      return true;
     }
     function finishAll(){
       allAnims.forEach(function(a){try{a.cancel();}catch(e){}});allAnims=[];
@@ -263,7 +265,7 @@
     var io;
     try{
       io=new IntersectionObserver(function(es){es.forEach(function(e){
-        if(e.intersectionRatio===0){planVisible=false;if(allAnims.length)finishAll();return;}
+        if(e.intersectionRatio===0){planVisible=false;finishAll();return;}
         planVisible=e.intersectionRatio>=.5;
         if(e.intersectionRatio>=.5&&!firstPlayed){firstPlayed=true;make();play(false);}
       });},{threshold:[0,.05,.5]});
