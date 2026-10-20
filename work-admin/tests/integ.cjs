@@ -200,7 +200,7 @@ async function checkout(page, L, picks, total, lines) {
   const sum = await page.evaluate(() => document.querySelector('#tot').textContent);
   await page.fill('#o-name', 'Test Buyer'); await page.fill('#o-ph', '9876543210'); await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
   await page.fill('#o-ct', 'Vadodara'); await page.fill('#o-pin', '390007');
-  await page.click('#order-btn', { timeout: 8000 }); await page.waitForSelector('#v-pay:not([hidden])', { timeout: 8000 });
+  await page.waitForTimeout(400); await page.click('#order-btn', { timeout: 8000 }); await page.waitForSelector('#v-pay:not([hidden])', { timeout: 8000 });
   const r = await page.evaluate(() => ({ wa: decodeURIComponent((document.querySelector('#sendwa').href.split('text=')[1]) || ''), upi: document.querySelector('#upil').href, amt: document.querySelector('#payamt').textContent }));
   const n = total.toLocaleString('en-IN');
   ok(sum.includes('₹' + n), L + ' details total ₹' + n, sum);
