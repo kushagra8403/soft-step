@@ -46,9 +46,9 @@ jobs:
           node - <<'NODE'
           const fs = require('fs');
           const html = fs.readFileSync('work-admin/site/softsteps.html', 'utf8');
-          const root = html.match(/:root\\s*\\{([^}]+)\\}/);
+          const root = html.match(/:root\s*\{([^}]+)\}/);
           if (!root) throw new Error('Missing palette root');
-          const vars = Object.fromEntries([...root[1].matchAll(/(--[\\w-]+)\\s*:\\s*(#[0-9a-fA-F]{3,8})/g)].map(m => [m[1], m[2]]));
+          const vars = Object.fromEntries([...root[1].matchAll(/(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{3,8})/g)].map(m => [m[1], m[2]]));
           function rgb(h) { let x=h.slice(1); if(x.length===3)x=x.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(x.slice(i,i+2),16)); }
           function lum(h) { return rgb(h).map(v=>v/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0); }
           function ratio(a,b) { const x=lum(a),y=lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); }
