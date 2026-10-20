@@ -1,0 +1,470 @@
+[
+ {
+  "kind": "text",
+  "en": "Pay",
+  "gu": "પેમેન્ટ કરો:",
+  "hi": "पेमेंट करें:"
+ },
+ {
+  "kind": "text",
+  "en": "by UPI to the ID below.",
+  "gu": "— નીચે આપેલા UPI ID પર.",
+  "hi": "— नीचे दी गई UPI ID पर।"
+ },
+ {
+  "kind": "rich",
+  "en": "Colours that <em>go together</em>",
+  "gu": "સાથે <em>શોભે એવા રંગ</em>",
+  "hi": "साथ में <em>जंचने वाले रंग</em>"
+ },
+ {
+  "kind": "text",
+  "en": "A mat for the door and one for the bathroom, in shades that suit each other. Add both in one tap.",
+  "gu": "એક મેટ દરવાજા માટે અને એક બાથરૂમ માટે, એકબીજાને શોભે એવા રંગમાં. એક ટૅપમાં બંને ઉમેરો.",
+  "hi": "एक मैट दरवाज़े के लिए और एक बाथरूम के लिए, ऐसे रंगों में जो एक-दूसरे पर जंचें। एक टैप में दोनों जोड़ें।"
+ },
+ {
+  "kind": "text",
+  "en": "Door",
+  "gu": "દરવાજો",
+  "hi": "दरवाज़ा"
+ },
+ {
+  "kind": "text",
+  "en": "Bath",
+  "gu": "બાથરૂમ",
+  "hi": "बाथरूम"
+ },
+ {
+  "kind": "pattern",
+  "en": "Add both · {price}",
+  "gu": "બંને ઉમેરો · {price}",
+  "hi": "दोनों जोड़ें · {price}"
+ },
+ {
+  "kind": "text",
+  "en": "Added both mats",
+  "gu": "બંને મેટ કાર્ટમાં ઉમેરી",
+  "hi": "दोनों मैट कार्ट में जुड़ गए"
+ },
+ {
+  "kind": "text",
+  "en": "Calm blues",
+  "gu": "શાંત વાદળી",
+  "hi": "शांत नीले"
+ },
+ {
+  "kind": "text",
+  "en": "Deep navy at the door, clear aqua by the bath. One family, two moods.",
+  "gu": "દરવાજે ઘેરો નેવી, બાથરૂમ પાસે ખુલ્લો એક્વા. એક જ રંગ-પરિવાર, બે મિજાજ.",
+  "hi": "दरवाज़े पर गहरा नेवी, बाथरूम के पास खिला एक्वा। एक ही रंग-परिवार, दो मिज़ाज।"
+ },
+ {
+  "kind": "text",
+  "en": "Green & rust",
+  "gu": "લીલો અને રસ્ટ",
+  "hi": "हरा और रस्ट"
+ },
+ {
+  "kind": "text",
+  "en": "Opposites on the colour wheel, so each makes the other look richer.",
+  "gu": "રંગચક્રમાં સામસામે, એટલે બંને એકબીજાને વધુ ખીલવે છે.",
+  "hi": "रंग-चक्र में आमने-सामने, इसलिए दोनों एक-दूसरे को और निखारते हैं।"
+ },
+ {
+  "kind": "text",
+  "en": "Blue & mustard",
+  "gu": "વાદળી અને મસ્ટર્ડ",
+  "hi": "नीला और मस्टर्ड"
+ },
+ {
+  "kind": "text",
+  "en": "The classic bright pair. Bold at the door, sunny in the bathroom.",
+  "gu": "જાણીતી ચમકદાર જોડી. દરવાજે ઘેરો, બાથરૂમમાં ખુશનુમા.",
+  "hi": "जानी-मानी चटख जोड़ी। दरवाज़े पर गहरा, बाथरूम में खिला-खिला।"
+ },
+ {
+  "kind": "text",
+  "en": "Warm earth",
+  "gu": "માટીના હૂંફાળા રંગ",
+  "hi": "मिट्टी के गर्म रंग"
+ },
+ {
+  "kind": "text",
+  "en": "Cocoa and gold, the warm browns of tea and jaggery.",
+  "gu": "કોકો અને સોનેરી, ચા અને ગોળ જેવા હૂંફાળા કથ્થઈ રંગ.",
+  "hi": "कोको और सुनहरा, चाय और गुड़ जैसे गर्म भूरे रंग।"
+ },
+ {
+  "kind": "text",
+  "en": "Soft rose",
+  "gu": "કોમળ ગુલાબી",
+  "hi": "कोमल गुलाबी"
+ },
+ {
+  "kind": "text",
+  "en": "Blush pink brings warmth; plain grey keeps it calm.",
+  "gu": "આછો ગુલાબી હૂંફ લાવે, સાદો ગ્રે એને શાંત રાખે.",
+  "hi": "हल्का गुलाबी गर्माहट लाता है, सादा ग्रे उसे शांत रखता है।"
+ },
+ {
+  "kind": "text",
+  "en": "Olive & burnt orange",
+  "gu": "ઓલિવ અને ઘેરો નારંગી",
+  "hi": "ऑलिव और गहरा नारंगी"
+ },
+ {
+  "kind": "text",
+  "en": "Earthy olive with a deep mustard. Made for wooden doors.",
+  "gu": "માટી જેવો ઓલિવ અને ઘેરો મસ્ટર્ડ. લાકડાના દરવાજા માટે એકદમ યોગ્ય.",
+  "hi": "मिट्टी जैसा ऑलिव और गहरा मस्टर्ड। लकड़ी के दरवाज़ों पर खूब जंचता है।"
+ },
+ {
+  "kind": "text",
+  "en": "Berry & grey",
+  "gu": "બેરી અને ગ્રે",
+  "hi": "बेरी और ग्रे"
+ },
+ {
+  "kind": "text",
+  "en": "A rich berry stripe, steadied by grey and black.",
+  "gu": "ઘેરા બેરી પટ્ટા, ગ્રે અને કાળા સાથે સંતુલિત.",
+  "hi": "गहरी बेरी धारियाँ, ग्रे और काले के साथ संतुलित।"
+ },
+ {
+  "kind": "text",
+  "en": "Quiet neutrals",
+  "gu": "સાદા, શાંત રંગ",
+  "hi": "सादे, शांत रंग"
+ },
+ {
+  "kind": "text",
+  "en": "Black, grey and beige suit any floor and any wall.",
+  "gu": "કાળો, ગ્રે અને બેજ કોઈ પણ ફરસ અને દીવાલ સાથે શોભે.",
+  "hi": "काला, ग्रे और बेज किसी भी फ़र्श और दीवार पर जंचते हैं।"
+ },
+ {
+  "kind": "pattern",
+  "en": "· from {price}",
+  "gu": "· {price}થી શરૂ",
+  "hi": "· {price} से"
+ },
+ {
+  "kind": "text",
+  "en": "See it at your door",
+  "gu": "તમારા દરવાજે મૂકીને જુઓ",
+  "hi": "अपने दरवाज़े पर रखकर देखें"
+ },
+ {
+  "kind": "text",
+  "en": "New photo",
+  "gu": "નવો ફોટો",
+  "hi": "नई फ़ोटो"
+ },
+ {
+  "kind": "text",
+  "en": "Take a photo of your doorway or floor from standing height. Your photo stays on your phone.",
+  "gu": "ઊભા ઊભા તમારા દરવાજા કે ફરસનો ફોટો લો. તમારો ફોટો તમારા ફોનમાં જ રહે છે.",
+  "hi": "खड़े होकर अपने दरवाज़े या फ़र्श की फ़ोटो लें। आपकी फ़ोटो आपके फ़ोन में ही रहती है।"
+ },
+ {
+  "kind": "text",
+  "en": "Take a photo",
+  "gu": "ફોટો લો",
+  "hi": "फ़ोटो लें"
+ },
+ {
+  "kind": "text",
+  "en": "Choose from gallery",
+  "gu": "ગેલેરીમાંથી પસંદ કરો",
+  "hi": "गैलरी से चुनें"
+ },
+ {
+  "kind": "text",
+  "en": "Choose a photo",
+  "gu": "ફોટો પસંદ કરો",
+  "hi": "फ़ोटो चुनें"
+ },
+ {
+  "kind": "text",
+  "en": "Try a sample floor",
+  "gu": "નમૂનાની ફરસ પર જુઓ",
+  "hi": "सैंपल फ़र्श पर देखें"
+ },
+ {
+  "kind": "text",
+  "en": "Drag the corners to the edges of your floor. Screenshot to share.",
+  "gu": "ખૂણા ખેંચીને ફરસની કિનારી સુધી લાવો. શેર કરવા સ્ક્રીનશોટ લો.",
+  "hi": "कोनों को खींचकर फ़र्श के किनारों तक लाएँ। शेयर करने के लिए स्क्रीनशॉट लें।"
+ },
+ {
+  "kind": "attr",
+  "en": "Sample floor",
+  "gu": "નમૂનાની ફરસ",
+  "hi": "सैंपल फ़र्श"
+ },
+ {
+  "kind": "attr",
+  "en": "Far left corner of the rug",
+  "gu": "રગનો દૂરનો ડાબો ખૂણો",
+  "hi": "रग का दूर वाला बायाँ कोना"
+ },
+ {
+  "kind": "attr",
+  "en": "Far right corner of the rug",
+  "gu": "રગનો દૂરનો જમણો ખૂણો",
+  "hi": "रग का दूर वाला दायाँ कोना"
+ },
+ {
+  "kind": "attr",
+  "en": "Near right corner of the rug",
+  "gu": "રગનો નજીકનો જમણો ખૂણો",
+  "hi": "रग का पास वाला दायाँ कोना"
+ },
+ {
+  "kind": "attr",
+  "en": "Near left corner of the rug",
+  "gu": "રગનો નજીકનો ડાબો ખૂણો",
+  "hi": "रग का पास वाला बायाँ कोना"
+ },
+ {
+  "kind": "text",
+  "en": "Drag it, or use the arrow keys. Hold Shift to move further.",
+  "gu": "ખેંચીને ખસેડો, અથવા એરો કી વાપરો. વધુ ખસેડવા Shift દબાવી રાખો.",
+  "hi": "इसे खींचें, या ऐरो बटन दबाएँ। ज़्यादा खिसकाने के लिए Shift दबाकर रखें।"
+ },
+ {
+  "kind": "text",
+  "en": "Light",
+  "gu": "અજવાળું",
+  "hi": "रोशनी"
+ },
+ {
+  "kind": "text",
+  "en": "Hide handles",
+  "gu": "ટપકાં છુપાવો",
+  "hi": "हैंडल छिपाएँ"
+ },
+ {
+  "kind": "attr",
+  "en": "Range",
+  "gu": "પ્રકાર",
+  "hi": "रेंज"
+ },
+ {
+  "kind": "attr",
+  "en": "Colour",
+  "gu": "રંગ",
+  "hi": "रंग"
+ },
+ {
+  "kind": "pattern",
+  "en": "{product} in {colour}, size {size}",
+  "gu": "{colour} રંગમાં {product}, સાઇઝ {size}",
+  "hi": "{colour} रंग में {product}, साइज़ {size}"
+ },
+ {
+  "kind": "text",
+  "en": "That photo would not open here. Try a JPG or PNG.",
+  "gu": "આ ફોટો અહીં ખૂલતો નથી. JPG કે PNG ફોટો અજમાવો.",
+  "hi": "यह फ़ोटो यहाँ नहीं खुल रही। JPG या PNG फ़ोटो आज़माएँ।"
+ },
+ {
+  "kind": "text",
+  "en": "That file is not a photo. Choose a JPG or PNG.",
+  "gu": "આ ફાઇલ ફોટો નથી. JPG કે PNG પસંદ કરો.",
+  "hi": "यह फ़ाइल फ़ोटो नहीं है। JPG या PNG चुनें।"
+ },
+ {
+  "kind": "text",
+  "en": "The sample floor would not draw here.",
+  "gu": "નમૂનાની ફરસ અહીં દેખાડી શકાતી નથી.",
+  "hi": "सैंपल फ़र्श यहाँ नहीं दिख पा रहा।"
+ },
+ {
+  "kind": "attr",
+  "en": "Your photo",
+  "gu": "તમારો ફોટો",
+  "hi": "आपकी फ़ोटो"
+ },
+ {
+  "kind": "attr",
+  "en": "Sample doorway with a white marble floor",
+  "gu": "સફેદ માર્બલની ફરસ સાથે નમૂનાનો દરવાજો",
+  "hi": "सफ़ेद मार्बल फ़र्श वाला सैंपल दरवाज़ा"
+ },
+ {
+  "kind": "attr",
+  "en": "Sample doorway with a kota stone floor",
+  "gu": "કોટા સ્ટોનની ફરસ સાથે નમૂનાનો દરવાજો",
+  "hi": "कोटा स्टोन फ़र्श वाला सैंपल दरवाज़ा"
+ },
+ {
+  "kind": "attr",
+  "en": "Sample doorway with a wood floor",
+  "gu": "લાકડાની ફરસ સાથે નમૂનાનો દરવાજો",
+  "hi": "लकड़ी के फ़र्श वाला सैंपल दरवाज़ा"
+ },
+ {
+  "kind": "pattern",
+  "en": "Added {colour}, {size} · {price}",
+  "gu": "{colour}, {size} · {price} કાર્ટમાં ઉમેર્યું",
+  "hi": "{colour}, {size} · {price} कार्ट में जुड़ गया"
+ },
+ {
+  "kind": "pattern",
+  "en": "Added {colour}, {size} · {price}. Cart: {n} item",
+  "gu": "{colour}, {size} · {price} ઉમેર્યું. કાર્ટમાં: {n} વસ્તુ",
+  "hi": "{colour}, {size} · {price} जुड़ गया। कार्ट में: {n} आइटम"
+ },
+ {
+  "kind": "pattern",
+  "en": "Added {colour}, {size} · {price}. Cart: {n} items",
+  "gu": "{colour}, {size} · {price} ઉમેર્યું. કાર્ટમાં: {n} વસ્તુઓ",
+  "hi": "{colour}, {size} · {price} जुड़ गया। कार्ट में: {n} आइटम"
+ },
+ {
+  "kind": "text",
+  "en": "Try it on a photo of your floor",
+  "gu": "તમારી ફરસના ફોટા પર મૂકીને જુઓ",
+  "hi": "अपने फ़र्श की फ़ोटो पर रखकर देखें"
+ },
+ {
+  "kind": "text",
+  "en": "View cart",
+  "gu": "કાર્ટ જુઓ",
+  "hi": "कार्ट देखें"
+ },
+ {
+  "kind": "pattern",
+  "en": "{size} ({dims}) shown at {pc}% so it fits on screen",
+  "gu": "{size} ({dims}) સ્ક્રીનમાં સમાય એ માટે {pc}% માપમાં બતાવ્યું છે",
+  "hi": "{size} ({dims}) स्क्रीन में समाने के लिए {pc}% आकार में दिखाया गया है"
+ },
+ {
+  "kind": "text",
+  "en": "Few left",
+  "gu": "થોડા જ બાકી",
+  "hi": "कुछ ही बचे हैं"
+ },
+ {
+  "kind": "text",
+  "en": "Out of stock",
+  "gu": "સ્ટોકમાં નથી",
+  "hi": "स्टॉक में नहीं"
+ },
+ {
+  "kind": "text",
+  "en": "Now out of stock",
+  "gu": "હવે સ્ટોકમાં નથી",
+  "hi": "अब स्टॉक में नहीं"
+ },
+ {
+  "kind": "text",
+  "en": "Out of stock · Ask on WhatsApp",
+  "gu": "સ્ટોકમાં નથી · WhatsApp પર પૂછો",
+  "hi": "स्टॉक में नहीं · WhatsApp पर पूछें"
+ },
+ {
+  "kind": "text",
+  "en": "Sorry, this one is out of stock right now",
+  "gu": "માફ કરશો, આ હમણાં સ્ટોકમાં નથી",
+  "hi": "माफ़ कीजिए, यह अभी स्टॉक में नहीं है"
+ },
+ {
+  "kind": "text",
+  "en": "Remove the out-of-stock items to continue.",
+  "gu": "આગળ વધવા માટે સ્ટોકમાં ન હોય એવી વસ્તુઓ હટાવો.",
+  "hi": "आगे बढ़ने के लिए जो चीज़ें स्टॉक में नहीं हैं, उन्हें हटाएँ।"
+ },
+ {
+  "kind": "text",
+  "en": "Ask",
+  "gu": "પૂછો",
+  "hi": "पूछें"
+ },
+ {
+  "kind": "text",
+  "en": "Shop owner: edit prices & stock",
+  "gu": "દુકાનના માલિક માટે: ભાવ અને સ્ટોક બદલો",
+  "hi": "दुकान के मालिक के लिए: दाम और स्टॉक बदलें"
+ },
+ {
+  "kind": "text",
+  "en": "Admin",
+  "gu": "એડમિન",
+  "hi": "एडमिन"
+ },
+ {
+  "kind": "text",
+  "en": "Only the shop owner can open this. Sign in to claude.ai with the owner account.",
+  "gu": "આ ફક્ત દુકાનના માલિક જ ખોલી શકે છે. માલિકના એકાઉન્ટથી claude.ai માં સાઇન ઇન કરો.",
+  "hi": "इसे सिर्फ़ दुकान के मालिक खोल सकते हैं। मालिक के अकाउंट से claude.ai में साइन इन करें।"
+ },
+ {
+  "kind": "text",
+  "en": "The editor did not load. Check your connection and try again.",
+  "gu": "એડિટર ખૂલ્યું નહીં. ઇન્ટરનેટ કનેક્શન તપાસીને ફરી પ્રયત્ન કરો.",
+  "hi": "एडिटर नहीं खुला। अपना इंटरनेट कनेक्शन देखकर फिर से कोशिश करें।"
+ },
+ {
+  "kind": "attr",
+  "en": "Dismiss notice",
+  "gu": "સૂચના બંધ કરો",
+  "hi": "सूचना बंद करें"
+ },
+ {
+  "kind": "pattern",
+  "en": "{colour}, few left",
+  "gu": "{colour}, થોડા જ બાકી",
+  "hi": "{colour}, कुछ ही बचे हैं"
+ },
+ {
+  "kind": "pattern",
+  "en": "{colour}, out of stock",
+  "gu": "{colour}, સ્ટોકમાં નથી",
+  "hi": "{colour}, स्टॉक में नहीं"
+ },
+ {
+  "kind": "pattern",
+  "en": "{size}, {dims}, out of stock",
+  "gu": "{size}, {dims}, સ્ટોકમાં નથી",
+  "hi": "{size}, {dims}, स्टॉक में नहीं"
+ },
+ {
+  "kind": "pattern",
+  "en": "{colour}, {range}, from {price}, few left",
+  "gu": "{colour}, {range}, {price}થી શરૂ, થોડા જ બાકી",
+  "hi": "{colour}, {range}, {price} से, कुछ ही बचे हैं"
+ },
+ {
+  "kind": "pattern",
+  "en": "{colour}, {range}, from {price}, out of stock",
+  "gu": "{colour}, {range}, {price}થી શરૂ, સ્ટોકમાં નથી",
+  "hi": "{colour}, {range}, {price} से, स्टॉक में नहीं"
+ },
+ {
+  "kind": "pattern",
+  "en": "Choose {product} size {size}, {price}, out of stock",
+  "gu": "{product}, સાઇઝ {size} પસંદ કરો, {price}, સ્ટોકમાં નથી",
+  "hi": "{product} साइज़ {size} चुनें, {price}, स्टॉक में नहीं"
+ },
+ {
+  "kind": "pattern",
+  "en": "See all {n} colours",
+  "gu": "બધા {n} રંગ જુઓ",
+  "hi": "सभी {n} रंग देखें"
+ },
+ {
+  "kind": "pattern",
+  "en": "{n} colours, <em>three ranges</em>",
+  "gu": "{n} રંગ, <em>ત્રણ પ્રકાર</em>",
+  "hi": "{n} रंग, <em>तीन रेंज</em>"
+ },
+ {
+  "kind": "pattern",
+  "en": "{a} for a zigzag M, up to {b} for a solid XL",
+  "gu": "Zigzag M નું {a} થી લઈને Solid XL નું {b} સુધી",
+  "hi": "zigzag M के लिए {a}, solid XL के लिए {b} तक"
+ }
+]

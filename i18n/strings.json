@@ -1,0 +1,2102 @@
+[
+ {
+  "id": "page.title.sr",
+  "en": "Soft Steps: rugs, doormats and bath mats from Vadodara",
+  "kind": "text",
+  "where": "softsteps.html:879 h1.sr-only (the page's only h1, screen readers)",
+  "note": "Keep 'Soft Steps' in Latin script. Vadodara may be transliterated."
+ },
+ {
+  "id": "meta.description",
+  "en": "Soft Steps, Vadodara: plush, anti-slip rugs, doormats and bath mats from ₹249, with delivery across India.",
+  "kind": "attr",
+  "where": "softsteps.html:31 meta[name=description] content",
+  "note": "Shown in search results and link previews; only reaches crawlers if a language version is served as its own page. Keep 'Soft Steps' and ₹249."
+ },
+ {
+  "id": "skip.shop",
+  "en": "Skip to the shop",
+  "kind": "text",
+  "where": "softsteps.html:861 a.skip",
+  "note": ""
+ },
+ {
+  "id": "nav.sections.aria",
+  "en": "Sections",
+  "kind": "attr",
+  "where": "softsteps.html:866 #hdr nav.hnav[aria-label]",
+  "note": ""
+ },
+ {
+  "id": "nav.main.aria",
+  "en": "Main",
+  "kind": "attr",
+  "where": "softsteps.html:884 #hero nav.navpill[aria-label]",
+  "note": ""
+ },
+ {
+  "id": "nav.footer.aria",
+  "en": "Footer",
+  "kind": "attr",
+  "where": "softsteps.html:1245 footer nav[aria-label]",
+  "note": ""
+ },
+ {
+  "id": "nav.home",
+  "en": "Rugs & mats",
+  "kind": "text",
+  "where": "softsteps.html:884 #hero nav.navpill a.on | softsteps.html:1342 dialog#menu .mlinks a[href=#hero]",
+  "note": ""
+ },
+ {
+  "id": "nav.shop",
+  "en": "Shop",
+  "kind": "text",
+  "where": "softsteps.html:866,1245 #hdr nav.hnav a; footer nav a",
+  "note": ""
+ },
+ {
+  "id": "nav.colours",
+  "en": "Colours",
+  "kind": "text",
+  "where": "softsteps.html:866,884,1245 #hdr nav.hnav a; #hero nav.navpill a; footer nav a | softsteps.html:1343 dialog#menu .mlinks a | shop.js:88 #zoom-row[aria-label] (zoom viewer swatch row, attr)",
+  "note": ""
+ },
+ {
+  "id": "nav.sizes",
+  "en": "Sizes",
+  "kind": "text",
+  "where": "softsteps.html:866,884,1245 #hdr, #hero, footer nav a | softsteps.html:1347 dialog#menu .mlinks a",
+  "note": ""
+ },
+ {
+  "id": "nav.order",
+  "en": "How to order",
+  "kind": "text",
+  "where": "softsteps.html:866,884 #hdr, #hero nav a | softsteps.html:1348 dialog#menu .mlinks a",
+  "note": ""
+ },
+ {
+  "id": "nav.contact",
+  "en": "Contact",
+  "kind": "text",
+  "where": "softsteps.html:866,884,1245 #hdr, #hero, footer nav a | softsteps.html:1349 dialog#menu .mlinks a",
+  "note": ""
+ },
+ {
+  "id": "nav.questions",
+  "en": "Questions",
+  "kind": "text",
+  "where": "softsteps.html:1245 footer nav a",
+  "note": ""
+ },
+ {
+  "id": "app.instagram",
+  "en": "Instagram",
+  "kind": "text",
+  "where": "softsteps.html:1245 footer nav a | softsteps.html:925 #hero .social a[aria-label] (attr) | softsteps.html:1218 #contact .clist .k",
+  "note": "Third-party app name: usually kept in Latin script; transliterate only if that reads more naturally. The handle @softsteps.home stays as is."
+ },
+ {
+  "id": "app.whatsapp",
+  "en": "WhatsApp",
+  "kind": "text",
+  "where": "softsteps.html:926 #hero .social a[aria-label] (attr) | softsteps.html:1216 #contact .clist .k | softsteps.html:1351 dialog#menu .menu-wa span",
+  "note": "Third-party app name: usually kept in Latin script (or વોટ્સએપ / व्हाट्सएप). Use the same choice inside every sentence that mentions WhatsApp."
+ },
+ {
+  "id": "menu.button",
+  "en": "Menu",
+  "kind": "text",
+  "where": "softsteps.html:870 #hmenu | softsteps.html:888 #h-menu | softsteps.html:1339 dialog#menu[aria-label] (attr) | softsteps.html:1341 dialog#menu nav[aria-label] (attr)",
+  "note": ""
+ },
+ {
+  "id": "menu.close.aria",
+  "en": "Close menu",
+  "kind": "attr",
+  "where": "softsteps.html:1340 dialog#menu button.x[data-close]",
+  "note": ""
+ },
+ {
+  "id": "menu.zig",
+  "en": "Zigzag rugs",
+  "kind": "text",
+  "where": "softsteps.html:1344 dialog#menu .mlinks a[href=#r-zig]",
+  "note": "Keep the range name 'Zigzag' in English; translate only 'rugs'."
+ },
+ {
+  "id": "menu.sol",
+  "en": "Solid Premium rugs",
+  "kind": "text",
+  "where": "softsteps.html:1345 dialog#menu .mlinks a[href=#r-sol]",
+  "note": "Keep 'Solid Premium' in English; translate only 'rugs'."
+ },
+ {
+  "id": "menu.chen",
+  "en": "Chenille mats",
+  "kind": "text",
+  "where": "softsteps.html:1346 dialog#menu .mlinks a[href=#r-chen]",
+  "note": "Keep 'Chenille' in English; translate only 'mats'."
+ },
+ {
+  "id": "saved.button.aria",
+  "en": "Saved colours, {n}",
+  "kind": "pattern",
+  "where": "softsteps.html:868,886 static #hsaved, #h-savedbtn [aria-label] (n=0) | features.js:245 `btn.setAttribute(\"aria-label\", \"Saved colours, \" + n)`",
+  "note": "n = number of saved colours (0 or more). The code has no singular form: if your language needs one for n=1, add a variant and a plural switch in syncSaved()."
+ },
+ {
+  "id": "cart.button.aria.one",
+  "en": "Open cart, {n} item",
+  "kind": "pattern",
+  "where": "softsteps.html:1478 `$(\"#cartbtn\").setAttribute(\"aria-label\",\"Open cart, \"+n+(n===1?\" item\":\" items\"))` | features.js:351 `hc.setAttribute(\"aria-label\", \"Open cart, \" + n + (n === 1 ? \" item\" : \" items\"))`",
+  "note": "Variant used when n === 1 (#cartbtn and sticky-header #hcart)."
+ },
+ {
+  "id": "cart.button.aria.other",
+  "en": "Open cart, {n} items",
+  "kind": "pattern",
+  "where": "softsteps.html:869,887 static #hcart, #cartbtn (n=0) | softsteps.html:1478 `\"Open cart, \"+n+(n===1?\" item\":\" items\")` | features.js:351 `\"Open cart, \" + n + (n === 1 ? \" item\" : \" items\")`",
+  "note": "Variant used when n is 0 or more than 1."
+ },
+ {
+  "id": "hero.aria",
+  "en": "Featured rug",
+  "kind": "attr",
+  "where": "softsteps.html:878 header#hero[aria-label]",
+  "note": ""
+ },
+ {
+  "id": "hero.prev.aria",
+  "en": "Previous rug",
+  "kind": "attr",
+  "where": "softsteps.html:894 #prev",
+  "note": ""
+ },
+ {
+  "id": "hero.next.aria",
+  "en": "Next rug",
+  "kind": "attr",
+  "where": "softsteps.html:894 #nextBtn",
+  "note": ""
+ },
+ {
+  "id": "hero.pause.aria",
+  "en": "Pause slideshow",
+  "kind": "attr",
+  "where": "softsteps.html:894 static #h-play | fx.js:406 `btn.setAttribute(\"aria-label\", asPlay ? \"Play slideshow\" : \"Pause slideshow\")`",
+  "note": ""
+ },
+ {
+  "id": "hero.play.aria",
+  "en": "Play slideshow",
+  "kind": "attr",
+  "where": "fx.js:406 `btn.setAttribute(\"aria-label\", asPlay ? \"Play slideshow\" : \"Pause slideshow\")`",
+  "note": ""
+ },
+ {
+  "id": "hero.eyebrow",
+  "en": "Rugs, doormats & bath mats · Vadodara",
+  "kind": "text",
+  "where": "softsteps.html:895 #hero .hcopy p.eyebrow",
+  "note": ""
+ },
+ {
+  "id": "hero.s1.h",
+  "en": "Soft steps, every morning",
+  "kind": "text",
+  "where": "softsteps.html:1406 SLIDES[0].h | softsteps.html:896 static #h-title (before JS: h with the accent a wrapped in <em>) | softsteps.html:1421 core show() | fx.js:141 fx.js parts()/renderTitle(): words split into span.w, full text in span.sr-only",
+  "note": "SLIDES[0] = {k, c, h, a, g, t}. h is the headline, a the accent: fx.js parts() finds a inside h with h.lastIndexOf(a) and wraps it in <em>, so in every language a must be an exact substring of h (ideally its end, as in English). k (range key), c (colour, also the swatch lookup key) and g (the big faded ghost word, a colour fragment) stay English and are not in the catalog. 'Soft steps' here is a play on the brand; translators may keep it as the English brand or translate the phrase."
+ },
+ {
+  "id": "hero.s1.a",
+  "en": "every morning",
+  "kind": "text",
+  "where": "softsteps.html:1406 SLIDES[0].a | fx.js:141 fx.js parts()",
+  "note": "Accent of hero.s1.h: must be copied exactly from the translated headline (the part shown in italic <em>)."
+ },
+ {
+  "id": "hero.s1.t",
+  "en": "Our Solid Premium pile is heavy, plush and absorbent. Step out of the shower onto something warm, then throw it in the washing machine.",
+  "kind": "text",
+  "where": "softsteps.html:1406 SLIDES[0].t | softsteps.html:897 static #h-lead | softsteps.html:1421 core show()",
+  "note": "Lead paragraph under the hero headline. Keep 'Solid Premium' in English."
+ },
+ {
+  "id": "hero.s2.h",
+  "en": "Bold at the front door",
+  "kind": "text",
+  "where": "softsteps.html:1407 SLIDES[1].h | softsteps.html:1421 core show() | fx.js:141 fx.js parts()/renderTitle(): words split into span.w, full text in span.sr-only",
+  "note": "SLIDES[1] = {k, c, h, a, g, t}. h is the headline, a the accent: fx.js parts() finds a inside h with h.lastIndexOf(a) and wraps it in <em>, so in every language a must be an exact substring of h (ideally its end, as in English). k (range key), c (colour, also the swatch lookup key) and g (the big faded ghost word, a colour fragment) stay English and are not in the catalog."
+ },
+ {
+  "id": "hero.s2.a",
+  "en": "front door",
+  "kind": "text",
+  "where": "softsteps.html:1407 SLIDES[1].a | fx.js:141 fx.js parts()",
+  "note": "Accent of hero.s2.h: must be copied exactly from the translated headline (the part shown in italic <em>)."
+ },
+ {
+  "id": "hero.s2.t",
+  "en": "Zigzag stripes in a soft microfiber pile with a latex anti-slip backing. The first thing guests see, and the softest.",
+  "kind": "text",
+  "where": "softsteps.html:1407 SLIDES[1].t | softsteps.html:1421 core show()",
+  "note": "Lead paragraph under the hero headline."
+ },
+ {
+  "id": "hero.s3.h",
+  "en": "Dry feet, happy floors",
+  "kind": "text",
+  "where": "softsteps.html:1408 SLIDES[2].h | softsteps.html:1421 core show() | fx.js:141 fx.js parts()/renderTitle(): words split into span.w, full text in span.sr-only",
+  "note": "SLIDES[2] = {k, c, h, a, g, t}. h is the headline, a the accent: fx.js parts() finds a inside h with h.lastIndexOf(a) and wraps it in <em>, so in every language a must be an exact substring of h (ideally its end, as in English). k (range key), c (colour, also the swatch lookup key) and g (the big faded ghost word, a colour fragment) stay English and are not in the catalog."
+ },
+ {
+  "id": "hero.s3.a",
+  "en": "happy floors",
+  "kind": "text",
+  "where": "softsteps.html:1408 SLIDES[2].a | fx.js:141 fx.js parts()",
+  "note": "Accent of hero.s3.h: must be copied exactly from the translated headline (the part shown in italic <em>)."
+ },
+ {
+  "id": "hero.s3.t",
+  "en": "A thick textured pile that soaks up water fast and dries quickly. Made for the bathroom door, sized for every room.",
+  "kind": "text",
+  "where": "softsteps.html:1408 SLIDES[2].t | softsteps.html:1421 core show()",
+  "note": "Lead paragraph under the hero headline."
+ },
+ {
+  "id": "hero.s4.h",
+  "en": "A little colour by the bed",
+  "kind": "text",
+  "where": "softsteps.html:1409 SLIDES[3].h | softsteps.html:1421 core show() | fx.js:141 fx.js parts()/renderTitle(): words split into span.w, full text in span.sr-only",
+  "note": "SLIDES[3] = {k, c, h, a, g, t}. h is the headline, a the accent: fx.js parts() finds a inside h with h.lastIndexOf(a) and wraps it in <em>, so in every language a must be an exact substring of h (ideally its end, as in English). k (range key), c (colour, also the swatch lookup key) and g (the big faded ghost word, a colour fragment) stay English and are not in the catalog."
+ },
+ {
+  "id": "hero.s4.a",
+  "en": "by the bed",
+  "kind": "text",
+  "where": "softsteps.html:1409 SLIDES[3].a | fx.js:141 fx.js parts()",
+  "note": "Accent of hero.s4.h: must be copied exactly from the translated headline (the part shown in italic <em>)."
+ },
+ {
+  "id": "hero.s4.t",
+  "en": "Soft underfoot first thing in the morning. Ten zigzag colourways, four sizes, all machine washable.",
+  "kind": "text",
+  "where": "softsteps.html:1409 SLIDES[3].t | softsteps.html:1421 core show()",
+  "note": "Lead paragraph under the hero headline."
+ },
+ {
+  "id": "hero.s5.h",
+  "en": "Fresh as the first rain",
+  "kind": "text",
+  "where": "softsteps.html:1410 SLIDES[4].h | softsteps.html:1421 core show() | fx.js:141 fx.js parts()/renderTitle(): words split into span.w, full text in span.sr-only",
+  "note": "SLIDES[4] = {k, c, h, a, g, t}. h is the headline, a the accent: fx.js parts() finds a inside h with h.lastIndexOf(a) and wraps it in <em>, so in every language a must be an exact substring of h (ideally its end, as in English). k (range key), c (colour, also the swatch lookup key) and g (the big faded ghost word, a colour fragment) stay English and are not in the catalog."
+ },
+ {
+  "id": "hero.s5.a",
+  "en": "first rain",
+  "kind": "text",
+  "where": "softsteps.html:1410 SLIDES[4].a | fx.js:141 fx.js parts()",
+  "note": "Accent of hero.s5.h: must be copied exactly from the translated headline (the part shown in italic <em>)."
+ },
+ {
+  "id": "hero.s5.t",
+  "en": "A cool aqua pile that brightens a white bathroom. Anti-slip latex backing keeps it where you put it.",
+  "kind": "text",
+  "where": "softsteps.html:1410 SLIDES[4].t | softsteps.html:1421 core show()",
+  "note": "Lead paragraph under the hero headline."
+ },
+ {
+  "id": "hero.s6.h",
+  "en": "Sunshine for your doorstep",
+  "kind": "text",
+  "where": "softsteps.html:1411 SLIDES[5].h | softsteps.html:1421 core show() | fx.js:141 fx.js parts()/renderTitle(): words split into span.w, full text in span.sr-only",
+  "note": "SLIDES[5] = {k, c, h, a, g, t}. h is the headline, a the accent: fx.js parts() finds a inside h with h.lastIndexOf(a) and wraps it in <em>, so in every language a must be an exact substring of h (ideally its end, as in English). k (range key), c (colour, also the swatch lookup key) and g (the big faded ghost word, a colour fragment) stay English and are not in the catalog."
+ },
+ {
+  "id": "hero.s6.a",
+  "en": "doorstep",
+  "kind": "text",
+  "where": "softsteps.html:1411 SLIDES[5].a | fx.js:141 fx.js parts()",
+  "note": "Accent of hero.s6.h: must be copied exactly from the translated headline (the part shown in italic <em>)."
+ },
+ {
+  "id": "hero.s6.t",
+  "en": "Warm mustard zigzags for the main door or the balcony. From ₹249 for the 16×24 inch size.",
+  "kind": "text",
+  "where": "softsteps.html:1411 SLIDES[5].t | softsteps.html:1421 core show()",
+  "note": "Lead paragraph under the hero headline. Keep ₹249 and 16×24 as they are."
+ },
+ {
+  "id": "cta.add",
+  "en": "Add to cart",
+  "kind": "text",
+  "where": "softsteps.html:917 #h-add (text node before span.chev) | softsteps.html:1006,1030,1061 static .prod [data-add] x3 (replaced by cta.add.price once JS runs) | features.js:270 saved dialog [data-sadd] | features.js:290 saved dialog, reset after saved.added",
+  "note": ""
+ },
+ {
+  "id": "hero.see_all",
+  "en": "See all 26 colours",
+  "kind": "text",
+  "where": "softsteps.html:919 #hero .ctas a.text",
+  "note": ""
+ },
+ {
+  "id": "hero.choose",
+  "en": "Choose your size:",
+  "kind": "text",
+  "where": "softsteps.html:912 #hero p.choose",
+  "note": ""
+ },
+ {
+  "id": "hero.tagline",
+  "en": "Comfort, in every step",
+  "kind": "text",
+  "where": "softsteps.html:928 #hero p.tagline",
+  "note": ""
+ },
+ {
+  "id": "hero.next",
+  "en": "Next: {colour}",
+  "kind": "pattern",
+  "where": "softsteps.html:934 static #h-nextname | softsteps.html:1425 `$(\"#h-nextname\").textContent=\"Next: \"+nx.c.split(\" &\")[0].split(\" & \")[0]`",
+  "note": "colour = first part of the next slide's colour name, English (e.g. 'Forest green', 'Royal blue'). The #h-next button has no aria-label now, so this text is also its accessible name."
+ },
+ {
+  "id": "hero.live",
+  "en": "Rug {i} of {n}: {product} in {colour}, {price}",
+  "kind": "pattern",
+  "where": "softsteps.html:1423 `$(\"#h-live\").textContent=\"Rug \"+(hi+1)+\" of \"+SLIDES.length+\": \"+P[sl.k].name+\" in \"+sl.c+\", \"+inr(P[sl.k].sizes[hs][3])`",
+  "note": "Screen-reader announcement (#h-live, aria-live=polite) when the visitor changes slide from inside the hero. i = 1..6, n = 6; product and colour stay English; price like ₹349. The '{product} in {colour}' part should read the same as img.alt."
+ },
+ {
+  "id": "img.alt",
+  "en": "{product} in {colour}",
+  "kind": "pattern",
+  "where": "softsteps.html:902 static #h-img alt | softsteps.html:985 static #r-zig img alt | softsteps.html:1013 static #r-sol img alt | softsteps.html:1393 `img.alt=p.name+\" in \"+b.dataset.n` | softsteps.html:1419 `$(\"#h-img\").alt=P[sl.k].name+\" in \"+sl.c` | fx.js:265,302,361 `img.alt = SS.P[sl.k].name + \" in \" + sl.c` | shop.js:125 `img.alt = P[st.k].name + \" in \" + b.dataset.n`",
+  "note": "Alt text of the rug photos (hero, product cards, zoom viewer). product = full range name, colour = colour name; both stay English."
+ },
+ {
+  "id": "save.aria",
+  "en": "Save {colour} {product}",
+  "kind": "pattern",
+  "where": "softsteps.html:918 static #h-save | softsteps.html:988 static #r-zig [data-save] | fx.js:167 `b.setAttribute(\"aria-label\", \"Save \" + sl.c + \" \" + SS.P[sl.k].name)` | features.js:232 `h.setAttribute(\"aria-label\", \"Save \" + sl.c + \" \" + P[sl.k].name)` | features.js:238 `h.setAttribute(\"aria-label\", \"Save \" + c + \" \" + P[k].name)` | features.js:175 `esc(\"Save \" + t.n + \" \" + P[t.k].name)`",
+  "note": "Heart (toggle, aria-pressed) on the hero, each product card and each colour-index tile. colour and product stay English."
+ },
+ {
+  "id": "size.label",
+  "en": "Size",
+  "kind": "text",
+  "where": "softsteps.html:1004,1028,1059 .prod .szlab span.clab x3 | softsteps.html:1083 #fit p.clab | softsteps.html:913,1084 #h-sizes, #fsizes [aria-label] (attr) | features.js:450 compare table first header cell (sr-only)",
+  "note": ""
+ },
+ {
+  "id": "size.half",
+  "en": "{dims} half round",
+  "kind": "pattern",
+  "where": "softsteps.html:1368,1369,1370 P.*.sizes[1][1] data (all three ranges) | softsteps.html:1415 `$(\"#h-dims\").textContent=z[1]+(z[2]?\" · \"+z[2]:\"\")` | softsteps.html:1392 `$(\"[data-dims]\",el).textContent=z[1]+(z[2]?\" · \"+z[2]:\"\")` | softsteps.html:1384 `aria-label=\"'+z[0]+', '+z[1]+'\"` | features.js:453 `\"</b><small>\" + esc(h[1]) + \"</small></th>\"` | features.js:268 `esc(s[0] + \", \" + s[1])` | softsteps.html:1480 core render() cart line small (x.size)",
+  "note": "dims = '16×24 in'. The H size's dimension text, shown in #h-dims, the card's [data-dims], size-button aria-labels ('H, 16×24 in half round'), the Compare table row header, the Saved dialog size buttons and the cart line. The same P data also feeds the WhatsApp order and share messages, which stay English: translate at display time only, not in P. Cart items keep their English size in localStorage."
+ },
+ {
+  "id": "size.half.short",
+  "en": "½ round",
+  "kind": "text",
+  "where": "softsteps.html:1384 core sizeButtons() data-d, shown by CSS .sz[data-d]::after{content:attr(data-d)}",
+  "note": "Tiny caption under the H size button (11px). Keep it very short. The other buttons show measurements such as 16×24, which stay as they are."
+ },
+ {
+  "id": "compare.open",
+  "en": "Compare sizes",
+  "kind": "text",
+  "where": "softsteps.html:914 #h-compare | softsteps.html:1004,1028,1059,1131 .prod .szlab [data-compare] x3; #fit .fitbtns [data-compare] | softsteps.html:1332 dialog#compare h2",
+  "note": ""
+ },
+ {
+  "id": "size.which",
+  "en": "Which size?",
+  "kind": "text",
+  "where": "softsteps.html:1004,1028,1059 .prod .szlab a.link x3",
+  "note": ""
+ },
+ {
+  "id": "ranges.aria",
+  "en": "Shop by range",
+  "kind": "attr",
+  "where": "softsteps.html:940 nav.ranges",
+  "note": ""
+ },
+ {
+  "id": "price.from",
+  "en": "from {price}",
+  "kind": "pattern",
+  "where": "softsteps.html:941,942,943 static nav.ranges small (from ₹249 / ₹349 / ₹299) | features.js:173 `'<span class=\"fromp\"> · from ' + fp + '</span></span>'`",
+  "note": "price like ₹249 (lowest price of the range). In the colour-index tile it follows the range name after ' · ' (outside the string)."
+ },
+ {
+  "id": "ranges.count",
+  "en": "{n} colours",
+  "kind": "pattern",
+  "where": "softsteps.html:941,943 static nav.ranges small (Zigzag, Chenille) | softsteps.html:942 static nav.ranges small (Solid Premium)",
+  "note": "Static text in the markup; n = 10, 6, 10 (always plural)."
+ },
+ {
+  "id": "promise.aria",
+  "en": "Why Soft Steps",
+  "kind": "attr",
+  "where": "softsteps.html:945 section.promise[aria-label]",
+  "note": "Keep 'Soft Steps' in Latin script."
+ },
+ {
+  "id": "promise.delivery",
+  "en": "Free delivery in Vadodara",
+  "kind": "text",
+  "where": "softsteps.html:947 section.promise li",
+  "note": ""
+ },
+ {
+  "id": "promise.upi",
+  "en": "Pay by UPI, confirmed on WhatsApp the same day",
+  "kind": "text",
+  "where": "softsteps.html:948 section.promise li",
+  "note": ""
+ },
+ {
+  "id": "care.wash",
+  "en": "Machine washable, quick-drying",
+  "kind": "text",
+  "where": "softsteps.html:949 section.promise li | softsteps.html:1159 #made dl.specs dd",
+  "note": ""
+ },
+ {
+  "id": "promise.antislip",
+  "en": "Anti-slip latex backing",
+  "kind": "text",
+  "where": "softsteps.html:950 section.promise li",
+  "note": ""
+ },
+ {
+  "id": "pin.label",
+  "en": "Check delivery to your PIN",
+  "kind": "text",
+  "where": "softsteps.html:953 #pinf label",
+  "note": ""
+ },
+ {
+  "id": "pin.placeholder",
+  "en": "6-digit PIN",
+  "kind": "attr",
+  "where": "softsteps.html:954 #pin-in[placeholder]",
+  "note": ""
+ },
+ {
+  "id": "pin.check",
+  "en": "Check",
+  "kind": "text",
+  "where": "softsteps.html:954 #pinf button[type=submit]",
+  "note": ""
+ },
+ {
+  "id": "pin.vadodara",
+  "en": "Vadodara: free delivery. We confirm on WhatsApp.",
+  "kind": "text",
+  "where": "features.js:398 pinMsg() for PIN 390xxx, shown in #pin-out (aria-live) and #pinnote (aria-live)",
+  "note": ""
+ },
+ {
+  "id": "pin.district",
+  "en": "Vadodara district: we'll confirm delivery charges on WhatsApp.",
+  "kind": "text",
+  "where": "features.js:399 pinMsg() for PIN 391xxx, #pin-out and #pinnote",
+  "note": ""
+ },
+ {
+  "id": "pin.india",
+  "en": "Delivery across India: charges extra, confirmed on call. We confirm on WhatsApp.",
+  "kind": "text",
+  "where": "features.js:400 pinMsg() for any other valid PIN, #pin-out and #pinnote",
+  "note": ""
+ },
+ {
+  "id": "pin.invalid",
+  "en": "Enter a 6-digit PIN code.",
+  "kind": "text",
+  "where": "features.js:401 pinMsg() for an invalid PIN, #pin-out",
+  "note": ""
+ },
+ {
+  "id": "colours.title",
+  "en": "Twenty-six colours, <em>three ranges</em>",
+  "kind": "rich",
+  "where": "softsteps.html:961 h2#colours-h innerHTML",
+  "note": ""
+ },
+ {
+  "id": "colours.sub",
+  "en": "Every colour comes in the same four sizes. Tap one to see it on the rug.",
+  "kind": "text",
+  "where": "softsteps.html:962 #colours .sechead p.sub",
+  "note": ""
+ },
+ {
+  "id": "family.aria",
+  "en": "Colour family",
+  "kind": "attr",
+  "where": "softsteps.html:964 #fam[aria-label]",
+  "note": ""
+ },
+ {
+  "id": "family.all",
+  "en": "All",
+  "kind": "text",
+  "where": "softsteps.html:965 #fam chip text node before span.n (count stays a number)",
+  "note": ""
+ },
+ {
+  "id": "family.blues",
+  "en": "Blues",
+  "kind": "text",
+  "where": "softsteps.html:966 #fam chip[data-fam=blues] text node after span.cdots, before span.n | features.js:150 FAMNAME.blues (used in family.live.one)",
+  "note": "Colour-family filter label, not a product colour name, so it is translated."
+ },
+ {
+  "id": "family.greens",
+  "en": "Greens",
+  "kind": "text",
+  "where": "softsteps.html:967 #fam chip[data-fam=greens] text node after span.cdots, before span.n | features.js:150 FAMNAME.greens (used in family.live.one)",
+  "note": "Colour-family filter label, not a product colour name, so it is translated."
+ },
+ {
+  "id": "family.pinks",
+  "en": "Pinks & reds",
+  "kind": "text",
+  "where": "softsteps.html:968 #fam chip[data-fam=pinks] text node after span.cdots, before span.n | features.js:150 FAMNAME.pinks (used in family.live.one)",
+  "note": "Colour-family filter label, not a product colour name, so it is translated."
+ },
+ {
+  "id": "family.earth",
+  "en": "Mustard & earth",
+  "kind": "text",
+  "where": "softsteps.html:969 #fam chip[data-fam=earth] text node after span.cdots, before span.n | features.js:150 FAMNAME.earth (used in family.live.one)",
+  "note": "Colour-family filter label, not a product colour name, so it is translated."
+ },
+ {
+  "id": "family.greys",
+  "en": "Greys & blacks",
+  "kind": "text",
+  "where": "softsteps.html:970 #fam chip[data-fam=greys] text node after span.cdots, before span.n | features.js:150 FAMNAME.greys (used in family.live.one)",
+  "note": "Colour-family filter label, not a product colour name, so it is translated."
+ },
+ {
+  "id": "family.live.all",
+  "en": "Showing all {n} colours",
+  "kind": "pattern",
+  "where": "features.js:205 `f === \"all\" ? \"Showing all \" + n + \" colours\"`",
+  "note": "#fam-live (sr-only, aria-live) after the visitor picks a family chip. n = 26."
+ },
+ {
+  "id": "family.live.one",
+  "en": "Showing {n} colours: {family}",
+  "kind": "pattern",
+  "where": "features.js:205 `\"Showing \" + n + \" colours: \" + FAMNAME[f]`",
+  "note": "#fam-live. n = 4 or 6 (always plural); family = the translated family.* label."
+ },
+ {
+  "id": "tile.aria",
+  "en": "{colour}, {range}, from {price}",
+  "kind": "pattern",
+  "where": "features.js:171 `esc(t.n + \", \" + RN[t.k] + \", from \" + fp)`",
+  "note": "Colour-index tile button. colour stays English; range = RN long name (Multicolour Zigzag / Solid Premium / Striped Chenille), English; price like ₹249. The visible tile shows colour, the short range RS[k] ('Zigzag', 'Solid', 'Chenille', English) and price.from."
+ },
+ {
+  "id": "shop.title",
+  "en": "Three ranges, <em>four sizes</em>",
+  "kind": "rich",
+  "where": "softsteps.html:978 h2#shop-h innerHTML",
+  "note": ""
+ },
+ {
+  "id": "shop.sub",
+  "en": "Pick a colour and the rug's panel takes it on. Tap a rug to look closer.",
+  "kind": "text",
+  "where": "softsteps.html:979 #shop .sechead p.sub",
+  "note": ""
+ },
+ {
+  "id": "prod.zig.desc",
+  "en": "Bold zigzag stripes in a soft microfiber pile. Bright enough for the main door, soft enough beside the bed.",
+  "kind": "text",
+  "where": "softsteps.html:990 #r-zig p.desc",
+  "note": ""
+ },
+ {
+  "id": "prod.sol.desc",
+  "en": "A heavier, textured pile in one rich colour. Plush and absorbent, made for the bathroom door.",
+  "kind": "text",
+  "where": "softsteps.html:1018 #r-sol p.desc",
+  "note": ""
+ },
+ {
+  "id": "prod.chen.desc",
+  "en": "Soft, ribbed chenille in classic stripes. The photo shows all ten colourways; pick yours by name.",
+  "kind": "text",
+  "where": "softsteps.html:1045 #r-chen p.desc",
+  "note": ""
+ },
+ {
+  "id": "prod.new",
+  "en": "New",
+  "kind": "text",
+  "where": "softsteps.html:1043 #t-chen span.tag (h3 'Striped Chenille' itself stays English)",
+  "note": ""
+ },
+ {
+  "id": "prod.colour",
+  "en": "Colour:",
+  "kind": "text",
+  "where": "softsteps.html:991,1019,1046 .prod p.clab text node before span[data-colour] x3",
+  "note": "Label before the colour name (the name inside span[data-colour] stays English)."
+ },
+ {
+  "id": "prod.zig.colours.aria",
+  "en": "Zigzag colours",
+  "kind": "attr",
+  "where": "softsteps.html:992 #r-zig .swatches[aria-label]",
+  "note": "Keep 'Zigzag' in English."
+ },
+ {
+  "id": "prod.sol.colours.aria",
+  "en": "Solid colours",
+  "kind": "attr",
+  "where": "softsteps.html:1020 #r-sol .swatches[aria-label]",
+  "note": "'Solid' is the range (Solid Premium): keep it in English."
+ },
+ {
+  "id": "prod.chen.colours.aria",
+  "en": "Chenille colourways",
+  "kind": "attr",
+  "where": "softsteps.html:1047 #r-chen .chips[aria-label]",
+  "note": "Keep 'Chenille' in English."
+ },
+ {
+  "id": "prod.zig.sizes.aria",
+  "en": "Zigzag sizes",
+  "kind": "attr",
+  "where": "softsteps.html:1005 #r-zig .sizes-c[aria-label]",
+  "note": "Keep 'Zigzag' in English."
+ },
+ {
+  "id": "prod.sol.sizes.aria",
+  "en": "Solid sizes",
+  "kind": "attr",
+  "where": "softsteps.html:1029 #r-sol .sizes-c[aria-label]",
+  "note": "Keep 'Solid' in English."
+ },
+ {
+  "id": "prod.chen.sizes.aria",
+  "en": "Chenille sizes",
+  "kind": "attr",
+  "where": "softsteps.html:1060 #r-chen .sizes-c[aria-label]",
+  "note": "Keep 'Chenille' in English."
+ },
+ {
+  "id": "qty.less",
+  "en": "One less, {item}",
+  "kind": "pattern",
+  "where": "softsteps.html:1006,1030,1061,1480 static .prod .stepper (item = Zigzag / Solid Premium / Chenille) | softsteps.html:1480 `aria-label=\"One less, '+esc(x.colour+\" \"+P[x.k].name)+'\"`",
+  "note": "Stepper minus button. item = short range name on the product cards (static markup), or '{colour} {product}' on cart lines (core render()); all English."
+ },
+ {
+  "id": "qty.more",
+  "en": "One more, {item}",
+  "kind": "pattern",
+  "where": "softsteps.html:1006,1030,1061,1480 static .prod .stepper | softsteps.html:1480 `aria-label=\"One more, '+esc(x.colour+\" \"+P[x.k].name)+'\"`",
+  "note": "Stepper plus button. Same item values as qty.less."
+ },
+ {
+  "id": "cta.add.price",
+  "en": "Add to cart · {price}",
+  "kind": "pattern",
+  "where": "softsteps.html:1392 `add.innerHTML=\"Add to cart · \"+inr(z[3]*s.q)+' <span class=\"chev\" aria-hidden=\"true\">›</span>'`",
+  "note": "Product-card add button (core upd()), price = unit price × quantity. Set with innerHTML: keep the trailing span.chev outside the translated text."
+ },
+ {
+  "id": "prod.ask",
+  "en": "Ask if {colour} ({size}) is in stock",
+  "kind": "pattern",
+  "where": "softsteps.html:1007,1031,1062 static .prod .ask a[data-ask] x3 | features.js:328 `a.textContent = \"Ask if \" + label + \" (\" + z[0] + \") is in stock\"`",
+  "note": "colour stays English (on Chenille it is the short chip label, e.g. 'Mustard'); size = M/H/L/XL. The WhatsApp message behind the link (and its data-copy text) stays English."
+ },
+ {
+  "id": "prod.ask.copy.aria",
+  "en": "Copy the question about {colour} ({size})",
+  "kind": "pattern",
+  "where": "features.js:330 `cp.setAttribute(\"aria-label\", \"Copy the question about \" + label + \" (\" + z[0] + \")\")`",
+  "note": "aria-label of the Copy button next to prod.ask; same colour/size values."
+ },
+ {
+  "id": "common.copy",
+  "en": "Copy",
+  "kind": "text",
+  "where": "softsteps.html:1007,1031,1062 .prod .ask button.copy x3 (text 'Copy') | softsteps.html:1216,1351 #contact .clist and dialog#menu .menu-wa button.copy | softsteps.html:1217 #contact .clist button.copy",
+  "note": ""
+ },
+ {
+  "id": "common.copied",
+  "en": "Copied",
+  "kind": "text",
+  "where": "softsteps.html:1520 core copyText(): temporary label on any [data-copy] button, restored after 1.5 s | features.js:103 features dlgCopy() (copy buttons inside dialogs)",
+  "note": "The restore puts back whatever text the button had, so the translated label comes back correctly."
+ },
+ {
+  "id": "prod.replies",
+  "en": "Replies 10am–8pm daily",
+  "kind": "text",
+  "where": "softsteps.html:1007,1031,1062 .prod .ask small x3",
+  "note": ""
+ },
+ {
+  "id": "chen.alt",
+  "en": "All ten Striped Chenille Mat colourways laid out in two columns",
+  "kind": "attr",
+  "where": "softsteps.html:1038 #chen-frame img alt",
+  "note": "Keep 'Striped Chenille Mat' in English."
+ },
+ {
+  "id": "chen.cap.all",
+  "en": "Showing all ten colourways",
+  "kind": "text",
+  "where": "softsteps.html:1039 static #chen-cap | fx.js:523 fx.js allTen()",
+  "note": ""
+ },
+ {
+  "id": "chen.cap.one",
+  "en": "Showing the {colour} colourway",
+  "kind": "pattern",
+  "where": "fx.js:531 `cap.textContent = \"Showing the \" + (sel0.textContent || \"\").trim() + \" colourway\"` | fx.js:542 `cap.textContent = \"Showing the \" + (b.textContent || \"\").trim() + \" colourway\"`",
+  "note": "colour = the Chenille chip's text (short colour name, English, e.g. 'Mustard'). Read from the chip, so do not translate the chips."
+ },
+ {
+  "id": "chen.see_all",
+  "en": "See all ten",
+  "kind": "text",
+  "where": "softsteps.html:1039 #chen-all",
+  "note": ""
+ },
+ {
+  "id": "shop.fine",
+  "en": "Weights are ±5%. Colours can look slightly different on screen and stock changes, so we confirm your colour on WhatsApp before dispatch.",
+  "kind": "text",
+  "where": "softsteps.html:1066 #shop p.fine",
+  "note": ""
+ },
+ {
+  "id": "toast.added",
+  "en": "Added {q} × {product} ({size})",
+  "kind": "pattern",
+  "where": "softsteps.html:1386 `toast(\"Added \"+q+\" × \"+p.name+\" (\"+z[0]+\")\")`",
+  "note": "Toast (#toast, role=status) after any add to cart. q = quantity, product stays English, size = M/H/L/XL."
+ },
+ {
+  "id": "fit.eyebrow",
+  "en": "<span lang=\"gu\">ઉંબરો</span> · at your doorstep",
+  "kind": "rich",
+  "where": "softsteps.html:1072 #fit p.eyebrow > span innerHTML",
+  "note": "ઉંબરો (umbaro, threshold) is already Gujarati. In gu, the gloss after it can become a Gujarati phrase or be dropped; in hi, keep the Gujarati word with lang=\"gu\" or swap in देहरी (then change lang to hi)."
+ },
+ {
+  "id": "fit.title",
+  "en": "See it at <em>your door</em>",
+  "kind": "rich",
+  "where": "softsteps.html:1073 h2#fit-h innerHTML",
+  "note": ""
+ },
+ {
+  "id": "fit.lead",
+  "en": "Pick a spot and a size. The mat, the doorway and a pair of feet are drawn to the same scale.",
+  "kind": "text",
+  "where": "softsteps.html:1074 #fit p.lead",
+  "note": ""
+ },
+ {
+  "id": "fit.where",
+  "en": "Where will it go?",
+  "kind": "text",
+  "where": "softsteps.html:1076 #fit p.clab",
+  "note": ""
+ },
+ {
+  "id": "fit.spot.aria",
+  "en": "Spot",
+  "kind": "attr",
+  "where": "softsteps.html:1077 #spots[aria-label]",
+  "note": ""
+ },
+ {
+  "id": "fit.spot.main",
+  "en": "Main door",
+  "kind": "text",
+  "where": "softsteps.html:1078 #spots chip | softsteps.html:1439 SPOTS.main.label (used in fit.spotlabel.door)",
+  "note": ""
+ },
+ {
+  "id": "fit.spot.bath",
+  "en": "Bathroom door",
+  "kind": "text",
+  "where": "softsteps.html:1079 #spots chip | softsteps.html:1439 SPOTS.bath.label (used in fit.spotlabel.door)",
+  "note": ""
+ },
+ {
+  "id": "fit.spot.bed",
+  "en": "Bedside",
+  "kind": "text",
+  "where": "softsteps.html:1080 #spots chip",
+  "note": ""
+ },
+ {
+  "id": "fit.spot.kitchen",
+  "en": "Kitchen counter",
+  "kind": "text",
+  "where": "softsteps.html:1081 #spots chip",
+  "note": ""
+ },
+ {
+  "id": "fit.floor",
+  "en": "Your floor",
+  "kind": "text",
+  "where": "softsteps.html:1090 #fit p.clab | softsteps.html:1091 #floors[aria-label] (attr)",
+  "note": ""
+ },
+ {
+  "id": "fit.floor.marble",
+  "en": "White marble",
+  "kind": "text",
+  "where": "softsteps.html:1092 #floors chip",
+  "note": ""
+ },
+ {
+  "id": "fit.floor.kota",
+  "en": "Kota stone",
+  "kind": "text",
+  "where": "softsteps.html:1093 #floors chip",
+  "note": "Kota stone is a local floor stone from Kota, Rajasthan; keep 'Kota'."
+ },
+ {
+  "id": "fit.floor.wood",
+  "en": "Wood",
+  "kind": "text",
+  "where": "softsteps.html:1094 #floors chip",
+  "note": ""
+ },
+ {
+  "id": "fit.floor.tile",
+  "en": "Grey tile",
+  "kind": "text",
+  "where": "softsteps.html:1095 #floors chip",
+  "note": ""
+ },
+ {
+  "id": "fit.floor.oxide",
+  "en": "Red oxide",
+  "kind": "text",
+  "where": "softsteps.html:1096 #floors chip",
+  "note": ""
+ },
+ {
+  "id": "fit.compare_all",
+  "en": "Compare all sizes",
+  "kind": "text",
+  "where": "softsteps.html:1098 #cmpall text node after span.tick",
+  "note": ""
+ },
+ {
+  "id": "fit.spotlabel.door",
+  "en": "{spot}, {w} in opening",
+  "kind": "pattern",
+  "where": "softsteps.html:1102 static #spotlbl | softsteps.html:1445 `$(\"#spotlbl\").textContent=sp.kind===\"door\"?sp.label+\", \"+sp.w+\" in opening\":sp.label`",
+  "note": "Variants: 'Main door, 36 in opening' and 'Bathroom door, 30 in opening'. spot = fit.spot.main / fit.spot.bath (translated SPOTS label), w = 36 or 30 inches."
+ },
+ {
+  "id": "fit.spotlabel.bed",
+  "en": "Bed, 75 in side",
+  "kind": "text",
+  "where": "softsteps.html:1439 SPOTS.bed.label, shown as-is in #spotlbl",
+  "note": "75 is the drawn bed side in inches; keep the number."
+ },
+ {
+  "id": "fit.spotlabel.kitchen",
+  "en": "Kitchen counter, 72 in",
+  "kind": "text",
+  "where": "softsteps.html:1439 SPOTS.kitchen.label, shown as-is in #spotlbl",
+  "note": "72 is the counter length in inches; keep the number."
+ },
+ {
+  "id": "fit.plan.title",
+  "en": "Plan view of the chosen mat in front of the chosen spot, drawn to scale",
+  "kind": "text",
+  "where": "softsteps.html:1105 svg title#planlbl (accessible name of the role=img plan)",
+  "note": ""
+ },
+ {
+  "id": "fit.caption",
+  "en": "Adult feet, 10 in long, for scale. Mat shown in {range} · {colour}.",
+  "kind": "pattern",
+  "where": "softsteps.html:1125 static #fitcap | features.js:486 `cap.textContent = \"Adult feet, 10 in long, for scale. Mat shown in \" + RN[k] + \" · \" + c + \".\"`",
+  "note": "range = RN long name (Multicolour Zigzag / Solid Premium / Striped Chenille), colour = colour name; both English."
+ },
+ {
+  "id": "fit.readout.fits",
+  "en": "<b>{size}</b> covers {mat} in of your {w} in doorway, with {spare} in to spare on each side.",
+  "kind": "pattern",
+  "where": "softsteps.html:1451 `txt=spare>=0?\"<b>\"+fit.size+\"</b> covers \"+d[0]+\" in of your \"+sp.w+\" in doorway, with \"+(spare/2)+\" in to spare on each side.\"`",
+  "note": "Door spot, mat narrower than the opening. #readout (aria-live) is set with innerHTML, so the DOM holds <b>M</b> plus one text node starting ' covers …': a matcher that works on text nodes sees only the part after </b>. Keep <b>{size}</b> in translations. size = M/H/L/XL, mat = mat width (24/32/60), w = 36 or 30, spare = (w - mat) / 2 (3, 6, 2)."
+ },
+ {
+  "id": "fit.readout.over",
+  "en": "<b>{size}</b> is {over} in wider than a {w} in doorway, so it runs past the frame.",
+  "kind": "pattern",
+  "where": "softsteps.html:1451 `\"<b>\"+fit.size+\"</b> is \"+(-spare)+\" in wider than a \"+sp.w+\" in doorway, so it runs past the frame.\"`",
+  "note": "Door spot, mat wider than the opening. innerHTML, keep <b>. over = mat - w (2, 24, 30)."
+ },
+ {
+  "id": "fit.readout.bed",
+  "en": "<b>{size}</b> runs {mat} in along the {w} in side of the bed and is {depth} in deep, room for both feet.",
+  "kind": "pattern",
+  "where": "softsteps.html:1452 `txt=\"<b>\"+fit.size+\"</b> runs \"+d[0]+\" in along the \"+sp.w+\" in \"+(fit.spot===\"bed\"?\"side of the bed\":\"counter\")+\" and is \"+d[1]+\" in deep, room for both feet.\"`",
+  "note": "Bedside spot (fit.spot === 'bed', w = 75). The code builds one sentence with a 'side of the bed' / 'counter' switch; it is split into two full sentences here so the grammar can differ. innerHTML, keep <b>. depth = 16/20/24."
+ },
+ {
+  "id": "fit.readout.counter",
+  "en": "<b>{size}</b> runs {mat} in along the {w} in counter and is {depth} in deep, room for both feet.",
+  "kind": "pattern",
+  "where": "softsteps.html:1452 `(fit.spot===\"bed\"?\"side of the bed\":\"counter\")`",
+  "note": "Kitchen-counter spot (w = 72). Same expression as fit.readout.bed with the 'counter' branch."
+ },
+ {
+  "id": "fit.suggest.main",
+  "en": "Suggested: Multicolour Zigzag L (20×32 in), 2 in to spare each side.",
+  "kind": "text",
+  "where": "softsteps.html:1127 static #fit-sugg | features.js:475 SUG.main.t, shown in #fit-sugg by syncFitAdd()",
+  "note": "Keep 'Multicolour Zigzag', L and 20×32 in."
+ },
+ {
+  "id": "fit.suggest.bath",
+  "en": "Suggested: Solid Premium M or H (16×24 in), plush and absorbent for the bathroom door.",
+  "kind": "text",
+  "where": "features.js:476 SUG.bath.t",
+  "note": "Keep 'Solid Premium', M, H and 16×24 in."
+ },
+ {
+  "id": "fit.suggest.bed",
+  "en": "Suggested: a 24×60 in XL runner along the side of the bed.",
+  "kind": "text",
+  "where": "features.js:477 SUG.bed.t",
+  "note": ""
+ },
+ {
+  "id": "fit.suggest.kitchen",
+  "en": "Suggested: a 24×60 in XL runner along the counter.",
+  "kind": "text",
+  "where": "features.js:478 SUG.kitchen.t",
+  "note": ""
+ },
+ {
+  "id": "fit.add",
+  "en": "Add {range} {size} · {colour} · {price}",
+  "kind": "pattern",
+  "where": "features.js:526 `btn.innerHTML = esc(\"Add \" + FN[s.k] + \" \" + s.l + \" · \" + c.split(\" & \")[0] + \" · \" + inr(z[3])) + ' <span class=\"chev\" aria-hidden=\"true\">›</span>'`",
+  "note": "#fit-add label. range = FN short name (Zigzag / Solid Premium / Chenille), size = M/H/L/XL, colour = first part of the colour name; all English. Keep the trailing span.chev outside. fx.js tests this button's text for /Chenille/ and /Solid/ to pick the fly-to-cart range, so the range names must stay in Latin script."
+ },
+ {
+  "id": "fit.add.initial",
+  "en": "Add {range} {size} · {price}",
+  "kind": "pattern",
+  "where": "softsteps.html:1129 static #fit-add before features.js runs (range=Zigzag, size=L, price=₹349)",
+  "note": "Only the pre-JS markup uses this shorter form; features.js replaces it with fit.add on load."
+ },
+ {
+  "id": "fit.add.aria",
+  "en": "Add {range} {size} in {colour}, {price}",
+  "kind": "pattern",
+  "where": "features.js:527 `btn.setAttribute(\"aria-label\", \"Add \" + FN[s.k] + \" \" + s.l + \" in \" + c + \", \" + inr(z[3]))`",
+  "note": "aria-label of #fit-add; colour is the full colour name."
+ },
+ {
+  "id": "fit.shop_size",
+  "en": "Shop size {size}",
+  "kind": "pattern",
+  "where": "softsteps.html:1130 static #fitgo | softsteps.html:1454 `$(\"#fitgo\").innerHTML=\"Shop size \"+fit.size+' <span class=\"chev\" aria-hidden=\"true\">›</span>'`",
+  "note": "size = M/H/L/XL. innerHTML: keep the trailing span.chev outside."
+ },
+ {
+  "id": "made.layer.pile",
+  "en": "<b>Pile</b> · polyester microfiber and BCF yarn",
+  "kind": "rich",
+  "where": "softsteps.html:1148 #made ul.stk-l li innerHTML",
+  "note": "BCF (bulked continuous filament) stays as is."
+ },
+ {
+  "id": "made.layer.backing",
+  "en": "<b>Backing</b> · latex, anti-skid",
+  "kind": "rich",
+  "where": "softsteps.html:1149 #made ul.stk-l li innerHTML",
+  "note": ""
+ },
+ {
+  "id": "made.layer.floor",
+  "en": "<b>Your floor</b> · the backing holds it",
+  "kind": "rich",
+  "where": "softsteps.html:1150 #made ul.stk-l li innerHTML",
+  "note": ""
+ },
+ {
+  "id": "made.title",
+  "en": "Made for <em>wet feet</em>",
+  "kind": "rich",
+  "where": "softsteps.html:1154 h2#made-h innerHTML",
+  "note": ""
+ },
+ {
+  "id": "made.text",
+  "en": "Step out of the shower, in from the monsoon or off a dusty road. The pile soaks it up and the backing holds the floor.",
+  "kind": "text",
+  "where": "softsteps.html:1155 #made .made-text p",
+  "note": ""
+ },
+ {
+  "id": "spec.pile",
+  "en": "Pile",
+  "kind": "text",
+  "where": "softsteps.html:1157 #made dl.specs dt",
+  "note": ""
+ },
+ {
+  "id": "spec.backing",
+  "en": "Backing",
+  "kind": "text",
+  "where": "softsteps.html:1158 #made dl.specs dt",
+  "note": ""
+ },
+ {
+  "id": "spec.care",
+  "en": "Care",
+  "kind": "text",
+  "where": "softsteps.html:1159 #made dl.specs dt",
+  "note": ""
+ },
+ {
+  "id": "spec.weight",
+  "en": "Weight",
+  "kind": "text",
+  "where": "softsteps.html:1160 #made dl.specs dt",
+  "note": ""
+ },
+ {
+  "id": "spec.pile.value",
+  "en": "Polyester microfiber and BCF yarn",
+  "kind": "text",
+  "where": "softsteps.html:1157 #made dl.specs dd",
+  "note": ""
+ },
+ {
+  "id": "spec.backing.value",
+  "en": "Latex, anti-skid",
+  "kind": "text",
+  "where": "softsteps.html:1158 #made dl.specs dd",
+  "note": ""
+ },
+ {
+  "id": "spec.weight.value",
+  "en": "300 g for a zigzag M, up to 1715 g for a solid XL",
+  "kind": "text",
+  "where": "softsteps.html:1160 #made dl.specs dd",
+  "note": "'zigzag' and 'solid' are the ranges (keep in English); keep 300 g, 1715 g, M and XL."
+ },
+ {
+  "id": "order.title",
+  "en": "Order on WhatsApp, <em>pay by UPI</em>",
+  "kind": "rich",
+  "where": "softsteps.html:1169 h2#order-h innerHTML",
+  "note": ""
+ },
+ {
+  "id": "order.step1.title",
+  "en": "Fill your cart",
+  "kind": "text",
+  "where": "softsteps.html:1173 #order ol.steps li:nth-child(1) > b",
+  "note": ""
+ },
+ {
+  "id": "order.step1.text",
+  "en": "Pick colour, size and quantity for each mat.",
+  "kind": "text",
+  "where": "softsteps.html:1173 #order ol.steps li:nth-child(1) > span",
+  "note": ""
+ },
+ {
+  "id": "order.step2.title",
+  "en": "Add your address",
+  "kind": "text",
+  "where": "softsteps.html:1174 #order ol.steps li:nth-child(2) > b",
+  "note": ""
+ },
+ {
+  "id": "order.step2.text",
+  "en": "Name, phone, address and PIN code.",
+  "kind": "text",
+  "where": "softsteps.html:1174 #order ol.steps li:nth-child(2) > span",
+  "note": ""
+ },
+ {
+  "id": "order.step3.title",
+  "en": "Pay by UPI",
+  "kind": "text",
+  "where": "softsteps.html:1175 #order ol.steps li:nth-child(3) > b",
+  "note": ""
+ },
+ {
+  "id": "order.step3.text",
+  "en": "Scan our QR or pay to panchaljelam@oksbi from any UPI app.",
+  "kind": "text",
+  "where": "softsteps.html:1175 #order ol.steps li:nth-child(3) > span",
+  "note": "Keep the UPI ID panchaljelam@oksbi exactly."
+ },
+ {
+  "id": "order.step4.title",
+  "en": "Send it on WhatsApp",
+  "kind": "text",
+  "where": "softsteps.html:1176 #order ol.steps li:nth-child(4) > b",
+  "note": ""
+ },
+ {
+  "id": "order.step4.text",
+  "en": "One tap sends the order. We confirm it the same day and dispatch.",
+  "kind": "text",
+  "where": "softsteps.html:1176 #order ol.steps li:nth-child(4) > span",
+  "note": ""
+ },
+ {
+  "id": "chat.today",
+  "en": "Today",
+  "kind": "text",
+  "where": "softsteps.html:1184 #order .chat span.day (phone mock)",
+  "note": ""
+ },
+ {
+  "id": "chat.sent",
+  "en": "Sent from the site",
+  "kind": "text",
+  "where": "softsteps.html:1190 #order .chat .bubble small (phone mock)",
+  "note": "Only this small line is translated: the bubble text above it is an example WhatsApp order message and stays English, like real orders."
+ },
+ {
+  "id": "chat.note",
+  "en": "An example of the message the site writes for you.",
+  "kind": "text",
+  "where": "softsteps.html:1193 #order p.note (phone mock caption)",
+  "note": "Translations may add that the message itself is sent in English."
+ },
+ {
+  "id": "faq.title",
+  "en": "Before you order",
+  "kind": "text",
+  "where": "softsteps.html:1201 h2#faq-h",
+  "note": ""
+ },
+ {
+  "id": "faq.q1",
+  "en": "How do I order?",
+  "kind": "text",
+  "where": "softsteps.html:1203 #faq .qa details:nth-of-type(1) summary",
+  "note": ""
+ },
+ {
+  "id": "faq.a1",
+  "en": "Add mats to your cart, enter your delivery details, pay by UPI and send the order to us on WhatsApp with one tap. We confirm your order and payment the same day.",
+  "kind": "text",
+  "where": "softsteps.html:1203 #faq .qa details:nth-of-type(1) p",
+  "note": ""
+ },
+ {
+  "id": "faq.q2",
+  "en": "How do I pay?",
+  "kind": "text",
+  "where": "softsteps.html:1204 #faq .qa details:nth-of-type(2) summary",
+  "note": ""
+ },
+ {
+  "id": "faq.a2",
+  "en": "By UPI. Scan the QR at checkout or pay to panchaljelam@oksbi (Jelam Panchal) from GPay, PhonePe, Paytm or any UPI app. You can also pay to UPI number 90994 41429.",
+  "kind": "text",
+  "where": "softsteps.html:1204 #faq .qa details:nth-of-type(2) p",
+  "note": "Keep the UPI ID, the UPI number and the app names GPay, PhonePe, Paytm."
+ },
+ {
+  "id": "faq.q3",
+  "en": "Do you deliver across India?",
+  "kind": "text",
+  "where": "softsteps.html:1205 #faq .qa details:nth-of-type(3) summary",
+  "note": ""
+ },
+ {
+  "id": "faq.a3",
+  "en": "Yes. Delivery is free within Vadodara. For the rest of India, delivery charges are extra and we confirm them with you on call.",
+  "kind": "text",
+  "where": "softsteps.html:1205 #faq .qa details:nth-of-type(3) p",
+  "note": ""
+ },
+ {
+  "id": "faq.q4",
+  "en": "Can I choose my colour?",
+  "kind": "text",
+  "where": "softsteps.html:1206 #faq .qa details:nth-of-type(4) summary",
+  "note": ""
+ },
+ {
+  "id": "faq.a4",
+  "en": "Yes. Colours depend on stock, so we confirm yours on WhatsApp before dispatch. If your colour is out of stock, we let you know before you pay.",
+  "kind": "text",
+  "where": "softsteps.html:1206 #faq .qa details:nth-of-type(4) p",
+  "note": ""
+ },
+ {
+  "id": "faq.q5",
+  "en": "How do I wash my mat?",
+  "kind": "text",
+  "where": "softsteps.html:1207 #faq .qa details:nth-of-type(5) summary",
+  "note": ""
+ },
+ {
+  "id": "faq.a5",
+  "en": "Our mats are machine washable and quick-drying, with an anti-slip latex backing. Message us if you want care tips for a particular mat.",
+  "kind": "text",
+  "where": "softsteps.html:1207 #faq .qa details:nth-of-type(5) p",
+  "note": ""
+ },
+ {
+  "id": "faq.q6",
+  "en": "Can I visit?",
+  "kind": "text",
+  "where": "softsteps.html:1208 #faq .qa details:nth-of-type(6) summary",
+  "note": ""
+ },
+ {
+  "id": "faq.a6",
+  "en": "Yes, by appointment in Vadodara. Message us on WhatsApp to set a time.",
+  "kind": "text",
+  "where": "softsteps.html:1208 #faq .qa details:nth-of-type(6) p",
+  "note": ""
+ },
+ {
+  "id": "contact.title",
+  "en": "Ask Jelam",
+  "kind": "text",
+  "where": "softsteps.html:1213 #contact h2",
+  "note": "Jelam is the owner's first name: transliterate (જેલમ / जेलम)."
+ },
+ {
+  "id": "contact.text",
+  "en": "Soft Steps is run by Jelam Panchal in Vadodara. Ask about colours, sizes or stock and you get a reply the same day.",
+  "kind": "text",
+  "where": "softsteps.html:1214 #contact p",
+  "note": "Keep 'Soft Steps'."
+ },
+ {
+  "id": "field.email",
+  "en": "Email",
+  "kind": "text",
+  "where": "softsteps.html:1217 #contact .clist .k | softsteps.html:1283 #drawer label[for=o-email] text node before small",
+  "note": ""
+ },
+ {
+  "id": "contact.hours.label",
+  "en": "Hours",
+  "kind": "text",
+  "where": "softsteps.html:1219 #contact .clist .k",
+  "note": ""
+ },
+ {
+  "id": "contact.visits.label",
+  "en": "Visits",
+  "kind": "text",
+  "where": "softsteps.html:1220 #contact .clist .k",
+  "note": ""
+ },
+ {
+  "id": "contact.hours",
+  "en": "10am to 8pm, every day",
+  "kind": "text",
+  "where": "softsteps.html:1219 #contact .clist .v",
+  "note": ""
+ },
+ {
+  "id": "contact.visits",
+  "en": "By appointment in Vadodara",
+  "kind": "text",
+  "where": "softsteps.html:1220 #contact .clist .v",
+  "note": ""
+ },
+ {
+  "id": "copy.whatsapp.aria",
+  "en": "Copy WhatsApp number",
+  "kind": "attr",
+  "where": "softsteps.html:1216,1351 #contact .clist and dialog#menu .menu-wa button.copy",
+  "note": ""
+ },
+ {
+  "id": "copy.email.aria",
+  "en": "Copy email address",
+  "kind": "attr",
+  "where": "softsteps.html:1217 #contact .clist button.copy",
+  "note": ""
+ },
+ {
+  "id": "contact.whatsapp",
+  "en": "Message Jelam on WhatsApp",
+  "kind": "text",
+  "where": "softsteps.html:1222 #contact a.wa-direct (text node after svg)",
+  "note": "The pre-filled WhatsApp message behind this link stays English."
+ },
+ {
+  "id": "enquiry.open",
+  "en": "Or write it here first",
+  "kind": "text",
+  "where": "softsteps.html:1223 details#enqd summary",
+  "note": ""
+ },
+ {
+  "id": "enquiry.name",
+  "en": "Your name",
+  "kind": "text",
+  "where": "softsteps.html:1226 label[for=e-n] text node",
+  "note": ""
+ },
+ {
+  "id": "field.phone",
+  "en": "Phone / WhatsApp",
+  "kind": "text",
+  "where": "softsteps.html:1227 label[for=e-p] text node | softsteps.html:1276 #drawer label[for=o-ph] text node",
+  "note": ""
+ },
+ {
+  "id": "enquiry.interest",
+  "en": "Interested in",
+  "kind": "text",
+  "where": "softsteps.html:1229 label[for=e-s] text node",
+  "note": ""
+ },
+ {
+  "id": "enquiry.message",
+  "en": "Message",
+  "kind": "text",
+  "where": "softsteps.html:1230 label[for=e-m] text node before small",
+  "note": ""
+ },
+ {
+  "id": "enquiry.message.hint",
+  "en": "Sizes, colours, quantity, anything that helps",
+  "kind": "text",
+  "where": "softsteps.html:1230 label[for=e-m] small",
+  "note": ""
+ },
+ {
+  "id": "enquiry.option.larger",
+  "en": "A larger order",
+  "kind": "text",
+  "where": "softsteps.html:1229 #e-s option",
+  "note": "The selected option's text goes into the English WhatsApp enquiry ('Interested in: ' + $('#e-s').value). Give the option value=\"A larger order\" before translating its text, so the message stays English. The three range options (Multicolour Zigzag Rugs, Solid Premium Rugs, Striped Chenille Mats) stay English and are not in the catalog."
+ },
+ {
+  "id": "enquiry.option.unsure",
+  "en": "Not sure yet",
+  "kind": "text",
+  "where": "softsteps.html:1229 #e-s option",
+  "note": "Same as enquiry.option.larger: add value=\"Not sure yet\" so the WhatsApp enquiry stays English."
+ },
+ {
+  "id": "enquiry.error",
+  "en": "Add your name and phone number so we can reply.",
+  "kind": "text",
+  "where": "softsteps.html:1530 #eerr (role=alert)",
+  "note": ""
+ },
+ {
+  "id": "enquiry.submit",
+  "en": "Write my WhatsApp message",
+  "kind": "text",
+  "where": "softsteps.html:1232 #enq button[type=submit] text node before span.chev",
+  "note": ""
+ },
+ {
+  "id": "enquiry.done",
+  "en": "Your message is ready. Tap below to open WhatsApp and send it.",
+  "kind": "text",
+  "where": "softsteps.html:1233 #enqdone text node before a#enqwa",
+  "note": ""
+ },
+ {
+  "id": "enquiry.send",
+  "en": "Open WhatsApp",
+  "kind": "text",
+  "where": "softsteps.html:1233 a#enqwa text node after svg",
+  "note": ""
+ },
+ {
+  "id": "footer.line",
+  "en": "Comfort in every step · Vadodara, Gujarat · © 2026",
+  "kind": "text",
+  "where": "softsteps.html:1244 footer .foot-row span",
+  "note": "Close to hero.tagline but without the comma; keep © 2026."
+ },
+ {
+  "id": "footer.contact",
+  "en": "WhatsApp +91 90994 41429 · 10am–8pm daily · UPI panchaljelam@oksbi",
+  "kind": "text",
+  "where": "softsteps.html:1246 footer p.mist",
+  "note": "Translate only the labels and '10am–8pm daily'; keep the phone number and UPI ID exactly."
+ },
+ {
+  "id": "cartbar.finish",
+  "en": "Finish order #{oid}",
+  "kind": "pattern",
+  "where": "softsteps.html:1479 `$(\"#cbn\").textContent=pend?\"Finish order #\"+pend.oid:\"View cart · \"+n+(n>1?\" items\":\" item\")`",
+  "note": "#cbn in the floating cart bar while an order waits on the pay step. oid like SS-4K2Q9P."
+ },
+ {
+  "id": "cartbar.view.one",
+  "en": "View cart · {n} item",
+  "kind": "pattern",
+  "where": "softsteps.html:1479 `\"View cart · \"+n+(n>1?\" items\":\" item\")`",
+  "note": "Variant for n = 1 (the bar is hidden at 0)."
+ },
+ {
+  "id": "cartbar.view.other",
+  "en": "View cart · {n} items",
+  "kind": "pattern",
+  "where": "softsteps.html:1479 `\"View cart · \"+n+(n>1?\" items\":\" item\")`",
+  "note": "Variant for n > 1."
+ },
+ {
+  "id": "dock.add",
+  "en": "Add",
+  "kind": "text",
+  "where": "softsteps.html:1257 #dock-add (phone buy dock)",
+  "note": ""
+ },
+ {
+  "id": "dock.add.aria",
+  "en": "Add {colour}, size {size}, to cart",
+  "kind": "pattern",
+  "where": "features.js:364 `$(\"#dock-add\").setAttribute(\"aria-label\", \"Add \" + c + \", size \" + l + \", to cart\")`",
+  "note": "colour stays English, size = M/H/L/XL. The dock text itself ('{colour} · {size}' and the price) needs no translation."
+ },
+ {
+  "id": "toast.copy_failed",
+  "en": "Select and copy: {text}",
+  "kind": "pattern",
+  "where": "softsteps.html:1521 `toast(\"Select and copy: \"+text)` | features.js:115 `SS.toast(\"Select and copy: \" + text)`",
+  "note": "Shown when the clipboard is blocked; text is the copied content (phone, email, UPI ID, or an English message)."
+ },
+ {
+  "id": "toast.saved",
+  "en": "Saved {colour}",
+  "kind": "pattern",
+  "where": "features.js:137 `\"Removed \" + c + \" from Saved\" : \"Saved \" + c`",
+  "note": "Toast after tapping a heart; colour stays English."
+ },
+ {
+  "id": "toast.unsaved",
+  "en": "Removed {colour} from Saved",
+  "kind": "pattern",
+  "where": "features.js:137 `SS.toast(i >= 0 ? \"Removed \" + c + \" from Saved\"`",
+  "note": "Toast after un-saving; 'Saved' is the Saved colours list (saved.title)."
+ },
+ {
+  "id": "common.close",
+  "en": "Close",
+  "kind": "attr",
+  "where": "softsteps.html:1264 #dclose | softsteps.html:1319,1332 dialog#saved and dialog#compare button.x | shop.js:84 zoom viewer button.x",
+  "note": ""
+ },
+ {
+  "id": "cart.title",
+  "en": "Your cart",
+  "kind": "text",
+  "where": "softsteps.html:1264 h2#dtitle (static) | softsteps.html:1490 titles.cart, set by view()",
+  "note": ""
+ },
+ {
+  "id": "cart.title.details",
+  "en": "Delivery details",
+  "kind": "text",
+  "where": "softsteps.html:1490 titles.det -> h2#dtitle",
+  "note": ""
+ },
+ {
+  "id": "cart.title.pay",
+  "en": "Pay & send",
+  "kind": "text",
+  "where": "softsteps.html:1490 titles.pay -> h2#dtitle | softsteps.html:1266 #prog li:nth-child(3)",
+  "note": ""
+ },
+ {
+  "id": "cart.step.cart",
+  "en": "Cart",
+  "kind": "text",
+  "where": "softsteps.html:1266 #prog li:nth-child(1)",
+  "note": ""
+ },
+ {
+  "id": "cart.step.details",
+  "en": "Details",
+  "kind": "text",
+  "where": "softsteps.html:1266 #prog li:nth-child(2)",
+  "note": ""
+ },
+ {
+  "id": "cart.line.each",
+  "en": "{size} · {price} each",
+  "kind": "pattern",
+  "where": "softsteps.html:1480 `<small>'+esc(x.size)+' · '+inr(x.p)+' each</small>`",
+  "note": "Cart line. size = the stored English size string, e.g. 'M 16×24 in' or 'H 16×24 in half round' (see size.half); price = unit price."
+ },
+ {
+  "id": "cart.remove",
+  "en": "Remove",
+  "kind": "text",
+  "where": "softsteps.html:1480 cart line button.rm | features.js:271 saved dialog [data-srm]",
+  "note": ""
+ },
+ {
+  "id": "cart.remove.aria",
+  "en": "Remove {colour} {product}",
+  "kind": "pattern",
+  "where": "softsteps.html:1480 `aria-label=\"Remove '+esc(x.colour+\" \"+P[x.k].name)+'\"`",
+  "note": "Cart line Remove button; colour and product stay English."
+ },
+ {
+  "id": "cart.live.removed",
+  "en": "Removed {colour} {product}",
+  "kind": "pattern",
+  "where": "softsteps.html:1488 `$(\"#cartlive\").textContent=gone?\"Removed \"+x.colour+\" \"+P[x.k].name:x.colour+\" \"+P[x.k].name+\", quantity \"+x.q`",
+  "note": "#cartlive (sr-only, aria-live) after a line is removed."
+ },
+ {
+  "id": "cart.live.quantity",
+  "en": "{colour} {product}, quantity {q}",
+  "kind": "pattern",
+  "where": "softsteps.html:1488 `x.colour+\" \"+P[x.k].name+\", quantity \"+x.q`",
+  "note": "#cartlive after + or − on a cart line."
+ },
+ {
+  "id": "cart.empty",
+  "en": "Your cart is empty.",
+  "kind": "text",
+  "where": "softsteps.html:1480 core render() empty state",
+  "note": ""
+ },
+ {
+  "id": "cart.browse",
+  "en": "Browse mats",
+  "kind": "text",
+  "where": "softsteps.html:1480 core render() #browse",
+  "note": ""
+ },
+ {
+  "id": "cart.subtotal",
+  "en": "Subtotal",
+  "kind": "text",
+  "where": "softsteps.html:1270 #f-cart .rowx",
+  "note": ""
+ },
+ {
+  "id": "cart.continue",
+  "en": "Continue to delivery details",
+  "kind": "text",
+  "where": "softsteps.html:1271 #go text node before span.chev",
+  "note": ""
+ },
+ {
+  "id": "details.name",
+  "en": "Full name",
+  "kind": "text",
+  "where": "softsteps.html:1275 label[for=o-name] text node",
+  "note": ""
+ },
+ {
+  "id": "details.phone.placeholder",
+  "en": "10-digit mobile number",
+  "kind": "attr",
+  "where": "softsteps.html:1276 #o-ph[placeholder]",
+  "note": ""
+ },
+ {
+  "id": "details.address",
+  "en": "Address",
+  "kind": "text",
+  "where": "softsteps.html:1277 label[for=o-ad] text node",
+  "note": ""
+ },
+ {
+  "id": "details.address.placeholder",
+  "en": "House / flat, street, area, landmark",
+  "kind": "attr",
+  "where": "softsteps.html:1277 #o-ad[placeholder]",
+  "note": ""
+ },
+ {
+  "id": "details.city",
+  "en": "City",
+  "kind": "text",
+  "where": "softsteps.html:1279 label[for=o-ct] text node",
+  "note": ""
+ },
+ {
+  "id": "details.pin",
+  "en": "PIN code",
+  "kind": "text",
+  "where": "softsteps.html:1280 label[for=o-pin] text node",
+  "note": ""
+ },
+ {
+  "id": "details.pin.placeholder",
+  "en": "6 digits",
+  "kind": "attr",
+  "where": "softsteps.html:1280 #o-pin[placeholder]",
+  "note": ""
+ },
+ {
+  "id": "details.optional",
+  "en": "Optional",
+  "kind": "text",
+  "where": "softsteps.html:1283 label[for=o-email] small",
+  "note": ""
+ },
+ {
+  "id": "details.gift",
+  "en": "This is a gift",
+  "kind": "text",
+  "where": "softsteps.html:1286 label[for=o-gift-on] span",
+  "note": ""
+ },
+ {
+  "id": "details.gift.message",
+  "en": "Gift message",
+  "kind": "text",
+  "where": "softsteps.html:1287 label[for=o-gift] text node before small",
+  "note": ""
+ },
+ {
+  "id": "details.gift.hint",
+  "en": "It's sent to Jelam with your order on WhatsApp.",
+  "kind": "text",
+  "where": "softsteps.html:1287 label[for=o-gift] small",
+  "note": "The gift note the shopper types is sent as they wrote it."
+ },
+ {
+  "id": "details.delivery",
+  "en": "Delivery",
+  "kind": "text",
+  "where": "softsteps.html:1290 #v-det fieldset legend | softsteps.html:1500 core summary() delivery row",
+  "note": ""
+ },
+ {
+  "id": "details.vadodara",
+  "en": "Vadodara",
+  "kind": "text",
+  "where": "softsteps.html:1291 radio[value=vad] span text node before small",
+  "note": "Place name: transliterate (વડોદરા / वडोदरा)."
+ },
+ {
+  "id": "details.vadodara.note",
+  "en": "Free delivery",
+  "kind": "text",
+  "where": "softsteps.html:1291 radio[value=vad] small",
+  "note": ""
+ },
+ {
+  "id": "details.india",
+  "en": "Rest of India",
+  "kind": "text",
+  "where": "softsteps.html:1292 radio[value=out] span text node before small",
+  "note": ""
+ },
+ {
+  "id": "details.india.note",
+  "en": "Delivery charges extra, confirmed on call",
+  "kind": "text",
+  "where": "softsteps.html:1292 radio[value=out] small",
+  "note": ""
+ },
+ {
+  "id": "details.summary",
+  "en": "Order summary",
+  "kind": "text",
+  "where": "softsteps.html:1294 #v-det .box .bh",
+  "note": ""
+ },
+ {
+  "id": "summary.on_call",
+  "en": "Confirmed on call",
+  "kind": "text",
+  "where": "softsteps.html:1500 core summary() delivery row value (Rest of India)",
+  "note": ""
+ },
+ {
+  "id": "summary.free",
+  "en": "Free",
+  "kind": "text",
+  "where": "softsteps.html:1500 core summary() delivery row value (Vadodara)",
+  "note": ""
+ },
+ {
+  "id": "details.total",
+  "en": "Total",
+  "kind": "text",
+  "where": "softsteps.html:1297 #f-det .rowx",
+  "note": ""
+ },
+ {
+  "id": "details.total.out",
+  "en": "{price} + delivery",
+  "kind": "pattern",
+  "where": "softsteps.html:1500 `$(\"#tot\").textContent=inr(total())+(dl()===\"out\"?\" + delivery\":\"\")`",
+  "note": "#tot when 'Rest of India' is chosen; otherwise #tot is just the price."
+ },
+ {
+  "id": "error.name",
+  "en": "Add your name.",
+  "kind": "text",
+  "where": "softsteps.html:1507 #oerr (role=alert), order-btn validation",
+  "note": ""
+ },
+ {
+  "id": "error.phone",
+  "en": "Enter a 10-digit Indian mobile number, like 98765 43210.",
+  "kind": "text",
+  "where": "softsteps.html:1508 #oerr",
+  "note": "Keep the example number 98765 43210."
+ },
+ {
+  "id": "error.address",
+  "en": "Add your full address with house number and area.",
+  "kind": "text",
+  "where": "softsteps.html:1509 #oerr",
+  "note": ""
+ },
+ {
+  "id": "error.city",
+  "en": "Add your city.",
+  "kind": "text",
+  "where": "softsteps.html:1510 #oerr",
+  "note": ""
+ },
+ {
+  "id": "error.pin",
+  "en": "Enter your 6-digit PIN code.",
+  "kind": "text",
+  "where": "softsteps.html:1511 #oerr",
+  "note": ""
+ },
+ {
+  "id": "error.email",
+  "en": "Check your email address, or leave it blank.",
+  "kind": "text",
+  "where": "softsteps.html:1512 #oerr",
+  "note": ""
+ },
+ {
+  "id": "details.back",
+  "en": "Back",
+  "kind": "text",
+  "where": "softsteps.html:1299 #back",
+  "note": ""
+ },
+ {
+  "id": "details.continue",
+  "en": "Continue to payment",
+  "kind": "text",
+  "where": "softsteps.html:1299 #order-btn text node before span.chev",
+  "note": ""
+ },
+ {
+  "id": "pay.order",
+  "en": "Order <span id=\"oid\"></span>",
+  "kind": "rich",
+  "where": "softsteps.html:1302 p.oidl innerHTML",
+  "note": "#oid is filled by fillPay() with '#SS-…' via textContent. Translate the text node only (or re-run fillPay after swapping innerHTML), or the order number is lost."
+ },
+ {
+  "id": "pay.hello",
+  "en": "Almost done, <span id=\"oname\"></span>",
+  "kind": "rich",
+  "where": "softsteps.html:1302 #v-pay h3 innerHTML",
+  "note": "#oname gets the shopper's first name from fillPay(). Same caution as pay.order."
+ },
+ {
+  "id": "pay.todo.pay",
+  "en": "<b>Pay <span id=\"payamt\"></span></b> by UPI to the ID below.",
+  "kind": "rich",
+  "where": "softsteps.html:1303 #v-pay ol.todo li:nth-child(1) innerHTML",
+  "note": "#payamt is filled by fillPay() (price, or pay.amount.out). Keep <b> and the empty span; their order may change for gu/hi word order."
+ },
+ {
+  "id": "pay.amount.out",
+  "en": "{price} + delivery once confirmed",
+  "kind": "pattern",
+  "where": "softsteps.html:1475 `$(\"#payamt\").textContent=inr(o.t)+(o.out?\" + delivery once confirmed\":\"\")`",
+  "note": "#payamt for Rest of India orders; otherwise just the price."
+ },
+ {
+  "id": "pay.todo.send",
+  "en": "<b>Send your order on WhatsApp</b> with the green button. Your order is confirmed when we reply.",
+  "kind": "rich",
+  "where": "softsteps.html:1303 #v-pay ol.todo li:nth-child(2) innerHTML",
+  "note": ""
+ },
+ {
+  "id": "pay.upi_id",
+  "en": "UPI ID",
+  "kind": "text",
+  "where": "softsteps.html:1305 #v-pay .upiid .fine",
+  "note": ""
+ },
+ {
+  "id": "pay.upi_name",
+  "en": "Jelam Panchal (Soft Steps) · or UPI number <span style=\"white-space:nowrap\">90994 41429</span>",
+  "kind": "rich",
+  "where": "softsteps.html:1305 #v-pay .upiid .fine:last-child innerHTML",
+  "note": "Only 'or UPI number' is translated; the name (transliterate if wished), brand and number stay."
+ },
+ {
+  "id": "pay.copy_upi",
+  "en": "Copy UPI ID",
+  "kind": "text",
+  "where": "softsteps.html:1305 #v-pay .upiid button[data-copy]",
+  "note": ""
+ },
+ {
+  "id": "pay.open_upi",
+  "en": "Open a UPI app",
+  "kind": "text",
+  "where": "softsteps.html:1306 a#upil",
+  "note": ""
+ },
+ {
+  "id": "pay.qr.show",
+  "en": "Show the UPI QR code",
+  "kind": "text",
+  "where": "softsteps.html:1307 details#qrd summary",
+  "note": ""
+ },
+ {
+  "id": "pay.qr.alt",
+  "en": "UPI QR code for Soft Steps",
+  "kind": "attr",
+  "where": "softsteps.html:1307 details#qrd img alt",
+  "note": "Keep 'Soft Steps'."
+ },
+ {
+  "id": "pay.qr.help",
+  "en": "Scan it from another phone. On this phone, long-press to save it, then use “scan from gallery” in GPay, PhonePe or Paytm.",
+  "kind": "text",
+  "where": "softsteps.html:1307 details#qrd p.fine",
+  "note": "“scan from gallery” names a button in the UPI apps; if those apps show it in Gujarati/Hindi, quote their wording, otherwise keep the English in quotes."
+ },
+ {
+  "id": "pay.sent",
+  "en": "<b>Sent it?</b> Jelam replies on WhatsApp to confirm your order and payment.",
+  "kind": "rich",
+  "where": "softsteps.html:1309 #sentbox p innerHTML",
+  "note": ""
+ },
+ {
+  "id": "pay.new_cart",
+  "en": "Start a new cart",
+  "kind": "text",
+  "where": "softsteps.html:1309 #newcart",
+  "note": ""
+ },
+ {
+  "id": "pay.edit",
+  "en": "Change something in this order",
+  "kind": "text",
+  "where": "softsteps.html:1310 #editorder",
+  "note": ""
+ },
+ {
+  "id": "pay.send",
+  "en": "Send order on WhatsApp",
+  "kind": "text",
+  "where": "softsteps.html:1313 a#sendwa text node after svg",
+  "note": "The order message it sends stays English."
+ },
+ {
+  "id": "pay.help",
+  "en": "WhatsApp not opening? <button type=\"button\" class=\"link\" id=\"copyorder\">Copy the order text</button> and message +91 90994 41429 or email softsteps.home@gmail.com.",
+  "kind": "rich",
+  "where": "softsteps.html:1314 #f-pay p.fine innerHTML",
+  "note": "#copyorder has a click handler set once by the core: replace only the text nodes around it and the button's own text, never the whole innerHTML (or re-bind). Keep phone and email exactly."
+ },
+ {
+  "id": "pay.copy_order",
+  "en": "Copy the order text",
+  "kind": "text",
+  "where": "softsteps.html:1314 button#copyorder (inside pay.help)",
+  "note": "Also part of pay.help. Listed on its own so the button can be translated in place and keep its click handler."
+ },
+ {
+  "id": "saved.title",
+  "en": "Saved colours",
+  "kind": "text",
+  "where": "softsteps.html:1319 dialog#saved h2",
+  "note": ""
+ },
+ {
+  "id": "saved.empty",
+  "en": "Tap ♡ on any colour to save it here.",
+  "kind": "text",
+  "where": "softsteps.html:1322 #saved-empty p",
+  "note": "Keep the ♡ symbol."
+ },
+ {
+  "id": "saved.ask",
+  "en": "Ask Jelam about these",
+  "kind": "text",
+  "where": "softsteps.html:1325 a#saved-ask text node after svg",
+  "note": "The stock-check message it opens ('Hi Jelam, are these in stock?' + list) stays English."
+ },
+ {
+  "id": "saved.family",
+  "en": "Send to family",
+  "kind": "text",
+  "where": "softsteps.html:1326 a#saved-family",
+  "note": "The list it shares with family (familyText()) stays English."
+ },
+ {
+  "id": "saved.copy",
+  "en": "Copy list",
+  "kind": "text",
+  "where": "softsteps.html:1327 #saved-copy",
+  "note": "The copied list (familyText()) stays English."
+ },
+ {
+  "id": "saved.size.aria",
+  "en": "Size for {colour}",
+  "kind": "pattern",
+  "where": "features.js:267 `esc(\"Size for \" + x.c)`",
+  "note": "Saved row size radiogroup; colour stays English."
+ },
+ {
+  "id": "saved.add.aria",
+  "en": "Add to cart: {colour} {product}, {size}",
+  "kind": "pattern",
+  "where": "features.js:270 `esc(\"Add to cart: \" + x.c + \" \" + P[x.k].name + \", \" + z[0])` | features.js:270 `\"Add to cart: \" + x.c + \" \" + P[x.k].name + \", \" + z[0])`",
+  "note": "aria-label of each Saved row's Add to cart; size = M/H/L/XL."
+ },
+ {
+  "id": "saved.added",
+  "en": "Added ✓",
+  "kind": "text",
+  "where": "features.js:290 saved row [data-sadd] for 1.5 s after adding",
+  "note": ""
+ },
+ {
+  "id": "saved.remove.aria",
+  "en": "Remove {colour} {product} from Saved",
+  "kind": "pattern",
+  "where": "features.js:271 `esc(\"Remove \" + x.c + \" \" + P[x.k].name + \" from Saved\")`",
+  "note": ""
+ },
+ {
+  "id": "compare.caption",
+  "en": "Price and weight of every range in each size",
+  "kind": "text",
+  "where": "features.js:449 #cmp-table caption (sr-only)",
+  "note": ""
+ },
+ {
+  "id": "compare.choose.aria",
+  "en": "Choose {product} size {size}, {price}",
+  "kind": "pattern",
+  "where": "features.js:455 `esc(\"Choose \" + P[k].name + \" size \" + z[0] + \", \" + inr(z[3]))`",
+  "note": "Each price cell is a button that picks that range and size. product stays English. Column headers (Zigzag / Solid Premium / Chenille) and weights stay as they are."
+ },
+ {
+  "id": "compare.note",
+  "en": "Weights are ±5%.",
+  "kind": "text",
+  "where": "softsteps.html:1335 dialog#compare p.cmpnote",
+  "note": ""
+ },
+ {
+  "id": "zoom.hint.touch",
+  "en": "Double-tap or pinch to zoom · swipe for the next colour",
+  "kind": "text",
+  "where": "shop.js:86 #zoom-hint (touch screens)",
+  "note": ""
+ },
+ {
+  "id": "zoom.hint.mouse",
+  "en": "Click or press + to zoom · arrow keys for the next colour",
+  "kind": "text",
+  "where": "shop.js:94 #zoom-hint (mouse / no touch)",
+  "note": "'+' is the keyboard key and stays as is."
+ },
+ {
+  "id": "zoom.in.aria",
+  "en": "Zoom in",
+  "kind": "attr",
+  "where": "shop.js:87 #zoom-in (button shows +)",
+  "note": ""
+ },
+ {
+  "id": "zoom.out.aria",
+  "en": "Zoom out",
+  "kind": "attr",
+  "where": "shop.js:87 #zoom-out (button shows −)",
+  "note": ""
+ },
+ {
+  "id": "zoom.try",
+  "en": "See it at your door",
+  "kind": "text",
+  "where": "shop.js:89 #zoom-try text node after the door svg (hidden unless the photo try-on, SS.tryon, is loaded)",
+  "note": "Same words as the fit-tool heading (fit.title) without the <em>; keep the two translations consistent."
+ },
+ {
+  "id": "zoom.view.aria",
+  "en": "View {product} in {colour} larger",
+  "kind": "pattern",
+  "where": "shop.js:264 `return \"View \" + P[k].name + \" in \" + curColour(card) + \" larger\"` | shop.js:268 `sl ? \"View \" + P[sl.k].name + \" in \" + sl.c + \" larger\"`",
+  "note": "aria-label of the corner expand button (.zopen) on each Zigzag/Solid card panel and on the hero rug; renamed when the colour or slide changes. product and colour stay English."
+ },
+ {
+  "id": "zoom.view.aria.fallback",
+  "en": "View this rug larger",
+  "kind": "attr",
+  "where": "shop.js:268 hero .zopen aria-label when no slide is known",
+  "note": ""
+ },
+ {
+  "id": "zoom.choose",
+  "en": "Choose this colour",
+  "kind": "text",
+  "where": "shop.js:90 #zoom-go",
+  "note": ""
+ },
+ {
+  "id": "share.aria",
+  "en": "Share this {product} on WhatsApp",
+  "kind": "pattern",
+  "where": "shop.js:69 `a.setAttribute(\"aria-label\", \"Share this \" + P[k].name + \" on WhatsApp\")`",
+  "note": "Share icon added to each product card. product stays English. The shared message (shareText()) stays English."
+ },
+ {
+  "id": "lang.done",
+  "en": "Showing the site in English",
+  "kind": "text",
+  "where": "lang.js:168 lang.js set(): toast after switching to gu or hi, text taken from the dictionary's own `done` field",
+  "note": "No English source text: English never shows this toast. Each dictionary supplies its own confirmation naming its language ('Showing the site in Gujarati' / '... in Hindi'). The switch labels English / ગુજરાતી / हिन्दी and the group label 'Language / ભાષા / भाषा' are written in all three scripts on purpose (data-noi18n) and are not in the catalog."
+ }
+]

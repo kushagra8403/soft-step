@@ -1,0 +1,246 @@
+{
+  "_source": "tryon.js (snapshot 2026-10-19 22:27:45 UTC, file still being written)",
+  "_status": "Not in strings.json yet: proposed ids for the catalog rescan. Reuses catalog entries for Close, Size, Add to cart and the floor names.",
+  "entries": [
+    {
+      "id": "tryon.title",
+      "kind": "text",
+      "en": "See it at your door",
+      "gu": "તમારા દરવાજે મૂકીને જુઓ",
+      "where": "tryon.js | tryon.js:123 h2#tryon-t; tryon.js:93 .tgo button span",
+      "note": "Same English as catalog zoom.try, so the existing text entry already covers it."
+    },
+    {
+      "id": "tryon.new",
+      "kind": "text",
+      "en": "New photo",
+      "gu": "નવો ફોટો",
+      "where": "tryon.js | tryon.js:124 #tryon-new",
+      "note": ""
+    },
+    {
+      "id": "tryon.lead",
+      "kind": "text",
+      "en": "Take a photo of your doorway or floor from standing height. Your photo stays on your phone.",
+      "gu": "ઊભા ઊભા તમારા દરવાજા કે ફરસનો ફોટો લો. તમારો ફોટો તમારા ફોનમાં જ રહે છે.",
+      "where": "tryon.js | tryon.js:130 p.tlead",
+      "note": ""
+    },
+    {
+      "id": "tryon.camera",
+      "kind": "text",
+      "en": "Take a photo",
+      "gu": "ફોટો લો",
+      "where": "tryon.js | tryon.js:131 #tryon-camb span",
+      "note": ""
+    },
+    {
+      "id": "tryon.gallery",
+      "kind": "text",
+      "en": "Choose from gallery",
+      "gu": "ગેલેરીમાંથી પસંદ કરો",
+      "where": "tryon.js | tryon.js:132,170 #tryon-galb span",
+      "note": ""
+    },
+    {
+      "id": "tryon.choose",
+      "kind": "text",
+      "en": "Choose a photo",
+      "gu": "ફોટો પસંદ કરો",
+      "where": "tryon.js | tryon.js:170 desk(): #tryon-galb span on desktop",
+      "note": ""
+    },
+    {
+      "id": "tryon.sample",
+      "kind": "text",
+      "en": "Try a sample floor",
+      "gu": "નમૂનાની ફરસ પર જુઓ",
+      "where": "tryon.js | tryon.js:133 #tryon-sample",
+      "note": ""
+    },
+    {
+      "id": "tryon.hint",
+      "kind": "text",
+      "en": "Drag the corners to the edges of your floor. Screenshot to share.",
+      "gu": "ખૂણા ખેંચીને ફરસની કિનારી સુધી લાવો. શેર કરવા સ્ક્રીનશોટ લો.",
+      "where": "tryon.js | tryon.js:141 p.thint",
+      "note": ""
+    },
+    {
+      "id": "tryon.floors.aria",
+      "kind": "attr",
+      "en": "Sample floor",
+      "gu": "નમૂનાની ફરસ",
+      "where": "tryon.js | tryon.js:142 #tryon-floors[aria-label]",
+      "note": "Floor chip names (White marble, Kota stone, Wood) reuse catalog fit.floor.*."
+    },
+    {
+      "id": "tryon.corner.far_left",
+      "kind": "attr",
+      "en": "Far left corner of the rug",
+      "gu": "રગનો દૂરનો ડાબો ખૂણો",
+      "where": "tryon.js | tryon.js:20,144 .thandle[aria-label] = CORNER[i] + ' corner of the rug'",
+      "note": "Built by concatenation; listed as four full strings so the corner words translate too."
+    },
+    {
+      "id": "tryon.corner.far_right",
+      "kind": "attr",
+      "en": "Far right corner of the rug",
+      "gu": "રગનો દૂરનો જમણો ખૂણો",
+      "where": "tryon.js | tryon.js:20,144",
+      "note": ""
+    },
+    {
+      "id": "tryon.corner.near_right",
+      "kind": "attr",
+      "en": "Near right corner of the rug",
+      "gu": "રગનો નજીકનો જમણો ખૂણો",
+      "where": "tryon.js | tryon.js:20,144",
+      "note": ""
+    },
+    {
+      "id": "tryon.corner.near_left",
+      "kind": "attr",
+      "en": "Near left corner of the rug",
+      "gu": "રગનો નજીકનો ડાબો ખૂણો",
+      "where": "tryon.js | tryon.js:20,144",
+      "note": ""
+    },
+    {
+      "id": "tryon.kb",
+      "kind": "text",
+      "en": "Drag it, or use the arrow keys. Hold Shift to move further.",
+      "gu": "ખેંચીને ખસેડો, અથવા એરો કી વાપરો. વધુ ખસેડવા Shift દબાવી રાખો.",
+      "where": "tryon.js | tryon.js:147 p.sr-only#tryon-kb",
+      "note": "Shift is the keyboard key; kept in Latin."
+    },
+    {
+      "id": "tryon.light",
+      "kind": "text",
+      "en": "Light",
+      "gu": "અજવાળું",
+      "where": "tryon.js | tryon.js:150 label.tlight span (brightness slider)",
+      "note": ""
+    },
+    {
+      "id": "tryon.hide",
+      "kind": "text",
+      "en": "Hide handles",
+      "gu": "ટપકાં છુપાવો",
+      "where": "tryon.js | tryon.js:151 #tryon-hide (toggle, aria-pressed)",
+      "note": "Handles are the round corner dots."
+    },
+    {
+      "id": "tryon.range.aria",
+      "kind": "attr",
+      "en": "Range",
+      "gu": "પ્રકાર",
+      "where": "tryon.js | tryon.js:152 #tryon-range[aria-label]",
+      "note": "Matches the catalog's word for range (પ્રકાર). Range buttons Zigzag / Solid stay English."
+    },
+    {
+      "id": "tryon.colour.aria",
+      "kind": "attr",
+      "en": "Colour",
+      "gu": "રંગ",
+      "where": "tryon.js | tryon.js:152 #tryon-sw[aria-label]",
+      "note": ""
+    },
+    {
+      "id": "tryon.rug.aria",
+      "kind": "pattern",
+      "en": "{product} in {colour}, size {size}",
+      "gu": "{colour} રંગમાં {product}, સાઇઝ {size}",
+      "where": "tryon.js | tryon.js:296 #tryon-rug[aria-label]",
+      "note": "Matches img.alt word order."
+    },
+    {
+      "id": "tryon.err.open",
+      "kind": "text",
+      "en": "That photo would not open here. Try a JPG or PNG.",
+      "gu": "આ ફોટો અહીં ખૂલતો નથી. JPG કે PNG ફોટો અજમાવો.",
+      "where": "tryon.js | tryon.js:358,361 #tryon-err (role=alert)",
+      "note": ""
+    },
+    {
+      "id": "tryon.err.type",
+      "kind": "text",
+      "en": "That file is not a photo. Choose a JPG or PNG.",
+      "gu": "આ ફાઇલ ફોટો નથી. JPG કે PNG પસંદ કરો.",
+      "where": "tryon.js | tryon.js:367 #tryon-err",
+      "note": ""
+    },
+    {
+      "id": "tryon.err.sample",
+      "kind": "text",
+      "en": "The sample floor would not draw here.",
+      "gu": "નમૂનાની ફરસ અહીં દેખાડી શકાતી નથી.",
+      "where": "tryon.js | tryon.js:463 #tryon-err",
+      "note": ""
+    },
+    {
+      "id": "tryon.photo.alt",
+      "kind": "attr",
+      "en": "Your photo",
+      "gu": "તમારો ફોટો",
+      "where": "tryon.js | tryon.js:369 #tryon-photo alt",
+      "note": ""
+    },
+    {
+      "id": "tryon.sample.alt.marble",
+      "kind": "attr",
+      "en": "Sample doorway with a white marble floor",
+      "gu": "સફેદ માર્બલની ફરસ સાથે નમૂનાનો દરવાજો",
+      "where": "tryon.js | tryon.js:466 #tryon-photo alt ('Sample doorway with a ' + floor name lower-cased + ' floor')",
+      "note": "Listed as full strings because the floor name is inserted lower-cased in English."
+    },
+    {
+      "id": "tryon.sample.alt.kota",
+      "kind": "attr",
+      "en": "Sample doorway with a kota stone floor",
+      "gu": "કોટા સ્ટોનની ફરસ સાથે નમૂનાનો દરવાજો",
+      "where": "tryon.js | tryon.js:466",
+      "note": ""
+    },
+    {
+      "id": "tryon.sample.alt.wood",
+      "kind": "attr",
+      "en": "Sample doorway with a wood floor",
+      "gu": "લાકડાની ફરસ સાથે નમૂનાનો દરવાજો",
+      "where": "tryon.js | tryon.js:466",
+      "note": ""
+    },
+    {
+      "id": "tryon.added",
+      "kind": "pattern",
+      "en": "Added {colour}, {size} · {price}",
+      "gu": "{colour}, {size} · {price} કાર્ટમાં ઉમેર્યું",
+      "where": "tryon.js | tryon.js:523 note() toast when the cart count is unknown",
+      "note": ""
+    },
+    {
+      "id": "tryon.added.cart.one",
+      "kind": "pattern",
+      "en": "Added {colour}, {size} · {price}. Cart: {n} item",
+      "gu": "{colour}, {size} · {price} ઉમેર્યું. કાર્ટમાં: {n} વસ્તુ",
+      "where": "tryon.js | tryon.js:523 note(), n === 1",
+      "note": ""
+    },
+    {
+      "id": "tryon.added.cart.other",
+      "kind": "pattern",
+      "en": "Added {colour}, {size} · {price}. Cart: {n} items",
+      "gu": "{colour}, {size} · {price} ઉમેર્યું. કાર્ટમાં: {n} વસ્તુઓ",
+      "where": "tryon.js | tryon.js:523 note(), n > 1",
+      "note": ""
+    },
+    {
+      "id": "tryon.fit_button",
+      "kind": "text",
+      "en": "Try it on a photo of your floor",
+      "gu": "તમારી ફરસના ફોટા પર મૂકીને જુઓ",
+      "where": "tryon.js | tryon.js:99 button.tfit beside #fit-add (text node after the camera svg)",
+      "note": ""
+    }
+  ]
+}
