@@ -107,3 +107,33 @@ jobs:
           }
           console.log('Netlify preview verified: 3 catalog products, structured prices match, scripts present.');
           NODE
+
+      - name: Package deploy-ready Netlify preview
+        run: |
+          python - <<'PY'
+          import os, zipfile
+          root = '/tmp/softsteps-dist'
+          target = '/tmp/softsteps-netlify-preview.zip'
+          with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as archive:
+              for folder, _, files in os.walk(root):
+                  for name in files:
+                      full = os.path.join(folder, name)
+                      archive.write(full, os.path.relpath(full, root))
+          print('Packaged static site:', os.path.getsize(target), 'bytes')
+          PY
+      - name: Upload deploy-ready preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: softsteps-netlify-preview
+          path: /tmp/softsteps-netlify-preview.zip
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload QA screenshots from admin and integration tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: softsteps-review-screenshots
+          path: |
+            work-admin/shots/**/*.png
+            work-admin/shots-integ/**/*.png
+          if-no-files-found: warn
+          retention-days: 14
