@@ -521,6 +521,82 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ok(!reqs.some(u => /admin\.(js|css)/.test(u)), L + ' nothing admin fetched');
       eq(errs(log), [], L + ' console clean'); await ctx.close();
     }
+
+    /* ---------- 8. Checkout history, saved details, duplicate guard and WhatsApp confirmation ---------- */
+    {
+      const L = 'checkout safeguards';
+      const { ctx, page, log } = await open(b, s, { vp: [390, 844] });
+      await page.click('.prod[data-k="zig"] [data-add]');
+      await page.waitForTimeout(450);
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.fill('#o-name', 'Test Buyer');
+      await page.fill('#o-ph', '9876543210');
+      await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
+      await page.fill('#o-ct', 'Vadodara');
+      await page.fill('#o-pin', '390 007');
+      eq(await page.locator('#o-pin').inputValue(), '390007', L + ': pasted PIN is normalized');
+      await page.waitForTimeout(100);
+      await page.reload({ waitUntil: 'load' });
+      await page.waitForTimeout(1400);
+      eq(await page.locator('#o-name').inputValue(), 'Test Buyer', L + ': name draft survives reload');
+      eq(await page.locator('#o-pin').inputValue(), '390007', L + ': PIN draft survives reload');
+      eq(await page.evaluate(() => JSON.parse(localStorage.getItem('ss_cart2') || '[]').length), 1, L + ': cart survives reload');
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.evaluate(() => history.back());
+      await page.waitForSelector('#v-cart:not([hidden])');
+      eq(await page.evaluate(() => document.querySelector('#drawer').hidden), false, L + ': Back returns to cart step');
+      await page.evaluate(() => history.back());
+      await page.waitForFunction(() => document.querySelector('#drawer').hidden);
+      eq(await page.evaluate(() => document.querySelector('#drawer').hidden), true, L + ': second Back closes drawer in-page');
+
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.click('#order-btn');
+      await page.waitForSelector('#v-pay:not([hidden])');
+      const oidBefore = await page.locator('#oid').textContent();
+      await page.evaluate(() => history.back());
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.fill('#o-name', 'Repeat Buyer');
+      await page.waitForTimeout(400);
+      await page.click('#order-btn');
+      await page.waitForSelector('#v-pay:not([hidden])');
+      const oidAfter = await page.locator('#oid').textContent();
+      eq(oidAfter, oidBefore, L + ': going Back and continuing reuses the pending order ID');
+
+      const popupPromise = ctx.waitForEvent('page');
+      await page.click('#sendwa');
+      const popup = await popupPromise;
+      await popup.waitForLoadState('domcontentloaded').catch(() => {});
+      await popup.close();
+      await page.waitForSelector('#sentbox:not([hidden])');
+      const afterOpen = await page.evaluate(() => {
+        const p = JSON.parse(localStorage.getItem('ss_pending') || 'null');
+        return { sent: !!(p && p.sent), opened: !!(p && p.opened), cart: JSON.parse(localStorage.getItem('ss_cart2') || '[]').length };
+      });
+      eq(afterOpen, { sent: false, opened: true, cart: 1 }, L + ': opening WhatsApp does not falsely mark the order sent');
+      await page.click('#newcart');
+      const afterConfirm = await page.evaluate(() => ({
+        pending: localStorage.getItem('ss_pending'),
+        cart: JSON.parse(localStorage.getItem('ss_cart2') || '[]').length,
+        lastSent: JSON.parse(localStorage.getItem('ss_last_sent') || 'null')?.sent || false,
+        name: document.querySelector('#o-name').value
+      }));
+      eq(afterConfirm, { pending: null, cart: 0, lastSent: true, name: '' }, L + ': explicit sent confirmation clears order and details');
+      await page.evaluate(() => history.back());
+      await page.waitForFunction(() => document.querySelector('#drawer').hidden);
+      eq(await page.evaluate(() => document.querySelector('#drawer').hidden), true, L + ': Back after a new cart cannot reopen stale payment');
+      eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
   } catch (e) { fail++; fails.push('CRASH: ' + (e && e.stack || e)); }
   await b.close(); s.close();
   console.log('core.cjs: ' + pass + ' passed, ' + fail + ' failed (' + Math.round((Date.now() - T0) / 1000) + 's)');
