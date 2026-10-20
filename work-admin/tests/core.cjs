@@ -568,7 +568,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
       await page.waitForSelector('#v-det:not([hidden])');
       await page.fill('#o-name', 'Repeat Buyer');
       await page.waitForTimeout(400);
-      await page.waitForTimeout(400); await page.click('#order-btn');
+      await page.click('#order-btn');
       await page.waitForSelector('#v-pay:not([hidden])');
       const oidAfter = await page.locator('#oid').textContent();
       eq(oidAfter, oidBefore, L + ': going Back and continuing reuses the pending order ID');
