@@ -1775,7 +1775,7 @@ function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:
 /* Text colour on a dyed panel: the house picks for the known light colours, else by luminance (owner-added colours). */
 function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FDFCFA";
   var L=[0,2,4].map(function(i){var v=parseInt(m[1].substr(i,2),16)/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
-  return .2126*L[0]+.7152*L[1]+.0722*L[2]>.3?"#1F1B18":"#FDFCFA"}
+  var y=.2126*L[0]+.7152*L[1]+.0722*L[2];if(y>=.22)return "#1F1B18";if(y>=.18)return "#000000";return "#FFFFFF"}
 function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FDFCFA"?"#1F1B18":"#FDFCFA";el.dataset.tone=fg==="#FDFCFA"?"dark":"light";
   if(from&&fx("dye",el,hex,fg,on,from))return;
   el.style.setProperty("--f",hex);el.style.setProperty("--fg",fg);el.style.setProperty("--on",on)}
@@ -2011,7 +2011,7 @@ ready=true;
    included); read-only, clone it before editing. SS.stock(k, colour, sizeIdx|letter) -> "in"|"few"|"out";
    SS.canBuy(...) -> boolean. */
 window.SS={P:P,SLIDES:SLIDES,SIZEIDX:SIZEIDX,catalog:CAT,catalogDefault:CATDEF,stock:stock,canBuy:canBuy,sizeStock:sizeStock,stockLabel:stockLabel,stkTag:stkTag,askURL:askURL,openAsk:openAsk,markSizes:markSizes,slideFix:slideFix,pickers:pickers,addToCart:addToCart,swatch:swatch,imgFor:imgFor,inr:inr,esc:esc,toast:toast,copyText:copyText,radio:radio,arrows:arrows,
-  render:render,openD:openD,closeD:closeD,show:show,hsSet:hsSet,getHi:function(){return hi},getHs:function(){return hs}};
+  render:render,openD:openD,closeD:closeD,show:show,fieldForeground:fgFor,hsSet:hsSet,getHi:function(){return hi},getHs:function(){return hs}};
 })();
 </script>
 <script src="fx.js"></script><script src="features.js"></script><script src="touchfx.js"></script><script src="shop.js"></script><script src="pairs.js"></script><script src="tryon.js"></script><script src="lang.js"></script><script src="wow.js"></script><script src="extras.js"></script>
