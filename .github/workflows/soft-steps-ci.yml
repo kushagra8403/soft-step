@@ -52,26 +52,26 @@ jobs:
           const html = fs.readFileSync('work-admin/site/softsteps.html', 'utf8');
           const admin = fs.readFileSync('work-admin/site/admin.js', 'utf8');
           const headers = fs.readFileSync('netlify.toml', 'utf8');
-          const scripts = [...html.matchAll(/<script\\b[^>]*\\bsrc\\s*=\\s*["']([^"']+)["'][^>]*>/gi)].map(m => m[1]);
-          const remote = scripts.filter(src => /^(?:[a-z]+:)?\\/\\//i.test(src) || /^[a-z][a-z0-9+.-]*:/i.test(src));
+          const scripts = [...html.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["'][^>]*>/gi)].map(m => m[1]);
+          const remote = scripts.filter(src => /^(?:[a-z]+:)?\/\//i.test(src) || /^[a-z][a-z0-9+.-]*:/i.test(src));
           if (remote.length) throw new Error('Remote script sources are not allowed: ' + remote.join(', '));
-          if (/\\.innerHTML\\s*=|\\.outerHTML\\s*=|insertAdjacentHTML\\s*\\(/.test(admin)) {
+          if (/\.innerHTML\s*=|\.outerHTML\s*=|insertAdjacentHTML\s*\(/.test(admin)) {
             throw new Error('Admin UI must build DOM nodes and use textContent, not HTML string sinks.');
           }
-          const links = [...html.matchAll(/<a\\b[^>]*\\btarget=["']_blank["'][^>]*>/gi)].map(m => m[0]);
+          const links = [...html.matchAll(/<a\b[^>]*\btarget=["']_blank["'][^>]*>/gi)].map(m => m[0]);
           for (const tag of links) {
-            const rel = (tag.match(/\\brel=["']([^"']+)["']/i) || [,''])[1].toLowerCase().split(/\\s+/);
+            const rel = (tag.match(/\brel=["']([^"']+)["']/i) || [,''])[1].toLowerCase().split(/\s+/);
             if (!rel.includes('noopener') && !rel.includes('noreferrer')) {
               throw new Error('External tab link is missing rel=noopener/noreferrer: ' + tag.slice(0, 180));
             }
           }
-          const cspLine = headers.split('\\n').find(x => /Content-Security-Policy\\s*=/.test(x));
+          const cspLine = headers.split('\n').find(x => /Content-Security-Policy\s*=/.test(x));
           if (!cspLine) throw new Error('Missing Content-Security-Policy header');
           const csp = cspLine.split('=', 2)[1];
           for (const required of ["default-src 'self'", "object-src 'none'", "frame-ancestors 'none'", "connect-src 'self'"]) {
             if (!csp.includes(required)) throw new Error('CSP missing restrictive directive: ' + required);
           }
-          if (/script-src[^;]*unsafe-eval|script-src[^;]*\\*/i.test(csp)) {
+          if (/script-src[^;]*unsafe-eval|script-src[^;]*\*/i.test(csp)) {
             throw new Error('CSP must not allow unsafe-eval or wildcard script sources');
           }
           console.log('Static security checks OK: local scripts, safe admin DOM construction, safe new-tab links, restrictive CSP.');
