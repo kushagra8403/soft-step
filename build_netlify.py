@@ -39,6 +39,21 @@ if catalog_match:
     try:
         catalog = json.loads(catalog_match.group(1))
         ranges = catalog.get("ranges", {})
+        # Artifact-hosted /_blob/ uploads do not exist on a static Netlify site.
+        # Stop rather than quietly publishing broken product photos.
+        for item in ranges.values():
+            if not isinstance(item, dict):
+                continue
+            for colour in item.get("colours", []):
+                if not isinstance(colour, dict):
+                    continue
+                for field in ("photo", "thumb"):
+                    src = colour.get(field)
+                    if isinstance(src, str) and src.startswith("/_blob/"):
+                        raise SystemExit(
+                            "Netlify export blocked: a catalogue photo still points to an Artifact /_blob/ URL. "
+                            "Copy the approved image into the site's img/ folder and update the catalogue reference."
+                        )
         for k, item in ranges.items():
             if k not in ("zig", "sol", "chen") or not isinstance(item, dict):
                 continue
