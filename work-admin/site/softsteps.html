@@ -1456,6 +1456,9 @@ var PDEF={
 };
 var KS=["zig","sol","chen"],HEX=/^#[0-9a-f]{6}$/i,AID=/^[0-9a-f]{32}$/;
 function cstr(v,max){return typeof v==="string"&&v.trim()&&v.length<=max?v.trim():null}
+/* Names are rendered in several HTML templates. Keep catalogue text to plain labels, never markup or attribute syntax. */
+var LABEL_RE=(function(){try{return new RegExp("^[\\p{L}\\p{M}\\p{N}][\\p{L}\\p{M}\\p{N} &.'()/-]*$","u")}catch(e){return /^[A-Za-z0-9][A-Za-z0-9 &.'()/-]*$/}})();
+function safeLabel(v,max){if(typeof v!=="string")return null;var s=v.trim();return s&&s.length<=max&&LABEL_RE.test(s)?s:null}
 function catDefault(){var r={};KS.forEach(function(k){var d=PDEF[k];r[k]={name:d.name,
   sizes:d.sizes.map(function(z){return {id:z[0],dims:z[1],weight:z[2],price:z[3],stock:"in"}}),
   colours:$$( '.prod[data-k="'+k+'"] [data-n]').map(function(b){return {n:b.dataset.n,bg:b.dataset.bg,stock:"in",hidden:false,photo:null,thumb:null,added:false}})}});
@@ -1469,12 +1472,12 @@ function catNorm(raw,def){
   o.ranges=Object.assign({},raw.ranges);
   KS.forEach(function(k){
     var d=def.ranges[k],r=raw.ranges[k]&&typeof raw.ranges[k]==="object"?raw.ranges[k]:{},rs=Array.isArray(r.sizes)?r.sizes:[],rc=Array.isArray(r.colours)?r.colours:[],x=Object.assign({},r),dc={},seen={},cols=[];
-    x.name=cstr(r.name,80)||d.name;
+    x.name=safeLabel(r.name,80)||d.name;
     x.sizes=d.sizes.map(function(ds){var s=rs.filter(function(q){return q&&q.id===ds.id})[0]||{},pr=typeof s.price==="string"?+s.price:s.price;
-      return Object.assign({},s,{id:ds.id,dims:cstr(s.dims,40)||ds.dims,weight:typeof s.weight==="string"&&s.weight.length<=20?s.weight.trim():ds.weight,
+      return Object.assign({},s,{id:ds.id,dims:ds.dims,weight:ds.weight,
         price:typeof pr==="number"&&isFinite(pr)&&pr>0&&pr<1e6?Math.round(pr):ds.price,stock:s.stock==="out"?"out":"in"})});
     d.colours.forEach(function(c){dc[c.n]=c});
-    rc.forEach(function(c){var nm=c&&cstr(c.n,60);if(!nm||seen[nm])return;seen[nm]=1;var dd=dc[nm];
+    rc.forEach(function(c){var nm=c&&safeLabel(c.n,60);if(!nm||seen[nm])return;seen[nm]=1;var dd=dc[nm];
       cols.push(Object.assign({},c,{n:nm,bg:HEX.test(c.bg)?c.bg:dd?dd.bg:"#E8DDCB",stock:c.stock==="few"||c.stock==="out"?c.stock:"in",hidden:c.hidden===true,
         photo:k!=="chen"&&AID.test(c.photo)?c.photo:null,thumb:k!=="chen"&&AID.test(c.thumb)?c.thumb:null,added:!dd&&c.added===true}))});
     d.colours.forEach(function(c){if(!seen[c.n])cols.push(Object.assign({},c))});
