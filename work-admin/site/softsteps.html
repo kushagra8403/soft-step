@@ -1684,14 +1684,14 @@ var pend=null;
 function sig(){return JSON.stringify(cart.map(function(x){return [x.k,x.size,x.colour,x.q,x.p]}))}
 function savePend(){try{if(pend)localStorage.setItem("ss_pending",JSON.stringify(pend));else localStorage.removeItem("ss_pending")}catch(e){}}
 function fillPay(o){lastMsg=o.msg;$("#sendwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(o.msg);$("#oid").textContent="#"+o.oid;$("#oname").textContent=o.nm;
-  $("#payamt").textContent=inr(o.t)+(o.out?" + delivery once confirmed":"");$("#upil").href="upi://pay?pa="+UPI+"&pn=Jelam%20Panchal&am="+o.t+"&cu=INR&tn="+encodeURIComponent("Soft Steps "+o.oid);$("#sentbox").hidden=!o.sent}
+  $("#payamt").textContent=inr(o.t)+(o.out?" + delivery once confirmed":"");$("#upil").href="upi://pay?pa="+UPI+"&pn=Jelam%20Panchal&am="+o.t+"&cu=INR&tn="+encodeURIComponent("Soft Steps "+o.oid);$("#sentbox").hidden=!(o.sent||o.opened)}
 /* Lines keep their colour and size; price and size text always come from the catalog (P). */
 function lineIdx(x){var i=SIZEIDX[String(x.size).split(" ")[0]];return i==null?-1:i}
 function refresh(x){var z=P[x.k]&&P[x.k].sizes[lineIdx(x)];if(z){x.p=z[3];x.size=z[0]+" "+z[1]}}
 function lineOK(x){return canBuy(x.k,x.colour,lineIdx(x))}
 function render(){
   cart.forEach(refresh);var bad=cart.filter(function(x){return !lineOK(x)}).length;
-  if(pend&&!pend.sent&&(pend.sig!==sig()||pend.t!==total()||bad)){try{localStorage.setItem("ss_previous_pending",JSON.stringify(pend))}catch(e){}var oldOid=pend.oid;pend=null;savePend();toast("Cart changed. Check previous order #"+oldOid+" with Jelam before paying again.")}
+  if(pend&&!pend.sent&&(pend.sig!==sig()||pend.t!==total()||bad)){try{localStorage.setItem("ss_previous_pending",JSON.stringify(pend));if(pend.details)localStorage.setItem("ss_details2",JSON.stringify(pend.details))}catch(e){}var oldOid=pend.oid;pend=null;savePend();toast("Cart changed. Check previous order #"+oldOid+" with Jelam before paying again.")}
   var n=count();$("#cnt").textContent=n;$("#cnt").hidden=!n;$("#cartbtn").setAttribute("aria-label","Open cart, "+n+(n===1?" item":" items"));
   $("#cbar").hidden=!n||!$("#drawer").hidden;$("#cbn").textContent=pend&&!pend.sent?"Finish order #"+pend.oid:"View cart · "+n+(n>1?" items":" item");$("#cbt").textContent=inr(total());
   $("#v-cart").innerHTML=cart.length?cart.map(function(x,i){var ok=lineOK(x);return '<div class="line'+(ok?"":" oos")+'">'+(window.SS&&SS.lineThumb?SS.lineThumb(x.k,x.colour):'<img src="'+imgFor(x.k,x.colour)+'" alt="">')+'<div><b>'+esc(P[x.k].name)+'</b><small>'+esc(x.colour)+'</small><small>'+esc(x.size)+' · '+inr(x.p)+' each</small>'+(ok?'':'<small class="oosn">Now out of stock</small>')+'<div class="stepper"><button type="button" data-i="'+i+'" data-d="-1" aria-label="One less, '+esc(x.colour+" "+P[x.k].name)+'">−</button><output>'+x.q+'</output><button type="button" data-i="'+i+'" data-d="1" aria-label="One more, '+esc(x.colour+" "+P[x.k].name)+'"'+(ok?'':' disabled')+'>+</button></div><button type="button" class="link rm" data-i="'+i+'" data-d="0" aria-label="Remove '+esc(x.colour+" "+P[x.k].name)+'">Remove</button></div><span class="amt">'+inr(x.p*x.q)+'</span></div>'}).join(""):'<div class="empty"><p>Your cart is empty.</p><button type="button" class="pill quiet" id="browse">Browse mats</button></div>';
@@ -1704,20 +1704,29 @@ $("#v-cart").addEventListener("click",function(e){var b=e.target.closest("button
   /* render() rebuilds the lines, so put focus back on the same control (or the next sensible one) and say what changed */
   $("#cartlive").textContent=gone?"Removed "+x.colour+" "+P[x.k].name:x.colour+" "+P[x.k].name+", quantity "+x.q;
   var nb=gone?($('#v-cart button[data-i="'+Math.min(i,cart.length-1)+'"][data-d="1"]')||$("#browse")):$('#v-cart button[data-i="'+i+'"][data-d="'+d+'"]');if(nb)try{nb.focus({preventScroll:true})}catch(er){}});
-var lastFocus=null,titles={cart:"Your cart",det:"Delivery details",pay:"Pay & send"},VIEWS=["cart","det","pay"];
-function view(v){VIEWS.forEach(function(x,i){var li=$$("#prog li")[i];$("#v-"+x).hidden=x!==v;$("#f-"+x).hidden=x!==v;li.classList.toggle("on",VIEWS.indexOf(v)>=i);if(x===v)li.setAttribute("aria-current","step");else li.removeAttribute("aria-current")});$("#dtitle").textContent=titles[v];$("#v-"+v).scrollTop=0}
+var lastFocus=null,titles={cart:"Your cart",det:"Delivery details",pay:"Pay & send"},VIEWS=["cart","det","pay"],checkoutEntries=0;
+function view(v){VIEWS.forEach(function(x,i){var li=$("#prog li")[i];$("#v-"+x).hidden=x!==v;$("#f-"+x).hidden=x!==v;li.classList.toggle("on",VIEWS.indexOf(x)>=i);if(x===v)li.setAttribute("aria-current","step");else li.removeAttribute("aria-current")});$("#dtitle").textContent=titles[v];$("#v-"+v).scrollTop=0}
+function pushCheckoutState(v){try{var st=history.state&&typeof history.state==="object"?Object.assign({},history.state):{};st.__softStepsCheckout=true;st.__softStepsStep=v;history.pushState(st,"",location.href);checkoutEntries++}catch(e){}}
 /* A step change hides the button that was pressed, so focus moves to the new step's title. */
-function step(v){view(v);try{$("#dtitle").focus({preventScroll:true})}catch(e){}}
-function openD(v){lastFocus=document.activeElement;view(pend&&(!v||v==="cart")?"pay":v||"cart");$("#drawer").hidden=false;$("#scrim").hidden=false;$("#cbar").hidden=true;document.body.style.overflow="hidden";$("#dclose").focus();fx("drawer",true)}
-function closeD(){$("#drawer").hidden=true;$("#scrim").hidden=true;document.body.style.overflow="";render();fx("drawer",false);if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function step(v,fromPop){view(v);if(!fromPop&&!$("#drawer").hidden)pushCheckoutState(v);try{$("#dtitle").focus({preventScroll:true})}catch(e){}}
+function openD(v){var wasOpen=!$("#drawer").hidden;lastFocus=document.activeElement;var target=pend&&(!v||v==="cart")?"pay":v||"cart";view(target);$("#drawer").hidden=false;$("#scrim").hidden=false;$("#cbar").hidden=true;document.body.style.overflow="hidden";if(!wasOpen)pushCheckoutState(target);$("#dclose").focus();fx("drawer",true)}
+function closeD(fromPop){var back=fromPop?0:checkoutEntries;checkoutEntries=0;$("#drawer").hidden=true;$("#scrim").hidden=true;document.body.style.overflow="";render();fx("drawer",false);if(lastFocus&&lastFocus.focus)lastFocus.focus();if(back)try{history.go(-back)}catch(e){}}
+window.addEventListener("popstate",function(e){if($("#drawer").hidden){checkoutEntries=0;return}checkoutEntries=Math.max(0,checkoutEntries-1);var st=e.state;if(st&&st.__softStepsCheckout===true&&VIEWS.indexOf(st.__softStepsStep)>=0){view(st.__softStepsStep);try{$("#dtitle").focus({preventScroll:true})}catch(x){}return}closeD(true)});
 $("#cartbtn").onclick=function(){openD("cart")};$("#cbar").onclick=function(){openD("cart")};
 $("#dclose").onclick=closeD;$("#scrim").onclick=closeD;
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#drawer").hidden)closeD()});
 function dl(){return $("input[name=dl]:checked").value}
+function collectDetails(){return {name:$("#o-name").value,phone:$("#o-ph").value,address:$("#o-ad").value,city:$("#o-ct").value,pin:$("#o-pin").value,email:$("#o-email").value,giftOn:$("#o-gift-on").checked,gift:$("#o-gift").value,delivery:dl()}}
+function applyDetails(d){if(!d||typeof d!=="object")return;[["#o-name","name",100],["#o-ph","phone",20],["#o-ad","address",500],["#o-ct","city",100],["#o-pin","pin",6],["#o-email","email",254],["#o-gift","gift",200]].forEach(function(a){if(typeof d[a[1]]==="string")$(a[0]).value=d[a[1]].slice(0,a[2])});$("#o-gift-on").checked=!!d.giftOn;if(d.delivery==="out"||d.delivery==="vad"){var r=$('input[name="dl"][value="'+d.delivery+'"]');if(r)r.checked=true}try{pinInput.dispatchEvent(new Event("input",{bubbles:true}))}catch(e){}}
+function saveDetailsDraft(){var d=collectDetails(),empty=!d.name&&!d.phone&&!d.address&&!d.city&&!d.pin&&!d.email&&!d.gift&&!d.giftOn;try{if(empty)localStorage.removeItem("ss_details2");else localStorage.setItem("ss_details2",JSON.stringify(d))}catch(e){}}
+function clearDetailsDraft(){try{localStorage.removeItem("ss_details2")}catch(e){}}
+["#o-name","#o-ph","#o-ad","#o-ct","#o-pin","#o-email","#o-gift","#o-gift-on"].forEach(function(sel){$(sel).addEventListener("input",saveDetailsDraft);$(sel).addEventListener("change",saveDetailsDraft)});$("input[name=dl]").forEach(function(r){r.addEventListener("change",saveDetailsDraft)});
 function summary(){$("#lines").innerHTML=cart.map(function(x){return '<div class="sl"><span>'+esc(P[x.k].name)+', '+esc(x.size.split(" ")[0])+' · '+esc(x.colour)+' × '+x.q+'</span><b>'+inr(x.p*x.q)+'</b></div>'}).join("")+'<div class="sl"><span>Delivery</span><b>'+(dl()==="out"?"Confirmed on call":"Free")+'</b></div>';$("#tot").textContent=inr(total())+(dl()==="out"?" + delivery":"")}
 $("#go").onclick=function(){if(!cart.length||!cart.every(lineOK))return;summary();$("#oerr").textContent="";step("det")};
 $("#back").onclick=function(){step("cart")};
-$$("input[name=dl]").forEach(function(r){r.onchange=summary});
+$("input[name=dl]").forEach(function(r){r.onchange=summary});
+var pinInput=$("#o-pin");pinInput.addEventListener("input",function(){var v=pinInput.value.replace(/\D/g,"").slice(0,6);if(v!==pinInput.value)pinInput.value=v});pinInput.addEventListener("paste",function(e){var v="";try{v=(e.clipboardData||window.clipboardData).getData("text")}catch(x){}if(!v)return;e.preventDefault();pinInput.value=v.replace(/\D/g,"").slice(0,6);pinInput.dispatchEvent(new Event("input",{bubbles:true}))});
+var fastActionAt=0;document.addEventListener("click",function(e){var el=e.target.closest&&e.target.closest("[data-add],#go,#order-btn,#v-cart button[data-i]");if(!el)return;var now=Date.now();if(now-fastActionAt<350){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();return}fastActionAt=now},true);
 $("#order-btn").onclick=function(){
   var v=function(id){return $(id).value.trim()},nm=v("#o-name"),ph=v("#o-ph"),ad=v("#o-ad"),ct=v("#o-ct"),pin=v("#o-pin").replace(/\D/g,"").slice(0,6),em=v("#o-email");$("#o-pin").value=pin;var pinRadio=$('input[name="dl"][value="'+(/^390\d{3}$/.test(pin)?"vad":"out")+'"]');if(/^[1-9]\d{5}$/.test(pin)&&pinRadio){pinRadio.checked=true;pinRadio.dispatchEvent(new Event("change"))}
   var pd=ph.replace(/[\s()+-]/g,"").replace(/^(91|0)(?=\d{10}$)/,""),err="",bad=null;
@@ -1731,8 +1740,8 @@ $("#order-btn").onclick=function(){
   $("#oerr").textContent=err;if(bad){$(bad).setAttribute("aria-invalid","true");$(bad).setAttribute("aria-describedby","oerr");$(bad).focus();return}
   if(!cart.every(lineOK)){step("cart");render();return}
   var t=total(),oid="SS-"+Date.now().toString(36).toUpperCase().slice(-6),gift=$("#o-gift-on").checked?v("#o-gift"):"";
-  lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(dl()==="out"?" + delivery outside Vadodara (please confirm charges)":" (free delivery in Vadodara)")+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+(gift?"\n\nGift note: "+gift:"")+"\n\nI will share the UPI payment screenshot here.";
-  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false};savePend();fillPay(pend);
+  lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(/^390\d{3}$/.test(pin)?" (free delivery in Vadodara)":(/^391\d{3}$/.test(pin)?" (Vadodara district delivery charges to be confirmed)":" + delivery outside Vadodara (please confirm charges)"))+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+(gift?"\n\nGift note: "+gift:"")+"\n\nI will share the UPI payment screenshot here.";
+  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false,details:collectDetails()};savePend();clearDetailsDraft();fillPay(pend);
   step("pay");render();
 };
 function copyText(text,btn){if(!btn||btn._cp)return;btn._cp=true;var original=btn.dataset.copyLabel||btn.textContent;if(!btn.dataset.copyLabel)btn.dataset.copyLabel=original;var timer;var done=function(){btn.textContent="Copied";clearTimeout(timer);timer=setTimeout(function(){btn.textContent=original;btn._cp=false},1500)};
@@ -1740,17 +1749,20 @@ function copyText(text,btn){if(!btn||btn._cp)return;btn._cp=true;var original=bt
   try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done,fallback);else fallback()}catch(e){fallback()}}
 document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(b)copyText(b.dataset.copy,b)});
 $("#copyorder").onclick=function(){copyText(lastMsg,this)};
-$("#sendwa").addEventListener("click",function(){if(pend){pend.sent=true;savePend();setTimeout(function(){$("#sentbox").hidden=false;cart.length=0;save();render()},600)}});
-$("#newcart").onclick=function(){cart.length=0;pend=null;savePend();render();step("cart")};
-$("#editorder").onclick=function(){step("cart")};
+$("#sendwa").addEventListener("click",function(){if(!pend)return;var oid=pend.oid;pend.opened=true;pend.openedAt=Date.now();savePend();setTimeout(function(){if(pend&&pend.oid===oid)$("#sentbox").hidden=false},600)});
+$("#newcart").onclick=function(){if(pend){pend.sent=true;pend.sentAt=Date.now();try{localStorage.setItem("ss_last_sent",JSON.stringify(pend))}catch(e){}}cart.length=0;pend=null;savePend();save();clearDetailsDraft();applyDetails({});render();step("cart")};
+$("#editorder").onclick=function(){if(pend&&pend.details)applyDetails(pend.details);saveDetailsDraft();step("cart")};
 try{if(matchMedia("(min-width: 761px)").matches){$("#qrd").open=true;$("#enqd").open=true}}catch(e){}
 $("#enq").onsubmit=function(e){e.preventDefault();var n=$("#e-n").value.trim(),p=$("#e-p").value.trim();
   if(!n||!p){$("#eerr").textContent="Add your name and phone number so we can reply.";$(n?"#e-p":"#e-n").focus();return}
   $("#eerr").textContent="";
   var msg="Enquiry – Soft Steps\n\nName: "+n+"\nPhone: "+p+"\nInterested in: "+$("#e-s").value+($("#e-m").value.trim()?"\nMessage: "+$("#e-m").value.trim():"");
   $("#enqwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(msg);$("#enqdone").hidden=false};
-try{var saved=JSON.parse(localStorage.getItem("ss_cart2")||"[]"),clean=[];if(Array.isArray(saved))saved.forEach(function(x){try{if(!x||!P[x.k]||typeof x.colour!=="string"||typeof x.size!=="string")return;var letter=x.size.trim().split(/\s+/)[0],si=SIZEIDX[letter],z=P[x.k].sizes[si],q=Math.max(1,Math.min(99,Math.floor(Number(x.q))));if(!z||!Number.isFinite(q)||!swatch(x.k,x.colour)||!canBuy(x.k,x.colour,si))return;var id=x.k+"|"+z[0]+"|"+x.colour,it=clean.filter(function(y){return y.id===id})[0];if(it)it.q=Math.min(99,it.q+q);else clean.push({id:id,k:x.k,size:z[0]+" "+z[1],colour:x.colour,p:z[3],q:q})}catch(e){}});cart=clean;save()}catch(e){cart=[];try{localStorage.removeItem("ss_cart2")}catch(x){}}
-try{var pd=JSON.parse(localStorage.getItem("ss_pending")||"null");if(pd&&typeof pd.oid==="string"&&typeof pd.msg==="string"&&typeof pd.t==="number"&&typeof pd.at==="number"&&typeof pd.sent==="boolean"&&Date.now()-pd.at<7*864e5){pend=pd;fillPay(pd)}else localStorage.removeItem("ss_pending")}catch(e){pend=null;try{localStorage.removeItem("ss_pending")}catch(x){}}
+function restoreCartFromStorage(persist){var raw=null;try{raw=localStorage.getItem("ss_cart2");var saved=JSON.parse(raw||"[]"),clean=[];if(Array.isArray(saved))saved.forEach(function(x){try{if(!x||!P[x.k]||typeof x.colour!=="string"||typeof x.size!=="string")return;var letter=x.size.trim().split(/\s+/)[0],si=SIZEIDX[letter],z=P[x.k].sizes[si],q=Math.max(1,Math.min(99,Math.floor(Number(x.q))));if(!z||!Number.isFinite(q)||!swatch(x.k,x.colour)||!canBuy(x.k,x.colour,si))return;var id=x.k+"|"+z[0]+"|"+x.colour,it=clean.filter(function(y){return y.id===id})[0];if(it)it.q=Math.min(99,it.q+q);else clean.push({id:id,k:x.k,size:z[0]+" "+z[1],colour:x.colour,p:z[3],q:q})}catch(e){}});cart=clean;if(persist&&raw!==JSON.stringify(clean))save()}catch(e){cart=[];try{localStorage.removeItem("ss_cart2")}catch(x){}}}
+function restorePendingFromStorage(){try{var raw=localStorage.getItem("ss_pending"),pd=JSON.parse(raw||"null");if(pd&&typeof pd.oid==="string"&&typeof pd.msg==="string"&&typeof pd.t==="number"&&typeof pd.at==="number"&&typeof pd.sent==="boolean"&&Date.now()-pd.at<7*864e5){if(pd.sent){try{localStorage.setItem("ss_previous_pending",JSON.stringify(pd))}catch(x){}pend=null;localStorage.removeItem("ss_pending");cart=[];save();toast("A previous order was marked sent. Its items were removed to avoid a duplicate order.")}else{pend=pd;if(pd.details)applyDetails(pd.details);fillPay(pd)}}else{pend=null;localStorage.removeItem("ss_pending")}}catch(e){pend=null;try{localStorage.removeItem("ss_pending")}catch(x){}}}
+try{applyDetails(JSON.parse(localStorage.getItem("ss_details2")||"null"))}catch(e){}
+restoreCartFromStorage(true);restorePendingFromStorage();
+window.addEventListener("storage",function(e){if(["ss_cart2","ss_pending","ss_details2"].indexOf(e.key)<0)return;restoreCartFromStorage(false);restorePendingFromStorage();if(e.key==="ss_details2"){try{applyDetails(JSON.parse(e.newValue||"null"))}catch(x){}}render();if(!$("#drawer").hidden&&pend&&e.key==="ss_pending")view("pay")});
 render();
 ready=true;
 /* SS.catalog: the catalog in use, complete and validated (every range, size and colour; hidden and owner-added colours
