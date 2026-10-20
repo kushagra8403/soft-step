@@ -1776,6 +1776,173 @@ window.SS={P:P,SLIDES:SLIDES,SIZEIDX:SIZEIDX,catalog:CAT,catalogDefault:CATDEF,s
   render:render,openD:openD,closeD:closeD,show:show,hsSet:hsSet,getHi:function(){return hi},getHs:function(){return hs}};
 })();
 </script>
+<style id="ss-heritage-palette-preview">
+/* ==========================================================================
+   HERITAGE LUXE: "Neel, Manjistha, Haldi on Kora" (an Ajrakh dyer's ledger)
+   Indigo-ink, madder thread and turmeric light on unbleached cotton.
+   The UI only uses dye colours that are NOT in the 26 rugs (every accent >= dE 7.7
+   from every rug), so the rugs stay the only saturated objects on the page.
+   CSS-only override for the preview; JS untouched.
+   ========================================================================== */
+:root{
+  /* Cotton (light grounds) */
+  --kora:#F4F0E8;        /* page ground, unbleached cotton (OKLCH C .0115, was .0205) */
+  --kora-2:#EAE3D7;      /* sand inset: steppers, copy, drawer foot, chat day chip */
+  --chalk:#FCFAF6;       /* cards, dialogs, inputs (one warm white) */
+  --aasmani:#D6E1E7;     /* NEW: first-dip indigo, the pale "water" panel (made, promise discs) */
+  --haldi-wash:#F2E6C8;  /* NEW: haldi-dhoop, turmeric first dip: the order panel (no rug photos on it) */
+  --sut:#DAD1C1;         /* hairlines, card outlines (decorative) */
+  --edge:#80766B;        /* control borders >=3:1 on every light ground */
+  /* Ink and anchor: ONE dark */
+  --kajal:#091D30;       /* neel-kala: 30-dip indigo ink, all text on light */
+  --neel:#091D30;        /* anchor surface: buttons, fit, cart bar, dock, footer, overlays */
+  --neel-2:#1B3249;      /* the only tint of it: hover + raised surfaces on dark */
+  --night:#091D30;       /* alias of neel (kept so old rules resolve to the one dark) */
+  --mitti:#5B524A;       /* secondary text */
+  --mist:#B3C1C9;        /* secondary text on neel */
+  /* Dye accents (functional, never on a rug field) */
+  --haldi:#E8B652;       /* turmeric: light on dark only (accents, focus, progress, footer dot) */
+  --haldi-deep:#765412;  /* harda (myrobalan): eyebrow text on light */
+  --kumkum:#A9344E;      /* manjistha (madder): running stitch, italic accent, badge, saved heart, New, error */
+  --wa:#1A7349;--wa-2:#155F3C;
+  --kasis:#BDB8B0;       /* NEW: iron-wash stone, neutral judging ground for zoom + try-on stage */
+  /* Recipes */
+  --wash:rgba(9,29,48,.06);
+  --line:rgba(9,29,48,.14);
+  --glass-d:rgba(252,250,246,.14);
+  --ring-d:rgba(252,250,246,.55);
+  --sh-card:0 1px 2px rgba(48,36,26,.06),0 22px 44px -30px rgba(48,36,26,.32);
+  --sh-hero:0 40px 80px -46px rgba(48,36,26,.55);
+  --sh-float:0 20px 50px -18px rgba(9,29,48,.42);
+}
+body{background:var(--kora);color:var(--kajal)}
+body::before{background:var(--kora)}
+.hdr{background:rgba(252,250,246,.88)}
+
+/* ---- Type accents: one madder voice on light, haldi on dark ---- */
+.h2 em{color:var(--kumkum)}
+.fit .h2 em{color:var(--haldi)}
+.contact .h2 em{color:var(--kumkum)}
+
+/* ---- Buttons / controls ---- */
+.pill:hover{background:var(--neel-2)}
+.pill.wa:hover{background:var(--wa-2)}
+.pill.sec:hover,.chip:hover,.sz:hover{background:var(--wash)}
+.cdots i{box-shadow:inset 0 0 0 1px var(--line)}
+.chip .dot{box-shadow:inset 0 0 0 1px var(--line)}
+.sw{box-shadow:inset 0 0 0 1px var(--line)}
+input::placeholder,textarea::placeholder{color:#6B6259}
+.qa summary::after{box-shadow:inset 0 0 0 1.5px var(--neel);color:var(--neel)}
+
+/* ---- Dye fields (hero, card pics, footer) ---- */
+.hero{box-shadow:var(--sh-hero)}
+.field[data-tone=light]{outline:1px solid var(--line);outline-offset:-1px}
+.lamp{background:radial-gradient(closest-side,rgba(255,236,204,.17),transparent)}
+.pic.field::before{background:radial-gradient(closest-side at 62% 36%,rgba(255,236,204,.16),transparent),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.24),transparent 60%)}
+.pic.field[data-tone=light]::before{background:radial-gradient(closest-side at 62% 36%,rgba(255,236,204,.16),transparent)}
+.field .badge{background:var(--fg);color:var(--on);box-shadow:0 0 0 2px var(--f)}
+/* light text on a dark rug: thinner glass so Menu / "See it at your door" stay >=4.5 on Burnt orange (12% gave 4.35) */
+@supports (color:color-mix(in srgb,red 50%,blue)){.field[data-tone=dark]{--glass:color-mix(in srgb,var(--fg) 8%,transparent)}}
+.field .sz[data-d]::after{opacity:1}
+.chen-cap,.chen-cap .link{color:var(--fg)}
+@media(max-width:860px){.arrows .circle{background:var(--glass);box-shadow:inset 0 0 0 1.5px var(--ring);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}}
+
+/* ---- Card shells: chalk + hairline + low warm shadow (no more 1.12 step alone) ---- */
+.prod,.contact,.stackpanel{box-shadow:0 0 0 1px var(--sut),var(--sh-card)}
+.ranges a{box-shadow:inset 0 0 0 1px var(--sut)}
+
+/* ---- Promise: a chalk card; icons sit in aasmani (indigo-wash) discs ---- */
+.promise{position:relative;border:0;background:var(--chalk);border-radius:24px;padding:28px clamp(18px,3vw,32px);box-shadow:0 0 0 1px var(--sut)}
+.facts .ic{width:36px;height:36px;padding:8px;border-radius:50%;background:var(--aasmani);overflow:visible}
+.facts li{align-items:center}
+
+/* ---- Colour index ---- */
+.tile .heart::before{background:rgba(252,250,246,.82);box-shadow:0 0 0 1px var(--line)}
+/* no polka dots: on mouse devices the save heart appears on hover/focus, and stays once saved */
+@media (hover:hover) and (pointer:fine){
+  .tile .heart{opacity:0;transition:opacity .16s}
+  .tile:hover .heart,.tile:focus-within .heart,.tile .heart[aria-pressed="true"]{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.tile .heart{transition:none}}
+
+/* ---- Pairs: two cloths stitched, not a hard diagonal ---- */
+.pair{background:var(--chalk);box-shadow:0 0 0 1px var(--sut)}
+.pair .pv{background:linear-gradient(110deg,var(--a) 0 calc(50% - 1.5px),var(--chalk) calc(50% - 1.5px) calc(50% + 1.5px),var(--b) calc(50% + 1.5px) 100%)}
+.pair .pill.done{background:var(--wa)}
+
+/* ---- Fit: the one indigo feature section ---- */
+.fit{--f:#091D30;--focus:var(--haldi);background:var(--neel)}
+.fit::before{background:radial-gradient(60% 60% at 85% 6%,rgba(232,182,82,.11),transparent 70%),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.28),transparent 60%)}
+.fit::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:var(--grain);background-size:160px;opacity:.07}
+.fit .chip,.fit .sz,.btn-ring,.fit .pill.ringp{box-shadow:inset 0 0 0 1.5px var(--ring-d)}
+.fit .chip:hover,.fit .sz:hover,.btn-ring:hover,.fit .pill.ringp:hover{background:rgba(252,250,246,.08)}
+.fit .chip[aria-checked="true"],.fit .sz[aria-checked="true"],.btn-ring[aria-pressed="true"]{background:var(--chalk);color:var(--neel);box-shadow:none}
+.plan{background:var(--neel-2);box-shadow:0 0 0 1px rgba(252,250,246,.22),0 30px 60px -30px rgba(0,0,0,.6)}
+.plan .wall{fill:#4A423B;stroke:rgba(252,250,246,.5);stroke-width:.25}
+.plan .sill{fill:var(--kora-2)}
+.plan .cmpt{stroke:rgba(9,29,48,.6)}
+
+/* ---- Made: the aasmani (water) panel ---- */
+.stackpanel{background:var(--aasmani)}
+.ly-latex{background:radial-gradient(circle,#A88F62 1.4px,transparent 1.8px) 0 0/12px 12px,#CDB68E}
+.ly-floor{background:linear-gradient(rgba(9,29,48,.14) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(9,29,48,.14) 1px,transparent 1px) 0 0/24px 24px,var(--chalk)}
+.ly-floor{box-shadow:0 0 0 1px rgba(9,29,48,.16)}
+.stk-l li::before{background:rgba(9,29,48,.45)}
+.stk-l li::after{background:var(--kajal)}
+
+/* ---- Order: haldi-dhoop panel (turmeric after the indigo of fit + made), indigo numerals, madder thread ---- */
+.order{background:var(--haldi-wash)}
+.steps li::before{background:var(--haldi-wash);color:var(--neel)}
+.chat{background:var(--neel)}
+.bubble{background:var(--kora-2)}
+
+/* ---- Footer: painted in the one dark ---- */
+#foot{--f:#091D30!important;--fg:#FCFAF6!important}
+/* phone: the edge-to-edge footer runs to the bottom (no beige strip); room for the cart bar goes inside it */
+@media(max-width:860px){
+  #foot{margin-bottom:0!important;padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+  body:has(#cbar:not([hidden])) #foot,body.docked #foot{padding-bottom:calc(32px + 84px + env(safe-area-inset-bottom,0px))}
+}
+.foot .name i{background:var(--haldi)}
+
+/* ---- Bars, toast, drawer, dialogs, menu ---- */
+.cbar,.dock{background:var(--neel);box-shadow:0 0 0 1px rgba(252,250,246,.38),var(--sh-float)}
+.toast{background:var(--chalk);color:var(--kajal);border-top:0;box-shadow:0 0 0 1px var(--sut),inset 3px 0 0 var(--kumkum),var(--sh-float)}
+.scrim,dialog::backdrop{background:rgba(9,29,48,.55)}
+.dtop{background:var(--neel)}
+.dtop .x,#menu .x,.menu-wa .copy{background:var(--glass-d)}
+.progress li::before{background:rgba(179,193,201,.3)}
+#menu{background:radial-gradient(90% 45% at 85% 0%,rgba(232,182,82,.10),transparent 70%),var(--neel)}
+#menu::backdrop{background:var(--neel)}
+.menu-wa{border-top:1px solid rgba(179,193,201,.28)}
+.sentbox{box-shadow:inset 0 0 0 1.5px var(--neel)}
+
+/* ---- Zoom viewer: judge colour on neutral kasis stone, dark-ink chrome ---- */
+html body #zoom{background:radial-gradient(75% 45% at 50% 48%,#C9C4BC,rgba(201,196,188,0) 75%),var(--kasis);color:var(--kajal);--focus:var(--neel)}
+html body #zoom::backdrop{background:var(--kasis)}
+html body #zoom .zh{background:linear-gradient(var(--kasis) 55%,rgba(189,184,176,0))}
+html body #zoom .zh small{opacity:1}
+html body #zoom .x,html body #zoom .zb{background:rgba(9,29,48,.10);color:var(--kajal)}
+html body #zoom .zf{background:linear-gradient(rgba(189,184,176,0),var(--kasis) 36%)}
+html body #zoom .zsw{box-shadow:0 0 0 1.5px rgba(9,29,48,.6)}
+html body #zoom .zsw[aria-current=true]{box-shadow:0 0 0 2px var(--kasis),0 0 0 4.5px var(--neel)}
+html body #zoom .zhint{opacity:1;color:var(--kajal)}
+html body #zoom .zgo{background:var(--neel);color:var(--chalk)}
+html body #zoom .ztry{color:var(--kajal);box-shadow:inset 0 0 0 1.5px var(--kajal)}
+html body #zoom .ztry:hover{background:var(--wash)}
+
+/* ---- Try-on: one dark chrome, neutral stage, visible swatch rings ---- */
+html body #tryon{background:var(--neel);--focus:var(--haldi)}
+html body #tryon::backdrop{background:var(--neel)}
+html body #tryon .tstage{background:var(--kasis)}
+html body #tryon .tsw button{box-shadow:0 0 0 1.5px var(--ring-d)}
+html body #tryon .tsw [aria-checked=true]{box-shadow:0 0 0 3px var(--haldi)}
+html body #tryon .tbtn[aria-pressed=true],html body #tryon .tfloors [aria-checked=true],html body #tryon .tseg [aria-checked=true],html body #tryon .tsizes [aria-checked=true],html body #tryon .tpri,html body #tryon .tadd,html body #tryon .ttoast{color:var(--neel)}
+html body #tryon .thint,html body #tryon .tfloors button{background:rgba(9,29,48,.8)}
+html body #tryon .terr{color:var(--haldi)}
+html body #tryon .tadd .td,html body #tryon .twhat{opacity:1}
+html body #tryon .tseg button,html body #tryon .tsizes button{box-shadow:inset 0 0 0 1.5px var(--ring-d)}
+</style>
 <script src="fx.js"></script><script src="features.js"></script><script src="touchfx.js"></script><script src="shop.js"></script><script src="pairs.js"></script><script src="tryon.js"></script><script src="lang.js"></script><script src="wow.js"></script><script src="extras.js"></script>
 <script>
 /* Shop owner's way in: only a viewer who can edit this artifact (the owner, or an editor) sees the footer link, and
