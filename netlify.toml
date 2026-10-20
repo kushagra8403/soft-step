@@ -1,6 +1,9 @@
 [build]
-  publish = "."
-  command = ""
+  publish = "dist"
+  command = "python3 -m pip install --quiet --disable-pip-version-check -r requirements.txt && python3 build_netlify.py work-admin/site dist"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"
 
 [[headers]]
   for = "/img/*"
