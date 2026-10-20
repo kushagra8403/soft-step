@@ -110,7 +110,7 @@
           setTimeout(function () { sweep(i); }, 500);
         });
       }, { threshold: 0.6 });
-      $$$(".prod .pic").forEach(function (p) { io.observe(p); });
+      $$(".prod .pic").forEach(function (p) { io.observe(p); });
     })();
   } catch (e) {}
 })();
