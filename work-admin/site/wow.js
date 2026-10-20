@@ -218,7 +218,7 @@
   (function chappalsOff() {
     var fit=$("#fit"),svg=$(".plan svg",fit),ch=$("#chappals",fit),feet=$("#feet",fit),mat=$("#matR",fit),matH=$("#matH",fit),spotText=$("#spotlbl");
     if(!fit||!svg||!ch||!feet||!mat)return;
-    var ready=false,planVisible=false,firstPlayed=false,lastSpot=null,walk=null,chInner=null,ftInner=null,prints=null,allAnims=[];
+    var ready=false,planVisible=false,firstPlayed=false,lastSpot=(function(){var b=$("#spots [aria-checked=\"true\"]");return b?b.getAttribute("data-spot"):"main";})(),walk=null,chInner=null,ftInner=null,prints=null,allAnims=[],cleanupTimer=0;
     function make(){
       if(ready)return true;
       if(RM.matches||typeof Element.prototype.animate!=="function")return false;
@@ -234,6 +234,7 @@
       return true;
     }
     function finishAll(){
+      clearTimeout(cleanupTimer);cleanupTimer=0;
       allAnims.forEach(function(a){try{a.cancel();}catch(e){}});allAnims=[];
       if(chInner){chInner.style.removeProperty("transform");chInner.style.removeProperty("opacity");}
       if(ftInner){ftInner.style.removeProperty("transform");ftInner.style.removeProperty("opacity");}
@@ -248,6 +249,7 @@
       var spot=visibleSpot?visibleSpot.getAttribute("data-spot"):"main";
       if(spot==="bed"||spot==="kitchen"){
         animate(ftInner,[{opacity:0,transform:"translateY(3px)"},{opacity:1,transform:"none"}],{duration:300,delay:short?0:150,easing:EOUT});
+        cleanupTimer=setTimeout(finishAll,short?500:600);
         return;
       }
       var bbox=mat.getBBox(),yBottom=bbox.y+bbox.height;
@@ -261,6 +263,7 @@
       });
       animate(chInner,[{opacity:0,transform:"translate("+dx+"px,"+dy+"px)",offset:0},{opacity:0,transform:"translate("+dx+"px,"+dy+"px)",offset:.374},{opacity:1,transform:"translate("+dx+"px,"+dy+"px)",offset:.514},{opacity:1,transform:"none",offset:1}],{duration:short?670:1070,delay:short?0:0,easing:EOUT});
       animate(ftInner,[{opacity:0,transform:"translateY(3px)"},{opacity:1,transform:"none"}],{duration:300,delay:short?300:900,easing:EOUT});
+      cleanupTimer=setTimeout(finishAll,short?1050:1800);
     }
     var io;
     try{
