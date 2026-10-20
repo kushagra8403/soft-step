@@ -12,16 +12,15 @@
 //  5. Owner session 3 edits the second published page once more (third round trip).
 const fs = require('fs'), path = require('path'), http = require('http');
 const { chromium } = require('playwright');
-const SP = '/tmp/claude-0/-home-user/b3b2df08-4b5f-5d42-b6f7-07d0365cb062/scratchpad';
-const WORK = SP + '/work/admin', SITE = WORK + '/site', T = WORK + '/tests', SHOTS = WORK + '/shots-integ';
-const PHOTOS = [SP + '/tryon_test/doorway.jpg', SITE + '/img/s2_close.jpg', SITE + '/img/z3.webp'];
-const { prep } = require(SP + '/qa.cjs');
+const SP = path.resolve(__dirname, '../..');
+const WORK = path.join(SP, 'work-admin'), SITE = path.join(WORK, 'site'), T = path.join(WORK, 'tests'), SHOTS = path.join(WORK, 'shots-integ');
+const PHOTOS = [path.join(SP, 'tryon_test/doorway.jpg'), path.join(SITE, 'img/s2_close.jpg'), path.join(SITE, 'img/z3.webp')];
+const { prep } = require(path.join(SP, 'qa.cjs'));
 const MOCK = fs.readFileSync(T + '/mock-claude.js', 'utf8');
 const START = '<!--ss-catalog:start-->', END = '<!--ss-catalog:end-->';
 const OPEN_TAG = '<script type="application/json" id="ss-catalog">', CLOSE_TAG = '</script>';
 // The exact first line of the live artifact's stored index.html (wrapper prefix + "\n").
-const STORED = fs.readFileSync(SP + '/artifact-files/602ce28c-13fc-476c-9805-bcaeb511049a/index.html', 'utf8');
-const WRAP = STORED.slice(0, STORED.indexOf('\n') + 1), TAIL = '\n</body></html>';
+const WRAP = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>\n', TAIL = '\n</body></html>';
 
 let pass = 0, fail = 0; const fails = [];
 function ok(cond, label, got) { if (cond) pass++; else { fail++; fails.push(label + (got !== undefined ? '  got: ' + JSON.stringify(got).slice(0, 400) : '')); } console.log((cond ? 'PASS ' : 'FAIL ') + label + (!cond && got !== undefined ? '  got: ' + JSON.stringify(got).slice(0, 400) : '')); }
@@ -544,7 +543,7 @@ async function injectedCopy(b, dir, src) {
   const page = fs.readFileSync(SITE + '/softsteps.html', 'utf8');
   const v0 = WRAP + page + TAIL;
   ok(WRAP.startsWith('<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>') && WRAP.endsWith('</style></head><body>\n'), 'wrapper prefix is the stored one');
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  const b = await chromium.launch();
   const T0 = Date.now();
   try {
     const s0 = await rawServe(siteDir('www-i0', v0));
