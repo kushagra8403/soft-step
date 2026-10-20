@@ -123,6 +123,14 @@ jobs:
           const fs = require('fs');
           const path = require('path');
           const html = fs.readFileSync('/tmp/softsteps-dist/index.html', 'utf8');
+          const sourcePage = fs.readFileSync('work-admin/site/softsteps.html', 'utf8');
+          const paletteSource = fs.readFileSync('design2/quiet.css', 'utf8').trim();
+          const paletteMarker = '/* Kora Quiet palette and component overrides. Source: design2/quiet.css. */\n' + paletteSource + '\n</style>';
+          if (!sourcePage.includes(paletteMarker)) throw new Error('Embedded Kora Quiet CSS is out of sync with design2/quiet.css');
+          if (!sourcePage.includes('id="r-zig" data-k="zig" data-def="3"') || !sourcePage.includes('img/z4.webp" alt="Multicolour Zigzag Rug in Olive &amp; cream"')) throw new Error('Zigzag Olive default selection/image mismatch');
+          for (const image of ['img/z4.webp', 'img/m/z4.avif', 'img/m/z4.webp']) {
+            if (!fs.existsSync(path.join('work-admin/site', image))) throw new Error('Missing Olive default asset: ' + image);
+          }
           const scripts = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map(m => m[1]);
           if (new Set(scripts).size !== scripts.length) throw new Error('Duplicate script reference in generated page: ' + scripts.join(', '));
           const netlify = fs.readFileSync('/tmp/softsteps-dist/netlify.toml', 'utf8');
