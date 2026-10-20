@@ -1,0 +1,740 @@
+<title>Soft Steps</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Soft Steps, Vadodara: plush, anti-slip rugs, doormats and bath mats from ₹249, with delivery across India.">
+<meta name="theme-color" content="#8a3412">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400..700&display=swap">
+<style>
+/* Layout: after the client's reference. Each rug floats on a big rounded card filled with its own colour:
+   headline left, rug centre, price and round size buttons right. Single light theme by choice. */
+:root{
+  color-scheme:light;
+  --ground:#f6f1ec;
+  --tone:#ece4dc;
+  --tone-2:#e0d5ca;
+  --ink:#1f1a17;
+  --soft:#665b53;
+  --white:#ffffff;
+  --f:#8a3412;          /* field colour, set per rug */
+  --fg:#ffffff;         /* text on the field */
+  --wa:#1f7a4d;
+  --display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --text:"DM Sans","Helvetica Neue",Arial,sans-serif;
+  --m:max(12px,env(safe-area-inset-left,0px));
+  --mr:max(12px,env(safe-area-inset-right,0px));
+  --ease:cubic-bezier(.22,.8,.2,1);
+  --r:28px;
+}
+@media(min-width:768px){:root{--m:max(24px,env(safe-area-inset-left,0px));--mr:max(24px,env(safe-area-inset-right,0px))}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--ground);z-index:30}
+img{max-width:100%;display:block}
+a{color:inherit;text-underline-offset:3px}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.page{padding-left:var(--m);padding-right:var(--mr)}
+.wrap{max-width:1380px;margin-inline:auto}
+.skip{position:absolute;left:12px;top:-80px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:calc(10px + env(safe-area-inset-top,0px))}
+
+/* Coloured card: flat field colour (animates) with a soft light-and-shade glaze on top */
+.field{position:relative;isolation:isolate;background:var(--f);color:var(--fg);border-radius:var(--r);transition:background-color .6s var(--ease),color .4s var(--ease);overflow:hidden}
+.field::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 90% at 50% 42%,rgba(255,255,255,.22),rgba(255,255,255,0) 55%),radial-gradient(140% 120% at 50% 100%,rgba(0,0,0,.28),rgba(0,0,0,0) 60%)}
+
+/* Pills */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 14px 12px 22px;border:0;border-radius:999px;background:var(--white);color:var(--ink);font:600 15px var(--display);text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.pill .chev{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;transition:transform .25s var(--ease)}
+.pill:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.pill:hover .chev{transform:translateX(3px)}
+.pill:active{transform:scale(.97)}
+.pill.ink{background:var(--ink);color:#fff}
+.pill.ink .chev{background:#fff;color:var(--ink)}
+.pill.quiet{background:var(--tone);color:var(--ink);padding-right:22px}
+.pill.wa{background:var(--wa);color:#fff;padding-right:22px}
+.pill.full{width:100%}
+.pill:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.link{background:none;border:0;padding:0;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.glass{background:rgba(0,0,0,.2)}
+.circle{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.22);color:var(--fg);font-size:16px;transition:background .2s var(--ease),transform .2s var(--ease)}
+.circle:hover{background:rgba(0,0,0,.34)}
+.circle:active{transform:scale(.94)}
+
+/* HERO */
+.hero{margin-top:calc(var(--m) + env(safe-area-inset-top,0px));min-height:min(780px,calc(100vh - 48px));display:grid;grid-template-rows:auto 1fr auto;padding:22px clamp(18px,3vw,44px) 26px;box-shadow:0 30px 70px rgba(60,30,10,.18)}
+.top{display:flex;align-items:center;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:600 15px var(--display);letter-spacing:.08em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
+.logo img{width:36px;height:36px;border-radius:50%}
+.navpill{display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(0,0,0,.2)}
+.navpill a{padding:8px 16px;border-radius:999px;font:600 12px var(--display);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--fg);transition:background .2s var(--ease)}
+.navpill a:hover{background:rgba(255,255,255,.16)}
+.navpill a.on{background:var(--white);color:var(--ink)}
+.icons{display:flex;gap:8px;margin-left:auto}
+.cartic{position:relative}
+.cartic b{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--white);color:var(--ink);font:700 11px/20px var(--text);text-align:center}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr) minmax(0,.7fr);gap:clamp(16px,3vw,48px);align-items:center;padding-block:clamp(20px,4vw,48px)}
+.hcopy{display:grid;gap:20px;align-content:center;min-width:0}
+.arrows{display:flex;gap:8px}
+.arrows .circle{width:36px;height:36px;font-size:14px}
+.hero h1{font-size:clamp(36px,4.2vw,60px);line-height:1.04}
+.hero .lead{font-size:15px;line-height:1.6;max-width:40ch;opacity:.92}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.ctas .text{font:600 14px var(--display);text-decoration:underline;text-underline-offset:5px}
+.rugwrap{position:relative;display:grid;place-items:center;min-height:clamp(240px,34vw,460px);perspective:1400px}
+.rug{width:min(100%,520px);transform:rotateX(46deg) rotateZ(-14deg);transform-style:preserve-3d;transition:transform .7s var(--ease),opacity .35s var(--ease)}
+.rug img{width:100%;filter:drop-shadow(0 30px 28px rgba(0,0,0,.38)) drop-shadow(0 8px 8px rgba(0,0,0,.22))}
+.rugwrap::after{content:"";position:absolute;left:12%;right:12%;bottom:12%;height:16%;border-radius:50%;background:rgba(0,0,0,.28);filter:blur(28px);z-index:-1}
+.rugwrap:hover .rug{transform:rotateX(40deg) rotateZ(-10deg) translateY(-8px)}
+.rug.out{opacity:0;transform:rotateX(46deg) rotateZ(-26deg) translateX(60px) scale(.92)}
+.side{display:grid;gap:12px;justify-items:end;text-align:right;min-width:0}
+.price{font:600 clamp(36px,3.6vw,52px)/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.price-note{font-size:14px;opacity:.85}
+.choose{font-size:14px;margin-top:14px}
+.sizes-c{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.sz{width:52px;height:52px;border-radius:50%;border:0;background:rgba(0,0,0,.24);color:var(--fg);font:600 14px var(--display);transition:background .2s var(--ease),transform .2s var(--ease),color .2s}
+.sz:hover{background:rgba(0,0,0,.36)}
+.sz:active{transform:scale(.94)}
+.sz[aria-checked="true"]{background:var(--white);color:var(--ink)}
+.dims{font-size:14px;opacity:.85}
+.bottom{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:16px}
+.social{display:flex;gap:10px}
+.social a{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:var(--fg);transition:background .2s}
+.social a:hover{background:rgba(0,0,0,.2)}
+.tagline{font:500 clamp(16px,1.4vw,20px)/1.25 var(--display);text-align:center}
+.next{justify-self:end;display:grid;justify-items:center;gap:6px;border:0;background:none;color:var(--fg);font-size:12px;padding:0}
+.next .mini{width:96px;perspective:600px}
+.next img{width:100%;border-radius:4px;transform:rotateX(46deg) rotateZ(-14deg);box-shadow:0 14px 16px rgba(0,0,0,.35);transition:transform .3s var(--ease)}
+.next:hover img{transform:rotateX(38deg) rotateZ(-8deg) translateY(-4px)}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.dots span{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.35;transition:opacity .3s,width .3s}
+.dots span.on{opacity:1;width:18px;border-radius:3px}
+@media(max-width:980px){.navpill{display:none}}
+@media(max-width:860px){
+  .hero{min-height:0}
+  .stage{grid-template-columns:1fr;gap:18px}
+  .rugwrap{order:-1;min-height:250px}
+  .rug{width:min(88%,420px)}
+  .side{justify-items:start;text-align:left;grid-template-columns:auto 1fr;align-items:end;column-gap:20px}
+  .side .choose,.side .sizes-c,.side .dims{grid-column:1/-1}
+  .sizes-c{justify-content:flex-start}
+  .bottom{grid-template-columns:1fr auto}
+  .tagline{display:none}
+}
+
+/* Section scaffolding */
+.sec{padding-block:clamp(72px,9vw,140px)}
+.h2{font-size:clamp(36px,4.6vw,64px)}
+.intro{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px;align-items:end;margin-bottom:clamp(32px,4vw,56px)}
+.intro p{font-size:18px;max-width:42ch;justify-self:end}
+@media(max-width:860px){.intro{grid-template-columns:1fr}.intro p{justify-self:start}}
+
+/* Product cards: the card takes the colour you pick */
+.prods{display:grid;gap:20px}
+.prod{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,4vw,60px);align-items:center;padding:clamp(22px,3.5vw,52px)}
+.prod.flip .pic{order:2}
+.prod .pic{display:grid;place-items:center;perspective:1300px;min-height:300px;position:relative}
+.prod .pic .rug{width:min(100%,520px)}
+.prod.tall .pic .rug{transform:none}
+.prod.tall .pic img{max-height:620px;width:auto;margin:auto;filter:none;box-shadow:0 30px 50px rgba(0,0,0,.3)}
+.info{display:grid;gap:18px;align-content:start;min-width:0}
+.info h3{font-size:clamp(30px,3.2vw,44px)}
+.info .row1{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.info .price{font-size:clamp(30px,3vw,40px)}
+.info .desc{max-width:46ch;opacity:.92}
+.lbl{font:600 13px var(--display);letter-spacing:.06em;text-transform:uppercase;opacity:.85;display:flex;justify-content:space-between;gap:12px}
+.lbl a{letter-spacing:0;text-transform:none;font-family:var(--text);font-size:14px}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.sw{width:44px;height:44px;padding:0;border:3px solid transparent;border-radius:50%;overflow:hidden;background:rgba(0,0,0,.2);transition:transform .2s var(--ease),border-color .2s}
+.sw img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.sw:hover{transform:scale(1.08)}
+.sw[aria-checked="true"]{border-color:var(--white)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:40px;padding:8px 15px;border:0;border-radius:999px;background:rgba(0,0,0,.22);color:var(--fg);font:600 13px var(--display);transition:background .2s var(--ease),transform .2s var(--ease)}
+.chip:hover{background:rgba(0,0,0,.34)}
+.chip:active{transform:scale(.96)}
+.chip[aria-checked="true"]{background:var(--white);color:var(--ink)}
+.sizerow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sizerow .dims{margin-left:6px}
+.buy{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.stepper{display:inline-flex;align-items:center;border-radius:999px;background:rgba(0,0,0,.22)}
+.stepper button{width:44px;height:48px;border:0;background:none;color:inherit;font-size:20px}
+.stepper output{min-width:24px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.buy .pill{flex:1;min-width:200px}
+.fine{font-size:15px;color:var(--soft);max-width:62ch}
+@media(max-width:860px){.prod{grid-template-columns:1fr}.prod.flip .pic{order:0}.prod .pic{min-height:220px}}
+
+/* Fit tool */
+.fit{--f:#2f4a2a;--fg:#fff;padding:clamp(26px,4vw,60px)}
+.fit-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
+.fit .lead{margin-top:16px;max-width:38ch;opacity:.92}
+.fit .ctrl{display:grid;gap:14px;margin-top:28px}
+.plan{margin:0;border-radius:18px;overflow:hidden}
+.plan svg{width:100%;height:auto;display:block}
+.plan .floor{fill:rgba(0,0,0,.18)}
+.plan .wall{fill:rgba(0,0,0,.35)}
+.plan .mat{fill:#f1b23a;transition:width .45s var(--ease),height .45s var(--ease),x .45s var(--ease)}
+.plan .foot{fill:#1f1a17;opacity:.85}
+.plan .t{fill:rgba(255,255,255,.75);font:600 2.3px var(--text)}
+.readout{margin-top:18px;font:500 clamp(20px,2vw,26px)/1.35 var(--display)}
+.readout b{color:#f1b23a}
+.fit .pill{margin-top:20px}
+@media(max-width:860px){.fit-grid{grid-template-columns:1fr}}
+
+/* Panels on the light ground */
+.panel{background:var(--white);border-radius:var(--r);padding:clamp(22px,3.5vw,48px)}
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media(max-width:860px){.two-col{grid-template-columns:1fr}}
+.specs{margin:24px 0 0;display:grid;gap:8px}
+.specs div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:14px 18px;border-radius:16px;background:var(--ground)}
+.specs dt{font-weight:700}
+.specs dd{margin:0}
+.made-pic{border-radius:var(--r);overflow:hidden;min-height:320px}
+.made-pic img{width:100%;height:100%;object-fit:cover}
+.how{margin:24px 0 0;padding-left:1.3em;display:grid;gap:16px}
+.how b{display:block;font:600 20px var(--display)}
+.chat{border-radius:var(--r);background:#e9e1d6;padding:22px;display:grid;gap:10px;align-content:start}
+.chat .who{font-weight:700;font-size:15px}
+.bubble{background:#d8f8c6;border-radius:16px 16px 4px 16px;padding:14px 16px;font-size:15px;line-height:1.5;white-space:pre-line;justify-self:end;max-width:100%}
+.bubble small{display:block;text-align:right;font-size:12px;color:var(--soft);margin-top:6px}
+.chat .note{font-size:14px;color:var(--soft)}
+.qa{display:grid;gap:8px;margin-top:24px}
+.qa details{background:var(--ground);border-radius:18px}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;font:600 18px/1.3 var(--display);min-height:56px}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font:400 20px/1 var(--text);transition:transform .25s var(--ease)}
+.qa details[open] summary::after{transform:rotate(45deg)}
+.qa details p{padding:0 20px 20px;max-width:60ch}
+.clist{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:8px}
+.clist li{display:grid;grid-template-columns:100px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 16px;border-radius:16px;background:var(--ground)}
+.clist .k{font-weight:700}
+.clist .v{overflow-wrap:anywhere}
+.copy{min-height:38px;padding:6px 14px;border:0;border-radius:999px;background:var(--ink);color:#fff;font-size:13px;font-weight:700}
+.field-in{display:grid;gap:6px;font-size:15px;font-weight:700}
+.field-in small{font-weight:500;color:var(--soft)}
+input,select,textarea{width:100%;font:500 16px/1.4 var(--text);color:var(--ink);background:var(--ground);border:1px solid var(--tone-2);border-radius:14px;padding:12px 14px;min-height:50px}
+textarea{min-height:100px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(31,26,23,.12)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+form.enq{display:grid;gap:16px;margin-top:24px}
+.done{background:var(--ground);border-radius:16px;padding:16px;display:grid;gap:12px}
+.err{color:#a3332b;font-size:15px;font-weight:600}
+@media(max-width:440px){.clist li{grid-template-columns:1fr auto}.clist .k{grid-column:1/-1}.two{grid-template-columns:1fr}.specs div{grid-template-columns:1fr;gap:2px}}
+
+/* Footer */
+.foot{margin-top:20px;margin-bottom:calc(var(--m) + 90px + env(safe-area-inset-bottom,0px));padding:clamp(28px,4vw,56px)}
+.foot .name{font:700 clamp(54px,14vw,210px)/.85 var(--display);letter-spacing:-.05em;white-space:nowrap}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 32px;margin-top:24px;font-weight:600;font-size:15px}
+.foot-row nav{display:flex;flex-wrap:wrap;gap:6px 20px}
+.foot-row a{text-decoration:none}
+.foot-row a:hover{text-decoration:underline}
+
+/* Entrances: transform only, nothing is ever hidden */
+@supports (animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    .rise{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+  }
+}
+@keyframes rise{from{transform:translateY(28px)}to{transform:none}}
+@keyframes heroIn{from{opacity:0;transform:translateY(16px)}}
+@media(prefers-reduced-motion:no-preference){
+  .hcopy>*{animation:heroIn .7s var(--ease) both}
+  .hcopy>*:nth-child(2){animation-delay:.07s}.hcopy>*:nth-child(3){animation-delay:.14s}.hcopy>*:nth-child(4){animation-delay:.21s}
+  .side{animation:heroIn .7s .25s var(--ease) both}
+}
+
+/* Cart bar, toast, drawer (these float, so they cast a shadow) */
+.cbar{position:fixed;z-index:15;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(480px,calc(100% - 32px));display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 22px;border:0;border-radius:999px;background:var(--ink);color:#fff;box-shadow:0 14px 34px rgba(31,26,23,.3);font-weight:600}
+.cbar span:last-child{background:#fff;color:var(--ink);padding:10px 16px;border-radius:999px;font-weight:700}
+.toast{position:fixed;z-index:60;left:50%;top:calc(20px + env(safe-area-inset-top,0px));transform:translate(-50%,-8px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .25s var(--ease);box-shadow:0 10px 30px rgba(31,26,23,.25)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.scrim{position:fixed;inset:0;z-index:40;background:rgba(31,26,23,.45)}
+.drawer{position:fixed;z-index:41;top:0;right:0;bottom:0;width:min(480px,100%);background:var(--ground);display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(31,26,23,.2);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px);animation:slide .35s var(--ease)}
+@keyframes slide{from{transform:translateX(40px);opacity:0}}
+.dh{display:flex;align-items:center;gap:12px;padding:16px 20px}
+.dh h2{font-size:28px;margin-right:auto}
+.x{width:44px;height:44px;border:0;border-radius:50%;background:var(--tone);font-size:18px}
+.progress{display:flex;gap:6px;padding:0 20px;list-style:none;margin:0}
+.progress li{flex:1;display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--soft)}
+.progress li::before{content:"";height:4px;border-radius:4px;background:var(--tone-2)}
+.progress li.on{color:var(--ink)}
+.progress li.on::before{background:var(--ink)}
+.db{flex:1;overflow-y:auto;padding:18px 20px 24px;display:grid;gap:12px;align-content:start}
+.df{padding:16px 20px;display:grid;gap:10px;background:var(--tone)}
+.rowx{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.total{font:600 30px var(--display);font-variant-numeric:tabular-nums}
+.line{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px;border-radius:18px;background:#fff}
+.line img{width:72px;height:72px;object-fit:cover;border-radius:12px}
+.line b{display:block;font-size:16px}
+.line small{display:block;color:var(--soft);font-size:14px}
+.line .amt{font-weight:700;font-variant-numeric:tabular-nums}
+.line .stepper{margin-top:8px;background:var(--tone)}
+.line .stepper button{width:40px;height:40px;font-size:18px}
+.line .rm{margin-left:10px;font-size:14px;color:var(--soft)}
+.empty{text-align:center;padding:40px 10px;display:grid;gap:14px;justify-items:center}
+.box{background:#fff;border-radius:18px;padding:16px;display:grid;gap:12px}
+.radio{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:14px;background:var(--ground);cursor:pointer;font-weight:600}
+.radio small{display:block;font-weight:500;color:var(--soft)}
+.radio input{width:20px;height:20px;min-height:0;margin:2px 0 0;accent-color:var(--ink)}
+.sl{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:3px 0}
+.upi{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;align-items:center}
+.upi img{width:150px;border-radius:12px}
+.upi .id{font-weight:700;font-size:18px;overflow-wrap:anywhere}
+.upi .copy{margin-top:8px}
+.thanks h3{font-size:30px}
+ol.todo{margin:0;padding-left:20px;display:grid;gap:6px}
+@media(max-width:400px){.upi{grid-template-columns:1fr}.upi img{width:170px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<a class="skip" href="#shop">Skip to the shop</a>
+<div class="page">
+<div class="wrap">
+
+<header class="hero field" id="hero" aria-label="Featured rug">
+  <div class="top">
+    <a class="logo" href="#hero"><img src="img/logo.jpg" alt="">Soft Steps</a>
+    <nav class="navpill" aria-label="Main"><a class="on" href="#hero">Rugs &amp; mats</a><a href="#shop">All products</a><a href="#fit">Sizes</a><a href="#order">How to order</a><a href="#contact">Contact</a></nav>
+    <div class="icons"><button class="circle cartic" id="cartbtn" type="button" aria-label="Open cart, 0 items"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><b id="cnt" hidden>0</b></button></div>
+  </div>
+
+  <div class="stage">
+    <div class="hcopy">
+      <div class="arrows"><button type="button" class="circle" id="prev" aria-label="Previous rug">‹</button><button type="button" class="circle" id="nextBtn" aria-label="Next rug">›</button></div>
+      <h1 id="h-title">Soft steps, every morning</h1>
+      <p class="lead" id="h-lead"></p>
+      <div class="ctas"><button type="button" class="pill" id="h-add">Add to cart <span class="chev" aria-hidden="true">›</span></button><a class="text" href="#shop">See all colours</a></div>
+    </div>
+    <div class="rugwrap"><div class="rug" id="h-rug"><img id="h-img" src="img/s4.webp" alt=""></div></div>
+    <div class="side">
+      <div><div class="price" id="h-price">₹349</div></div>
+      <p class="price-note" id="h-name">Solid Premium Rug · Rust</p>
+      <p class="choose">Choose your size:</p>
+      <div class="sizes-c" role="radiogroup" aria-label="Size" id="h-sizes"></div>
+      <p class="dims" id="h-dims"></p>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="social">
+      <a href="https://www.instagram.com/softsteps.home" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://wa.me/919099441429" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19.2L4 20Z"/><path d="M9 9.5c.3 1.8 1.7 3.6 3.6 4.4l1.2-1 2 .8-.3 1.5c-3.4.3-7-3.3-6.7-6.7l1.5-.3.8 2-1 1.2"/></svg></a>
+    </div>
+    <p class="tagline">Comfort,<br>in every step</p>
+    <div><button type="button" class="next" id="h-next" aria-label="Show next rug"><span class="mini"><img id="h-nextimg" src="img/t/z1.jpg" alt=""></span><span id="h-nextname">Next</span></button><div class="dots" id="dots" aria-hidden="true"></div></div>
+  </div>
+</header>
+
+<main>
+<section class="sec" id="shop">
+  <div class="intro">
+    <h2 class="h2 rise">Three ranges, 26 colours</h2>
+    <p class="rise">Every range comes in the same four sizes. Pick a colour and the card turns that colour.</p>
+  </div>
+  <div class="prods">
+
+    <article class="prod field" data-k="zig" aria-labelledby="t-zig">
+      <div class="pic"><div class="rug"><img src="img/z1.webp" alt="Multicolour Zigzag Rug in Forest green &amp; black"></div></div>
+      <div class="info">
+        <div class="row1"><h3 id="t-zig">Multicolour Zigzag</h3><span class="price" data-price>₹249</span></div>
+        <p class="desc">Bold zigzag stripes in a soft microfiber pile. Bright enough for the main door, soft enough beside the bed.</p>
+        <div class="lbl">Colour: <span data-colour></span></div>
+        <div class="swatches" role="radiogroup" aria-label="Zigzag colours">
+          <button type="button" class="sw" role="radio" data-n="Forest green &amp; black" data-bg="#3a5a2c" data-full="img/z1.webp"><img src="img/t/z1.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Blush pink &amp; black" data-bg="#d98d9b" data-full="img/z2.webp"><img src="img/t/z2.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Navy &amp; cream" data-bg="#1f3566" data-full="img/z3.webp"><img src="img/t/z3.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Olive &amp; cream" data-bg="#666b3c" data-full="img/z4.webp"><img src="img/t/z4.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Cocoa &amp; cream" data-bg="#6b4a3a" data-full="img/z5.webp"><img src="img/t/z5.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Mustard &amp; tan" data-bg="#c8922e" data-full="img/z6.webp"><img src="img/t/z6.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Berry red &amp; pink" data-bg="#a3263f" data-full="img/z7.webp"><img src="img/t/z7.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Grey &amp; black" data-bg="#5d5f63" data-full="img/z8.webp"><img src="img/t/z8.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Black &amp; beige" data-bg="#2c2723" data-full="img/z9.webp"><img src="img/t/z9.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Navy &amp; white" data-bg="#243a7a" data-full="img/z10.webp"><img src="img/t/z10.jpg" alt="" loading="lazy"></button>
+        </div>
+        <div class="lbl">Size <a href="#fit">Which size?</a></div>
+        <div class="sizerow"><div class="sizes-c" role="radiogroup" aria-label="Zigzag sizes"></div><span class="dims" data-dims></span></div>
+        <div class="buy"><div class="stepper"><button type="button" data-q="-1" aria-label="One less">−</button><output aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div><button type="button" class="pill" data-add>Add to cart</button></div>
+      </div>
+    </article>
+
+    <article class="prod field flip" data-k="sol" aria-labelledby="t-sol">
+      <div class="pic"><div class="rug"><img src="img/s1.webp" alt="Solid Premium Rug in Royal blue"></div></div>
+      <div class="info">
+        <div class="row1"><h3 id="t-sol">Solid Premium</h3><span class="price" data-price>₹349</span></div>
+        <p class="desc">A heavier, textured pile in one rich colour. Plush and absorbent, made for the bathroom door.</p>
+        <div class="lbl">Colour: <span data-colour></span></div>
+        <div class="swatches" role="radiogroup" aria-label="Solid colours">
+          <button type="button" class="sw" role="radio" data-n="Royal blue" data-bg="#1d4fb8" data-full="img/s1.webp"><img src="img/t/s1.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Aqua" data-bg="#2aaec4" data-full="img/s2.webp"><img src="img/t/s2.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Mustard" data-bg="#d9820f" data-full="img/s3.webp"><img src="img/t/s3.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Rust" data-bg="#8a3412" data-full="img/s4.webp"><img src="img/t/s4.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Black" data-bg="#2b2a29" data-full="img/s5.webp"><img src="img/t/s5.jpg" alt="" loading="lazy"></button>
+          <button type="button" class="sw" role="radio" data-n="Grey" data-bg="#8a8a8c" data-full="img/s6.webp"><img src="img/t/s6.jpg" alt="" loading="lazy"></button>
+        </div>
+        <div class="lbl">Size <a href="#fit">Which size?</a></div>
+        <div class="sizerow"><div class="sizes-c" role="radiogroup" aria-label="Solid sizes"></div><span class="dims" data-dims></span></div>
+        <div class="buy"><div class="stepper"><button type="button" data-q="-1" aria-label="One less">−</button><output aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div><button type="button" class="pill" data-add>Add to cart</button></div>
+      </div>
+    </article>
+
+    <article class="prod field tall" data-k="chen" aria-labelledby="t-chen">
+      <div class="pic"><div class="rug"><img src="img/chen.jpg" alt="All ten Striped Chenille Mat colourways laid out in two columns"></div></div>
+      <div class="info">
+        <div class="row1"><h3 id="t-chen">Striped Chenille, new</h3><span class="price" data-price>₹299</span></div>
+        <p class="desc">Soft, ribbed chenille in classic stripes. The photo shows all ten colourways; pick yours by name.</p>
+        <div class="lbl">Colourway: <span data-colour></span></div>
+        <div class="chips" role="radiogroup" aria-label="Chenille colourways">
+          <button type="button" class="chip" role="radio" data-n="Forest green stripe" data-bg="#3a5a2c">Forest green</button>
+          <button type="button" class="chip" role="radio" data-n="Blush pink stripe" data-bg="#d98d9b">Blush pink</button>
+          <button type="button" class="chip" role="radio" data-n="Navy stripe" data-bg="#1f3566">Navy</button>
+          <button type="button" class="chip" role="radio" data-n="Olive stripe" data-bg="#666b3c">Olive</button>
+          <button type="button" class="chip" role="radio" data-n="Cocoa stripe" data-bg="#6b4a3a">Cocoa</button>
+          <button type="button" class="chip" role="radio" data-n="Mustard stripe" data-bg="#c8922e">Mustard</button>
+          <button type="button" class="chip" role="radio" data-n="Berry stripe" data-bg="#a3263f">Berry</button>
+          <button type="button" class="chip" role="radio" data-n="Grey stripe" data-bg="#6f7175">Grey</button>
+          <button type="button" class="chip" role="radio" data-n="Black stripe" data-bg="#2c2723">Black</button>
+          <button type="button" class="chip" role="radio" data-n="Blue stripe" data-bg="#2d4fa0">Blue</button>
+        </div>
+        <div class="lbl">Size <a href="#fit">Which size?</a></div>
+        <div class="sizerow"><div class="sizes-c" role="radiogroup" aria-label="Chenille sizes"></div><span class="dims" data-dims></span></div>
+        <div class="buy"><div class="stepper"><button type="button" data-q="-1" aria-label="One less">−</button><output aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div><button type="button" class="pill" data-add>Add to cart</button></div>
+      </div>
+    </article>
+  </div>
+  <p class="fine" style="margin-top:24px">Weights are ±5%. Colours can look slightly different on screen and stock changes, so we confirm your colour on WhatsApp before dispatch.</p>
+</section>
+
+<section class="fit field" id="fit">
+  <div class="fit-grid">
+    <div>
+      <h2 class="h2 rise">See it at your door</h2>
+      <p class="lead">Pick a spot and a size. The mat, the doorway and a pair of feet are drawn to the same scale.</p>
+      <div class="ctrl">
+        <div class="lbl">Where will it go?</div>
+        <div class="chips" role="radiogroup" aria-label="Spot" id="spots">
+          <button type="button" class="chip" role="radio" data-spot="main">Main door</button>
+          <button type="button" class="chip" role="radio" data-spot="bath">Bathroom door</button>
+          <button type="button" class="chip" role="radio" data-spot="bed">Bedside</button>
+          <button type="button" class="chip" role="radio" data-spot="kitchen">Kitchen counter</button>
+        </div>
+        <div class="lbl">Size</div>
+        <div class="sizes-c" style="justify-content:flex-start" role="radiogroup" aria-label="Size" id="fsizes">
+          <button type="button" class="sz" role="radio" data-fs="M">M</button>
+          <button type="button" class="sz" role="radio" data-fs="H">H</button>
+          <button type="button" class="sz" role="radio" data-fs="L">L</button>
+          <button type="button" class="sz" role="radio" data-fs="XL">XL</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <figure class="plan">
+        <svg viewBox="0 0 84 40" role="img" aria-labelledby="planlbl">
+          <title id="planlbl">Plan view of the chosen mat in front of the chosen spot</title>
+          <rect class="floor" x="0" y="0" width="84" height="40"/>
+          <rect class="wall" id="wallL" x="0" y="0" width="24" height="7"/>
+          <rect class="wall" id="wallR" x="60" y="0" width="24" height="7"/>
+          <text class="t" id="spotlbl" x="42" y="4.6" text-anchor="middle"></text>
+          <rect class="mat" id="matR" x="30" y="8" width="24" height="16" rx=".6"/>
+          <path class="mat" id="matH" d="" hidden/>
+          <g id="feet"><ellipse class="foot" cx="-2.1" cy="0" rx="1.9" ry="4.9"/><ellipse class="foot" cx="2.1" cy="0" rx="1.9" ry="4.9"/></g>
+          <text class="t" x="2" y="38.2">Adult feet, 10 in long, for scale</text>
+        </svg>
+      </figure>
+      <p class="readout" id="readout" aria-live="polite"></p>
+      <a class="pill" id="fitgo" href="#shop">Shop size M <span class="chev" aria-hidden="true">›</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="made">
+  <div class="two-col">
+    <div class="made-pic rise"><img src="img/s2_close.jpg" alt="Close-up of the aqua Solid Premium pile"></div>
+    <div class="panel rise">
+      <h2 class="h2">Made for wet feet</h2>
+      <p style="margin-top:16px;font-size:18px;max-width:40ch">Step out of the shower, in from the monsoon or off a dusty road. The pile soaks it up and the backing holds the floor.</p>
+      <dl class="specs">
+        <div><dt>Pile</dt><dd>Polyester microfiber and BCF yarn</dd></div>
+        <div><dt>Backing</dt><dd>Latex, anti-skid</dd></div>
+        <div><dt>Care</dt><dd>Machine washable, quick-drying</dd></div>
+        <div><dt>Weight</dt><dd>300 g for a zigzag M, up to 1715 g for a solid XL</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="order" style="padding-bottom:clamp(72px,9vw,140px)">
+  <div class="two-col">
+    <div class="panel rise">
+      <h2 class="h2">Order on WhatsApp, pay by UPI</h2>
+      <ol class="how">
+        <li><b>Fill your cart</b>Pick colour, size and quantity for each mat.</li>
+        <li><b>Add your address</b>Name, phone, address and PIN code.</li>
+        <li><b>Pay by UPI</b>Scan our QR or pay to panchaljelam@oksbi from any UPI app.</li>
+        <li><b>Send it on WhatsApp</b>One tap sends the order. We confirm it the same day and dispatch.</li>
+      </ol>
+    </div>
+    <div class="chat rise" data-ui>
+      <div class="who">Soft Steps · +91 90994 41429</div>
+      <div class="bubble">New order SS-4K2Q9P – Soft Steps
+
+• Solid Premium Rug, L 20×32 in (Rust) × 1 = ₹499
+• Multicolour Zigzag Rug, M 16×24 in (Navy &amp; cream) × 2 = ₹498
+
+Total: ₹997 (free delivery in Vadodara)<small>Sent from the site</small></div>
+      <p class="note">An example of the message the site writes for you.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-bottom:20px">
+  <div class="two-col">
+    <div class="panel rise">
+      <h2 class="h2">Before you order</h2>
+      <div class="qa">
+        <details><summary>How do I order?</summary><p>Add mats to your cart, enter your delivery details, pay by UPI and send the order to us on WhatsApp with one tap. We confirm your order and payment the same day.</p></details>
+        <details><summary>How do I pay?</summary><p>By UPI. Scan the QR at checkout or pay to panchaljelam@oksbi (Jelam Panchal) from GPay, PhonePe, Paytm or any UPI app. You can also pay to UPI number 90994 41429.</p></details>
+        <details><summary>Do you deliver across India?</summary><p>Yes. Delivery is free within Vadodara. For the rest of India, delivery charges are extra and we confirm them with you on call.</p></details>
+        <details><summary>Can I choose my colour?</summary><p>Yes. Colours depend on stock, so we confirm yours on WhatsApp before dispatch. If your colour is out of stock, we let you know before you pay.</p></details>
+        <details><summary>How do I wash my mat?</summary><p>Our mats are machine washable and quick-drying, with an anti-slip latex backing. Message us if you want care tips for a particular mat.</p></details>
+        <details><summary>Can I visit?</summary><p>Yes, by appointment in Vadodara. Message us on WhatsApp to set a time.</p></details>
+      </div>
+    </div>
+    <div class="panel rise" id="contact">
+      <h2 class="h2">Ask Jelam</h2>
+      <p style="margin-top:16px;max-width:42ch">Soft Steps is run by Jelam Panchal in Vadodara. Ask about colours, sizes or stock and you get a reply the same day.</p>
+      <ul class="clist">
+        <li><span class="k">WhatsApp</span><a class="v" href="https://wa.me/919099441429" target="_blank" rel="noopener">+91 90994 41429</a><button type="button" class="copy" data-copy="+91 90994 41429">Copy</button></li>
+        <li><span class="k">Email</span><span class="v">softsteps.home@gmail.com</span><button type="button" class="copy" data-copy="softsteps.home@gmail.com">Copy</button></li>
+        <li><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/softsteps.home" target="_blank" rel="noopener">@softsteps.home</a><span></span></li>
+        <li><span class="k">Hours</span><span class="v">10am to 8pm, every day</span><span></span></li>
+      </ul>
+      <form class="enq" id="enq" novalidate>
+        <div class="two">
+          <label class="field-in" for="e-n">Your name<input id="e-n" required autocomplete="name"></label>
+          <label class="field-in" for="e-p">Phone / WhatsApp<input id="e-p" type="tel" required autocomplete="tel" inputmode="tel"></label>
+        </div>
+        <label class="field-in" for="e-s">Interested in<select id="e-s"><option>Multicolour Zigzag Rugs</option><option>Solid Premium Rugs</option><option>Striped Chenille Mats</option><option>A larger order</option><option>Not sure yet</option></select></label>
+        <label class="field-in" for="e-m">Message <small>Sizes, colours, quantity, anything that helps</small><textarea id="e-m"></textarea></label>
+        <p class="err" id="eerr" role="alert"></p>
+        <button class="pill ink full" type="submit">Write my WhatsApp message <span class="chev" aria-hidden="true">›</span></button>
+        <div class="done" id="enqdone" hidden>Your message is ready. Tap below to open WhatsApp and send it.<a class="pill wa full" id="enqwa" href="#" target="_blank" rel="noopener">Open WhatsApp</a></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot field" id="foot">
+  <p class="name" aria-hidden="true">Soft Steps</p>
+  <div class="foot-row">
+    <span>Comfort in every step · Vadodara, Gujarat · © 2026</span>
+    <nav aria-label="Footer"><a href="#shop">Shop</a><a href="#fit">Sizes</a><a href="#faq">Questions</a><a href="#contact">Contact</a><a href="https://www.instagram.com/softsteps.home" target="_blank" rel="noopener">Instagram</a></nav>
+  </div>
+</footer>
+</div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<button type="button" class="cbar" id="cbar" hidden><span id="cbn"></span><span id="cbt"></span></button>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dtitle" hidden>
+  <div class="dh"><h2 id="dtitle">Your cart</h2><button type="button" class="x" id="dclose" aria-label="Close">✕</button></div>
+  <ol class="progress" id="prog"><li class="on">Cart</li><li>Details</li><li>Pay &amp; send</li></ol>
+  <div class="db" id="v-cart"></div>
+  <div class="df" id="f-cart">
+    <div class="rowx"><span>Subtotal</span><span class="total" id="sub">₹0</span></div>
+    <button type="button" class="pill ink full" id="go">Continue to delivery details <span class="chev" aria-hidden="true">›</span></button>
+  </div>
+  <div class="db" id="v-det" hidden>
+    <div class="box">
+      <label class="field-in" for="o-name">Full name<input id="o-name" autocomplete="name" maxlength="100"></label>
+      <label class="field-in" for="o-ph">Phone / WhatsApp<input id="o-ph" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="10-digit mobile number"></label>
+      <label class="field-in" for="o-ad">Address<textarea id="o-ad" autocomplete="street-address" maxlength="500" placeholder="House / flat, street, area, landmark"></textarea></label>
+      <div class="two">
+        <label class="field-in" for="o-ct">City<input id="o-ct" autocomplete="address-level2" maxlength="100"></label>
+        <label class="field-in" for="o-pin">PIN code<input id="o-pin" inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="6 digits"></label>
+      </div>
+      <label class="field-in" for="o-email">Email <small>Optional</small><input id="o-email" type="email" autocomplete="email" maxlength="254"></label>
+    </div>
+    <div class="box">
+      <div style="font-weight:700">Delivery</div>
+      <label class="radio"><input type="radio" name="dl" value="vad" checked><span>Vadodara<small>Free delivery</small></span></label>
+      <label class="radio"><input type="radio" name="dl" value="out"><span>Rest of India<small>Delivery charges extra, confirmed on call</small></span></label>
+    </div>
+    <div class="box"><div style="font-weight:700">Order summary</div><div id="lines"></div></div>
+  </div>
+  <div class="df" id="f-det" hidden>
+    <div class="rowx"><span>Total</span><span class="total" id="tot">₹0</span></div>
+    <p class="err" id="oerr" role="alert"></p>
+    <div class="rowx" style="gap:8px"><button type="button" class="pill quiet" id="back">Back</button><button type="button" class="pill ink" style="flex:1" id="order-btn">Place order <span class="chev" aria-hidden="true">›</span></button></div>
+  </div>
+  <div class="db thanks" id="v-pay" hidden>
+    <div><p style="font-weight:700">Order <span id="oid"></span></p><h3 style="margin-top:6px">Thank you, <span id="oname"></span></h3></div>
+    <ol class="todo"><li><b>Pay <span id="payamt"></span></b> by UPI using the QR or ID below.</li><li><b>Send your order on WhatsApp.</b> Your order is confirmed when we reply.</li></ol>
+    <div class="box">
+      <div class="upi"><img src="img/qr.jpg" alt="UPI QR code for Soft Steps"><div><div>UPI ID</div><div class="id">panchaljelam@oksbi</div><div class="fine">Jelam Panchal (Soft Steps)<br>or UPI number 90994 41429</div><button type="button" class="copy" data-copy="panchaljelam@oksbi">Copy UPI ID</button></div></div>
+      <a class="pill quiet full" id="upil" href="#">Open a UPI app</a>
+    </div>
+  </div>
+  <div class="df" id="f-pay" hidden>
+    <a class="pill wa full" id="sendwa" href="#" target="_blank" rel="noopener">Send order on WhatsApp</a>
+    <p class="fine">WhatsApp not opening? <button type="button" class="link" id="copyorder">Copy the order text</button> and message +91 90994 41429 or email softsteps.home@gmail.com.</p>
+  </div>
+</aside>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var PH="919099441429",UPI="panchaljelam@oksbi";
+var P={
+  zig:{name:"Multicolour Zigzag Rug",sizes:[["M","16×24 in","300 g",249],["H","16×24 in half round","300 g",249],["L","20×32 in","520 g",349],["XL","24×60 in","1150 g",599]]},
+  sol:{name:"Solid Premium Rug",sizes:[["M","16×24 in","450 g",349],["H","16×24 in half round","400 g",349],["L","20×32 in","780 g",499],["XL","24×60 in","1715 g",849]]},
+  chen:{name:"Striped Chenille Mat",sizes:[["M","16×24 in","",299],["H","16×24 in half round","",299],["L","20×32 in","",399],["XL","24×60 in","",649]]}
+};
+var SIZEIDX={M:0,H:1,L:2,XL:3},pickers={},cart=[],lastMsg="";
+function inr(n){return "₹"+n.toLocaleString("en-IN")}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove("on")},1800)}
+function swatch(k,colour){return $$('.prod[data-k="'+k+'"] [data-n]').filter(function(x){return x.dataset.n===colour})[0]}
+function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:$('.prod[data-k="chen"] .pic img').src}
+function lum(hex){var n=parseInt(hex.slice(1),16),c=[n>>16,n>>8&255,n&255].map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function paint(el,hex){el.style.setProperty("--f",hex);el.style.setProperty("--fg",lum(hex)>.28?"#1f1a17":"#ffffff")}
+function radio(group,btn){$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
+function arrows(group,cb){group.addEventListener("keydown",function(e){var d={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!d)return;var bs=$$('[role="radio"]',group),i=bs.indexOf(document.activeElement);if(i<0)return;e.preventDefault();var n=bs[(i+d+bs.length)%bs.length];n.focus();cb(n)})}
+function sizeButtons(box,p){box.innerHTML=p.sizes.map(function(z){return '<button type="button" class="sz" role="radio" aria-label="'+z[0]+', '+z[1]+'">'+z[0]+'</button>'}).join("");return $$('[role="radio"]',box)}
+function addToCart(k,sIdx,colour,q){var p=P[k],z=p.sizes[sIdx],id=k+"|"+z[0]+"|"+colour,it=cart.filter(function(x){return x.id===id})[0];
+  if(it)it.q+=q;else cart.push({id:id,k:k,size:z[0]+" "+z[1],colour:colour,p:z[3],q:q});render();toast("Added "+q+" × "+p.name+" ("+z[0]+")")}
+
+/* Product cards */
+$$(".prod").forEach(function(el){
+  var k=el.dataset.k,p=P[k],s={c:0,s:0,q:1};
+  var cg=$(".swatches,.chips",el),cbs=$$('[role="radio"]',cg),sbox=$(".sizes-c",el),sbs=sizeButtons(sbox,p),out=$("output",el),add=$("[data-add]",el),img=$(".pic img",el);
+  function upd(){var z=p.sizes[s.s];add.innerHTML="Add to cart · "+inr(z[3]*s.q)+' <span class="chev" aria-hidden="true">›</span>';out.textContent=s.q;$("[data-price]",el).textContent=inr(z[3]);$("[data-dims]",el).textContent=z[1]+(z[2]?" · "+z[2]:"")}
+  function pickC(b){s.c=cbs.indexOf(b);radio(cg,b);$("[data-colour]",el).textContent=b.dataset.n;paint(el,b.dataset.bg);if(b.dataset.full){img.src=b.dataset.full;img.alt=p.name+" in "+b.dataset.n}}
+  function pickS(b){s.s=sbs.indexOf(b);radio(sbox,b);upd()}
+  cbs.forEach(function(b){if(b.classList.contains("sw")){b.setAttribute("aria-label",b.dataset.n);b.title=b.dataset.n}b.onclick=function(){pickC(b)}});
+  sbs.forEach(function(b){b.onclick=function(){pickS(b)}});
+  arrows(cg,pickC);arrows(sbox,pickS);
+  $$("[data-q]",el).forEach(function(b){b.onclick=function(){s.q=Math.max(1,Math.min(20,s.q+ +b.dataset.q));upd()}});
+  add.onclick=function(){addToCart(k,s.s,cbs[s.c].dataset.n,s.q);s.q=1;upd()};
+  pickers[k]=function(letter){pickS(sbs[SIZEIDX[letter]])};
+  pickC(cbs[0]);pickS(sbs[0]);
+});
+
+/* Hero carousel */
+var SLIDES=[
+  {k:"sol",c:"Rust",h:"Soft steps, every morning",t:"Our Solid Premium pile is heavy, plush and absorbent. Step out of the shower onto something warm, then throw it in the washing machine."},
+  {k:"zig",c:"Forest green & black",h:"Bold at the front door",t:"Zigzag stripes in a soft microfiber pile with a latex anti-slip backing. The first thing guests see, and the softest."},
+  {k:"sol",c:"Royal blue",h:"Dry feet, happy floors",t:"A thick textured pile that soaks up water fast and dries quickly. Made for the bathroom door, sized for every room."},
+  {k:"zig",c:"Blush pink & black",h:"A little colour by the bed",t:"Soft underfoot first thing in the morning. Ten zigzag colourways, four sizes, all machine washable."},
+  {k:"sol",c:"Aqua",h:"Fresh as the first rain",t:"A cool aqua pile that brightens a white bathroom. Anti-slip latex backing keeps it where you put it."},
+  {k:"zig",c:"Mustard & tan",h:"Sunshine for your doorstep",t:"Warm mustard zigzags for the main door or the balcony. From ₹249 for the 16×24 inch size."}
+];
+var hero=$("#hero"),hi=0,hs=0,hsb=sizeButtons($("#h-sizes"),P.sol);
+$("#dots").innerHTML=SLIDES.map(function(){return "<span></span>"}).join("");
+function hsSet(i){hs=i;radio($("#h-sizes"),hsb[i]);var sl=SLIDES[hi],z=P[sl.k].sizes[i];$("#h-price").textContent=inr(z[3]);$("#h-dims").textContent=z[1]+(z[2]?" · "+z[2]:"")}
+hsb.forEach(function(b,i){b.onclick=function(){hsSet(i)}});arrows($("#h-sizes"),function(b){hsSet(hsb.indexOf(b))});
+function show(i,instant){
+  hi=(i+SLIDES.length)%SLIDES.length;var sl=SLIDES[hi],b=swatch(sl.k,sl.c),nx=SLIDES[(hi+1)%SLIDES.length],rug=$("#h-rug");
+  function swap(){$("#h-img").src=b.dataset.full;$("#h-img").alt=P[sl.k].name+" in "+sl.c;rug.classList.remove("out")}
+  paint(hero,b.dataset.bg);
+  $("#h-title").textContent=sl.h;$("#h-lead").textContent=sl.t;$("#h-name").textContent=P[sl.k].name+" · "+sl.c;
+  hsSet(hs);
+  $("#h-nextimg").src=$("img",swatch(nx.k,nx.c)).src;$("#h-nextname").textContent="Next: "+nx.c.split(" &")[0].split(" & ")[0];
+  $$("#dots span").forEach(function(d,j){d.classList.toggle("on",j===hi)});
+  var mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.content=b.dataset.bg;
+  if(instant||matchMedia("(prefers-reduced-motion: reduce)").matches)swap();else{rug.classList.add("out");setTimeout(swap,280)}
+}
+$("#prev").onclick=function(){show(hi-1)};$("#nextBtn").onclick=function(){show(hi+1)};$("#h-next").onclick=function(){show(hi+1)};
+$("#h-add").onclick=function(){var sl=SLIDES[hi];addToCart(sl.k,hs,sl.c,1)};
+var tx=null;hero.addEventListener("touchstart",function(e){tx=e.touches[0].clientX},{passive:true});
+hero.addEventListener("touchend",function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)show(hi+(dx<0?1:-1));tx=null});
+show(0,true);
+paint($("#foot"),"#1f1a17");
+
+/* Fit tool, all in inches */
+var SPOTS={main:{label:"Main door",w:36,kind:"door"},bath:{label:"Bathroom door",w:30,kind:"door"},bed:{label:"Bed, 75 in side",w:75,kind:"block"},kitchen:{label:"Kitchen counter, 72 in",w:72,kind:"block"}};
+var FS={M:[24,16],H:[24,16],L:[32,20],XL:[60,24]},fit={spot:"main",size:"M"};
+function drawFit(){
+  var sp=SPOTS[fit.spot],d=FS[fit.size],W=84,y=8,wl=$("#wallL"),wr=$("#wallR"),g=(W-sp.w)/2;
+  if(sp.kind==="door"){wl.setAttribute("x",0);wl.setAttribute("width",g);wr.setAttribute("x",g+sp.w);wr.setAttribute("width",g);wr.removeAttribute("hidden")}
+  else{wl.setAttribute("x",g);wl.setAttribute("width",sp.w);wr.setAttribute("hidden","")}
+  $("#spotlbl").textContent=sp.kind==="door"?sp.label+", "+sp.w+" in opening":sp.label;
+  var x=(W-d[0])/2,r=$("#matR"),h=$("#matH");
+  if(fit.size==="H"){r.setAttribute("hidden","");h.removeAttribute("hidden");h.setAttribute("d","M"+x+" "+y+"h"+d[0]+"a"+(d[0]/2)+" "+d[1]+" 0 0 1 -"+d[0]+" 0z")}
+  else{h.setAttribute("hidden","");r.removeAttribute("hidden");r.style.x=x+"px";r.style.width=d[0]+"px";r.style.height=d[1]+"px";r.setAttribute("x",x);r.setAttribute("width",d[0]);r.setAttribute("height",d[1])}
+  $("#feet").setAttribute("transform","translate(42 "+(y+8-(fit.size==="H"?1:0))+")");
+  var spare=sp.w-d[0],txt;
+  if(sp.kind==="door")txt=spare>=0?"<b>"+fit.size+"</b> covers "+d[0]+" in of your "+sp.w+" in doorway, with "+(spare/2)+" in to spare on each side.":"<b>"+fit.size+"</b> is "+(-spare)+" in wider than a "+sp.w+" in doorway, so it runs past the frame.";
+  else txt="<b>"+fit.size+"</b> runs "+d[0]+" in along the "+sp.w+" in "+(fit.spot==="bed"?"side of the bed":"counter")+" and is "+d[1]+" in deep, room for both feet.";
+  $("#readout").innerHTML=txt;
+  $("#fitgo").innerHTML="Shop size "+fit.size+' <span class="chev" aria-hidden="true">›</span>';
+}
+var spots=$("#spots"),fsz=$("#fsizes");
+function pickSpot(b){fit.spot=b.dataset.spot;radio(spots,b);drawFit()}
+function pickFS(b){fit.size=b.dataset.fs;radio(fsz,b);drawFit()}
+$$('[role="radio"]',spots).forEach(function(b){b.onclick=function(){pickSpot(b)}});
+$$('[role="radio"]',fsz).forEach(function(b){b.onclick=function(){pickFS(b)}});
+arrows(spots,pickSpot);arrows(fsz,pickFS);
+$("#fitgo").onclick=function(){Object.keys(pickers).forEach(function(k){pickers[k](fit.size)});hsSet(SIZEIDX[fit.size])};
+pickSpot($('[data-spot="main"]'));pickFS($('[data-fs="M"]'));
+
+/* Cart and checkout */
+function count(){return cart.reduce(function(a,x){return a+x.q},0)}
+function total(){return cart.reduce(function(a,x){return a+x.p*x.q},0)}
+function save(){try{localStorage.setItem("ss_cart2",JSON.stringify(cart))}catch(e){}}
+function render(){
+  var n=count();$("#cnt").textContent=n;$("#cnt").hidden=!n;$("#cartbtn").setAttribute("aria-label","Open cart, "+n+(n===1?" item":" items"));
+  $("#cbar").hidden=!n||!$("#drawer").hidden;$("#cbn").textContent="View cart · "+n+(n>1?" items":" item");$("#cbt").textContent=inr(total());
+  $("#v-cart").innerHTML=cart.length?cart.map(function(x,i){return '<div class="line"><img src="'+imgFor(x.k,x.colour)+'" alt=""><div><b>'+esc(P[x.k].name)+'</b><small>'+esc(x.colour)+'</small><small>'+esc(x.size)+' · '+inr(x.p)+' each</small><div class="stepper"><button type="button" data-i="'+i+'" data-d="-1" aria-label="One less">−</button><output>'+x.q+'</output><button type="button" data-i="'+i+'" data-d="1" aria-label="One more">+</button></div><button type="button" class="link rm" data-i="'+i+'" data-d="0">Remove</button></div><span class="amt">'+inr(x.p*x.q)+'</span></div>'}).join(""):'<div class="empty"><p>Your cart is empty.</p><button type="button" class="pill quiet" id="browse">Browse mats</button></div>';
+  $("#sub").textContent=inr(total());$("#go").disabled=!cart.length;
+  var br=$("#browse");if(br)br.onclick=function(){closeD();$("#shop").scrollIntoView({behavior:"smooth"})};
+  save();
+}
+$("#v-cart").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;var i=+b.dataset.i,d=+b.dataset.d;if(!d)cart.splice(i,1);else{cart[i].q+=d;if(cart[i].q<1)cart.splice(i,1)}render()});
+var lastFocus=null,titles={cart:"Your cart",det:"Delivery details",pay:"Pay & send"},VIEWS=["cart","det","pay"];
+function view(v){VIEWS.forEach(function(x,i){$("#v-"+x).hidden=x!==v;$("#f-"+x).hidden=x!==v;$$("#prog li")[i].classList.toggle("on",VIEWS.indexOf(v)>=i)});$("#dtitle").textContent=titles[v];$("#v-"+v).scrollTop=0}
+function openD(v){lastFocus=document.activeElement;view(v||"cart");$("#drawer").hidden=false;$("#scrim").hidden=false;$("#cbar").hidden=true;document.body.style.overflow="hidden";$("#dclose").focus()}
+function closeD(){$("#drawer").hidden=true;$("#scrim").hidden=true;document.body.style.overflow="";render();if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+$("#cartbtn").onclick=function(){openD("cart")};$("#cbar").onclick=function(){openD("cart")};
+$("#dclose").onclick=closeD;$("#scrim").onclick=closeD;
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#drawer").hidden)closeD()});
+function dl(){return $("input[name=dl]:checked").value}
+function summary(){$("#lines").innerHTML=cart.map(function(x){return '<div class="sl"><span>'+esc(P[x.k].name)+', '+esc(x.size.split(" ")[0])+' · '+esc(x.colour)+' × '+x.q+'</span><b>'+inr(x.p*x.q)+'</b></div>'}).join("")+'<div class="sl"><span>Delivery</span><b>'+(dl()==="out"?"Confirmed on call":"Free")+'</b></div>';$("#tot").textContent=inr(total())+(dl()==="out"?" + delivery":"")}
+$("#go").onclick=function(){if(!cart.length)return;summary();$("#oerr").textContent="";view("det")};
+$("#back").onclick=function(){view("cart")};
+$$("input[name=dl]").forEach(function(r){r.onchange=summary});
+$("#order-btn").onclick=function(){
+  var v=function(id){return $(id).value.trim()},nm=v("#o-name"),ph=v("#o-ph"),ad=v("#o-ad"),ct=v("#o-ct"),pin=v("#o-pin"),em=v("#o-email");
+  var pd=ph.replace(/[\s()+-]/g,"").replace(/^(91|0)(?=\d{10}$)/,""),err="",bad=null;
+  if(!nm){err="Add your name.";bad="#o-name"}
+  else if(!/^[6-9]\d{9}$/.test(pd)){err="Enter a 10-digit Indian mobile number, like 98765 43210.";bad="#o-ph"}
+  else if(ad.length<8){err="Add your full address with house number and area.";bad="#o-ad"}
+  else if(!ct){err="Add your city.";bad="#o-ct"}
+  else if(!/^[1-9]\d{5}$/.test(pin)){err="Enter your 6-digit PIN code.";bad="#o-pin"}
+  else if(em&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err="Check your email address, or leave it blank.";bad="#o-email"}
+  $("#oerr").textContent=err;if(bad){$(bad).focus();return}
+  var t=total(),oid="SS-"+Date.now().toString(36).toUpperCase().slice(-6);
+  lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(dl()==="out"?" + delivery outside Vadodara (please confirm charges)":" (free delivery in Vadodara)")+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+"\n\nI will share the UPI payment screenshot here.";
+  $("#sendwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(lastMsg);
+  $("#oid").textContent="#"+oid;$("#oname").textContent=nm.split(" ")[0];$("#payamt").textContent=inr(t)+(dl()==="out"?" + delivery once confirmed":"");
+  $("#upil").href="upi://pay?pa="+UPI+"&pn=Jelam%20Panchal&am="+t+"&cu=INR&tn="+encodeURIComponent("Soft Steps "+oid);
+  view("pay");
+};
+function copyText(text,btn){var done=function(){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1500)};
+  var fallback=function(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch(e){toast("Select and copy: "+text)}ta.remove()};
+  try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}}
+document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(b)copyText(b.dataset.copy,b)});
+$("#copyorder").onclick=function(){copyText(lastMsg,this)};
+$("#enq").onsubmit=function(e){e.preventDefault();var n=$("#e-n").value.trim(),p=$("#e-p").value.trim();
+  if(!n||!p){$("#eerr").textContent="Add your name and phone number so we can reply.";$(n?"#e-p":"#e-n").focus();return}
+  $("#eerr").textContent="";
+  var msg="Enquiry – Soft Steps\n\nName: "+n+"\nPhone: "+p+"\nInterested in: "+$("#e-s").value+($("#e-m").value.trim()?"\nMessage: "+$("#e-m").value.trim():"");
+  $("#enqwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(msg);$("#enqdone").hidden=false};
+try{var saved=JSON.parse(localStorage.getItem("ss_cart2")||"[]");if(Array.isArray(saved))saved.forEach(function(x){if(x&&P[x.k]&&x.q>0)cart.push(x)})}catch(e){}
+render();
+})();
+</script>
