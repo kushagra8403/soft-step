@@ -34,6 +34,8 @@ jobs:
           node --check work-admin/site/pairs.js
           node --check work-admin/site/tryon.js
           node --check work-admin/site/lang.js
+          node --check work-admin/site/wow.js
+          node --check work-admin/site/extras.js
           node --check work-admin/site/lang-gu.js
           node --check work-admin/site/lang-hi.js
           node --check work-admin/tests/core.cjs
