@@ -92,6 +92,8 @@ jobs:
           const fs = require('fs');
           const path = require('path');
           const html = fs.readFileSync('/tmp/softsteps-dist/index.html', 'utf8');
+          const scripts = [...html.matchAll(/<script src="([^"]+)"><\\/script>/g)].map(m => m[1]);
+          if (new Set(scripts).size !== scripts.length) throw new Error('Duplicate script reference in generated page: ' + scripts.join(', '));
           const netlify = fs.readFileSync('/tmp/softsteps-dist/netlify.toml', 'utf8');
           for (const header of ['Content-Security-Policy', 'X-Frame-Options = "DENY"', 'Strict-Transport-Security', 'Permissions-Policy']) {
             if (!netlify.includes(header)) throw new Error('Missing generated Netlify security header: ' + header);
