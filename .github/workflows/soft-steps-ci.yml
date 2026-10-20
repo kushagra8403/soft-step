@@ -1,0 +1,45 @@
+name: Soft Steps CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-tests:
+    name: Browser regression tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Check JavaScript syntax
+        run: |
+          node --check work-admin/site/features.js
+          node --check work-admin/site/admin.js
+          node --check work-admin/site/fx.js
+          node --check work-admin/site/touchfx.js
+          node --check work-admin/site/shop.js
+          node --check work-admin/site/pairs.js
+          node --check work-admin/site/tryon.js
+          node --check work-admin/site/lang.js
+          node --check work-admin/tests/core.cjs
+          node --check work-admin/tests/admin.cjs
+          node --check work-admin/tests/integ.cjs
+      - name: Shop catalog and checkout tests
+        run: node work-admin/tests/core.cjs work-admin/site
+      - name: Admin editor end-to-end tests
+        run: node work-admin/tests/admin.cjs
+      - name: Shop-admin integration tests
+        run: node work-admin/tests/integ.cjs
