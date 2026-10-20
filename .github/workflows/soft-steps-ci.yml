@@ -1,4 +1,8 @@
 name: Soft Steps CI
+concurrency:
+  group: soft-steps-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
   push:
