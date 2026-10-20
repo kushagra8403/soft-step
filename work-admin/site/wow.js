@@ -58,7 +58,7 @@
     var card = $("#r-sol"), pic = $("#r-sol .pic"), plane = $("#r-sol .plane"), img = $("#r-sol .pic .plane img");
     if (!card || !pic || !plane || !img) return;
     var canvas = null, ctx = null, imageData = null, normals = null, raf = 0, active = false, pressed = false;
-    var last = null, lastInput = 0, hint = null, tint = { lit:[251,247,240], shade:[20,27,54] }, lastDraw = 0;
+    var last = null, lastInput = 0, hint = null, tint = { lit:[253,252,250], shade:[31,27,24] }, lastDraw = 0;
     var NX = 48, NY = 40, R = 4.5, RESTX = 0, RESTY = 1, LX = .94, LY = -.34, S0 = -.34;
     function parseRgb(s, fallback) {
       var m = String(s || "").match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i);
@@ -70,8 +70,8 @@
     }
     function colours() {
       var cs=getComputedStyle(card);
-      tint.lit=parseRgb(cs.getPropertyValue("--wow-lit"),[251,247,240]);
-      tint.shade=parseRgb(cs.getPropertyValue("--wow-shade"),[20,27,54]);
+      tint.lit=parseRgb(cs.getPropertyValue("--wow-lit"),[253,252,250]);
+      tint.shade=parseRgb(cs.getPropertyValue("--wow-shade"),[31,27,24]);
     }
     function setMask() {
       if (!canvas) return;
