@@ -30,11 +30,11 @@ for n in (180, 192, 512):
 # Netlify export must describe the same catalog as the visible shop.
 P = {}
 AVAIL = {}
-for k, name, sizes in re.findall(r'(\\w+):\\{name:"([^"]+)",sizes:(\\[\\[.*?\\]\\])\\}', page):
+for k, name, sizes in re.findall(r'(\w+):\{name:"([^"]+)",sizes:(\[\[.*?\]\])\}', page):
     P[k] = (name, json.loads(sizes))
     AVAIL[k] = "https://schema.org/InStock"
 
-catalog_match = re.search(r'<script type="application/json" id="ss-catalog">([\\s\\S]*?)</script>', page)
+catalog_match = re.search(r'<script type="application/json" id="ss-catalog">([\s\S]*?)</script>', page)
 if catalog_match:
     try:
         catalog = json.loads(catalog_match.group(1))
