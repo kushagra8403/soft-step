@@ -106,12 +106,13 @@
     function quietText(el,txt){
       if(!el)return;
       if(inView(el)){
+        el.__ssReplyNext=txt;
         if(!el.__ssReplyWait){
           el.__ssReplyWait=true;
-          var done=function(){if(!inView(el)){W.removeEventListener("scroll",done);W.removeEventListener("resize",done);el.__ssReplyWait=false;el.textContent=txt;}};
+          var done=function(){if(!inView(el)){W.removeEventListener("scroll",done);W.removeEventListener("resize",done);el.__ssReplyWait=false;el.textContent=el.__ssReplyNext||txt;el.__ssReplyNext="";}};
           W.addEventListener("scroll",done,{passive:true});W.addEventListener("resize",done,{passive:true});
         }
-      }else el.textContent=txt;
+      }else {el.textContent=txt;el.__ssReplyNext="";}
     }
     function update(){
       var now=new Date(),txt=status(now);
