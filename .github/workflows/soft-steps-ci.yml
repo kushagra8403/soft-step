@@ -43,3 +43,34 @@ jobs:
         run: node work-admin/tests/admin.cjs
       - name: Shop-admin integration tests
         run: node work-admin/tests/integ.cjs
+      - name: Build and verify deployable Netlify preview
+        run: |
+          python -m pip install --quiet pillow
+          python build_netlify.py work-admin/site /tmp/softsteps-dist
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const html = fs.readFileSync('/tmp/softsteps-dist/index.html', 'utf8');
+          const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+          if (!ldMatch) throw new Error('Missing JSON-LD structured data');
+          const ld = JSON.parse(ldMatch[1]);
+          const offers = (ld.makesOffer || []).map(x => x.itemOffered);
+          if (offers.length !== 3) throw new Error('Expected 3 structured products; found ' + offers.length);
+          const catalogMatch = html.match(/<script type="application\/json" id="ss-catalog">([\s\S]*?)<\/script>/);
+          if (!catalogMatch) throw new Error('Missing catalog data');
+          const catalog = JSON.parse(catalogMatch[1]);
+          for (const [key, range] of Object.entries(catalog.ranges)) {
+            const product = offers.find(p => p.name === range.name);
+            if (!product) throw new Error('Structured data missing catalog product ' + key);
+            const prices = range.sizes.map(s => s.price);
+            if (product.offers.lowPrice !== Math.min(...prices) || product.offers.highPrice !== Math.max(...prices)) {
+              throw new Error('Structured prices do not match catalog for ' + key);
+            }
+          }
+          for (const match of html.matchAll(/<script src="([^"]+)"><\/script>/g)) {
+            if (!fs.existsSync(path.join('/tmp/softsteps-dist', match[1]))) {
+              throw new Error('Missing built script ' + match[1]);
+            }
+          }
+          console.log('Netlify preview verified: 3 catalog products, structured prices match, scripts present.');
+          NODE
