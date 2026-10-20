@@ -466,5 +466,29 @@
   "en": "{a} for a zigzag M, up to {b} for a solid XL",
   "gu": "Zigzag M નું {a} થી લઈને Solid XL નું {b} સુધી",
   "hi": "zigzag M के लिए {a}, solid XL के लिए {b} तक"
+ },
+ {
+  "kind": "pattern",
+  "en": "Cart changed. Check previous order #{id} with Jelam before paying again.",
+  "gu": "કાર્ટ બદલાયો છે. ફરીથી ચુકવણી કરતાં પહેલાં Jelam સાથે અગાઉના ઑર્ડર #{id} વિશે તપાસો.",
+  "hi": "कार्ट बदल गया है। दोबारा भुगतान करने से पहले Jelam से पिछले ऑर्डर #{id} के बारे में पुष्टि करें।"
+ },
+ {
+  "kind": "text",
+  "en": "Could not copy. Please select and copy the text manually.",
+  "gu": "કૉપી થઈ શક્યું નથી. કૃપા કરીને લખાણ પસંદ કરીને જાતે કૉપી કરો.",
+  "hi": "कॉपी नहीं हो पाया। कृपया टेक्स्ट चुनकर खुद कॉपी करें।"
+ },
+ {
+  "kind": "text",
+  "en": "A previous order was marked sent. Its items were removed to avoid a duplicate order.",
+  "gu": "અગાઉનો ઑર્ડર મોકલાયેલો તરીકે નોંધાયો હતો. ફરીથી ઑર્ડર ન થાય તે માટે તેની વસ્તુઓ દૂર કરી છે.",
+  "hi": "पिछले ऑर्डर को भेजा हुआ माना गया था। दोबारा ऑर्डर से बचने के लिए उसकी चीज़ें हटा दी गई हैं।"
+ },
+ {
+  "kind": "text",
+  "en": "I’ve sent it — start a new cart",
+  "gu": "મેં ઑર્ડર મોકલી દીધો છે — નવું કાર્ટ શરૂ કરો",
+  "hi": "मैंने ऑर्डर भेज दिया है — नया कार्ट शुरू करें"
  }
 ]
