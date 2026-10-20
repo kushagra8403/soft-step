@@ -1386,7 +1386,7 @@ Total: ₹997 (free delivery in Vadodara)<small>Sent from the site</small></div>
       <a class="pill quiet full" id="upil" href="#">Open a UPI app</a>
       <details class="qrd" id="qrd"><summary>Show the UPI QR code</summary><div class="qrin"><img src="img/qr.jpg" alt="UPI QR code for Soft Steps" width="762" height="862" loading="lazy" decoding="async"><p class="fine">Scan it from another phone. On this phone, long-press to save it, then use “scan from gallery” in GPay, PhonePe or Paytm.</p></div></details>
     </div>
-    <div class="box sentbox" id="sentbox" hidden><p><b>Sent it?</b> Jelam replies on WhatsApp to confirm your order and payment.</p><button type="button" class="pill quiet" id="newcart">Start a new cart</button></div>
+    <div class="box sentbox" id="sentbox" hidden><p><b>Sent it?</b> Jelam replies on WhatsApp to confirm your order and payment.</p><button type="button" class="pill quiet" id="newcart">I’ve sent it — start a new cart</button></div>
     <button type="button" class="link" id="editorder">Change something in this order</button>
   </div>
   <div class="df" id="f-pay" hidden>
@@ -1750,7 +1750,7 @@ function copyText(text,btn){if(!btn||btn._cp)return;btn._cp=true;var original=bt
 document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(b)copyText(b.dataset.copy,b)});
 $("#copyorder").onclick=function(){copyText(lastMsg,this)};
 $("#sendwa").addEventListener("click",function(){if(!pend)return;var oid=pend.oid;pend.opened=true;pend.openedAt=Date.now();savePend();setTimeout(function(){if(pend&&pend.oid===oid)$("#sentbox").hidden=false},600)});
-$("#newcart").onclick=function(){if(pend){pend.sent=true;pend.sentAt=Date.now();try{localStorage.setItem("ss_last_sent",JSON.stringify(pend))}catch(e){}}cart.length=0;pend=null;savePend();save();clearDetailsDraft();applyDetails({});render();step("cart")};
+$("#newcart").onclick=function(){if(pend){pend.sent=true;pend.sentAt=Date.now();try{localStorage.setItem("ss_last_sent",JSON.stringify(pend))}catch(e){}}cart.length=0;pend=null;savePend();save();clearDetailsDraft();applyDetails({name:"",phone:"",address:"",city:"",pin:"",email:"",giftOn:false,gift:"",delivery:"vad"});render();step("cart")};
 $("#editorder").onclick=function(){if(pend&&pend.details)applyDetails(pend.details);saveDetailsDraft();step("cart")};
 try{if(matchMedia("(min-width: 761px)").matches){$("#qrd").open=true;$("#enqd").open=true}}catch(e){}
 $("#enq").onsubmit=function(e){e.preventDefault();var n=$("#e-n").value.trim(),p=$("#e-p").value.trim();
