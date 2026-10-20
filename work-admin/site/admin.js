@@ -430,8 +430,18 @@
   }
   async function preparePhoto(file) {
     if (!file) throw { code: "not_image" };
-    if (file.type && !/^image\//.test(file.type)) throw { code: "not_image" };
     if (file.size > FILE_MAX) throw { code: "file_too_big" };
+    /* Trust file signatures, not the browser-provided MIME type. Only raster formats are accepted;
+       all uploads are decoded and re-encoded below, so source metadata (including EXIF) is stripped. */
+    const head = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+    const starts = function (bytes) { return bytes.every(function (v, i) { return head[i] === v; }); };
+    const jpeg = starts([0xFF, 0xD8, 0xFF]);
+    const png = starts([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
+    const webp = starts([0x52, 0x49, 0x46, 0x46]) && head[8] === 0x57 && head[9] === 0x45 && head[10] === 0x42 && head[11] === 0x50;
+    const type = String(file.type || "").toLowerCase();
+    const typeOK = !type || type === "image/jpeg" || type === "image/jpg" || type === "image/png" || type === "image/webp";
+    if (!typeOK || !(jpeg || png || webp) || (type.indexOf("jpeg") >= 0 && !jpeg) || (type.indexOf("jpg") >= 0 && !jpeg) ||
+        (type === "image/png" && !png) || (type === "image/webp" && !webp)) throw { code: "not_image" };
     const im = await decode(file);
     try {
       if (!im.w || !im.h) throw { code: "decode" };
@@ -566,7 +576,7 @@
     els.toast = h("div", { class: "ssa-toast", "aria-hidden": "true", hidden: true });
     els.live = h("div", { class: "ssa-sr", "aria-live": "polite", role: "status" });
     els.sheetHost = h("div", { class: "ssa-sheethost" });
-    els.file = h("input", { type: "file", accept: "image/*", class: "ssa-file", tabindex: "-1", "aria-hidden": "true" });
+    els.file = h("input", { type: "file", accept: "image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp", class: "ssa-file", tabindex: "-1", "aria-hidden": "true" });
     els.file.addEventListener("change", onFile);
     append(root, [els.hd, els.nav, els.main, els.bar, els.toast, els.live, els.sheetHost, els.file]);
     D.body.appendChild(root);
