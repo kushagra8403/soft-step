@@ -205,7 +205,7 @@
       for(var s=0;s<sub;s++)cards.forEach(function(c){c.v+=(-c.w*c.w*(c.a-target)-2*c.z*c.w*c.v)*step;c.a+=c.v*step;});
       cards.forEach(function(c){if(!visibleCards.has(c))return;if(Math.abs(c.a)>.03||Math.abs(c.v)>.05){settled=false;var rot=c.a.toFixed(2)+"deg";if(c.el.style.rotate!==rot){c.el.style.rotate=rot;c.el.style.willChange="rotate";}}else{c.a=0;c.v=0;c.el.style.removeProperty("rotate");c.el.style.removeProperty("will-change");}});
       lastFrame=now;
-      if(settled&&now-lastTime>150){clear();return;}
+      if(settled&&now-lastTime>150){cards.forEach(function(c){c.a=0;c.v=0;c.el.style.removeProperty("rotate");c.el.style.removeProperty("will-change");});vel=target=0;raf=0;return;}
       raf=requestAnimationFrame(frame);
     }
     function refresh(){if(!PHONE.matches||RM.matches){clear();if(ioNear)ioNear.disconnect();list.removeEventListener("scroll",scroll);return;}clear();start();}
@@ -277,7 +277,7 @@
       else if(allAnims.length)finishAll();
     });
     on("picked",function(el,k){if(k==="zig"||k==="sol"||k==="chen"){if(allAnims.length)finishAll();}});
-    listenMq(RM,function(){if(RM.matches){finishAll();if(io)io.disconnect();ready=false;}});
+    listenMq(RM,function(){if(RM.matches){finishAll();}else if(planVisible&&!firstPlayed){firstPlayed=true;make();play(false);}});
   })();
 
   /* W4 — the mat compresses beneath a soft, water-like footprint. */
