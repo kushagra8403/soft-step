@@ -527,6 +527,32 @@ async function checkout(page, { addSel, expectTotal, label }) {
       eq(errs(log), [], L + ' console clean'); await ctx.close();
     }
 
+    /* ---------- 7b. Field foreground contrast for built-in and owner-added colours ---------- */
+    {
+      const L = 'field foreground AA';
+      const { ctx, page, log } = await open(b, s);
+      const values = await page.evaluate(() => {
+        function lum(h) {
+          const x = h.slice(1);
+          const rgb = [0, 2, 4].map(i => parseInt(x.slice(i, i + 2), 16) / 255);
+          return rgb.map(v => v <= .04045 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4)).reduce((a, v, i) => a + v * [.2126, .7152, .0722][i], 0);
+        }
+        function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); }
+        const builtIn = [...document.querySelectorAll('[data-bg]')].map(el => el.dataset.bg.toUpperCase());
+        const colours = [...new Set(builtIn.concat(['#757575', '#767676', '#777777', '#808080', '#969696', '#000000', '#FFFFFF']))];
+        return colours.map(bg => {
+          const fg = SS.fieldForeground(bg);
+          return { bg, fg, ratio: ratio(fg, bg) };
+        });
+      });
+      ok(values.length >= 26, L + ': audits all 26 built-in swatches plus custom midpoint shades', values.length);
+      eq(values.filter(x => x.ratio < 4.5).map(x => ({ bg: x.bg, fg: x.fg, ratio: +x.ratio.toFixed(2) })), [], L + ': every painted field label reaches 4.5:1');
+      eq(values.find(x => x.bg === '#808080').fg, '#000000', L + ': mid-grey custom colour chooses black text');
+      eq(values.find(x => x.bg === '#757575').fg, '#FFFFFF', L + ': darker edge grey chooses white text');
+      eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
     /* ---------- 8. Checkout history, saved details, duplicate guard and WhatsApp confirmation ---------- */
     {
       const L = 'checkout safeguards';
