@@ -63,7 +63,7 @@
   /* ---------- sheen radius (effects 3 and 4 share it): matches the webp's transparent corners ---------- */
   try {
     (function () {
-      var items = $$$(".sheen").map(function (s) { return { s: s, img: s.parentNode && $("img", s.parentNode) }; }).filter(function (o) { return o.img; });
+      var items = $$(".sheen").map(function (s) { return { s: s, img: s.parentNode && $("img", s.parentNode) }; }).filter(function (o) { return o.img; });
       function upd() { items.forEach(function (o) { var w = o.img.clientWidth; if (w) o.s.style.setProperty("--rr", (w * 0.019).toFixed(1) + "px"); }); }
       upd();
       items.forEach(function (o) { o.img.addEventListener("load", upd); });
@@ -283,7 +283,7 @@
         /* 7. lead and name */
         [lead, nameEl].forEach(function (el) { if (el) track(el.animate([{ opacity: 0.3 }, { opacity: 1 }], { duration: 300, easing: E.out })); });
         /* 6, prepared now: the new words wait below their line (paused at t=0, fill backwards) */
-        var inA = vis ? $$$(".w > span", vis).map(function (s, i) {
+        var inA = vis ? $$(".w > span", vis).map(function (s, i) {
           var a = track(s.animate([{ transform: "translateY(105%)" }, { transform: "translateY(0)" }], { duration: 700, delay: i * 50, easing: E.out, fill: "backwards" }));
           a.pause(); return a;
         }) : [];
@@ -292,7 +292,7 @@
         var outLast = null;
         if (outNode && vis && vis.parentNode === h1) {
           h1.replaceChild(outNode, vis); attached = outNode;
-          $$$(".w > span", outNode).forEach(function (s, i) {
+          $$(".w > span", outNode).forEach(function (s, i) {
             outLast = track(s.animate([{ transform: "translateY(0)" }, { transform: "translateY(-105%)" }], { duration: 300, delay: i * 20, easing: E.inn, fill: "forwards" }));
           });
         }
@@ -341,7 +341,7 @@
         } catch (e) {}
         var my = ++gen;
         killAll();
-        $$$(".hcopy > *", hero).forEach(function (el, i) {
+        $$(".hcopy > *", hero).forEach(function (el, i) {
           track(el.animate([{ transform: "translateY(18px)" }, { transform: "none" }], { duration: 700, delay: i * 70, easing: E.out, fill: "backwards" }));
         });
         var go = function () {
@@ -450,7 +450,7 @@
       var lamp = hero && $(".lamp", hero), tilt = $("#h-rug .tilt"), hImg = $("#h-img"), hSh = $("#h-rug .sheen i");
       if (!lamp || !tilt || !hImg) return;
       var S = { lx: 0, ly: 0, tlx: 0, tly: 0, rx: 0, ry: 0, trx: 0, tr: 0, sx: 40, tsx: 40 }, wrote = {};
-      var cards = $$$(".prod .pic").map(function (p) { return { p: p, img: $(".plane img", p), i: $(".sheen i", p), x: 40, t: 40, w: null }; })
+      var cards = $$(".prod .pic").map(function (p) { return { p: p, img: $(".plane img", p), i: $(".sheen i", p), x: 40, t: 40, w: null }; })
         .filter(function (c) { return c.img && c.i; });
       var raf = 0, heroOn = true, moving = false;
       function ok() { return FINE.matches && !RM.matches; }
@@ -672,7 +672,7 @@
 
   /* ---------- reduced-motion preference changes at runtime ---------- */
   listen(RM, function () {
-    try { $$$(".prod, #hero").forEach(function (el) { if (el._dye) el._dye.finish(); }); } catch (e) {}
+    try { $$(".prod, #hero").forEach(function (el) { if (el._dye) el._dye.finish(); }); } catch (e) {}
     try { if (heroFx) heroFx.sync(); } catch (e) {}
     try { pointerReset(); } catch (e) {}
   });
