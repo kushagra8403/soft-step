@@ -1458,7 +1458,7 @@ var KS=["zig","sol","chen"],HEX=/^#[0-9a-f]{6}$/i,AID=/^[0-9a-f]{32}$/;
 function cstr(v,max){return typeof v==="string"&&v.trim()&&v.length<=max?v.trim():null}
 function catDefault(){var r={};KS.forEach(function(k){var d=PDEF[k];r[k]={name:d.name,
   sizes:d.sizes.map(function(z){return {id:z[0],dims:z[1],weight:z[2],price:z[3],stock:"in"}}),
-  colours:$$$( '.prod[data-k="'+k+'"] [data-n]').map(function(b){return {n:b.dataset.n,bg:b.dataset.bg,stock:"in",hidden:false,photo:null,thumb:null,added:false}})}});
+  colours:$$$$( '.prod[data-k="'+k+'"] [data-n]').map(function(b){return {n:b.dataset.n,bg:b.dataset.bg,stock:"in",hidden:false,photo:null,thumb:null,added:false}})}});
   return {v:1,updatedAt:"",notice:{on:false,en:"",gu:"",hi:""},ranges:r}}
 /* Validate field by field; unknown fields are kept so the editor can round-trip them. */
 function catNorm(raw,def){
@@ -1529,7 +1529,7 @@ applyCatalog();
 function canBuyAny(k){return KS.indexOf(k)>=0&&STK[k]&&Object.keys(STK[k].col).length>0}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove("on")},1800)}
-function swatch(k,colour){return $$$( '.prod[data-k="'+k+'"] [data-n]').filter(function(x){return x.dataset.n===colour})[0]}
+function swatch(k,colour){return $$$$( '.prod[data-k="'+k+'"] [data-n]').filter(function(x){return x.dataset.n===colour})[0]}
 function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:$('.prod[data-k="chen"] .pic img').src}
 /* Text colour on a dyed panel: the house picks for the known light colours, else by luminance (owner-added colours). */
 function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FBF7F0";
@@ -1538,7 +1538,7 @@ function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=
 function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FBF7F0"?"#1B1D2B":"#FBF7F0";el.dataset.tone=fg==="#FBF7F0"?"dark":"light";
   if(from&&fx("dye",el,hex,fg,on,from))return;
   el.style.setProperty("--f",hex);el.style.setProperty("--fg",fg);el.style.setProperty("--on",on)}
-function radio(group,btn){$$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
+function radio(group,btn){$$$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
 function arrows(group,cb){group.addEventListener("keydown",function(e){var d={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key];if(!d)return;var bs=$$('[role="radio"]',group),i=bs.indexOf(document.activeElement);if(i<0)return;e.preventDefault();var n=bs[(i+d+bs.length)%bs.length];n.focus();cb(n)})}
 function sizeButtons(box,p,k){box.innerHTML=p.sizes.map(function(z){return '<button type="button" class="sz" role="radio" aria-label="'+z[0]+', '+z[1]+'" data-d="'+(/half round/.test(z[1])?"½ round":z[1].replace(" in",""))+'">'+z[0]+'</button>'}).join("");var bs=$$('[role="radio"]',box);if(k)markSizes(bs,k);return bs}
 /* A size the owner marked out of stock stays choosable (so the visitor can ask about it) but looks disabled and says so. */
@@ -1550,7 +1550,7 @@ function addToCart(k,sIdx,colour,q){var p=P[k],z=p&&p.sizes[sIdx];if(!z||!canBuy
   if(it)it.q+=q;else cart.push({id:id,k:k,size:z[0]+" "+z[1],colour:colour,p:z[3],q:q});render();toast("Added "+q+" × "+p.name+" ("+z[0]+")");return true}
 
 /* Product cards */
-$$$(".prod").forEach(function(el){
+$$$$(".prod").forEach(function(el){
   var k=el.dataset.k,p=P[k],s={c:0,s:0,q:1};
   var cg=$(".swatches,.chips",el),cbs=cg?$$('[role="radio"]',cg):[];
   if(!p||!cbs.length){el.hidden=true;return}
@@ -1563,7 +1563,7 @@ $$$(".prod").forEach(function(el){
   cbs.forEach(function(b){if(b.classList.contains("sw")){var l=stockLabel(b.dataset.n,stock(k,b.dataset.n));b.setAttribute("aria-label",l);b.title=l}b.onclick=function(){pickC(b)}});
   sbs.forEach(function(b){b.onclick=function(){pickS(b)}});
   arrows(cg,pickC);arrows(sbox,pickS);
-  $$$("[data-q]",el).forEach(function(b){b.onclick=function(){s.q=Math.max(1,Math.min(20,s.q+ +b.dataset.q));upd()}});
+  $$$$("[data-q]",el).forEach(function(b){b.onclick=function(){s.q=Math.max(1,Math.min(20,s.q+ +b.dataset.q));upd()}});
   add.onclick=function(){var b=cbs[s.c],c=b.dataset.n;if(!canBuy(k,c,s.s)){openAsk(k,c,s.s);return}if(addToCart(k,s.s,c,s.q))fx("fly",el,k,b);s.q=1;upd()};
   pickers[k]=function(letter){pickS(sbs[SIZEIDX[letter]])};
   pickC(cbs.filter(function(b){return b.dataset.n===el.getAttribute("data-first")})[0]||cbs[0]);pickS(sbs.filter(function(b,i){return STK[k].sizes[i]!=="out"})[0]||sbs[0]);
@@ -1600,7 +1600,7 @@ function show(i,instant,from){
   if(from&&hero.contains(document.activeElement))$("#h-live").textContent="Rug "+(hi+1)+" of "+SLIDES.length+": "+P[sl.k].name+" in "+sl.c+", "+inr(P[sl.k].sizes[hs][3]);
   markSizes(hsb,sl.k);hsSet(hs);
   $("#h-nextimg").src=$("img",swatch(nx.k,nx.c)).src;$("#h-nextname").textContent="Next: "+nx.c.split(" &")[0].split(" & ")[0];
-  $$("#dots span").forEach(function(d,j){d.classList.toggle("on",j===hi)});
+  $$$("#dots span").forEach(function(d,j){d.classList.toggle("on",j===hi)});
   var mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.content=b.dataset.bg;
   if(!instant&&fx("slide",{sl:sl,b:b,from:from}))return;
   if(instant||matchMedia("(prefers-reduced-motion: reduce)").matches)swap();else{rug.classList.add("out");setTimeout(swap,280)}
@@ -1628,7 +1628,7 @@ try{(function(){
   if(bb&&bb.firstChild&&bb.firstChild.nodeType===3){var t="New order SS-4K2Q9P – Soft Steps\n\n• "+P.sol.name+", "+L[0]+" "+L[1]+" (Rust) × 1 = "+inr(L[3])+"\n• "+P.zig.name+", "+M[0]+" "+M[1]+" (Navy & cream) × 2 = "+inr(M[3]*2)+"\n\nTotal: "+inr(L[3]+M[3]*2)+" (free delivery in Vadodara)";
     if(bb.firstChild.nodeValue!==t)bb.firstChild.nodeValue=t}
   var wz=P.zig.sizes[0][2],ws=P.sol.sizes[3][2];
-  $$$(".specs dd").forEach(function(dd){if(wz&&ws&&/ for a zigzag M, up to /.test(dd.textContent))setT(dd,wz+" for a zigzag M, up to "+ws+" for a solid XL")});
+  $$$$(".specs dd").forEach(function(dd){if(wz&&ws&&/ for a zigzag M, up to /.test(dd.textContent))setT(dd,wz+" for a zigzag M, up to "+ws+" for a solid XL")});
 })()}catch(e){}
 
 /* Shop notice: a slim bar above the hero in the visitor's language (falls back to English), set as text only.
@@ -1669,8 +1669,8 @@ function drawFit(){
 var spots=$("#spots"),fsz=$("#fsizes");
 function pickSpot(b){fit.spot=b.dataset.spot;radio(spots,b);drawFit()}
 function pickFS(b){fit.size=b.dataset.fs;radio(fsz,b);drawFit()}
-$$('[role="radio"]',spots).forEach(function(b){b.onclick=function(){pickSpot(b)}});
-$$('[role="radio"]',fsz).forEach(function(b){b.onclick=function(){pickFS(b)}});
+$$$('[role="radio"]',spots).forEach(function(b){b.onclick=function(){pickSpot(b)}});
+$$$('[role="radio"]',fsz).forEach(function(b){b.onclick=function(){pickFS(b)}});
 arrows(spots,pickSpot);arrows(fsz,pickFS);
 $("#fitgo").onclick=function(){Object.keys(pickers).forEach(function(k){pickers[k](fit.size)});hsSet(SIZEIDX[fit.size])};
 pickSpot($('[data-spot="main"]'));pickFS($('[data-fs="M"]'));
@@ -1720,11 +1720,11 @@ function collectDetails(){return {name:$("#o-name").value,phone:$("#o-ph").value
 function applyDetails(d){if(!d||typeof d!=="object")return;[["#o-name","name",100],["#o-ph","phone",20],["#o-ad","address",500],["#o-ct","city",100],["#o-pin","pin",6],["#o-email","email",254],["#o-gift","gift",200]].forEach(function(a){if(typeof d[a[1]]==="string")$(a[0]).value=d[a[1]].slice(0,a[2])});$("#o-gift-on").checked=!!d.giftOn;if(d.delivery==="out"||d.delivery==="vad"){var r=$('input[name="dl"][value="'+d.delivery+'"]');if(r)r.checked=true}try{pinInput.dispatchEvent(new Event("input",{bubbles:true}))}catch(e){}}
 function saveDetailsDraft(){var d=collectDetails(),empty=!d.name&&!d.phone&&!d.address&&!d.city&&!d.pin&&!d.email&&!d.gift&&!d.giftOn;try{if(empty)localStorage.removeItem("ss_details2");else localStorage.setItem("ss_details2",JSON.stringify(d))}catch(e){}}
 function clearDetailsDraft(){try{localStorage.removeItem("ss_details2")}catch(e){}}
-["#o-name","#o-ph","#o-ad","#o-ct","#o-pin","#o-email","#o-gift","#o-gift-on"].forEach(function(sel){$(sel).addEventListener("input",saveDetailsDraft);$(sel).addEventListener("change",saveDetailsDraft)});$$("input[name=dl]").forEach(function(r){r.addEventListener("change",saveDetailsDraft)});
+["#o-name","#o-ph","#o-ad","#o-ct","#o-pin","#o-email","#o-gift","#o-gift-on"].forEach(function(sel){$(sel).addEventListener("input",saveDetailsDraft);$(sel).addEventListener("change",saveDetailsDraft)});$$$("input[name=dl]").forEach(function(r){r.addEventListener("change",saveDetailsDraft)});
 function summary(){$("#lines").innerHTML=cart.map(function(x){return '<div class="sl"><span>'+esc(P[x.k].name)+', '+esc(x.size.split(" ")[0])+' · '+esc(x.colour)+' × '+x.q+'</span><b>'+inr(x.p*x.q)+'</b></div>'}).join("")+'<div class="sl"><span>Delivery</span><b>'+(dl()==="out"?"Confirmed on call":"Free")+'</b></div>';$("#tot").textContent=inr(total())+(dl()==="out"?" + delivery":"")}
 $("#go").onclick=function(){if(!cart.length||!cart.every(lineOK))return;summary();$("#oerr").textContent="";step("det")};
 $("#back").onclick=function(){step("cart")};
-$$("input[name=dl]").forEach(function(r){r.onchange=summary});
+$$$("input[name=dl]").forEach(function(r){r.onchange=summary});
 var pinInput=$("#o-pin");pinInput.addEventListener("input",function(){var v=pinInput.value.replace(/\D/g,"").slice(0,6);if(v!==pinInput.value)pinInput.value=v});pinInput.addEventListener("paste",function(e){var v="";try{v=(e.clipboardData||window.clipboardData).getData("text")}catch(x){}if(!v)return;e.preventDefault();pinInput.value=v.replace(/\D/g,"").slice(0,6);pinInput.dispatchEvent(new Event("input",{bubbles:true}))});
 var fastActionAt=0;document.addEventListener("click",function(e){var el=e.target.closest&&e.target.closest("[data-add],#go,#order-btn,#v-cart button[data-i]");if(!el)return;var now=Date.now();if(now-fastActionAt<350){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();return}fastActionAt=now},true);
 $("#order-btn").onclick=function(){
