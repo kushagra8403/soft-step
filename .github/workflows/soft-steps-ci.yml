@@ -77,7 +77,16 @@ jobs:
         run: node work-admin/tests/integ.cjs
       - name: Build and verify deployable Netlify preview
         run: |
-          python -m pip install --quiet pillow
+          python - <<'PY'
+          import tomllib
+          with open("netlify.toml", "rb") as fh:
+              config = tomllib.load(fh)
+          build = config.get("build", {})
+          assert build.get("publish") == "dist", "Netlify must publish the generated dist folder"
+          assert "build_netlify.py work-admin/site dist" in build.get("command", ""), "Netlify must export the working site"
+          assert config.get("build", {}).get("environment", {}).get("PYTHON_VERSION") == "3.12", "Pin the Python build version"
+          PY
+          python -m pip install --quiet --disable-pip-version-check -r requirements.txt
           python build_netlify.py work-admin/site /tmp/softsteps-dist
           node - <<'NODE'
           const fs = require('fs');
