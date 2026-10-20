@@ -536,7 +536,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
       await page.fill('#o-ph', '9876543210');
       await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
       await page.fill('#o-ct', 'Vadodara');
-      await page.fill('#o-pin', '390 007');
+      await page.evaluate(() => { const i = document.querySelector('#o-pin'), d = new DataTransfer(); d.setData('text/plain', '390 007'); i.focus(); i.dispatchEvent(new ClipboardEvent('paste', { clipboardData: d, bubbles: true, cancelable: true })); });
       eq(await page.locator('#o-pin').inputValue(), '390007', L + ': pasted PIN is normalized');
       await page.waitForTimeout(100);
       await page.reload({ waitUntil: 'load' });
