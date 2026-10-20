@@ -5,9 +5,9 @@
 //     everywhere, in English and Gujarati; (c) the owner loader shows only for editors.
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
-const SP = '/tmp/claude-0/-home-user/b3b2df08-4b5f-5d42-b6f7-07d0365cb062/scratchpad';
+const SP = path.resolve(__dirname, '../..');
 const SITE = path.resolve(process.argv[2] || SP + '/work/admin/site');
-const { prep } = require(SP + '/qa.cjs'); const { serve } = require(SP + '/audit/serve.cjs');
+const { prep } = require(path.join(SP, 'qa.cjs')); const { serve } = require(path.join(SP, 'audit/serve.cjs'));
 const SRC = fs.readFileSync(SITE + '/softsteps.html', 'utf8');
 const RE = /<!--ss-catalog:start--><script type="application\/json" id="ss-catalog">([\s\S]*?)<\/script><!--ss-catalog:end-->/;
 const SKEL = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style></style></head><body>\n';
@@ -117,7 +117,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
 
 (async () => {
   const s = await serve(SITE);
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  const b = await chromium.launch();
   const T0 = Date.now();
   try {
     /* ---------- 0. The block itself ---------- */
@@ -128,7 +128,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ok(/\n<!--ss-catalog:start--><script type="application\/json" id="ss-catalog">[^\n]*<\/script><!--ss-catalog:end-->\n/.test(SRC), 'block on its own line, exact form');
       ok(!/</.test(SRC.match(RE)[1]), 'no raw "<" inside the JSON');
       // today's data, regenerated from the pre-catalog page
-      const orig = fs.readFileSync(SP + '/next/softsteps.html', 'utf8');
+      const orig = fs.readFileSync(path.join(SP, 'site-live-v30/softsteps.html'), 'utf8');
       const P = eval('({' + orig.match(/var P=\{\n([\s\S]*?)\n\};/)[1] + '})');
       const dec = x => x.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
       const want = { v: 1, updatedAt: '', notice: { on: false, en: '', gu: '', hi: '' }, ranges: {} };
