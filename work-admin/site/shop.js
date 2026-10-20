@@ -65,7 +65,7 @@
       "\nSize " + z[0] + " (" + z[1] + ") · " + inr(z[3]) + "\n" + SHARE_URL;
   }
   safe(function () {
-    $$$(".prod").forEach(function (el) {
+    $$(".prod").forEach(function (el) {
       var k = el.dataset.k, row = $(".trow", el), heart = row && $("[data-save]", row);
       if (!P[k] || !row || !heart) return;
       var a = doc.createElement("a");
@@ -129,7 +129,7 @@
       img.alt = P[st.k].name + " in " + b.dataset.n;
       img.src = small; st.src = big;
       if (big !== small) { var t = new Image(); t.onload = function () { if (st.src === big) img.src = big; }; t.src = big; }
-      $$$(".zsw", row).forEach(function (x, j) { x.setAttribute("aria-current", j === i ? "true" : "false"); });
+      $$(".zsw", row).forEach(function (x, j) { x.setAttribute("aria-current", j === i ? "true" : "false"); });
       /* Centre the chosen swatch by scrolling the row only (scrollIntoView would also shift the dialog). */
       var cur = $$(".zsw", row)[i]; if (cur) row.scrollLeft = cur.offsetLeft - row.clientWidth / 2 + cur.offsetWidth / 2;
       if (dir && !RM.matches && img.animate) img.animate([{ opacity: 0, transform: "translateX(" + (dir * 40) + "px)" }, { opacity: 1, transform: "none" }], { duration: 260, easing: "cubic-bezier(.22,.8,.2,1)" });
@@ -236,7 +236,7 @@
     stage.addEventListener("click", function (e) { if (e.target === stage && !moved) close(); });
 
     /* Openers: the rug photo on each Zigzag/Solid card, and the hero rug (a tap, not a drag). */
-    $$$(".prod").forEach(function (card) {
+    $$(".prod").forEach(function (card) {
       var k = card.dataset.k, im = $(".pic .plane img", card);
       if (!im || k === "chen") return;
       im.addEventListener("click", function () { open(k, curColour(card)); });
@@ -263,7 +263,7 @@
       return name;
     }
     var names = {};
-    $$$(".prod").forEach(function (card) {
+    $$(".prod").forEach(function (card) {
       var k = card.dataset.k, pic = $(".pic", card);
       if (!pic || !P[k] || !$(".pic .plane img", card)) return;
       names[k] = viewButton(pic, function () { return "View " + P[k].name + " in " + curColour(card) + " larger"; }, function (b) { open(k, curColour(card), b); });
