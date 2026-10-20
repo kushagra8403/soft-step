@@ -106,7 +106,9 @@ async function checkout(page, { addSel, expectTotal, label }) {
   const sum = await page.evaluate(() => document.querySelector('#tot').textContent);
   await page.fill('#o-name', 'Test Buyer'); await page.fill('#o-ph', '9876543210'); await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
   await page.fill('#o-ct', 'Vadodara'); await page.fill('#o-pin', '390007');
-  await page.click('#order-btn', { timeout: 5000 }); await page.waitForSelector('#v-pay:not([hidden])', { timeout: 5000 });
+  await page.click('#order-btn', { timeout: 5000 }); await page.waitForTimeout(100);
+  const state = await page.evaluate(() => ({ pay: !document.querySelector('#v-pay').hidden, error: document.querySelector('#oerr').textContent, invalid: [...document.querySelectorAll('[aria-invalid="true"]')].map(e => e.id), delivery: document.querySelector('input[name="dl"]:checked')?.value, pin: document.querySelector('#o-pin').value, cart: [...document.querySelectorAll('#v-cart .line')].length }));
+  if (!state.pay) throw new Error('Checkout did not advance to payment: ' + JSON.stringify(state));
   const r = await page.evaluate(() => ({ wa: decodeURIComponent((document.querySelector('#sendwa').href.split('text=')[1]) || ''), upi: document.querySelector('#upil').href, amt: document.querySelector('#payamt').textContent }));
   const n = expectTotal.toLocaleString('en-IN');
   ok(sum.startsWith('₹' + n), label + ': details total ₹' + n, sum);
