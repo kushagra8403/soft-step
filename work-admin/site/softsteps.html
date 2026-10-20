@@ -927,6 +927,243 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
 .adm-deny p{flex:1;min-width:0;padding:10px 0}
 .adm-deny .x{flex:none;background:rgba(251,247,240,.15);color:var(--chalk)}
 .hero.noslides .rugwrap,.hero.noslides .side,.hero.noslides .ctas,.hero.noslides .arrows,.hero.noslides .bend{display:none}
+
+/* Kora Quiet palette and component overrides. Source: design2/quiet.css. */
+/* ==========================================================================
+   "Kora & Kattha": quiet warm minimal palette override (preview, CSS only)
+   Gallery logic: the page is warm paper and stone, the UI has ONE deep anchor
+   (kattha espresso), and the rugs are the only saturated colour on the page.
+   ========================================================================== */
+:root{
+  --kora:#F5F3EE;        /* page ground: warm white paper (OKLCH C .007) */
+  --kora-2:#E5DFD5;      /* stone: plinths and inset panels (order, made, pair plinth, tags) */
+  --chalk:#FDFCFA;       /* cards, drawer, dialogs, inputs; text on dark. The only white. */
+  --kajal:#1F1B18;       /* ink: all text on light */
+  --mitti:#5F5750;       /* secondary text (>=5.3:1 on every light ground incl. stone) */
+  --sut:#E0D9CE;         /* hairlines, decorative only */
+  --edge:#7F746A;        /* control boundaries: >=3.4:1 on chalk, kora AND stone */
+  --neel:#2A2420;        /* ANCHOR, kattha espresso: filled buttons, selected, links, #fit, cart bar, toast */
+  --neel-2:#3B332D;      /* anchor hover (lift) */
+  --night:#1F1B18;       /* deepest surface = ink: footer, try-on darkroom */
+  --mist:#C9BFB3;        /* secondary text on dark */
+  --haldi:#D8BE94;       /* pital (brass): accent on dark ONLY (italic, active, focus on dark, footer dot) */
+  --haldi-deep:#735F50;  /* taupe: italic H2 accent, numerals, eyebrow on light */
+  --kumkum:#9E2E1E;      /* errors only */
+  --kumkum-2:#F0A291;    /* error text on dark */
+  --wa:#1A7349;--wa-2:#155F3C; /* WhatsApp only */
+  --ph:#756B62;          /* placeholder */
+  --glass-d:rgba(253,252,250,.14);
+  --ring-d:rgba(253,252,250,.55);
+  --wash:rgba(31,27,24,.05);
+  --sh-card:0 0 0 1px var(--sut),0 1px 2px rgba(31,27,24,.04),0 18px 40px -28px rgba(31,27,24,.26);
+  --sh-hero:0 40px 80px -48px rgba(31,27,24,.5);
+  --sh-float:0 18px 44px -18px rgba(31,27,24,.42);
+}
+
+/* ---------- Type accents ---------- */
+.h2 em{color:var(--haldi-deep)}
+.fit .h2 em{color:var(--haldi)}
+
+/* ---------- Buttons: anchor fill, bare chevron, rings for secondary ---------- */
+.pill:has(.chev){padding:0 20px 0 24px}
+.pill .chev,.field .pill .chev,.fit .pill .chev,.fit .pill.ringp .chev,.pair .pill .chev,.pill.sec .chev{width:auto;height:auto;background:none;color:inherit;font-size:20px;padding:0 0 2px}
+.pill:hover{background:var(--neel-2)}
+.pill.quiet{background:transparent;color:var(--kajal);box-shadow:inset 0 0 0 1px var(--edge)}
+.pill.quiet:hover{background:var(--kora-2)}
+.pill.wa{color:var(--chalk)}
+.pill.wa:hover{background:var(--wa-2)}
+.pill.sec:hover{background:var(--wash)}
+.copy{background:transparent;box-shadow:inset 0 0 0 1px var(--edge)}
+.copy:hover{background:var(--kora-2)}
+.stepper{background:transparent;box-shadow:inset 0 0 0 1px var(--edge)}
+.chip:hover,.sz:hover{background:var(--wash)}
+.badge{background:var(--neel);color:var(--chalk)}
+.field .badge{background:var(--fg);color:var(--on)}
+.heart[aria-pressed="true"] svg{fill:var(--neel);stroke:var(--neel)}
+.field .heart[aria-pressed="true"] svg{fill:var(--fg);stroke:var(--fg)}
+input::placeholder,textarea::placeholder{color:var(--ph)}
+
+/* ---------- Header ---------- */
+.hdr{background:rgba(253,252,250,.92)}
+.hbtn{background:transparent}
+.hbtn:hover{background:var(--kora-2)}
+
+/* ---------- Painted fields: quieter lamp, warm shadow, hairline edge for light rugs ---------- */
+.hero{box-shadow:var(--sh-hero)}
+.hero,.pic.field{outline:1px solid rgba(31,27,24,.07);outline-offset:-1px}
+.lamp{background:radial-gradient(closest-side,rgba(255,246,232,.15),transparent)}
+.field::before{background:radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.2),transparent 60%)}
+.pic.field::before{background:radial-gradient(closest-side at 62% 36%,rgba(255,246,232,.13),transparent),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.2),transparent 60%)}
+.pic.field[data-tone=light]::before{background:radial-gradient(closest-side at 62% 36%,rgba(255,246,232,.13),transparent)}
+.field .sz[data-d]::after{opacity:1}                      /* fixes 4.03 / 4.32 on Aqua and Mustard & tan */
+/* phone arrows sit over the photo: frosted field-tone discs with a ring, legible on every rug (iter 2) */
+@media(max-width:860px){.arrows .circle{background:var(--f);background:color-mix(in srgb,var(--f) 80%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px var(--ring35),0 6px 16px -8px rgba(31,27,24,.45)}}
+
+/* ---------- Range strip + promise ---------- */
+.ranges a{box-shadow:var(--sh-card)}
+@media(hover:hover){.ranges a:hover{box-shadow:0 0 0 1.5px var(--neel),0 18px 40px -28px rgba(31,27,24,.26)}}
+.promise{border-top:0;border-bottom:0;padding-block:8px 0}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--sut);border-bottom:1px solid var(--sut)}
+.facts li{padding:18px 20px;font:500 15px/1.45 var(--text);color:var(--kajal);border-left:1px solid var(--sut)}
+.facts li:first-child{border-left:0;padding-left:0}
+.facts .ic{display:none}
+.facts .sep{display:none}
+@media(max-width:1180px){
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts li{padding:14px 12px 14px 14px}
+  .facts li:nth-child(odd){border-left:0;padding-left:0}
+  .facts li:nth-child(n+3){border-top:1px solid var(--sut)}
+}
+@media(max-width:600px){
+  .facts{grid-template-columns:1fr}
+  .facts li,.facts li:nth-child(odd){padding:12px 0;border-left:0;font-size:15px}
+  .facts li+li{border-top:1px solid var(--sut)}
+}
+
+/* ---------- Colour index: rugs only; hearts appear on hover/focus or when saved ---------- */
+.tile .bar{display:none}
+.tile .heart::before{background:rgba(253,252,250,.94);box-shadow:0 1px 3px rgba(31,27,24,.16)}
+@media(hover:hover) and (pointer:fine){
+  .tile .heart[aria-pressed="false"]{opacity:0;transition:opacity .16s}
+  .tile:hover .heart,.tile:focus-within .heart{opacity:1}
+}
+
+/* ---------- Shop cards: chalk card with hairline + soft lift ---------- */
+.prod,.contact{box-shadow:var(--sh-card)}
+.tag{background:var(--kora-2);color:var(--kajal)}
+.sw[aria-checked="true"]{box-shadow:0 0 0 3px var(--chalk),0 0 0 4.5px var(--neel)}
+.chen-cap,.chen-cap .link{color:var(--fg)}
+.chen-frame{box-shadow:0 0 0 1px rgba(31,27,24,.08),0 22px 40px -24px rgba(0,0,0,.45)}
+.line .stepper{background:var(--chalk)}             /* fixes 8 of 10 Chenille failures */
+
+/* ---------- Pairs: stone plinth + quiet two-colour chip instead of the duotone split ---------- */
+.pair{box-shadow:var(--sh-card)}
+.pair .pv{background:linear-gradient(90deg,var(--a) 0 50%,var(--b) 50% 100%) left bottom/100% 4px no-repeat,var(--kora-2)}
+.pair .pv>span{box-shadow:0 0 0 3px var(--chalk),0 12px 24px -10px rgba(31,27,24,.35)}
+.pair .pill{background:transparent;color:var(--kajal);box-shadow:inset 0 0 0 1.5px var(--neel)}
+.pair .pill:hover{background:var(--neel);color:var(--chalk)}
+.pair .pill.done{background:var(--neel);color:var(--chalk)}
+
+/* ---------- Fit: the one dark room (kattha espresso), brass accents ---------- */
+.fit{--f:var(--neel);background:var(--neel)}
+.fit::before{background:radial-gradient(60% 70% at 85% 8%,rgba(255,244,228,.06),transparent 70%),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.22),transparent 60%)}
+.fit .chip,.fit .sz,.btn-ring,.fit .pill.ringp{box-shadow:inset 0 0 0 1.5px var(--ring-d)}
+.fit .chip:hover,.fit .sz:hover,.btn-ring:hover,.fit .pill.ringp:hover{background:rgba(253,252,250,.08)}
+.fit .chip[aria-checked="true"],.fit .sz[aria-checked="true"],.btn-ring[aria-pressed="true"]{background:var(--chalk);color:var(--neel);box-shadow:none}
+.fit .pill{background:var(--chalk);color:var(--neel)}
+.fit .pill:hover{background:var(--kora)}
+.fit .pill.ringp{background:transparent;color:var(--chalk)}
+.plan{background:var(--night);box-shadow:0 0 0 1px rgba(253,252,250,.16),0 30px 60px -30px rgba(0,0,0,.55)}
+.plan .wall{fill:var(--edge);stroke:rgba(253,252,250,.35)}
+.plan .sill{fill:var(--kora-2)}
+.plan .mat{stroke:rgba(31,27,24,.5);stroke-width:.25}
+.plan .cmpt{stroke:rgba(31,27,24,.6)}
+
+/* ---------- Made: stone plinth, layers that read ---------- */
+.stackpanel{background:var(--kora-2);box-shadow:none}
+.ly-latex{background:radial-gradient(circle,#A8977C 1.4px,transparent 1.8px) 0 0/12px 12px,#C8B89C}
+.ly-floor{background:linear-gradient(rgba(31,27,24,.13) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(31,27,24,.13) 1px,transparent 1px) 0 0/24px 24px,var(--chalk)}
+.specs dt{color:var(--mitti)}
+
+/* ---------- Order: stone panel, taupe numerals, espresso phone ---------- */
+.order{background:var(--kora-2)}
+.steps li::before{background:var(--kora-2);color:var(--haldi-deep)}
+.thread path{stroke:var(--edge)}
+.chat{background:var(--neel)}
+.chat .who{color:var(--chalk)}
+.bubble,.chat .day{background:var(--kora-2)}
+
+/* ---------- FAQ + contact ---------- */
+.qa summary::after{box-shadow:inset 0 0 0 1px var(--edge);color:var(--kajal)}
+.medal{box-shadow:0 0 0 1px var(--sut)}
+
+/* ---------- Footer: ink, brass dot ---------- */
+#foot{--f:var(--night)!important}
+.foot .name i{background:var(--haldi)}
+/* phone: the page ends in ink; no beige strip under the footer, the cart bar floats over ink (iter 2) */
+@media(max-width:860px){
+  #foot#foot.foot{margin-bottom:0;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  body:has(#cbar:not([hidden])) #foot#foot.foot,body.docked #foot#foot.foot{padding-bottom:calc(28px + 88px + env(safe-area-inset-bottom,0px))}
+}
+
+/* ---------- Cart bar, dock, toast, fly ---------- */
+.cbar,.dock{background:var(--neel);box-shadow:inset 0 0 0 1px rgba(253,252,250,.22),var(--sh-float)}
+.toast{background:var(--neel);color:var(--chalk);border-top:0;box-shadow:inset 0 0 0 1px rgba(253,252,250,.14),var(--sh-float)}
+#flylayer path{stroke:var(--neel)}
+
+/* ---------- Drawer: all light, one anchor ---------- */
+.scrim{background:rgba(31,27,24,.45)}
+.dtop{--focus:var(--neel);background:var(--chalk);color:var(--kajal);box-shadow:inset 0 -1px 0 var(--sut)}
+.dh h2{color:var(--kajal)}
+.dtop .x{background:var(--kora-2);color:var(--kajal)}
+.dtop .x:hover{background:var(--sut)}
+.progress li{color:var(--mitti)}
+.progress li::before{background:var(--sut)}
+.progress li.on{color:var(--kajal)}
+.progress li.on::before{background:var(--neel)}
+.sentbox{box-shadow:inset 0 0 0 1.5px var(--neel)}
+
+/* ---------- Dialogs and menu ---------- */
+dialog::backdrop{background:rgba(31,27,24,.45)}
+#menu{--focus:var(--neel);background:var(--kora);color:var(--kajal)}
+#menu::backdrop{background:var(--kora)}
+.menu-h .hlogo{color:var(--kajal)}
+#menu .x{background:var(--kora-2);color:var(--kajal)}
+.mlinks{gap:0}
+.mlinks li{border-bottom:1px solid var(--sut)}
+.mlinks a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0;color:var(--kajal);font-size:30px}
+.mlinks a:hover{color:var(--haldi-deep)}
+@media(max-width:360px){.mlinks a{font-size:26px}}
+.mlinks a[href="#r-zig"]::after,.mlinks a[href="#r-sol"]::after,.mlinks a[href="#r-chen"]::after{content:"";flex:none;width:44px;height:44px;border-radius:10px;background:var(--kora-2) center/cover no-repeat}
+.mlinks a[href="#r-zig"]::after{background-image:url(img/t/z5.jpg)}
+.mlinks a[href="#r-sol"]::after{background-image:url(img/t/s2.jpg)}
+.mlinks a[href="#r-chen"]::after{background-image:url(img/t/chen5.jpg)}
+.menu-wa{border-top-color:var(--sut);color:var(--mitti)}
+.menu-wa a{color:var(--kajal)}
+.menu-wa .copy{background:transparent;color:var(--kajal)}
+:root #menu .langs button{color:var(--mitti)}
+:root #menu .langs button[aria-pressed=true]{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--sut)}
+
+/* ---------- Zoom viewer: a light gallery wall, so colour can be judged ---------- */
+:root #zoom{background:var(--kora);color:var(--kajal);--focus:var(--neel)}
+:root #zoom::backdrop{background:var(--kora)}
+:root #zoom .zh{background:linear-gradient(var(--kora),rgba(245,243,238,0))}
+:root #zoom .zh small{opacity:1;color:var(--mitti)}
+:root #zoom .x,:root #zoom .zb{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--edge)}
+:root #zoom .zb[aria-disabled=true]{opacity:1;color:var(--edge);box-shadow:inset 0 0 0 1px var(--sut)}  /* disabled reads lighter but legible (4.4:1), not a .4 ghost (iter 2) */
+:root #zoom .zstage img{filter:drop-shadow(0 22px 28px rgba(31,27,24,.3))}
+:root #zoom .zf{background:linear-gradient(rgba(245,243,238,0),var(--kora) 40%)}
+:root #zoom .zsw{box-shadow:0 0 0 1px var(--edge)}
+:root #zoom .zsw[aria-current=true]{box-shadow:0 0 0 2px var(--kora),0 0 0 4px var(--neel)}
+:root #zoom .zhint{opacity:1;color:var(--mitti)}
+:root #zoom .zgo{background:var(--neel);color:var(--chalk)}
+:root #zoom .ztry{color:var(--kajal);box-shadow:inset 0 0 0 1.5px var(--neel)}
+:root #zoom .ztry:hover{background:var(--wash)}
+
+/* ---------- Try-on: a warm darkroom (ink), never saturated navy ---------- */
+:root #tryon{background:var(--night);color:var(--chalk);--focus:var(--haldi)}
+:root #tryon::backdrop{background:var(--night)}
+:root #tryon .tstage{background:var(--night)}
+:root #tryon .x,:root #tryon .tbtn{background:var(--glass-d);color:var(--chalk)}
+:root #tryon .tbtn[aria-pressed=true],:root #tryon .tpri,:root #tryon .tadd,:root #tryon .tfloors [aria-checked=true],:root #tryon .ttoast{background:var(--chalk);color:var(--kajal)}
+:root #tryon .tsec,:root #tryon #tryon-cart,:root #tryon .tseg button,:root #tryon .tsizes button{box-shadow:inset 0 0 0 1.5px var(--ring-d)}
+:root #tryon .tseg [aria-checked=true],:root #tryon .tsizes [aria-checked=true]{background:var(--chalk);color:var(--kajal);box-shadow:none}
+:root #tryon #tryon-cart .chev{background:none;color:inherit}
+:root #tryon .terr{color:var(--kumkum-2)}
+:root #tryon .twhat{opacity:1;color:var(--mist)}
+:root #tryon .twhat img{box-shadow:0 0 0 1px var(--ring-d)}
+:root #tryon .thint,:root #tryon .tfloors button{background:rgba(31,27,24,.78)}
+:root #tryon .tsw button{box-shadow:0 0 0 1px var(--ring-d)}
+:root #tryon .tsw [aria-checked=true]{box-shadow:0 0 0 2px var(--night),0 0 0 4px var(--haldi)}
+:root #tryon .tadd .td{opacity:1;color:var(--mitti)}
+:root #tryon .tlight input{accent-color:var(--haldi)}
+:root #tryon .tfile:has(input:focus-visible),:root #tryon .trug:focus-visible{outline-color:var(--haldi)}
+:root #tryon .thandle:focus-visible::before{box-shadow:0 0 0 3px var(--haldi),0 2px 6px rgba(0,0,0,.6)}
+:root #tryon .thandle::before{background:rgba(31,27,24,.38)}
+:root #tryon .tart path[fill="#E3A62F"]{fill:var(--haldi)}
+:root #tryon .tart g[fill="#141B36"],:root #tryon .tart path[stroke="#141B36"]{fill:var(--night);stroke:var(--night)}
+:root #tryon .tart g[fill="#141B36"]{stroke:var(--chalk)}
+
 </style>
 
 <a class="skip" href="#shop">Skip to the shop</a>
@@ -1051,15 +1288,15 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
   </div>
   <div class="prods">
 
-    <article class="prod" id="r-zig" data-k="zig" aria-labelledby="t-zig" style="--f:#3B4A28;--fg:#FBF7F0;--on:#1B1D2B">
+    <article class="prod" id="r-zig" data-k="zig" data-def="3" aria-labelledby="t-zig" style="--f:#504621;--fg:#FDFCFA;--on:#1F1B18">
       <div class="pic field">
-        <div class="rugwrap"><div class="rugbox"><div class="rug"><div class="plane"><picture data-flat><source type="image/avif" media="(max-width: 760px)" srcset="img/m/z1.avif"><source type="image/webp" media="(max-width: 760px)" srcset="img/m/z1.webp"><img src="img/z1.webp" alt="Multicolour Zigzag Rug in Forest green &amp; black" width="1600" height="876" loading="lazy" decoding="async"></picture><span class="sheen" aria-hidden="true"><i></i></span></div></div><span class="shadow s-tight" aria-hidden="true"></span><span class="shadow s-amb" aria-hidden="true"></span></div></div>
+        <div class="rugwrap"><div class="rugbox"><div class="rug"><div class="plane"><picture data-flat><source type="image/avif" media="(max-width: 760px)" srcset="img/m/z4.avif"><source type="image/webp" media="(max-width: 760px)" srcset="img/m/z4.webp"><img src="img/z4.webp" alt="Multicolour Zigzag Rug in Olive &amp; cream" width="1600" height="876" loading="lazy" decoding="async"></picture><span class="sheen" aria-hidden="true"><i></i></span></div></div><span class="shadow s-tight" aria-hidden="true"></span><span class="shadow s-amb" aria-hidden="true"></span></div></div>
       </div>
       <div class="info">
-        <div class="trow"><h3 id="t-zig">Multicolour Zigzag</h3><button type="button" class="heart" data-save aria-pressed="false" aria-label="Save Forest green &amp; black Multicolour Zigzag Rug"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg></button></div>
+        <div class="trow"><h3 id="t-zig">Multicolour Zigzag</h3><button type="button" class="heart" data-save aria-pressed="false" aria-label="Save Olive &amp; cream Multicolour Zigzag Rug"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg></button></div>
         <div class="prow"><span data-price>₹249</span><span data-dims>16×24 in · 300 g</span></div>
         <p class="desc">Bold zigzag stripes in a soft microfiber pile. Bright enough for the main door, soft enough beside the bed.</p>
-        <p class="clab">Colour: <span data-colour>Forest green &amp; black</span></p>
+        <p class="clab">Colour: <span data-colour>Olive &amp; cream</span></p>
         <div class="swatches" role="radiogroup" aria-label="Zigzag colours">
           <button type="button" class="sw" role="radio" data-n="Forest green &amp; black" data-bg="#3B4A28" data-full="img/z1.webp" style="--c:#3B4A28"><img src="img/t/z1.jpg" alt="" width="200" height="200"></button>
           <button type="button" class="sw" role="radio" data-n="Blush pink &amp; black" data-bg="#EBC4BD" data-full="img/z2.webp" style="--c:#EBC4BD"><img src="img/t/z2.jpg" alt="" width="200" height="200"></button>
@@ -1079,7 +1316,7 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
       </div>
     </article>
 
-    <article class="prod flip" id="r-sol" data-k="sol" aria-labelledby="t-sol" style="--f:#1D3A8A;--fg:#FBF7F0;--on:#1B1D2B">
+    <article class="prod flip" id="r-sol" data-k="sol" aria-labelledby="t-sol" style="--f:#1D3A8A;--fg:#FDFCFA;--on:#1F1B18">
       <div class="pic field">
         <div class="rugwrap"><div class="rugbox"><div class="rug"><div class="plane"><picture data-flat><source type="image/avif" media="(max-width: 760px)" srcset="img/m/s1.avif"><source type="image/webp" media="(max-width: 760px)" srcset="img/m/s1.webp"><img src="img/s1.webp" alt="Solid Premium Rug in Royal blue" width="1600" height="1348" loading="lazy" decoding="async"></picture><span class="sheen" aria-hidden="true"><i></i></span></div></div><span class="shadow s-tight" aria-hidden="true"></span><span class="shadow s-amb" aria-hidden="true"></span></div></div>
       </div>
@@ -1103,7 +1340,7 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
       </div>
     </article>
 
-    <article class="prod" id="r-chen" data-k="chen" data-def="5" aria-labelledby="t-chen" style="--f:#D3913F;--fg:#1B1D2B;--on:#FBF7F0">
+    <article class="prod" id="r-chen" data-k="chen" data-def="5" aria-labelledby="t-chen" style="--f:#D3913F;--fg:#1F1B18;--on:#FDFCFA">
       <div class="pic field">
         <div class="chen-board">
           <div class="chen-frame" id="chen-frame"><picture data-flat><source type="image/webp" media="(max-width: 760px)" srcset="img/m/chen.webp"><img src="img/chen.jpg" alt="All ten Striped Chenille Mat colourways laid out in two columns" width="1200" height="1801" loading="lazy" decoding="async"></picture></div>
@@ -1317,7 +1554,7 @@ Total: ₹997 (free delivery in Vadodara)<small>Sent from the site</small></div>
 </section>
 </main>
 
-<footer class="foot field" id="foot" style="--f:#141B36;--fg:#FBF7F0;--on:#1B1D2B">
+<footer class="foot field" id="foot" style="--f:#1F1B18;--fg:#FDFCFA;--on:#1F1B18">
   <p class="name" aria-hidden="true">Soft Steps<i></i></p>
   <div class="foot-row">
     <span>Comfort in every step · Vadodara, Gujarat · © 2026</span>
@@ -1488,7 +1725,7 @@ try{CAT=JSON.parse(document.getElementById('ss-catalog').textContent)}catch(e){C
 CAT=catNorm(CAT,CATDEF);
 var P={};KS.forEach(function(k){var r=CAT.ranges[k];P[k]={name:r.name,sizes:r.sizes.map(function(s){return [s.id,s.dims,s.weight,s.price]})}});
 var SIZEIDX={M:0,H:1,L:2,XL:3},pickers={},cart=[],lastMsg="";
-var FG={"#ebc4bd":"#1B1D2B","#d3913f":"#1B1D2B","#2aa5b8":"#1B1D2B","#a29d9c":"#1B1D2B"};
+var FG={"#ebc4bd":"#1F1B18","#d3913f":"#1F1B18","#2aa5b8":"#1F1B18","#a29d9c":"#1F1B18"};
 function inr(n){return "₹"+n.toLocaleString("en-IN")}
 /* Stock: STK[k] = {sizes:["in"|"out" by size], col:{colour name: "in"|"few"|"out"}} for the colours on show.
    A hidden or unknown colour, or a size marked out, cannot be bought. */
@@ -1535,10 +1772,10 @@ function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearT
 function swatch(k,colour){return $$( '.prod[data-k="'+k+'"] [data-n]').filter(function(x){return x.dataset.n===colour})[0]}
 function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:$('.prod[data-k="chen"] .pic img').src}
 /* Text colour on a dyed panel: the house picks for the known light colours, else by luminance (owner-added colours). */
-function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FBF7F0";
+function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FDFCFA";
   var L=[0,2,4].map(function(i){var v=parseInt(m[1].substr(i,2),16)/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
-  return .2126*L[0]+.7152*L[1]+.0722*L[2]>.3?"#1B1D2B":"#FBF7F0"}
-function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FBF7F0"?"#1B1D2B":"#FBF7F0";el.dataset.tone=fg==="#FBF7F0"?"dark":"light";
+  return .2126*L[0]+.7152*L[1]+.0722*L[2]>.3?"#1F1B18":"#FDFCFA"}
+function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FDFCFA"?"#1F1B18":"#FDFCFA";el.dataset.tone=fg==="#FDFCFA"?"dark":"light";
   if(from&&fx("dye",el,hex,fg,on,from))return;
   el.style.setProperty("--f",hex);el.style.setProperty("--fg",fg);el.style.setProperty("--on",on)}
 function radio(group,btn){$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
