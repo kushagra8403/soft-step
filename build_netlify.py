@@ -5,7 +5,7 @@ structured data, icons, robots/sitemap and cache headers."""
 import os, re, shutil, sys, json
 from PIL import Image
 SRC, DIST = sys.argv[1], sys.argv[2]
-URL = "https://softsteps-home.netlify.app/"
+URL = "https://softsteps-home-lhci.netlify.app/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 if os.path.exists(DIST): shutil.rmtree(DIST)
 os.makedirs(DIST)
