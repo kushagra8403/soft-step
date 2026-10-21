@@ -632,6 +632,8 @@ form.enq{display:grid;gap:16px;margin-top:8px}
   .drawer:not([hidden]){animation:drawerin .3s var(--e-out)}
 }
 @media(prefers-reduced-motion:no-preference) and (hover:none){.lamp{animation:drift 18s ease-in-out infinite alternate}}
+/* Keep the mobile hero's layout stable: the ambient lamp drift is decorative, not structural. */
+@media(max-width:620px){.lamp{animation:none!important}}
 
 /* ---------- Overlays: cart bar, dock, toast, fly ---------- */
 .cbar{position:fixed;z-index:15;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(480px,calc(100% - 32px));min-height:60px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 22px;border:0;border-radius:999px;background:var(--kajal);color:var(--chalk);box-shadow:var(--sh-float);font:600 15px/1.2 var(--text)}
