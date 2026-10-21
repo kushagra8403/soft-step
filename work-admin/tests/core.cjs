@@ -24,7 +24,7 @@ function variant(mut) { const c = JSON.parse(JSON.stringify(BASE)); mut(c); retu
 const col = (c, k, n) => c.ranges[k].colours.find(x => x.n === n);
 
 async function open(b, s, o = {}) {
-  const ctx = await b.newContext({ viewport: { width: o.vp ? o.vp[0] : 1440, height: o.vp ? o.vp[1] : 900 } });
+  const ctx = await b.newContext({ viewport: { width: o.vp ? o.vp[0] : 1440, height: o.vp ? o.vp[1] : 900 }, reducedMotion: o.rm ? 'reduce' : 'no-preference' });
   const page = await ctx.newPage(); const log = []; const reqs = [];
   await prep(page, log);
   page.on('request', r => reqs.push(r.url()));
@@ -552,6 +552,32 @@ async function checkout(page, { addSel, expectTotal, label }) {
       eq(values.find(x => x.bg === '#848484').fg, '#1F1B18', L + ': contrast transition uses ink only above threshold');
       eq(values.find(x => x.bg === '#757575').fg, '#FFFFFF', L + ': darker edge grey chooses white text');
       eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
+    /* ---------- 7c. 320px narrow phone + reduced-motion overflow smoke ---------- */
+    {
+      const L = '320px reduced motion';
+      const { ctx, page, log } = await open(b, s, { vp: [320, 844], rm: true, wait: 2000 });
+      const dimensions = await page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        doc: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+        reduced: matchMedia('(prefers-reduced-motion: reduce)').matches
+      }));
+      ok(dimensions.reduced, L + ': reduced-motion preference is enabled', dimensions);
+      ok(dimensions.doc <= dimensions.client && dimensions.body <= dimensions.client, L + ': no horizontal overflow on 320px', dimensions);
+      await page.evaluate(() => SS.openD('cart'));
+      await page.waitForTimeout(350);
+      const drawer = await page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        doc: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+        open: !document.querySelector('#drawer').hidden
+      }));
+      ok(drawer.open, L + ': cart drawer opens at 320px', drawer);
+      ok(drawer.doc <= drawer.client && drawer.body <= drawer.client, L + ': cart drawer has no horizontal overflow at 320px', drawer);
+      eq(errs(log), [], L + ': no console errors');
       await ctx.close();
     }
 
