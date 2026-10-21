@@ -45,6 +45,7 @@ jobs:
           node --check work-admin/tests/core.cjs
           node --check work-admin/tests/admin.cjs
           node --check work-admin/tests/integ.cjs
+          node --check qa.cjs
       - name: Static security regression checks
         run: |
           node - <<'NODE'
@@ -165,6 +166,42 @@ jobs:
           console.log('Netlify preview verified: 3 catalog products, structured prices match, scripts present.');
           NODE
 
+      - name: Final viewport, mobile-performance and checkout QA
+        run: |
+          node qa.cjs /tmp/softsteps-dist/index.html work-admin/shots-netlify
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = 'work-admin/shots-netlify/report.json';
+          const r = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const errors = [];
+          for (const name of ['desktop', 'tablet', 'phone', 'phone-reduced']) {
+            const x = r[name];
+            if (!x) { errors.push('Missing viewport: ' + name); continue; }
+            if (x.scrollWidth > x.clientWidth) errors.push(name + ' horizontal overflow');
+          }
+          for (const name of ['flow-desktop', 'flow-phone']) {
+            const x = r[name];
+            if (!x) { errors.push('Missing checkout flow: ' + name); continue; }
+            for (const step of x.steps || []) if (step.startsWith('FAIL ')) errors.push(name + ': ' + step);
+            if (!(x.steps || []).includes('whatsapp link ok: true')) errors.push(name + ': no valid WhatsApp order link');
+          }
+          const phone = r.phone && r.phone.vitals;
+          const reduced = r['phone-reduced'] && r['phone-reduced'].vitals;
+          console.log('Final QA vitals (390px phone run uses 4× CPU throttle): ' + JSON.stringify({
+            phone, phoneReduced: reduced,
+            layoutWidths: ['desktop','tablet','phone','phone-reduced'].map(name => ({
+              name, client: r[name] && r[name].clientWidth, scroll: r[name] && r[name].scrollWidth
+            }))
+          }, null, 2));
+          for (const [name, v] of [['phone',phone],['phone-reduced',reduced]]) {
+            if (!v || !Number.isFinite(v.lcpMs) || !Number.isFinite(v.cls)) errors.push(name + ': LCP/CLS were not measured');
+          }
+          if (phone && Number.isFinite(phone.lcpMs) && phone.lcpMs > 1800) errors.push('Phone LCP exceeds 1800ms: ' + Math.round(phone.lcpMs) + 'ms');
+          if (phone && Number.isFinite(phone.cls) && phone.cls > 0.05) errors.push('Phone CLS exceeds 0.05: ' + phone.cls);
+          if (errors.length) throw new Error('Final viewport/performance/checkout QA failed:\\n' + errors.join('\\n'));
+          console.log('Final viewport/performance/checkout QA passed.');
+          NODE
+
       - name: Package deploy-ready Netlify preview
         run: |
           python - <<'PY'
@@ -192,5 +229,6 @@ jobs:
           path: |
             work-admin/shots/**/*.png
             work-admin/shots-integ/**/*.png
+            work-admin/shots-netlify/**/*
           if-no-files-found: warn
           retention-days: 14
