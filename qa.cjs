@@ -62,7 +62,7 @@ if (require.main === module) (async () => {
                 if (!el) return { selector: '(unknown)' };
                 const id = el.id ? '#' + el.id : '';
                 const cls = typeof el.className === 'string' && el.className.trim()
-                  ? '.' + el.className.trim().split(/\\s+/).slice(0, 3).join('.') : '';
+                  ? '.' + el.className.trim().split(/\s+/).slice(0, 3).join('.') : '';
                 return {
                   selector: el.tagName.toLowerCase() + id + cls,
                   previous: s.previousRect && { x: Math.round(s.previousRect.x), y: Math.round(s.previousRect.y), w: Math.round(s.previousRect.width), h: Math.round(s.previousRect.height) },
