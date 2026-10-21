@@ -330,7 +330,7 @@
       }
 
       function firstLoad() {
-        if (!motion() || doc.hidden) return;
+        if (!motion() || doc.hidden || PHONE.matches) return;
         var r = hero.getBoundingClientRect();
         if (r.bottom <= 0 || r.top >= innerHeight) return;
         /* if the page was already on screen well before this module arrived (slow network), the finished
