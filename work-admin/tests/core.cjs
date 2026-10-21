@@ -539,7 +539,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
         }
         function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); }
         const builtIn = [...document.querySelectorAll('[data-bg]')].map(el => el.dataset.bg.toUpperCase());
-        const colours = [...new Set(builtIn.concat(['#757575', '#767676', '#777777', '#808080', '#969696', '#000000', '#FFFFFF']))];
+        const colours = builtIn.concat(['#757575', '#767676', '#777777', '#808080', '#969696', '#000000', '#FFFFFF']);
         return colours.map(bg => {
           const fg = SS.fieldForeground(bg);
           return { bg, fg, ratio: ratio(fg, bg) };
