@@ -38,13 +38,30 @@ if (require.main === module) (async () => {
   const file = path.resolve(process.argv[2]); const out = path.resolve(process.argv[3] || 'qa-out');
   fs.mkdirSync(out, { recursive: true });
   const url = 'file://' + file;
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  const b = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   const report = {};
   for (const [w, h, name, rm] of [[1440, 900, 'desktop', false], [768, 1024, 'tablet', false], [390, 844, 'phone', false], [390, 844, 'phone-reduced', true]]) {
     const log = [];
     const ctx = await b.newContext({ viewport: { width: w, height: h }, reducedMotion: rm ? 'reduce' : 'no-preference', deviceScaleFactor: 1 });
     const page = await ctx.newPage(); await prep(page, log);
+    await page.addInitScript(() => {
+      const v = window.__ssVitals = { lcp: null, cls: 0 };
+      try {
+        new PerformanceObserver(list => { for (const e of list.getEntries()) v.lcp = e.startTime; })
+          .observe({ type: 'largest-contentful-paint', buffered: true });
+      } catch (e) {}
+      try {
+        new PerformanceObserver(list => {
+          for (const e of list.getEntries()) if (!e.hadRecentInput && Number.isFinite(e.value)) v.cls += e.value;
+        }).observe({ type: 'layout-shift', buffered: true });
+      } catch (e) {}
+    });
+    if (w === 390) {
+      const cdp = await ctx.newCDPSession(page);
+      await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+    }
     await page.goto(url, { waitUntil: 'load' }); await page.waitForTimeout(2500);
+    const vitals = await page.evaluate(() => ({ lcpMs: window.__ssVitals && window.__ssVitals.lcp, cls: window.__ssVitals && window.__ssVitals.cls }));
     await page.screenshot({ path: path.join(out, name + '-first.png') });
     await scrollThrough(page);
     const m = await page.evaluate(() => {
@@ -53,7 +70,7 @@ if (require.main === module) (async () => {
       return { scrollWidth: de.scrollWidth, clientWidth: de.clientWidth, height: de.scrollHeight, invisibleAfterScroll: hidden };
     });
     await page.screenshot({ path: path.join(out, name + '-full.png'), fullPage: true });
-    report[name] = { ...m, log };
+    report[name] = { ...m, vitals, log };
     await ctx.close();
   }
   // Functional flow on phone + desktop: add to cart -> details -> pay
@@ -88,5 +105,28 @@ if (require.main === module) (async () => {
   }
   await b.close();
   fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
+  const viewportNames = ['desktop', 'tablet', 'phone', 'phone-reduced'];
+  const errors = [];
+  for (const n of viewportNames) {
+    const r = report[n];
+    if (!r) { errors.push('Missing viewport report: ' + n); continue; }
+    if (r.scrollWidth > r.clientWidth) errors.push(n + ' horizontal overflow: ' + r.scrollWidth + ' > ' + r.clientWidth);
+    const bad = (r.log || []).filter(x => /^(?:PAGEERROR:|CONSOLE:|UNSERVED CDN)/.test(x));
+    if (bad.length) errors.push(n + ' browser errors: ' + bad.join(' | '));
+  }
+  for (const n of ['flow-desktop', 'flow-phone']) {
+    const r = report[n];
+    if (!r) { errors.push('Missing checkout report: ' + n); continue; }
+    const bad = (r.steps || []).filter(x => x.startsWith('FAIL '));
+    if (bad.length) errors.push(n + ' checkout failure: ' + bad.join(' | '));
+    if (!(r.steps || []).includes('whatsapp link ok: true')) errors.push(n + ' produced no valid WhatsApp order link');
+  }
+  console.log('QA perf (phone is 4× CPU-throttled): ' + JSON.stringify({
+    phone: report.phone && report.phone.vitals,
+    phoneReduced: report['phone-reduced'] && report['phone-reduced'].vitals,
+    layoutWidths: viewportNames.map(n => ({ name: n, client: report[n] && report[n].clientWidth, scroll: report[n] && report[n].scrollWidth }))
+  }));
+  if (errors.length) throw new Error('Final viewport/checkout QA failed:\\n' + errors.join('\\n'));
+  console.log('Final viewport/checkout QA passed: no horizontal overflow, browser errors, or failed checkout steps.');
   console.log(JSON.stringify(report, null, 2));
 })();
