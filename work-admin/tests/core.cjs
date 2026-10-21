@@ -539,7 +539,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
         }
         function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); }
         const builtIn = [...document.querySelectorAll('[data-bg]')].map(el => el.dataset.bg.toUpperCase());
-        const colours = builtIn.concat(['#757575', '#767676', '#777777', '#808080', '#969696', '#000000', '#FFFFFF']);
+        const colours = builtIn.concat(['#757575', '#767676', '#777777', '#808080', '#838383', '#848484', '#969696', '#000000', '#FFFFFF']);
         return colours.map(bg => {
           const fg = SS.fieldForeground(bg);
           return { bg, fg, ratio: ratio(fg, bg) };
@@ -548,6 +548,8 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ok(values.length >= 26, L + ': audits all 26 built-in swatches plus custom midpoint shades', values.length);
       eq(values.filter(x => x.ratio < 4.5).map(x => ({ bg: x.bg, fg: x.fg, ratio: +x.ratio.toFixed(2) })), [], L + ': every painted field label reaches 4.5:1');
       eq(values.find(x => x.bg === '#808080').fg, '#000000', L + ': mid-grey custom colour chooses black text');
+      eq(values.find(x => x.bg === '#838383').fg, '#000000', L + ': contrast transition stays black below threshold');
+      eq(values.find(x => x.bg === '#848484').fg, '#1F1B18', L + ': contrast transition uses ink only above threshold');
       eq(values.find(x => x.bg === '#757575').fg, '#FFFFFF', L + ': darker edge grey chooses white text');
       eq(errs(log), [], L + ': console clean');
       await ctx.close();
