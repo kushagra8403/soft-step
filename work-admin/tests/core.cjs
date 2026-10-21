@@ -605,6 +605,45 @@ async function checkout(page, { addSel, expectTotal, label }) {
       await ctx.close();
     }
 
+    /* ---------- 7e. Changing an order after payment details requires explicit unpaid confirmation ---------- */
+    {
+      const L = 'previous order payment guard';
+      const { ctx, page, log } = await open(b, s, { vp: [390, 844] });
+      await page.click('.prod[data-k="zig"] [data-add]');
+      await page.waitForTimeout(400);
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.fill('#o-name', 'Test Buyer');
+      await page.fill('#o-ph', '9876543210');
+      await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
+      await page.fill('#o-ct', 'Vadodara');
+      await page.fill('#o-pin', '390007');
+      await page.click('#order-btn');
+      await page.waitForSelector('#v-pay:not([hidden])');
+      const oldOid = await page.locator('#oid').textContent();
+      await page.click('#editorder');
+      await page.waitForSelector('#v-cart:not([hidden])');
+      await page.click('#v-cart button[data-i="0"][data-d="1"]');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.waitForTimeout(400);
+      await page.click('#order-btn');
+      await page.waitForSelector('#prev-order-guard:not([hidden])');
+      eq(await page.evaluate(() => localStorage.getItem('ss_pending')), null, L + ': old pending order is not reused for a changed cart');
+      ok((await page.locator('#prev-order-id').textContent()).includes(oldOid), L + ': warning identifies the previous order');
+      ok((await page.locator('#oerr').textContent()).includes('Please confirm'), L + ': new payment is blocked until unpaid confirmation');
+      await page.waitForTimeout(400);
+      await page.check('#prev-order-unpaid');
+      await page.waitForTimeout(400);
+      await page.click('#order-btn');
+      await page.waitForSelector('#v-pay:not([hidden])');
+      eq(await page.evaluate(() => localStorage.getItem('ss_previous_pending')), null, L + ': explicit unpaid confirmation resolves the warning');
+      eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
     /* ---------- 8. Checkout history, saved details, duplicate guard and WhatsApp confirmation ---------- */
     {
       const L = 'checkout safeguards';
