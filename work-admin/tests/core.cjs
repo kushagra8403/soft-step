@@ -581,6 +581,30 @@ async function checkout(page, { addSel, expectTotal, label }) {
       await ctx.close();
     }
 
+    /* ---------- 7d. Repeated taps must not act on the next re-rendered control ---------- */
+    {
+      const L = 'rapid action guard';
+      const { ctx, page, log } = await open(b, s, { vp: [390, 844] });
+      await page.evaluate(() => {
+        const add = document.querySelector('.prod[data-k="zig"] [data-add]');
+        add.click(); add.click();
+        document.querySelector('.prod[data-k="sol"] [data-add]').click();
+        document.querySelector('.prod[data-k="chen"] [data-add]').click();
+      });
+      const seeded = await page.evaluate(() => JSON.parse(localStorage.getItem('ss_cart2') || '[]'));
+      eq(seeded.length, 3, L + ': repeated Add tap does not duplicate the same item');
+      eq(seeded.find(x => x.k === 'zig').q, 1, L + ': same-product double tap adds only one');
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.evaluate(() => {
+        document.querySelector('#v-cart button[data-i="0"][data-d="0"]').click();
+        document.querySelector('#v-cart button[data-i="0"][data-d="0"]').click();
+      });
+      eq(await page.locator('#v-cart .line').count(), 2, L + ': double Remove does not remove the next line');
+      eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
     /* ---------- 8. Checkout history, saved details, duplicate guard and WhatsApp confirmation ---------- */
     {
       const L = 'checkout safeguards';
