@@ -6,11 +6,11 @@
 // Screenshots go to work/admin/shots/. Exit code 1 if any check fails.
 const fs = require('fs'), path = require('path'), http = require('http');
 const { chromium } = require('playwright');
-const SP = '/tmp/claude-0/-home-user/b3b2df08-4b5f-5d42-b6f7-07d0365cb062/scratchpad';
-const WORK = SP + '/work/admin', SITE = WORK + '/site', T = WORK + '/tests', SHOTS = WORK + '/shots';
-const PHOTO = SP + '/tryon_test/doorway.jpg';
-const { prep } = require(SP + '/qa.cjs');
-const { serve } = require(SP + '/audit/serve.cjs');
+const SP = path.resolve(__dirname, '../..');
+const WORK = path.join(SP, 'work-admin'), SITE = path.join(WORK, 'site'), T = path.join(WORK, 'tests'), SHOTS = path.join(WORK, 'shots');
+const PHOTO = path.join(SP, 'tryon_test/doorway.jpg');
+const { prep } = require(path.join(SP, 'qa.cjs'));
+const { serve } = require(path.join(SP, 'audit/serve.cjs'));
 const MOCK = fs.readFileSync(T + '/mock-claude.js', 'utf8');
 const START = '<!--ss-catalog:start-->', END = '<!--ss-catalog:end-->';
 const OPEN_TAG = '<script type="application/json" id="ss-catalog">', CLOSE_TAG = '</script>';
@@ -88,6 +88,7 @@ async function tab(page, t) { await page.click(fk('tab|' + t)); await page.waitF
 async function range(page, k) { await page.click(fk('range|' + k)); await page.waitForSelector(fk('range|' + k) + '[aria-checked="true"]'); }
 async function barText(page) { return (await page.locator('#ssadm .ssa-bar').innerText()).replace(/\s+/g, ' ').trim(); }
 async function choosePhoto(page, sel) { const [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click(sel)]); await fc.setFiles(PHOTO); }
+async function chooseFile(page, sel, file) { const [fc] = await Promise.all([page.waitForEvent('filechooser'), page.click(sel)]); await fc.setFiles(file); }
 async function openAdminFromFooter(page) {
   await page.waitForSelector('#ss-owner', { state: 'attached', timeout: 30000 });
   await page.locator('#ss-owner').scrollIntoViewIfNeeded();
@@ -166,9 +167,18 @@ async function ownerFlow(b, base, srcHtml, vp, tag) {
   await shot(page, tag, 'stock-only-out');
   await page.click(fk('only-out'));
 
-  /* Photos: new photo for Mustard & tan from doorway.jpg */
+  /* Photos: reject SVG even when it declares itself an image; then recover via a valid JPG. */
   await tab(page, 'photos');
-  await choosePhoto(page, fk('photo|zig|Mustard & tan'));
+  await chooseFile(page, fk('photo|zig|Mustard & tan'), {
+    name: 'vector-payload.svg',
+    mimeType: 'image/svg+xml',
+    buffer: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900"><script>alert(1)</script></svg>')
+  });
+  await page.waitForSelector('#ssadm .ssa-sheet .ssa-err-box', { timeout: 10000 });
+  check((await page.locator('#ssadm .ssa-sheet .ssa-err-box').innerText()).includes('JPG, PNG or WebP'), `[${tag}] SVG uploads are rejected by the raster-only photo checker`);
+  await choosePhoto(page, fk('sheet-other'));
+  await page.waitForSelector(fk('sheet-use'), { timeout: 60000 });
+  /* The accepted photo should still be resized and uploaded normally. */
   await page.waitForSelector(fk('sheet-use'), { timeout: 60000 });
   const meta = await page.locator('#ssadm .ssa-sheet .ssa-pv-main figcaption').innerText();
   check(/WebP|JPEG/.test(meta), `[${tag}] preview shows the prepared photo (${meta})`);
@@ -497,7 +507,7 @@ async function bareFlow(b) {
   const srcHtml = buildTestSite();
   const s = await rawServe(T + '/www');
   check((await get(s.url + 'index.html')) === srcHtml, 'test server returns index.html byte-for-byte');
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  const b = await chromium.launch();
   const only = process.argv[2];
   try {
     let pub = null;

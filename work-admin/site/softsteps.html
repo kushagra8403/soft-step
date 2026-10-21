@@ -62,7 +62,7 @@
 */
 :root{
   color-scheme:light;
-  --kora:#F2EADC;--kora-2:#E8DDCB;--chalk:#FBF7F0;--kajal:#1B1D2B;--mitti:#5F5248;--sut:#DDD0BB;--edge:#8F806F;
+  --kora:#F2EADC;--kora-2:#E8DDCB;--chalk:#FBF7F0;--kajal:#1B1D2B;--mitti:#5F5248;--sut:#DDD0BB;--edge:#897967;
   --neel:#1F2E57;--neel-2:#24356A;--night:#141B36;--mist:#B9C0D6;--haldi:#E3A62F;--haldi-deep:#805400;--kumkum:#A92E1F;--wa:#1A7349;
   --f:#8A3A1A;--fg:#FBF7F0;--on:#1B1D2B;
   --display:"Fraunces","Iowan Old Style",Georgia,serif;
@@ -204,7 +204,7 @@ p{margin:0}
 @media(max-width:860px){.hdr{height:56px}}
 
 /* ---------- S1 hero ---------- */
-.hero{--f:#8A3A1A;--fg:#FBF7F0;--on:#1B1D2B;margin-top:calc(16px + env(safe-area-inset-top,0px));min-height:min(820px,calc(100svh - 32px));display:grid;grid-template-rows:auto 1fr auto;padding:24px clamp(20px,3vw,44px);border-radius:32px;box-shadow:var(--sh-hero)}
+.hero{--f:#8A3A1A;--fg:#FDFCFA;--on:#1F1B18;margin-top:calc(16px + env(safe-area-inset-top,0px));min-height:min(820px,calc(100svh - 32px));display:grid;grid-template-rows:auto 1fr auto;padding:24px clamp(20px,3vw,44px);border-radius:32px;box-shadow:var(--sh-hero)}
 .lamp{position:absolute;z-index:-1;width:70vmin;height:70vmin;left:calc(62% - 35vmin);top:calc(36% - 35vmin);border-radius:50%;background:radial-gradient(closest-side,rgba(255,238,210,.26),transparent);pointer-events:none;will-change:transform}
 .top{position:relative;z-index:3;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
 .logo{display:inline-flex;align-items:center;gap:12px;justify-self:start;color:var(--fg);text-decoration:none;white-space:nowrap}
@@ -446,7 +446,7 @@ picture[data-flat]{display:contents}
 }
 
 /* ---------- S5 fit tool (Neel) ---------- */
-.fit{--f:#1F2E57;--fg:#FBF7F0;--focus:var(--haldi);--eb:var(--haldi);--ebd:var(--haldi);position:relative;isolation:isolate;overflow:hidden;overflow:clip;background:var(--neel);color:var(--chalk);border-radius:32px;padding:clamp(28px,5vw,72px)}
+.fit{--f:#1F2E57;--fg:#FDFCFA;--focus:var(--haldi);--eb:var(--haldi);--ebd:var(--haldi);position:relative;isolation:isolate;overflow:hidden;overflow:clip;background:var(--neel);color:var(--chalk);border-radius:32px;padding:clamp(28px,5vw,72px)}
 .fit::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 70% at 85% 10%,rgba(255,238,210,.10),transparent 70%),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.22),transparent 60%)}
 .fit-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:start}
 .fit .h2 em{color:var(--haldi)}
@@ -927,6 +927,243 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
 .adm-deny p{flex:1;min-width:0;padding:10px 0}
 .adm-deny .x{flex:none;background:rgba(251,247,240,.15);color:var(--chalk)}
 .hero.noslides .rugwrap,.hero.noslides .side,.hero.noslides .ctas,.hero.noslides .arrows,.hero.noslides .bend{display:none}
+
+/* Kora Quiet palette and component overrides. Source: design2/quiet.css. */
+/* ==========================================================================
+   "Kora & Kattha": quiet warm minimal palette override (preview, CSS only)
+   Gallery logic: the page is warm paper and stone, the UI has ONE deep anchor
+   (kattha espresso), and the rugs are the only saturated colour on the page.
+   ========================================================================== */
+:root{
+  --kora:#F5F3EE;        /* page ground: warm white paper (OKLCH C .007) */
+  --kora-2:#E5DFD5;      /* stone: plinths and inset panels (order, made, pair plinth, tags) */
+  --chalk:#FDFCFA;       /* cards, drawer, dialogs, inputs; text on dark. The only white. */
+  --fg:#FDFCFA;--on:#1F1B18; /* field-on-dark and field-on-light text defaults */
+  --kajal:#1F1B18;       /* ink: all text on light */
+  --mitti:#5F5750;       /* secondary text (>=5.3:1 on every light ground incl. stone) */
+  --sut:#E0D9CE;         /* hairlines, decorative only */
+  --edge:#7F746A;        /* control boundaries: >=3.4:1 on chalk, kora AND stone */
+  --neel:#2A2420;        /* ANCHOR, kattha espresso: filled buttons, selected, links, #fit, cart bar, toast */
+  --neel-2:#3B332D;      /* anchor hover (lift) */
+  --night:#1F1B18;       /* deepest surface = ink: footer, try-on darkroom */
+  --mist:#C9BFB3;        /* secondary text on dark */
+  --haldi:#D8BE94;       /* pital (brass): accent on dark ONLY (italic, active, focus on dark, footer dot) */
+  --haldi-deep:#735F50;  /* taupe: italic H2 accent, numerals, eyebrow on light */
+  --kumkum:#9E2E1E;      /* errors only */
+  --kumkum-2:#F0A291;    /* error text on dark */
+  --wa:#1A7349;--wa-2:#155F3C; /* WhatsApp only */
+  --ph:#756B62;          /* placeholder */
+  --glass-d:rgba(253,252,250,.14);
+  --ring-d:rgba(253,252,250,.55);
+  --wash:rgba(31,27,24,.05);
+  --sh-card:0 0 0 1px var(--sut),0 1px 2px rgba(31,27,24,.04),0 18px 40px -28px rgba(31,27,24,.26);
+  --sh-hero:0 40px 80px -48px rgba(31,27,24,.5);
+  --sh-float:0 18px 44px -18px rgba(31,27,24,.42);
+}
+
+/* ---------- Type accents ---------- */
+.h2 em{color:var(--haldi-deep)}
+.fit .h2 em{color:var(--haldi)}
+
+/* ---------- Buttons: anchor fill, bare chevron, rings for secondary ---------- */
+.pill:has(.chev){padding:0 20px 0 24px}
+.pill .chev,.field .pill .chev,.fit .pill .chev,.fit .pill.ringp .chev,.pair .pill .chev,.pill.sec .chev{width:auto;height:auto;background:none;color:inherit;font-size:20px;padding:0 0 2px}
+.pill:hover{background:var(--neel-2)}
+.pill.quiet{background:transparent;color:var(--kajal);box-shadow:inset 0 0 0 1px var(--edge)}
+.pill.quiet:hover{background:var(--kora-2)}
+.pill.wa{color:var(--chalk)}
+.pill.wa:hover{background:var(--wa-2)}
+.pill.sec:hover{background:var(--wash)}
+.copy{background:transparent;box-shadow:inset 0 0 0 1px var(--edge)}
+.copy:hover{background:var(--kora-2)}
+.stepper{background:transparent;box-shadow:inset 0 0 0 1px var(--edge)}
+.chip:hover,.sz:hover{background:var(--wash)}
+.badge{background:var(--neel);color:var(--chalk)}
+.field .badge{background:var(--fg);color:var(--on)}
+.heart[aria-pressed="true"] svg{fill:var(--neel);stroke:var(--neel)}
+.field .heart[aria-pressed="true"] svg{fill:var(--fg);stroke:var(--fg)}
+input::placeholder,textarea::placeholder{color:var(--ph)}
+
+/* ---------- Header ---------- */
+.hdr{background:rgba(253,252,250,.92)}
+.hbtn{background:transparent}
+.hbtn:hover{background:var(--kora-2)}
+
+/* ---------- Painted fields: quieter lamp, warm shadow, hairline edge for light rugs ---------- */
+.hero{box-shadow:var(--sh-hero)}
+.hero,.pic.field{outline:1px solid rgba(31,27,24,.07);outline-offset:-1px}
+.lamp{background:radial-gradient(closest-side,rgba(255,246,232,.15),transparent)}
+.field::before{background:radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.2),transparent 60%)}
+.pic.field::before{background:radial-gradient(closest-side at 62% 36%,rgba(255,246,232,.13),transparent),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.2),transparent 60%)}
+.pic.field[data-tone=light]::before{background:radial-gradient(closest-side at 62% 36%,rgba(255,246,232,.13),transparent)}
+.field .sz[data-d]::after{opacity:1}                      /* fixes 4.03 / 4.32 on Aqua and Mustard & tan */
+/* phone arrows sit over the photo: frosted field-tone discs with a ring, legible on every rug (iter 2) */
+@media(max-width:860px){.arrows .circle{background:var(--f);background:color-mix(in srgb,var(--f) 80%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px var(--ring35),0 6px 16px -8px rgba(31,27,24,.45)}}
+
+/* ---------- Range strip + promise ---------- */
+.ranges a{box-shadow:var(--sh-card)}
+@media(hover:hover){.ranges a:hover{box-shadow:0 0 0 1.5px var(--neel),0 18px 40px -28px rgba(31,27,24,.26)}}
+.promise{border-top:0;border-bottom:0;padding-block:8px 0}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--sut);border-bottom:1px solid var(--sut)}
+.facts li{padding:18px 20px;font:500 15px/1.45 var(--text);color:var(--kajal);border-left:1px solid var(--sut)}
+.facts li:first-child{border-left:0;padding-left:0}
+.facts .ic{display:none}
+.facts .sep{display:none}
+@media(max-width:1180px){
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .facts li{padding:14px 12px 14px 14px}
+  .facts li:nth-child(odd){border-left:0;padding-left:0}
+  .facts li:nth-child(n+3){border-top:1px solid var(--sut)}
+}
+@media(max-width:600px){
+  .facts{grid-template-columns:1fr}
+  .facts li,.facts li:nth-child(odd){padding:12px 0;border-left:0;font-size:15px}
+  .facts li+li{border-top:1px solid var(--sut)}
+}
+
+/* ---------- Colour index: rugs only; hearts appear on hover/focus or when saved ---------- */
+.tile .bar{display:none}
+.tile .heart::before{background:rgba(253,252,250,.94);box-shadow:0 1px 3px rgba(31,27,24,.16)}
+@media(hover:hover) and (pointer:fine){
+  .tile .heart[aria-pressed="false"]{opacity:0;transition:opacity .16s}
+  .tile:hover .heart,.tile:focus-within .heart{opacity:1}
+}
+
+/* ---------- Shop cards: chalk card with hairline + soft lift ---------- */
+.prod,.contact{box-shadow:var(--sh-card)}
+.tag{background:var(--kora-2);color:var(--kajal)}
+.sw[aria-checked="true"]{box-shadow:0 0 0 3px var(--chalk),0 0 0 4.5px var(--neel)}
+.chen-cap,.chen-cap .link{color:var(--fg)}
+.chen-frame{box-shadow:0 0 0 1px rgba(31,27,24,.08),0 22px 40px -24px rgba(0,0,0,.45)}
+.line .stepper{background:var(--chalk)}             /* fixes 8 of 10 Chenille failures */
+
+/* ---------- Pairs: stone plinth + quiet two-colour chip instead of the duotone split ---------- */
+.pair{box-shadow:var(--sh-card)}
+.pair .pv{background:linear-gradient(90deg,var(--a) 0 50%,var(--b) 50% 100%) left bottom/100% 4px no-repeat,var(--kora-2)}
+.pair .pv>span{box-shadow:0 0 0 3px var(--chalk),0 12px 24px -10px rgba(31,27,24,.35)}
+.pair .pill{background:transparent;color:var(--kajal);box-shadow:inset 0 0 0 1.5px var(--neel)}
+.pair .pill:hover{background:var(--neel);color:var(--chalk)}
+.pair .pill.done{background:var(--neel);color:var(--chalk)}
+
+/* ---------- Fit: the one dark room (kattha espresso), brass accents ---------- */
+.fit{--f:var(--neel);background:var(--neel)}
+.fit::before{background:radial-gradient(60% 70% at 85% 8%,rgba(255,244,228,.06),transparent 70%),radial-gradient(120% 90% at 50% 115%,rgba(0,0,0,.22),transparent 60%)}
+.fit .chip,.fit .sz,.btn-ring,.fit .pill.ringp{box-shadow:inset 0 0 0 1.5px var(--ring-d)}
+.fit .chip:hover,.fit .sz:hover,.btn-ring:hover,.fit .pill.ringp:hover{background:rgba(253,252,250,.08)}
+.fit .chip[aria-checked="true"],.fit .sz[aria-checked="true"],.btn-ring[aria-pressed="true"]{background:var(--chalk);color:var(--neel);box-shadow:none}
+.fit .pill{background:var(--chalk);color:var(--neel)}
+.fit .pill:hover{background:var(--kora)}
+.fit .pill.ringp{background:transparent;color:var(--chalk)}
+.plan{background:var(--night);box-shadow:0 0 0 1px rgba(253,252,250,.16),0 30px 60px -30px rgba(0,0,0,.55)}
+.plan .wall{fill:var(--edge);stroke:rgba(253,252,250,.35)}
+.plan .sill{fill:var(--kora-2)}
+.plan .mat{stroke:rgba(31,27,24,.5);stroke-width:.25}
+.plan .cmpt{stroke:rgba(31,27,24,.6)}
+
+/* ---------- Made: stone plinth, layers that read ---------- */
+.stackpanel{background:var(--kora-2);box-shadow:none}
+.ly-latex{background:radial-gradient(circle,#A8977C 1.4px,transparent 1.8px) 0 0/12px 12px,#C8B89C}
+.ly-floor{background:linear-gradient(rgba(31,27,24,.13) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(31,27,24,.13) 1px,transparent 1px) 0 0/24px 24px,var(--chalk)}
+.specs dt{color:var(--mitti)}
+
+/* ---------- Order: stone panel, taupe numerals, espresso phone ---------- */
+.order{background:var(--kora-2)}
+.steps li::before{background:var(--kora-2);color:var(--haldi-deep)}
+.thread path{stroke:var(--edge)}
+.chat{background:var(--neel)}
+.chat .who{color:var(--chalk)}
+.bubble,.chat .day{background:var(--kora-2)}
+
+/* ---------- FAQ + contact ---------- */
+.qa summary::after{box-shadow:inset 0 0 0 1px var(--edge);color:var(--kajal)}
+.medal{box-shadow:0 0 0 1px var(--sut)}
+
+/* ---------- Footer: ink, brass dot ---------- */
+#foot{--f:var(--night)!important}
+.foot .name i{background:var(--haldi)}
+/* phone: the page ends in ink; no beige strip under the footer, the cart bar floats over ink (iter 2) */
+@media(max-width:860px){
+  #foot#foot.foot{margin-bottom:0;padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  body:has(#cbar:not([hidden])) #foot#foot.foot,body.docked #foot#foot.foot{padding-bottom:calc(28px + 88px + env(safe-area-inset-bottom,0px))}
+}
+
+/* ---------- Cart bar, dock, toast, fly ---------- */
+.cbar,.dock{background:var(--neel);box-shadow:inset 0 0 0 1px rgba(253,252,250,.22),var(--sh-float)}
+.toast{background:var(--neel);color:var(--chalk);border-top:0;box-shadow:inset 0 0 0 1px rgba(253,252,250,.14),var(--sh-float)}
+#flylayer path{stroke:var(--neel)}
+
+/* ---------- Drawer: all light, one anchor ---------- */
+.scrim{background:rgba(31,27,24,.45)}
+.dtop{--focus:var(--neel);background:var(--chalk);color:var(--kajal);box-shadow:inset 0 -1px 0 var(--sut)}
+.dh h2{color:var(--kajal)}
+.dtop .x{background:var(--kora-2);color:var(--kajal)}
+.dtop .x:hover{background:var(--sut)}
+.progress li{color:var(--mitti)}
+.progress li::before{background:var(--sut)}
+.progress li.on{color:var(--kajal)}
+.progress li.on::before{background:var(--neel)}
+.sentbox{box-shadow:inset 0 0 0 1.5px var(--neel)}
+
+/* ---------- Dialogs and menu ---------- */
+dialog::backdrop{background:rgba(31,27,24,.45)}
+#menu{--focus:var(--neel);background:var(--kora);color:var(--kajal)}
+#menu::backdrop{background:var(--kora)}
+.menu-h .hlogo{color:var(--kajal)}
+#menu .x{background:var(--kora-2);color:var(--kajal)}
+.mlinks{gap:0}
+.mlinks li{border-bottom:1px solid var(--sut)}
+.mlinks a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0;color:var(--kajal);font-size:30px}
+.mlinks a:hover{color:var(--haldi-deep)}
+@media(max-width:360px){.mlinks a{font-size:26px}}
+.mlinks a[href="#r-zig"]::after,.mlinks a[href="#r-sol"]::after,.mlinks a[href="#r-chen"]::after{content:"";flex:none;width:44px;height:44px;border-radius:10px;background:var(--kora-2) center/cover no-repeat}
+.mlinks a[href="#r-zig"]::after{background-image:url(img/t/z5.jpg)}
+.mlinks a[href="#r-sol"]::after{background-image:url(img/t/s2.jpg)}
+.mlinks a[href="#r-chen"]::after{background-image:url(img/t/chen5.jpg)}
+.menu-wa{border-top-color:var(--sut);color:var(--mitti)}
+.menu-wa a{color:var(--kajal)}
+.menu-wa .copy{background:transparent;color:var(--kajal)}
+:root #menu .langs button{color:var(--mitti)}
+:root #menu .langs button[aria-pressed=true]{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--sut)}
+
+/* ---------- Zoom viewer: a light gallery wall, so colour can be judged ---------- */
+:root #zoom{background:var(--kora);color:var(--kajal);--focus:var(--neel)}
+:root #zoom::backdrop{background:var(--kora)}
+:root #zoom .zh{background:linear-gradient(var(--kora),rgba(245,243,238,0))}
+:root #zoom .zh small{opacity:1;color:var(--mitti)}
+:root #zoom .x,:root #zoom .zb{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--edge)}
+:root #zoom .zb[aria-disabled=true]{opacity:1;color:var(--edge);box-shadow:inset 0 0 0 1px var(--sut)}  /* disabled reads lighter but legible (4.4:1), not a .4 ghost (iter 2) */
+:root #zoom .zstage img{filter:drop-shadow(0 22px 28px rgba(31,27,24,.3))}
+:root #zoom .zf{background:linear-gradient(rgba(245,243,238,0),var(--kora) 40%)}
+:root #zoom .zsw{box-shadow:0 0 0 1px var(--edge)}
+:root #zoom .zsw[aria-current=true]{box-shadow:0 0 0 2px var(--kora),0 0 0 4px var(--neel)}
+:root #zoom .zhint{opacity:1;color:var(--mitti)}
+:root #zoom .zgo{background:var(--neel);color:var(--chalk)}
+:root #zoom .ztry{color:var(--kajal);box-shadow:inset 0 0 0 1.5px var(--neel)}
+:root #zoom .ztry:hover{background:var(--wash)}
+
+/* ---------- Try-on: a warm darkroom (ink), never saturated navy ---------- */
+:root #tryon{background:var(--night);color:var(--chalk);--focus:var(--haldi)}
+:root #tryon::backdrop{background:var(--night)}
+:root #tryon .tstage{background:var(--night)}
+:root #tryon .x,:root #tryon .tbtn{background:var(--glass-d);color:var(--chalk)}
+:root #tryon .tbtn[aria-pressed=true],:root #tryon .tpri,:root #tryon .tadd,:root #tryon .tfloors [aria-checked=true],:root #tryon .ttoast{background:var(--chalk);color:var(--kajal)}
+:root #tryon .tsec,:root #tryon #tryon-cart,:root #tryon .tseg button,:root #tryon .tsizes button{box-shadow:inset 0 0 0 1.5px var(--ring-d)}
+:root #tryon .tseg [aria-checked=true],:root #tryon .tsizes [aria-checked=true]{background:var(--chalk);color:var(--kajal);box-shadow:none}
+:root #tryon #tryon-cart .chev{background:none;color:inherit}
+:root #tryon .terr{color:var(--kumkum-2)}
+:root #tryon .twhat{opacity:1;color:var(--mist)}
+:root #tryon .twhat img{box-shadow:0 0 0 1px var(--ring-d)}
+:root #tryon .thint,:root #tryon .tfloors button{background:rgba(31,27,24,.78)}
+:root #tryon .tsw button{box-shadow:0 0 0 1px var(--ring-d)}
+:root #tryon .tsw [aria-checked=true]{box-shadow:0 0 0 2px var(--night),0 0 0 4px var(--haldi)}
+:root #tryon .tadd .td{opacity:1;color:var(--mitti)}
+:root #tryon .tlight input{accent-color:var(--haldi)}
+:root #tryon .tfile:has(input:focus-visible),:root #tryon .trug:focus-visible{outline-color:var(--haldi)}
+:root #tryon .thandle:focus-visible::before{box-shadow:0 0 0 3px var(--haldi),0 2px 6px rgba(0,0,0,.6)}
+:root #tryon .thandle::before{background:rgba(31,27,24,.38)}
+:root #tryon .tart path[fill="#E3A62F"]{fill:var(--haldi)}
+:root #tryon .tart g[fill="#141B36"],:root #tryon .tart path[stroke="#141B36"]{fill:var(--night);stroke:var(--night)}
+:root #tryon .tart g[fill="#141B36"]{stroke:var(--chalk)}
 </style>
 
 <a class="skip" href="#shop">Skip to the shop</a>
@@ -1051,7 +1288,7 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
   </div>
   <div class="prods">
 
-    <article class="prod" id="r-zig" data-k="zig" aria-labelledby="t-zig" style="--f:#3B4A28;--fg:#FBF7F0;--on:#1B1D2B">
+    <article class="prod" id="r-zig" data-k="zig" data-def="0" aria-labelledby="t-zig" style="--f:#3B4A28;--fg:#FDFCFA;--on:#1F1B18">
       <div class="pic field">
         <div class="rugwrap"><div class="rugbox"><div class="rug"><div class="plane"><picture data-flat><source type="image/avif" media="(max-width: 760px)" srcset="img/m/z1.avif"><source type="image/webp" media="(max-width: 760px)" srcset="img/m/z1.webp"><img src="img/z1.webp" alt="Multicolour Zigzag Rug in Forest green &amp; black" width="1600" height="876" loading="lazy" decoding="async"></picture><span class="sheen" aria-hidden="true"><i></i></span></div></div><span class="shadow s-tight" aria-hidden="true"></span><span class="shadow s-amb" aria-hidden="true"></span></div></div>
       </div>
@@ -1079,7 +1316,7 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
       </div>
     </article>
 
-    <article class="prod flip" id="r-sol" data-k="sol" aria-labelledby="t-sol" style="--f:#1D3A8A;--fg:#FBF7F0;--on:#1B1D2B">
+    <article class="prod flip" id="r-sol" data-k="sol" aria-labelledby="t-sol" style="--f:#1D3A8A;--fg:#FDFCFA;--on:#1F1B18">
       <div class="pic field">
         <div class="rugwrap"><div class="rugbox"><div class="rug"><div class="plane"><picture data-flat><source type="image/avif" media="(max-width: 760px)" srcset="img/m/s1.avif"><source type="image/webp" media="(max-width: 760px)" srcset="img/m/s1.webp"><img src="img/s1.webp" alt="Solid Premium Rug in Royal blue" width="1600" height="1348" loading="lazy" decoding="async"></picture><span class="sheen" aria-hidden="true"><i></i></span></div></div><span class="shadow s-tight" aria-hidden="true"></span><span class="shadow s-amb" aria-hidden="true"></span></div></div>
       </div>
@@ -1103,7 +1340,7 @@ html:has(#cbar:not([hidden])),html:has(body.docked){scroll-padding-bottom:96px}
       </div>
     </article>
 
-    <article class="prod" id="r-chen" data-k="chen" data-def="5" aria-labelledby="t-chen" style="--f:#D3913F;--fg:#1B1D2B;--on:#FBF7F0">
+    <article class="prod" id="r-chen" data-k="chen" data-def="5" aria-labelledby="t-chen" style="--f:#D3913F;--fg:#1F1B18;--on:#FDFCFA">
       <div class="pic field">
         <div class="chen-board">
           <div class="chen-frame" id="chen-frame"><picture data-flat><source type="image/webp" media="(max-width: 760px)" srcset="img/m/chen.webp"><img src="img/chen.jpg" alt="All ten Striped Chenille Mat colourways laid out in two columns" width="1200" height="1801" loading="lazy" decoding="async"></picture></div>
@@ -1317,7 +1554,7 @@ Total: ₹997 (free delivery in Vadodara)<small>Sent from the site</small></div>
 </section>
 </main>
 
-<footer class="foot field" id="foot" style="--f:#141B36;--fg:#FBF7F0;--on:#1B1D2B">
+<footer class="foot field" id="foot" style="--f:#1F1B18;--fg:#FDFCFA;--on:#1F1B18">
   <p class="name" aria-hidden="true">Soft Steps<i></i></p>
   <div class="foot-row">
     <span>Comfort in every step · Vadodara, Gujarat · © 2026</span>
@@ -1386,7 +1623,7 @@ Total: ₹997 (free delivery in Vadodara)<small>Sent from the site</small></div>
       <a class="pill quiet full" id="upil" href="#">Open a UPI app</a>
       <details class="qrd" id="qrd"><summary>Show the UPI QR code</summary><div class="qrin"><img src="img/qr.jpg" alt="UPI QR code for Soft Steps" width="762" height="862" loading="lazy" decoding="async"><p class="fine">Scan it from another phone. On this phone, long-press to save it, then use “scan from gallery” in GPay, PhonePe or Paytm.</p></div></details>
     </div>
-    <div class="box sentbox" id="sentbox" hidden><p><b>Sent it?</b> Jelam replies on WhatsApp to confirm your order and payment.</p><button type="button" class="pill quiet" id="newcart">Start a new cart</button></div>
+    <div class="box sentbox" id="sentbox" hidden><p><b>Sent it?</b> Jelam replies on WhatsApp to confirm your order and payment.</p><button type="button" class="pill quiet" id="newcart">I’ve sent it — start a new cart</button></div>
     <button type="button" class="link" id="editorder">Change something in this order</button>
   </div>
   <div class="df" id="f-pay" hidden>
@@ -1456,9 +1693,12 @@ var PDEF={
 };
 var KS=["zig","sol","chen"],HEX=/^#[0-9a-f]{6}$/i,AID=/^[0-9a-f]{32}$/;
 function cstr(v,max){return typeof v==="string"&&v.trim()&&v.length<=max?v.trim():null}
+/* Names are rendered in several HTML templates. Keep catalogue text to plain labels, never markup or attribute syntax. */
+var LABEL_RE=(function(){try{return new RegExp("^[\\p{L}\\p{M}\\p{N}][\\p{L}\\p{M}\\p{N} &.'()/-]*$","u")}catch(e){return /^[A-Za-z0-9][A-Za-z0-9 &.'()/-]*$/}})();
+function safeLabel(v,max){if(typeof v!=="string")return null;var s=v.trim();return s&&s.length<=max&&LABEL_RE.test(s)?s:null}
 function catDefault(){var r={};KS.forEach(function(k){var d=PDEF[k];r[k]={name:d.name,
   sizes:d.sizes.map(function(z){return {id:z[0],dims:z[1],weight:z[2],price:z[3],stock:"in"}}),
-  colours:$$('.prod[data-k="'+k+'"] [data-n]').map(function(b){return {n:b.dataset.n,bg:b.dataset.bg,stock:"in",hidden:false,photo:null,thumb:null,added:false}})}});
+  colours:$$( '.prod[data-k="'+k+'"] [data-n]').map(function(b){return {n:b.dataset.n,bg:b.dataset.bg,stock:"in",hidden:false,photo:null,thumb:null,added:false}})}});
   return {v:1,updatedAt:"",notice:{on:false,en:"",gu:"",hi:""},ranges:r}}
 /* Validate field by field; unknown fields are kept so the editor can round-trip them. */
 function catNorm(raw,def){
@@ -1469,12 +1709,12 @@ function catNorm(raw,def){
   o.ranges=Object.assign({},raw.ranges);
   KS.forEach(function(k){
     var d=def.ranges[k],r=raw.ranges[k]&&typeof raw.ranges[k]==="object"?raw.ranges[k]:{},rs=Array.isArray(r.sizes)?r.sizes:[],rc=Array.isArray(r.colours)?r.colours:[],x=Object.assign({},r),dc={},seen={},cols=[];
-    x.name=cstr(r.name,80)||d.name;
+    x.name=safeLabel(r.name,80)||d.name;
     x.sizes=d.sizes.map(function(ds){var s=rs.filter(function(q){return q&&q.id===ds.id})[0]||{},pr=typeof s.price==="string"?+s.price:s.price;
-      return Object.assign({},s,{id:ds.id,dims:cstr(s.dims,40)||ds.dims,weight:typeof s.weight==="string"&&s.weight.length<=20?s.weight.trim():ds.weight,
+      return Object.assign({},s,{id:ds.id,dims:ds.dims,weight:ds.weight,
         price:typeof pr==="number"&&isFinite(pr)&&pr>0&&pr<1e6?Math.round(pr):ds.price,stock:s.stock==="out"?"out":"in"})});
     d.colours.forEach(function(c){dc[c.n]=c});
-    rc.forEach(function(c){var nm=c&&cstr(c.n,60);if(!nm||seen[nm])return;seen[nm]=1;var dd=dc[nm];
+    rc.forEach(function(c){var nm=c&&safeLabel(c.n,60);if(!nm||seen[nm])return;seen[nm]=1;var dd=dc[nm];
       cols.push(Object.assign({},c,{n:nm,bg:HEX.test(c.bg)?c.bg:dd?dd.bg:"#E8DDCB",stock:c.stock==="few"||c.stock==="out"?c.stock:"in",hidden:c.hidden===true,
         photo:k!=="chen"&&AID.test(c.photo)?c.photo:null,thumb:k!=="chen"&&AID.test(c.thumb)?c.thumb:null,added:!dd&&c.added===true}))});
     d.colours.forEach(function(c){if(!seen[c.n])cols.push(Object.assign({},c))});
@@ -1485,7 +1725,7 @@ try{CAT=JSON.parse(document.getElementById('ss-catalog').textContent)}catch(e){C
 CAT=catNorm(CAT,CATDEF);
 var P={};KS.forEach(function(k){var r=CAT.ranges[k];P[k]={name:r.name,sizes:r.sizes.map(function(s){return [s.id,s.dims,s.weight,s.price]})}});
 var SIZEIDX={M:0,H:1,L:2,XL:3},pickers={},cart=[],lastMsg="";
-var FG={"#ebc4bd":"#1B1D2B","#d3913f":"#1B1D2B","#2aa5b8":"#1B1D2B","#a29d9c":"#1B1D2B"};
+var FG={"#ebc4bd":"#1F1B18","#d3913f":"#1F1B18","#2aa5b8":"#1F1B18","#a29d9c":"#1F1B18"};
 function inr(n){return "₹"+n.toLocaleString("en-IN")}
 /* Stock: STK[k] = {sizes:["in"|"out" by size], col:{colour name: "in"|"few"|"out"}} for the colours on show.
    A hidden or unknown colour, or a size marked out, cannot be bought. */
@@ -1529,13 +1769,13 @@ applyCatalog();
 function canBuyAny(k){return KS.indexOf(k)>=0&&STK[k]&&Object.keys(STK[k].col).length>0}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove("on")},1800)}
-function swatch(k,colour){return $$('.prod[data-k="'+k+'"] [data-n]').filter(function(x){return x.dataset.n===colour})[0]}
+function swatch(k,colour){return $$( '.prod[data-k="'+k+'"] [data-n]').filter(function(x){return x.dataset.n===colour})[0]}
 function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:$('.prod[data-k="chen"] .pic img').src}
 /* Text colour on a dyed panel: the house picks for the known light colours, else by luminance (owner-added colours). */
-function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FBF7F0";
+function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FDFCFA";
   var L=[0,2,4].map(function(i){var v=parseInt(m[1].substr(i,2),16)/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
-  return .2126*L[0]+.7152*L[1]+.0722*L[2]>.3?"#1B1D2B":"#FBF7F0"}
-function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FBF7F0"?"#1B1D2B":"#FBF7F0";el.dataset.tone=fg==="#FBF7F0"?"dark":"light";
+  var y=.2126*L[0]+.7152*L[1]+.0722*L[2];if(y>=.23)return "#1F1B18";if(y>=.18)return "#000000";return "#FFFFFF"}
+function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FDFCFA"?"#1F1B18":"#FDFCFA";el.dataset.tone=fg==="#FDFCFA"?"dark":"light";
   if(from&&fx("dye",el,hex,fg,on,from))return;
   el.style.setProperty("--f",hex);el.style.setProperty("--fg",fg);el.style.setProperty("--on",on)}
 function radio(group,btn){$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
@@ -1681,22 +1921,22 @@ function total(){return cart.reduce(function(a,x){return a+x.p*x.q},0)}
 function save(){try{localStorage.setItem("ss_cart2",JSON.stringify(cart))}catch(e){}}
 /* An order on the pay step is kept until it is sent and cleared, or the cart changes. */
 var pend=null;
-function sig(){return JSON.stringify(cart.map(function(x){return [x.k,x.size,x.colour,x.q]}))}
+function sig(){return JSON.stringify(cart.map(function(x){return [x.k,x.size,x.colour,x.q,x.p]}))}
 function savePend(){try{if(pend)localStorage.setItem("ss_pending",JSON.stringify(pend));else localStorage.removeItem("ss_pending")}catch(e){}}
 function fillPay(o){lastMsg=o.msg;$("#sendwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(o.msg);$("#oid").textContent="#"+o.oid;$("#oname").textContent=o.nm;
-  $("#payamt").textContent=inr(o.t)+(o.out?" + delivery once confirmed":"");$("#upil").href="upi://pay?pa="+UPI+"&pn=Jelam%20Panchal&am="+o.t+"&cu=INR&tn="+encodeURIComponent("Soft Steps "+o.oid);$("#sentbox").hidden=!o.sent}
+  $("#payamt").textContent=inr(o.t)+(o.out?" + delivery once confirmed":"");$("#upil").href="upi://pay?pa="+UPI+"&pn=Jelam%20Panchal&am="+o.t+"&cu=INR&tn="+encodeURIComponent("Soft Steps "+o.oid);$("#sentbox").hidden=!(o.sent||o.opened)}
 /* Lines keep their colour and size; price and size text always come from the catalog (P). */
 function lineIdx(x){var i=SIZEIDX[String(x.size).split(" ")[0]];return i==null?-1:i}
 function refresh(x){var z=P[x.k]&&P[x.k].sizes[lineIdx(x)];if(z){x.p=z[3];x.size=z[0]+" "+z[1]}}
 function lineOK(x){return canBuy(x.k,x.colour,lineIdx(x))}
 function render(){
   cart.forEach(refresh);var bad=cart.filter(function(x){return !lineOK(x)}).length;
-  if(pend&&(pend.sig!==sig()||pend.t!==total()||bad)){pend=null;savePend()}
+  if(pend&&!pend.sent&&(pend.sig!==sig()||pend.t!==total()||bad)){try{localStorage.setItem("ss_previous_pending",JSON.stringify(pend));if(pend.details)localStorage.setItem("ss_details2",JSON.stringify(pend.details))}catch(e){}var oldOid=pend.oid;pend=null;savePend();toast("Cart changed. Check previous order #"+oldOid+" with Jelam before paying again.")}
   var n=count();$("#cnt").textContent=n;$("#cnt").hidden=!n;$("#cartbtn").setAttribute("aria-label","Open cart, "+n+(n===1?" item":" items"));
-  $("#cbar").hidden=!n||!$("#drawer").hidden;$("#cbn").textContent=pend?"Finish order #"+pend.oid:"View cart · "+n+(n>1?" items":" item");$("#cbt").textContent=inr(total());
+  $("#cbar").hidden=!n||!$("#drawer").hidden;$("#cbn").textContent=pend&&!pend.sent?(pend.opened?"Return to order #"+pend.oid:"Finish order #"+pend.oid):"View cart · "+n+(n>1?" items":" item");$("#cbt").textContent=inr(total());
   $("#v-cart").innerHTML=cart.length?cart.map(function(x,i){var ok=lineOK(x);return '<div class="line'+(ok?"":" oos")+'">'+(window.SS&&SS.lineThumb?SS.lineThumb(x.k,x.colour):'<img src="'+imgFor(x.k,x.colour)+'" alt="">')+'<div><b>'+esc(P[x.k].name)+'</b><small>'+esc(x.colour)+'</small><small>'+esc(x.size)+' · '+inr(x.p)+' each</small>'+(ok?'':'<small class="oosn">Now out of stock</small>')+'<div class="stepper"><button type="button" data-i="'+i+'" data-d="-1" aria-label="One less, '+esc(x.colour+" "+P[x.k].name)+'">−</button><output>'+x.q+'</output><button type="button" data-i="'+i+'" data-d="1" aria-label="One more, '+esc(x.colour+" "+P[x.k].name)+'"'+(ok?'':' disabled')+'>+</button></div><button type="button" class="link rm" data-i="'+i+'" data-d="0" aria-label="Remove '+esc(x.colour+" "+P[x.k].name)+'">Remove</button></div><span class="amt">'+inr(x.p*x.q)+'</span></div>'}).join(""):'<div class="empty"><p>Your cart is empty.</p><button type="button" class="pill quiet" id="browse">Browse mats</button></div>';
   $("#sub").textContent=inr(total());$("#go").disabled=!cart.length||bad>0;$("#cart-oos").hidden=!bad;
-  var br=$("#browse");if(br)br.onclick=function(){closeD();$("#shop").scrollIntoView({behavior:"smooth"})};
+  var br=$("#browse");if(br)br.onclick=function(){closeD();var rm=false;try{rm=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}$("#shop").scrollIntoView({behavior:rm?"auto":"smooth"})};
   save();
   fx("rendered",n);
 }
@@ -1704,22 +1944,32 @@ $("#v-cart").addEventListener("click",function(e){var b=e.target.closest("button
   /* render() rebuilds the lines, so put focus back on the same control (or the next sensible one) and say what changed */
   $("#cartlive").textContent=gone?"Removed "+x.colour+" "+P[x.k].name:x.colour+" "+P[x.k].name+", quantity "+x.q;
   var nb=gone?($('#v-cart button[data-i="'+Math.min(i,cart.length-1)+'"][data-d="1"]')||$("#browse")):$('#v-cart button[data-i="'+i+'"][data-d="'+d+'"]');if(nb)try{nb.focus({preventScroll:true})}catch(er){}});
-var lastFocus=null,titles={cart:"Your cart",det:"Delivery details",pay:"Pay & send"},VIEWS=["cart","det","pay"];
-function view(v){VIEWS.forEach(function(x,i){var li=$$("#prog li")[i];$("#v-"+x).hidden=x!==v;$("#f-"+x).hidden=x!==v;li.classList.toggle("on",VIEWS.indexOf(v)>=i);if(x===v)li.setAttribute("aria-current","step");else li.removeAttribute("aria-current")});$("#dtitle").textContent=titles[v];$("#v-"+v).scrollTop=0}
+var lastFocus=null,titles={cart:"Your cart",det:"Delivery details",pay:"Pay & send"},VIEWS=["cart","det","pay"],checkoutEntries=0,checkoutEpoch=Date.now();
+function view(v){VIEWS.forEach(function(x,i){var li=$$("#prog li")[i];$("#v-"+x).hidden=x!==v;$("#f-"+x).hidden=x!==v;li.classList.toggle("on",VIEWS.indexOf(x)>=i);if(x===v)li.setAttribute("aria-current","step");else li.removeAttribute("aria-current")});$("#dtitle").textContent=titles[v];$("#v-"+v).scrollTop=0}
+function pushCheckoutState(v){try{var st=history.state&&typeof history.state==="object"?Object.assign({},history.state):{};if(!checkoutEntries){var base=Object.assign({},st);base.__softStepsBase=true;base.__softStepsEpoch=checkoutEpoch;delete base.__softStepsCheckout;delete base.__softStepsStep;delete base.__softStepsOrder;history.pushState(base,"",location.href);checkoutEntries=1;st={}}st.__softStepsCheckout=true;st.__softStepsStep=v;st.__softStepsOrder=pend&&!pend.sent?pend.oid:null;st.__softStepsEpoch=checkoutEpoch;history.pushState(st,"",location.href);checkoutEntries++}catch(e){}}
 /* A step change hides the button that was pressed, so focus moves to the new step's title. */
-function step(v){view(v);try{$("#dtitle").focus({preventScroll:true})}catch(e){}}
-function openD(v){lastFocus=document.activeElement;view(pend&&(!v||v==="cart")?"pay":v||"cart");$("#drawer").hidden=false;$("#scrim").hidden=false;$("#cbar").hidden=true;document.body.style.overflow="hidden";$("#dclose").focus();fx("drawer",true)}
-function closeD(){$("#drawer").hidden=true;$("#scrim").hidden=true;document.body.style.overflow="";render();fx("drawer",false);if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+function step(v,fromPop){view(v);if(!fromPop&&!$("#drawer").hidden)pushCheckoutState(v);try{$("#dtitle").focus({preventScroll:true})}catch(e){}}
+function openD(v){var wasOpen=!$("#drawer").hidden;lastFocus=document.activeElement;var target=pend&&(!v||v==="cart")?"pay":v||"cart",current=VIEWS.filter(function(x){return !$("#v-"+x).hidden})[0];view(target);$("#drawer").hidden=false;$("#scrim").hidden=false;$("#cbar").hidden=true;document.body.style.overflow="hidden";if(!wasOpen||current!==target)pushCheckoutState(target);$("#dclose").focus();fx("drawer",true)}
+function closeD(fromPop){var back=fromPop?0:Math.max(0,checkoutEntries-1);checkoutEntries=0;$("#drawer").hidden=true;$("#scrim").hidden=true;document.body.style.overflow="";render();fx("drawer",false);if(lastFocus&&lastFocus.focus)lastFocus.focus();if(back)try{history.go(-back)}catch(e){}}
+window.addEventListener("popstate",function(e){if($("#drawer").hidden){checkoutEntries=0;return}checkoutEntries=Math.max(0,checkoutEntries-1);var st=e.state;if(st&&st.__softStepsBase===true){if(st.__softStepsEpoch!==checkoutEpoch){view("cart");try{history.replaceState(Object.assign({},st,{__softStepsEpoch:checkoutEpoch}),"",location.href)}catch(x){}try{$("#dtitle").focus({preventScroll:true})}catch(x){}return}closeD(true);return}if(st&&st.__softStepsCheckout===true&&VIEWS.indexOf(st.__softStepsStep)>=0){var stale=st.__softStepsEpoch!==checkoutEpoch||(st.__softStepsOrder&&(!pend||st.__softStepsOrder!==pend.oid));if(stale){view("cart");try{history.replaceState(Object.assign({},st,{__softStepsStep:"cart",__softStepsOrder:pend&&!pend.sent?pend.oid:null,__softStepsEpoch:checkoutEpoch}),"",location.href)}catch(x){}}else view(st.__softStepsStep);try{$("#dtitle").focus({preventScroll:true})}catch(x){}return}closeD(true)});
 $("#cartbtn").onclick=function(){openD("cart")};$("#cbar").onclick=function(){openD("cart")};
 $("#dclose").onclick=closeD;$("#scrim").onclick=closeD;
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!$("#drawer").hidden)closeD()});
 function dl(){return $("input[name=dl]:checked").value}
+function collectDetails(){return {name:$("#o-name").value,phone:$("#o-ph").value,address:$("#o-ad").value,city:$("#o-ct").value,pin:$("#o-pin").value,email:$("#o-email").value,giftOn:$("#o-gift-on").checked,gift:$("#o-gift").value,delivery:dl()}}
+function applyDetails(d){if(!d||typeof d!=="object")return;[["#o-name","name",100],["#o-ph","phone",20],["#o-ad","address",500],["#o-ct","city",100],["#o-pin","pin",6],["#o-email","email",254],["#o-gift","gift",200]].forEach(function(a){if(typeof d[a[1]]==="string")$(a[0]).value=d[a[1]].slice(0,a[2])});$("#o-gift-on").checked=!!d.giftOn;if(d.delivery==="out"||d.delivery==="vad"){var r=$('input[name="dl"][value="'+d.delivery+'"]');if(r)r.checked=true}try{pinInput.dispatchEvent(new Event("input",{bubbles:true}))}catch(e){}}
+function saveDetailsDraft(){var d=collectDetails(),empty=!d.name&&!d.phone&&!d.address&&!d.city&&!d.pin&&!d.email&&!d.gift&&!d.giftOn;try{if(empty)localStorage.removeItem("ss_details2");else{d.__savedAt=Date.now();localStorage.setItem("ss_details2",JSON.stringify(d))}}catch(e){}}
+function restoreDetailsDraft(raw){try{var d=JSON.parse(raw||"null");if(d&&typeof d==="object"&&!(typeof d.__savedAt==="number"&&(!Number.isFinite(d.__savedAt)||Date.now()-d.__savedAt>7*864e5))){applyDetails(d);return true}localStorage.removeItem("ss_details2")}catch(e){try{localStorage.removeItem("ss_details2")}catch(x){}}return false}
+function clearDetailsDraft(){try{localStorage.removeItem("ss_details2")}catch(e){}}
+["#o-name","#o-ph","#o-ad","#o-ct","#o-pin","#o-email","#o-gift","#o-gift-on"].forEach(function(sel){$(sel).addEventListener("input",saveDetailsDraft);$(sel).addEventListener("change",saveDetailsDraft)});$$("input[name=dl]").forEach(function(r){r.addEventListener("change",saveDetailsDraft)});
 function summary(){$("#lines").innerHTML=cart.map(function(x){return '<div class="sl"><span>'+esc(P[x.k].name)+', '+esc(x.size.split(" ")[0])+' · '+esc(x.colour)+' × '+x.q+'</span><b>'+inr(x.p*x.q)+'</b></div>'}).join("")+'<div class="sl"><span>Delivery</span><b>'+(dl()==="out"?"Confirmed on call":"Free")+'</b></div>';$("#tot").textContent=inr(total())+(dl()==="out"?" + delivery":"")}
 $("#go").onclick=function(){if(!cart.length||!cart.every(lineOK))return;summary();$("#oerr").textContent="";step("det")};
 $("#back").onclick=function(){step("cart")};
 $$("input[name=dl]").forEach(function(r){r.onchange=summary});
+var pinInput=$("#o-pin");pinInput.addEventListener("input",function(){var v=pinInput.value.replace(/\D/g,"").slice(0,6);if(v!==pinInput.value)pinInput.value=v});pinInput.addEventListener("paste",function(e){var v="";try{v=(e.clipboardData||window.clipboardData).getData("text")}catch(x){}if(!v)return;e.preventDefault();pinInput.value=v.replace(/\D/g,"").slice(0,6);pinInput.dispatchEvent(new Event("input",{bubbles:true}))});
+var fastActionAt=0,fastActionEl=null;document.addEventListener("click",function(e){var el=e.target.closest&&e.target.closest("[data-add],#go,#order-btn,#v-cart button[data-i]");if(!el)return;var now=Date.now();if(el===fastActionEl&&now-fastActionAt<350){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();return}fastActionAt=now;fastActionEl=el},true);
 $("#order-btn").onclick=function(){
-  var v=function(id){return $(id).value.trim()},nm=v("#o-name"),ph=v("#o-ph"),ad=v("#o-ad"),ct=v("#o-ct"),pin=v("#o-pin"),em=v("#o-email");
+  var v=function(id){return $(id).value.trim()},nm=v("#o-name"),ph=v("#o-ph"),ad=v("#o-ad"),ct=v("#o-ct"),pin=v("#o-pin").replace(/\D/g,"").slice(0,6),em=v("#o-email");$("#o-pin").value=pin;var pinRadio=$('input[name="dl"][value="'+(/^390\d{3}$/.test(pin)?"vad":"out")+'"]');if(/^[1-9]\d{5}$/.test(pin)&&pinRadio){pinRadio.checked=true;pinRadio.dispatchEvent(new Event("change"))}
   var pd=ph.replace(/[\s()+-]/g,"").replace(/^(91|0)(?=\d{10}$)/,""),err="",bad=null;
   if(!nm){err="Add your name.";bad="#o-name"}
   else if(!/^[6-9]\d{9}$/.test(pd)){err="Enter a 10-digit Indian mobile number, like 98765 43210.";bad="#o-ph"}
@@ -1730,37 +1980,40 @@ $("#order-btn").onclick=function(){
   ["#o-name","#o-ph","#o-ad","#o-ct","#o-pin","#o-email"].forEach(function(id){$(id).removeAttribute("aria-invalid");$(id).removeAttribute("aria-describedby")});
   $("#oerr").textContent=err;if(bad){$(bad).setAttribute("aria-invalid","true");$(bad).setAttribute("aria-describedby","oerr");$(bad).focus();return}
   if(!cart.every(lineOK)){step("cart");render();return}
-  var t=total(),oid="SS-"+Date.now().toString(36).toUpperCase().slice(-6),gift=$("#o-gift-on").checked?v("#o-gift"):"";
-  lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(dl()==="out"?" + delivery outside Vadodara (please confirm charges)":" (free delivery in Vadodara)")+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+(gift?"\n\nGift note: "+gift:"")+"\n\nI will share the UPI payment screenshot here.";
-  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false};savePend();fillPay(pend);
+  var t=total(),reusePend=pend&&!pend.sent&&pend.sig===sig()&&pend.t===t,oid=reusePend?pend.oid:"SS-"+Date.now().toString(36).toUpperCase().slice(-6),gift=$("#o-gift-on").checked?v("#o-gift"):"";
+  lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(/^390\d{3}$/.test(pin)?" (free delivery in Vadodara)":(/^391\d{3}$/.test(pin)?" (Vadodara district delivery charges to be confirmed)":" + delivery outside Vadodara (please confirm charges)"))+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+(gift?"\n\nGift note: "+gift:"")+"\n\nI will share the UPI payment screenshot here.";
+  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false,details:collectDetails()};savePend();clearDetailsDraft();fillPay(pend);
   step("pay");render();
 };
-function copyText(text,btn){var done=function(){var o=btn.textContent;btn.textContent="Copied";setTimeout(function(){btn.textContent=o},1500)};
-  var fallback=function(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done()}catch(e){toast("Select and copy: "+text)}ta.remove()};
-  try{navigator.clipboard.writeText(text).then(done,fallback)}catch(e){fallback()}}
+function copyText(text,btn){if(!btn||btn._cp)return;btn._cp=true;var original=btn.dataset.copyLabel||btn.textContent;if(!btn.dataset.copyLabel)btn.dataset.copyLabel=original;var timer;var done=function(){btn.textContent="Copied";clearTimeout(timer);timer=setTimeout(function(){btn.textContent=original;btn._cp=false},1500)};
+  var fallback=function(){var ta=document.createElement("textarea"),ok=false;ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{ok=document.execCommand("copy")}catch(e){}ta.remove();if(ok)done();else{btn._cp=false;toast("Could not copy. Please select and copy the text manually.")}try{btn.focus({preventScroll:true})}catch(e){}};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done,fallback);else fallback()}catch(e){fallback()}}
 document.addEventListener("click",function(e){var b=e.target.closest("[data-copy]");if(b)copyText(b.dataset.copy,b)});
 $("#copyorder").onclick=function(){copyText(lastMsg,this)};
-$("#sendwa").addEventListener("click",function(){if(pend){pend.sent=true;savePend();setTimeout(function(){$("#sentbox").hidden=false},600)}});
-$("#newcart").onclick=function(){cart.length=0;pend=null;savePend();render();step("cart")};
-$("#editorder").onclick=function(){step("cart")};
+$("#sendwa").addEventListener("click",function(){if(!pend)return;var oid=pend.oid;pend.opened=true;pend.openedAt=Date.now();savePend();setTimeout(function(){if(pend&&pend.oid===oid)$("#sentbox").hidden=false},600)});
+$("#newcart").onclick=function(){if(pend){pend.sent=true;pend.sentAt=Date.now();try{localStorage.setItem("ss_last_sent",JSON.stringify(pend))}catch(e){}}cart.length=0;pend=null;savePend();save();clearDetailsDraft();applyDetails({name:"",phone:"",address:"",city:"",pin:"",email:"",giftOn:false,gift:"",delivery:"vad"});checkoutEpoch++;checkoutEntries=0;render();step("cart")};
+$("#editorder").onclick=function(){if(pend&&pend.details)applyDetails(pend.details);saveDetailsDraft();step("cart")};
 try{if(matchMedia("(min-width: 761px)").matches){$("#qrd").open=true;$("#enqd").open=true}}catch(e){}
 $("#enq").onsubmit=function(e){e.preventDefault();var n=$("#e-n").value.trim(),p=$("#e-p").value.trim();
   if(!n||!p){$("#eerr").textContent="Add your name and phone number so we can reply.";$(n?"#e-p":"#e-n").focus();return}
   $("#eerr").textContent="";
   var msg="Enquiry – Soft Steps\n\nName: "+n+"\nPhone: "+p+"\nInterested in: "+$("#e-s").value+($("#e-m").value.trim()?"\nMessage: "+$("#e-m").value.trim():"");
   $("#enqwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(msg);$("#enqdone").hidden=false};
-try{var saved=JSON.parse(localStorage.getItem("ss_cart2")||"[]");if(Array.isArray(saved))saved.forEach(function(x){if(x&&P[x.k]&&x.q>0&&typeof x.colour==="string"&&typeof x.size==="string")cart.push(x)})}catch(e){}
-try{var pd=JSON.parse(localStorage.getItem("ss_pending")||"null");if(pd&&pd.oid&&pd.msg&&pd.sig===sig()&&Date.now()-pd.at<7*864e5){pend=pd;fillPay(pd)}else localStorage.removeItem("ss_pending")}catch(e){}
+function restoreCartFromStorage(persist){var raw=null;try{raw=localStorage.getItem("ss_cart2");var saved=JSON.parse(raw||"[]"),clean=[];if(Array.isArray(saved))saved.forEach(function(x){try{if(!x||!P[x.k]||typeof x.colour!=="string"||typeof x.size!=="string")return;var letter=x.size.trim().split(/\s+/)[0],si=SIZEIDX[letter],z=P[x.k].sizes[si],q=Math.max(1,Math.min(99,Math.floor(Number(x.q))));if(!z||!Number.isFinite(q))return;var id=x.k+"|"+z[0]+"|"+x.colour,it=clean.filter(function(y){return y.id===id})[0];if(it)it.q=Math.min(99,it.q+q);else clean.push({id:id,k:x.k,size:z[0]+" "+z[1],colour:x.colour,p:z[3],q:q})}catch(e){}});cart=clean;if(persist&&raw!==JSON.stringify(clean))save()}catch(e){cart=[];try{localStorage.removeItem("ss_cart2")}catch(x){}}}
+function restorePendingFromStorage(){try{var raw=localStorage.getItem("ss_pending"),pd=JSON.parse(raw||"null");if(pd&&typeof pd.oid==="string"&&typeof pd.msg==="string"&&typeof pd.t==="number"&&typeof pd.at==="number"&&typeof pd.sent==="boolean"&&Date.now()-pd.at<7*864e5){if(pd.sent){try{localStorage.setItem("ss_previous_pending",JSON.stringify(pd))}catch(x){}pend=null;localStorage.removeItem("ss_pending");cart=[];save();toast("A previous order was marked sent. Its items were removed to avoid a duplicate order.")}else{pend=pd;if(pd.details)applyDetails(pd.details);fillPay(pd)}}else{pend=null;localStorage.removeItem("ss_pending")}}catch(e){pend=null;try{localStorage.removeItem("ss_pending")}catch(x){}}}
+restoreDetailsDraft(localStorage.getItem("ss_details2"));
+restoreCartFromStorage(true);restorePendingFromStorage();
+window.addEventListener("storage",function(e){if(["ss_cart2","ss_pending","ss_details2"].indexOf(e.key)<0)return;restoreCartFromStorage(false);restorePendingFromStorage();if(e.key==="ss_details2"){if(e.newValue)restoreDetailsDraft(e.newValue);else applyDetails({name:"",phone:"",address:"",city:"",pin:"",email:"",giftOn:false,gift:"",delivery:"vad"})}render();if(!$("#drawer").hidden&&pend&&e.key==="ss_pending")view("pay")});
 render();
 ready=true;
 /* SS.catalog: the catalog in use, complete and validated (every range, size and colour; hidden and owner-added colours
    included); read-only, clone it before editing. SS.stock(k, colour, sizeIdx|letter) -> "in"|"few"|"out";
    SS.canBuy(...) -> boolean. */
 window.SS={P:P,SLIDES:SLIDES,SIZEIDX:SIZEIDX,catalog:CAT,catalogDefault:CATDEF,stock:stock,canBuy:canBuy,sizeStock:sizeStock,stockLabel:stockLabel,stkTag:stkTag,askURL:askURL,openAsk:openAsk,markSizes:markSizes,slideFix:slideFix,pickers:pickers,addToCart:addToCart,swatch:swatch,imgFor:imgFor,inr:inr,esc:esc,toast:toast,copyText:copyText,radio:radio,arrows:arrows,
-  render:render,openD:openD,closeD:closeD,show:show,hsSet:hsSet,getHi:function(){return hi},getHs:function(){return hs}};
+  render:render,openD:openD,closeD:closeD,show:show,fieldForeground:fgFor,hsSet:hsSet,getHi:function(){return hi},getHs:function(){return hs}};
 })();
 </script>
-<script src="fx.js"></script><script src="features.js"></script><script src="touchfx.js"></script><script src="shop.js"></script><script src="pairs.js"></script><script src="tryon.js"></script><script src="lang.js"></script>
+<script src="fx.js"></script><script src="features.js"></script><script src="touchfx.js"></script><script src="shop.js"></script><script src="pairs.js"></script><script src="tryon.js"></script><script src="lang.js"></script><script src="wow.js"></script><script src="extras.js"></script>
 <script>
 /* Shop owner's way in: only a viewer who can edit this artifact (the owner, or an editor) sees the footer link, and
    only then are admin.css and admin.js loaded (once). #admin opens the editor straight away for them and shows a small

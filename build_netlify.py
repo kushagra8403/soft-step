@@ -25,13 +25,56 @@ logo = Image.open(os.path.join(img_src, 'logo.jpg')).convert('RGB')
 for n in (180, 192, 512):
     bg = Image.new('RGB', (n, n), (242, 234, 220)); lg = logo.resize((int(n * .86),) * 2, Image.LANCZOS)
     bg.paste(lg, ((n - lg.width) // 2,) * 2); bg.save(os.path.join(DIST, 'img', f'icon-{n}.png'))
-# P table -> structured data with the real prices
+# Seed from built-in defaults, then prefer the actual catalog saved in the page.
+# This matters after the owner changes prices or stock in the Artifact admin: the
+# Netlify export must describe the same catalog as the visible shop.
 P = {}
+AVAIL = {}
 for k, name, sizes in re.findall(r'(\w+):\{name:"([^"]+)",sizes:(\[\[.*?\]\])\}', page):
     P[k] = (name, json.loads(sizes))
+    AVAIL[k] = "https://schema.org/InStock"
+
+catalog_match = re.search(r'<script type="application/json" id="ss-catalog">([\s\S]*?)</script>', page)
+if catalog_match:
+    try:
+        catalog = json.loads(catalog_match.group(1))
+        ranges = catalog.get("ranges", {})
+        # Artifact-hosted /_blob/ uploads do not exist on a static Netlify site.
+        # Stop rather than quietly publishing broken product photos.
+        for item in ranges.values():
+            if not isinstance(item, dict):
+                continue
+            for colour in item.get("colours", []):
+                if not isinstance(colour, dict):
+                    continue
+                for field in ("photo", "thumb"):
+                    src = colour.get(field)
+                    if isinstance(src, str) and src.startswith("/_blob/"):
+                        raise SystemExit(
+                            "Netlify export blocked: a catalogue photo still points to an Artifact /_blob/ URL. "
+                            "Copy the approved image into the site's img/ folder and update the catalogue reference."
+                        )
+        for k, item in ranges.items():
+            if k not in ("zig", "sol", "chen") or not isinstance(item, dict):
+                continue
+            sizes = []
+            for z in item.get("sizes", []):
+                if not isinstance(z, dict) or not isinstance(z.get("price"), (int, float)) or z["price"] <= 0:
+                    continue
+                sizes.append([str(z.get("id", "")), str(z.get("dims", "")), str(z.get("weight", "")), z["price"]])
+            if not sizes:
+                continue
+            P[k] = (str(item.get("name") or P.get(k, (k, []))[0]), sizes)
+            colours = [c for c in item.get("colours", []) if isinstance(c, dict) and not c.get("hidden") and c.get("stock") != "out"]
+            buyable_size = any(z.get("stock") != "out" for z in item.get("sizes", []) if isinstance(z, dict))
+            AVAIL[k] = "https://schema.org/InStock" if colours and buyable_size else "https://schema.org/OutOfStock"
+    except (ValueError, TypeError, AttributeError):
+        # Keep the baked-in safe fallback rather than failing a static export.
+        pass
+
 offers = [{"@type": "Product", "name": name, "brand": {"@type": "Brand", "name": "Soft Steps"},
            "image": URL + "img/" + {"zig": "z1.webp", "sol": "s4.webp", "chen": "chen.jpg"}.get(k, "og.jpg"),
-           "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": min(z[3] for z in sz), "highPrice": max(z[3] for z in sz), "offerCount": len(sz), "availability": "https://schema.org/InStock"}}
+           "offers": {"@type": "AggregateOffer", "priceCurrency": "INR", "lowPrice": min(z[3] for z in sz), "highPrice": max(z[3] for z in sz), "offerCount": len(sz), "availability": AVAIL.get(k, "https://schema.org/InStock")}}
           for k, (name, sz) in P.items()]
 ld = {"@context": "https://schema.org", "@type": "Store", "name": "Soft Steps", "url": URL, "image": URL + "img/og.jpg",
       "description": "Plush, anti-slip rugs, doormats and bath mats from Vadodara.", "telephone": "+91 90994 41429",
@@ -84,6 +127,10 @@ open(os.path.join(DIST, 'netlify.toml'), 'w').write('''[build]
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https: upi:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; upgrade-insecure-requests"
 ''')
 tot = sum(os.path.getsize(os.path.join(d, f)) for d, _, fs in os.walk(DIST) for f in fs)
 print('built', DIST, 'files', sum(len(fs) for _, _, fs in os.walk(DIST)), 'MB', round(tot / 1e6, 1), 'scripts', scripts, 'products', list(P))

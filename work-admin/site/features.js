@@ -468,7 +468,7 @@
       if (!/^\d{6}$/.test(v)) { note.textContent = ""; return; }
       note.textContent = pinMsg(v);
       if (/^[1-9]\d{5}$/.test(v)) sset("ss_pin", v);
-      var r = /^390\d{3}$/.test(v) ? "vad" : (/^[1-9]\d{5}$/.test(v) && !/^391/.test(v)) ? "out" : null;
+      var r = /^390\d{3}$/.test(v) ? "vad" : /^[1-9]\d{5}$/.test(v) ? "out" : null;
       if (!r) return;
       var radio = $('input[name="dl"][value="' + r + '"]'); if (!radio) return;
       radio.checked = true;
@@ -519,6 +519,8 @@
     bed: { t: "Suggested: a 24×60 in XL runner along the side of the bed.", k: "zig", l: "XL" },
     kitchen: { t: "Suggested: a 24×60 in XL runner along the counter.", k: "sol", l: "XL" }
   };
+  /* Shared read-only fit suggestions; extras.js consumes this map rather than duplicating advice. */
+  try { SS.fitSug = SUG; } catch (e) {}
   var FN = { zig: "Zigzag", sol: "Solid Premium", chen: "Chenille" };
   var lastPick = null, patTok = 0, NH = {}, fitState = { spot: "main", size: "M" };
   function setLastPick(k, c) {

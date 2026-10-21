@@ -1,0 +1,234 @@
+name: Soft Steps CI
+concurrency:
+  group: soft-steps-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-tests:
+    name: Browser regression tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: npm install --no-save playwright
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Check JavaScript syntax
+        run: |
+          node --check work-admin/site/features.js
+          node --check work-admin/site/admin.js
+          node --check work-admin/site/fx.js
+          node --check work-admin/site/touchfx.js
+          node --check work-admin/site/shop.js
+          node --check work-admin/site/pairs.js
+          node --check work-admin/site/tryon.js
+          node --check work-admin/site/lang.js
+          node --check work-admin/site/wow.js
+          node --check work-admin/site/extras.js
+          node --check work-admin/site/lang-gu.js
+          node --check work-admin/site/lang-hi.js
+          node --check work-admin/tests/core.cjs
+          node --check work-admin/tests/admin.cjs
+          node --check work-admin/tests/integ.cjs
+          node --check qa.cjs
+      - name: Static security regression checks
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const html = fs.readFileSync('work-admin/site/softsteps.html', 'utf8');
+          const admin = fs.readFileSync('work-admin/site/admin.js', 'utf8');
+          const headers = fs.readFileSync('netlify.toml', 'utf8');
+          const scripts = [...html.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["'][^>]*>/gi)].map(m => m[1]);
+          const remote = scripts.filter(src => /^(?:[a-z]+:)?\/\//i.test(src) || /^[a-z][a-z0-9+.-]*:/i.test(src));
+          if (remote.length) throw new Error('Remote script sources are not allowed: ' + remote.join(', '));
+          if (/\.innerHTML\s*=|\.outerHTML\s*=|insertAdjacentHTML\s*\(/.test(admin)) {
+            throw new Error('Admin UI must build DOM nodes and use textContent, not HTML string sinks.');
+          }
+          const links = [...html.matchAll(/<a\b[^>]*\btarget=["']_blank["'][^>]*>/gi)].map(m => m[0]);
+          for (const tag of links) {
+            const rel = (tag.match(/\brel=["']([^"']+)["']/i) || [,''])[1].toLowerCase().split(/\s+/);
+            if (!rel.includes('noopener') && !rel.includes('noreferrer')) {
+              throw new Error('External tab link is missing rel=noopener/noreferrer: ' + tag.slice(0, 180));
+            }
+          }
+          const cspLine = headers.split('\n').find(x => /Content-Security-Policy\s*=/.test(x));
+          if (!cspLine) throw new Error('Missing Content-Security-Policy header');
+          const csp = cspLine.split('=', 2)[1];
+          for (const required of ["default-src 'self'", "object-src 'none'", "frame-ancestors 'none'", "connect-src 'self'"]) {
+            if (!csp.includes(required)) throw new Error('CSP missing restrictive directive: ' + required);
+          }
+          if (/script-src[^;]*unsafe-eval|script-src[^;]*\*/i.test(csp)) {
+            throw new Error('CSP must not allow unsafe-eval or wildcard script sources');
+          }
+          console.log('Static security checks OK: local scripts, safe admin DOM construction, safe new-tab links, restrictive CSP.');
+          NODE
+      - name: Check Kora Quiet palette contrast
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const css = fs.readFileSync('work-admin/site/softsteps.html', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+          const roots = [...css.matchAll(/:root\s*\{([^}]+)\}/g)];
+          if (!roots.length) throw new Error('Missing palette root');
+          const vars = {};
+          for (const root of roots) for (const m of root[1].matchAll(/(--[\w-]+)\s*:\s*(#[0-9a-fA-F]{3,8})/g)) vars[m[1]] = m[2];
+          function rgb(h) { let x=h.slice(1); if(x.length===3)x=x.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(x.slice(i,i+2),16)); }
+          function lum(h) { return rgb(h).map(v=>v/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0); }
+          function ratio(a,b) { const x=lum(a),y=lum(b); return (Math.max(x,y)+.05)/(Math.min(x,y)+.05); }
+          const textPairs=[['--kajal','--kora'],['--kajal','--chalk'],['--kajal','--haldi'],['--chalk','--neel'],['--chalk','--night'],['--chalk','--kumkum'],['--chalk','--wa'],['--haldi-deep','--chalk'],['--mitti','--kora'],['--mitti','--chalk'],['--mist','--night'],['--neel','--kora'],['--kajal','--kora-2'],['--haldi','--night'],['--kumkum','--chalk']];
+          for (const [fg,bg] of textPairs) { if(!vars[fg]||!vars[bg]) throw new Error('Missing palette token '+fg+' or '+bg); const r=ratio(vars[fg],vars[bg]); if(r<4.5) throw new Error(fg+' on '+bg+' fails 4.5:1 ('+r.toFixed(2)+')'); }
+          const uiPairs=[['--edge','--chalk'],['--edge','--kora'],['--edge','--kora-2']];
+          for (const [fg,bg] of uiPairs) { if(!vars[fg]||!vars[bg]) throw new Error('Missing UI token '+fg+' or '+bg); const r=ratio(vars[fg],vars[bg]); if(r<3) throw new Error(fg+' on '+bg+' fails 3:1 UI boundary contrast ('+r.toFixed(2)+')'); }
+          console.log('Kora Quiet contrast OK: '+textPairs.length+' text pairs >=4.5:1 and '+uiPairs.length+' UI boundary pairs >=3:1.');
+          NODE
+      - name: Verify generated Gujarati and Hindi dictionaries are current
+        run: |
+          python -I i18n/tools/build_lang.py gu /tmp/lang-gu.js
+          python -I i18n/tools/build_lang.py hi /tmp/lang-hi.js
+          cmp /tmp/lang-gu.js work-admin/site/lang-gu.js
+          cmp /tmp/lang-hi.js work-admin/site/lang-hi.js
+      - name: Shop catalog and checkout tests
+        run: node work-admin/tests/core.cjs work-admin/site
+      - name: Admin editor end-to-end tests
+        run: node work-admin/tests/admin.cjs
+      - name: Shop-admin integration tests
+        run: node work-admin/tests/integ.cjs
+      - name: Build and verify deployable Netlify preview
+        run: |
+          python - <<'PY'
+          import tomllib
+          with open("netlify.toml", "rb") as fh:
+              config = tomllib.load(fh)
+          build = config.get("build", {})
+          assert build.get("publish") == "dist", "Netlify must publish the generated dist folder"
+          assert "build_netlify.py work-admin/site dist" in build.get("command", ""), "Netlify must export the working site"
+          assert config.get("build", {}).get("environment", {}).get("PYTHON_VERSION") == "3.12", "Pin the Python build version"
+          PY
+          python -m pip install --quiet --disable-pip-version-check -r requirements.txt
+          python build_netlify.py work-admin/site /tmp/softsteps-dist
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const html = fs.readFileSync('/tmp/softsteps-dist/index.html', 'utf8');
+          const sourcePage = fs.readFileSync('work-admin/site/softsteps.html', 'utf8');
+          const paletteSource = fs.readFileSync('design2/quiet.css', 'utf8').trim();
+          const normalizedPage = sourcePage.replace(/\r\n/g, '\n');
+          const normalizedPalette = paletteSource.replace(/\r\n/g, '\n').trim();
+          const paletteStart = normalizedPage.indexOf('/* Kora Quiet palette and component overrides. Source: design2/quiet.css. */');
+          const paletteEnd = paletteStart < 0 ? -1 : normalizedPage.indexOf('</style>', paletteStart);
+          const embeddedPalette = paletteStart < 0 || paletteEnd < 0 ? '' : normalizedPage.slice(normalizedPage.indexOf('\n', paletteStart) + 1, paletteEnd).trim();
+          if (embeddedPalette !== normalizedPalette) throw new Error('Embedded Kora Quiet CSS is out of sync with design2/quiet.css');
+          if (!sourcePage.includes('id="r-zig" data-k="zig" data-def="0"') || !sourcePage.includes('img/z1.webp" alt="Multicolour Zigzag Rug in Forest green &amp; black"')) throw new Error('Zigzag Forest default selection/image mismatch');
+          for (const image of ['img/z1.webp', 'img/m/z1.avif', 'img/m/z1.webp']) {
+            if (!fs.existsSync(path.join('work-admin/site', image))) throw new Error('Missing Forest default asset: ' + image);
+          }
+          const scripts = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map(m => m[1]);
+          if (new Set(scripts).size !== scripts.length) throw new Error('Duplicate script reference in generated page: ' + scripts.join(', '));
+          const netlify = fs.readFileSync('/tmp/softsteps-dist/netlify.toml', 'utf8');
+          for (const header of ['Content-Security-Policy', 'X-Frame-Options = "DENY"', 'Strict-Transport-Security', 'Permissions-Policy']) {
+            if (!netlify.includes(header)) throw new Error('Missing generated Netlify security header: ' + header);
+          }
+          const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+          if (!ldMatch) throw new Error('Missing JSON-LD structured data');
+          const ld = JSON.parse(ldMatch[1]);
+          const offers = (ld.makesOffer || []).map(x => x.itemOffered);
+          if (offers.length !== 3) throw new Error('Expected 3 structured products; found ' + offers.length);
+          const catalogMatch = html.match(/<script type="application\/json" id="ss-catalog">([\s\S]*?)<\/script>/);
+          if (!catalogMatch) throw new Error('Missing catalog data');
+          const catalog = JSON.parse(catalogMatch[1]);
+          for (const [key, range] of Object.entries(catalog.ranges)) {
+            const product = offers.find(p => p.name === range.name);
+            if (!product) throw new Error('Structured data missing catalog product ' + key);
+            const prices = range.sizes.map(s => s.price);
+            if (product.offers.lowPrice !== Math.min(...prices) || product.offers.highPrice !== Math.max(...prices)) {
+              throw new Error('Structured prices do not match catalog for ' + key);
+            }
+          }
+          for (const match of html.matchAll(/<script src="([^"]+)"><\/script>/g)) {
+            if (!fs.existsSync(path.join('/tmp/softsteps-dist', match[1]))) {
+              throw new Error('Missing built script ' + match[1]);
+            }
+          }
+          console.log('Netlify preview verified: 3 catalog products, structured prices match, scripts present.');
+          NODE
+
+      - name: Final viewport, mobile-performance and checkout QA
+        run: |
+          node qa.cjs /tmp/softsteps-dist/index.html work-admin/shots-netlify
+          node - <<'NODE'
+          const fs = require('fs');
+          const file = 'work-admin/shots-netlify/report.json';
+          const r = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const errors = [];
+          for (const name of ['desktop', 'tablet', 'phone', 'phone-reduced']) {
+            const x = r[name];
+            if (!x) { errors.push('Missing viewport: ' + name); continue; }
+            if (x.scrollWidth > x.clientWidth) errors.push(name + ' horizontal overflow');
+          }
+          for (const name of ['flow-desktop', 'flow-phone']) {
+            const x = r[name];
+            if (!x) { errors.push('Missing checkout flow: ' + name); continue; }
+            for (const step of x.steps || []) if (step.startsWith('FAIL ')) errors.push(name + ': ' + step);
+            if (!(x.steps || []).includes('whatsapp link ok: true')) errors.push(name + ': no valid WhatsApp order link');
+          }
+          const phone = r.phone && r.phone.vitals;
+          const reduced = r['phone-reduced'] && r['phone-reduced'].vitals;
+          console.log('Final QA vitals (390px phone run uses 4× CPU throttle): ' + JSON.stringify({
+            phone, phoneReduced: reduced,
+            layoutWidths: ['desktop','tablet','phone','phone-reduced'].map(name => ({
+              name, client: r[name] && r[name].clientWidth, scroll: r[name] && r[name].scrollWidth
+            }))
+          }, null, 2));
+          for (const [name, v] of [['phone',phone],['phone-reduced',reduced]]) {
+            if (!v || !Number.isFinite(v.lcpMs) || !Number.isFinite(v.cls)) errors.push(name + ': LCP/CLS were not measured');
+          }
+          if (phone && Number.isFinite(phone.lcpMs) && phone.lcpMs > 1800) errors.push('Phone LCP exceeds 1800ms: ' + Math.round(phone.lcpMs) + 'ms');
+          if (phone && Number.isFinite(phone.cls) && phone.cls > 0.05) errors.push('Phone CLS exceeds 0.05: ' + phone.cls);
+          if (errors.length) throw new Error('Final viewport/performance/checkout QA failed:\\n' + errors.join('\\n'));
+          console.log('Final viewport/performance/checkout QA passed.');
+          NODE
+
+      - name: Package deploy-ready Netlify preview
+        run: |
+          python - <<'PY'
+          import os, zipfile
+          root = '/tmp/softsteps-dist'
+          target = '/tmp/softsteps-netlify-preview.zip'
+          with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as archive:
+              for folder, _, files in os.walk(root):
+                  for name in files:
+                      full = os.path.join(folder, name)
+                      archive.write(full, os.path.relpath(full, root))
+          print('Packaged static site:', os.path.getsize(target), 'bytes')
+          PY
+      - name: Upload deploy-ready preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: softsteps-netlify-preview
+          path: /tmp/softsteps-netlify-preview.zip
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload QA screenshots from admin and integration tests
+        uses: actions/upload-artifact@v4
+        with:
+          name: softsteps-review-screenshots
+          path: |
+            work-admin/shots/**/*.png
+            work-admin/shots-integ/**/*.png
+            work-admin/shots-netlify/**/*
+          if-no-files-found: warn
+          retention-days: 14

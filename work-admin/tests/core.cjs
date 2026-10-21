@@ -5,9 +5,9 @@
 //     everywhere, in English and Gujarati; (c) the owner loader shows only for editors.
 const { chromium } = require('playwright');
 const fs = require('fs'), path = require('path');
-const SP = '/tmp/claude-0/-home-user/b3b2df08-4b5f-5d42-b6f7-07d0365cb062/scratchpad';
+const SP = path.resolve(__dirname, '../..');
 const SITE = path.resolve(process.argv[2] || SP + '/work/admin/site');
-const { prep } = require(SP + '/qa.cjs'); const { serve } = require(SP + '/audit/serve.cjs');
+const { prep } = require(path.join(SP, 'qa.cjs')); const { serve } = require(path.join(SP, 'audit/serve.cjs'));
 const SRC = fs.readFileSync(SITE + '/softsteps.html', 'utf8');
 const RE = /<!--ss-catalog:start--><script type="application\/json" id="ss-catalog">([\s\S]*?)<\/script><!--ss-catalog:end-->/;
 const SKEL = '<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style></style></head><body>\n';
@@ -24,7 +24,7 @@ function variant(mut) { const c = JSON.parse(JSON.stringify(BASE)); mut(c); retu
 const col = (c, k, n) => c.ranges[k].colours.find(x => x.n === n);
 
 async function open(b, s, o = {}) {
-  const ctx = await b.newContext({ viewport: { width: o.vp ? o.vp[0] : 1440, height: o.vp ? o.vp[1] : 900 } });
+  const ctx = await b.newContext({ viewport: { width: o.vp ? o.vp[0] : 1440, height: o.vp ? o.vp[1] : 900 }, reducedMotion: o.rm ? 'reduce' : 'no-preference' });
   const page = await ctx.newPage(); const log = []; const reqs = [];
   await prep(page, log);
   page.on('request', r => reqs.push(r.url()));
@@ -49,6 +49,7 @@ async function open(b, s, o = {}) {
   }, { lang: o.lang, cart: o.cart, saved: o.saved, claude: o.claude });
   await page.goto(s.url + 'softsteps.html' + (o.hash || ''), { waitUntil: 'load', timeout: 90000 });
   await page.waitForTimeout(o.wait || 1500);
+  if (!(await page.evaluate(() => !!window.SS))) throw new Error('window.SS missing after startup: ' + errs(log).join(' | '));
   return { ctx, page, log, reqs };
 }
 function errs(log) { return log.filter(l => !/REQFAIL.*(img|\.jpg|\.webp|\.avif|_blob)/.test(l)); }
@@ -105,7 +106,9 @@ async function checkout(page, { addSel, expectTotal, label }) {
   const sum = await page.evaluate(() => document.querySelector('#tot').textContent);
   await page.fill('#o-name', 'Test Buyer'); await page.fill('#o-ph', '9876543210'); await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
   await page.fill('#o-ct', 'Vadodara'); await page.fill('#o-pin', '390007');
-  await page.click('#order-btn', { timeout: 5000 }); await page.waitForSelector('#v-pay:not([hidden])', { timeout: 5000 });
+  await page.waitForTimeout(400); await page.click('#order-btn', { timeout: 5000 }); await page.waitForTimeout(100);
+  const state = await page.evaluate(() => ({ pay: !document.querySelector('#v-pay').hidden, error: document.querySelector('#oerr').textContent, invalid: [...document.querySelectorAll('[aria-invalid="true"]')].map(e => e.id), delivery: document.querySelector('input[name="dl"]:checked')?.value, pin: document.querySelector('#o-pin').value, cart: [...document.querySelectorAll('#v-cart .line')].length }));
+  if (!state.pay) throw new Error('Checkout did not advance to payment: ' + JSON.stringify(state));
   const r = await page.evaluate(() => ({ wa: decodeURIComponent((document.querySelector('#sendwa').href.split('text=')[1]) || ''), upi: document.querySelector('#upil').href, amt: document.querySelector('#payamt').textContent }));
   const n = expectTotal.toLocaleString('en-IN');
   ok(sum.startsWith('₹' + n), label + ': details total ₹' + n, sum);
@@ -117,7 +120,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
 
 (async () => {
   const s = await serve(SITE);
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
+  const b = await chromium.launch();
   const T0 = Date.now();
   try {
     /* ---------- 0. The block itself ---------- */
@@ -128,7 +131,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ok(/\n<!--ss-catalog:start--><script type="application\/json" id="ss-catalog">[^\n]*<\/script><!--ss-catalog:end-->\n/.test(SRC), 'block on its own line, exact form');
       ok(!/</.test(SRC.match(RE)[1]), 'no raw "<" inside the JSON');
       // today's data, regenerated from the pre-catalog page
-      const orig = fs.readFileSync(SP + '/next/softsteps.html', 'utf8');
+      const orig = fs.readFileSync(path.join(SP, 'site-live-v30/softsteps.html'), 'utf8');
       const P = eval('({' + orig.match(/var P=\{\n([\s\S]*?)\n\};/)[1] + '})');
       const dec = x => x.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
       const want = { v: 1, updatedAt: '', notice: { on: false, en: '', gu: '', hi: '' }, ranges: {} };
@@ -439,7 +442,7 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ['corrupt', SRC.replace(RE, () => '<!--ss-catalog:start--><script type="application/json" id="ss-catalog">{"v":1,"ranges":{"zig":</script><!--ss-catalog:end-->')],
       ['missing', SRC.replace(RE, '')],
       ['wrong version', variant(c => { c.v = 2; c.ranges.zig.sizes[0].price = 1; })],
-      ['invalid fields', variant(c => { c.ranges.zig.sizes[0].price = 'abc'; c.ranges.sol.sizes[0].price = -5; c.ranges.zig.colours[0].stock = 'bogus'; c.ranges.zig.colours[1].bg = 'red'; c.ranges.chen.colours = 'x'; c.notice = 'x'; })],
+      ['invalid fields', variant(c => { c.ranges.zig.sizes[0].price = 'abc'; c.ranges.sol.sizes[0].price = -5; c.ranges.zig.sizes[0].dims = '<img src=x onerror=alert(1)>'; c.ranges.zig.sizes[0].weight = '<svg onload=alert(1)>'; c.ranges.zig.name = '<img src=x onerror=alert(1)>'; c.ranges.zig.colours[0].n = 'Forest green & black<img src=x onerror=alert(1)>'; c.ranges.zig.colours[0].stock = 'bogus'; c.ranges.zig.colours[1].bg = 'red'; c.ranges.chen.colours = 'x'; c.notice = 'x'; })],
     ]) {
       const L = 'fallback ' + name;
       const { ctx, page, log } = await open(b, s, { html });
@@ -447,6 +450,9 @@ async function checkout(page, { addSel, expectTotal, label }) {
       eq(r.sw, { zig: 10, sol: 6, chen: 10 }, L + ' swatches'); eq(r.price, ['₹249', '₹349', '₹299'], L + ' prices');
       eq(r.stockEls, 0, L + ' no stock marks'); eq(r.slides, 6, L + ' slides'); eq(r.pairs, 8, L + ' pairs');
       if (name === 'invalid fields') eq(await page.evaluate(() => document.querySelector('.prod[data-k="zig"] [data-n="Blush pink & black"]').dataset.bg), '#EBC4BD', L + ' bad colour kept default');
+      if (name === 'invalid fields') {
+        eq(await page.evaluate(() => ({ name: SS.P.zig.name, dims: SS.P.zig.sizes[0][1], weight: SS.P.zig.sizes[0][2], forest: !!document.querySelector('.prod[data-k="zig"] [data-n="Forest green & black"]'), injected: document.querySelectorAll('img[src="x"], svg[onload]').length })), { name: 'Multicolour Zigzag Rug', dims: '16×24 in', weight: '300 g', forest: true, injected: 0 }, L + ' rejects markup from catalogue labels and immutable size metadata');
+      }
       await checkout(page, { addSel: ['.prod[data-k="zig"] [data-add]'], expectTotal: 249, label: L });
       eq(errs(log), [], L + ' console clean');
       await ctx.close();
@@ -520,6 +526,136 @@ async function checkout(page, { addSel, expectTotal, label }) {
       ok(!reqs.some(u => /admin\.(js|css)/.test(u)), L + ' nothing admin fetched');
       eq(errs(log), [], L + ' console clean'); await ctx.close();
     }
+
+    /* ---------- 7b. Field foreground contrast for built-in and owner-added colours ---------- */
+    {
+      const L = 'field foreground AA';
+      const { ctx, page, log } = await open(b, s);
+      const values = await page.evaluate(() => {
+        function lum(h) {
+          const x = h.slice(1);
+          const rgb = [0, 2, 4].map(i => parseInt(x.slice(i, i + 2), 16) / 255);
+          return rgb.map(v => v <= .04045 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4)).reduce((a, v, i) => a + v * [.2126, .7152, .0722][i], 0);
+        }
+        function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); }
+        const builtIn = [...document.querySelectorAll('[data-bg]')].map(el => el.dataset.bg.toUpperCase());
+        const colours = builtIn.concat(['#757575', '#767676', '#777777', '#808080', '#838383', '#848484', '#969696', '#000000', '#FFFFFF']);
+        return colours.map(bg => {
+          const fg = SS.fieldForeground(bg);
+          return { bg, fg, ratio: ratio(fg, bg) };
+        });
+      });
+      ok(values.length >= 26, L + ': audits all 26 built-in swatches plus custom midpoint shades', values.length);
+      eq(values.filter(x => x.ratio < 4.5).map(x => ({ bg: x.bg, fg: x.fg, ratio: +x.ratio.toFixed(2) })), [], L + ': every painted field label reaches 4.5:1');
+      eq(values.find(x => x.bg === '#808080').fg, '#000000', L + ': mid-grey custom colour chooses black text');
+      eq(values.find(x => x.bg === '#838383').fg, '#000000', L + ': contrast transition stays black below threshold');
+      eq(values.find(x => x.bg === '#848484').fg, '#1F1B18', L + ': contrast transition uses ink only above threshold');
+      eq(values.find(x => x.bg === '#757575').fg, '#FFFFFF', L + ': darker edge grey chooses white text');
+      eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
+    /* ---------- 7c. 320px narrow phone + reduced-motion overflow smoke ---------- */
+    {
+      const L = '320px reduced motion';
+      const { ctx, page, log } = await open(b, s, { vp: [320, 844], rm: true, wait: 2000 });
+      const dimensions = await page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        doc: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+        reduced: matchMedia('(prefers-reduced-motion: reduce)').matches
+      }));
+      ok(dimensions.reduced, L + ': reduced-motion preference is enabled', dimensions);
+      ok(dimensions.doc <= dimensions.client && dimensions.body <= dimensions.client, L + ': no horizontal overflow on 320px', dimensions);
+      await page.evaluate(() => SS.openD('cart'));
+      await page.waitForTimeout(350);
+      const drawer = await page.evaluate(() => ({
+        client: document.documentElement.clientWidth,
+        doc: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+        open: !document.querySelector('#drawer').hidden
+      }));
+      ok(drawer.open, L + ': cart drawer opens at 320px', drawer);
+      ok(drawer.doc <= drawer.client && drawer.body <= drawer.client, L + ': cart drawer has no horizontal overflow at 320px', drawer);
+      eq(errs(log), [], L + ': no console errors');
+      await ctx.close();
+    }
+
+    /* ---------- 8. Checkout history, saved details, duplicate guard and WhatsApp confirmation ---------- */
+    {
+      const L = 'checkout safeguards';
+      const { ctx, page, log } = await open(b, s, { vp: [390, 844] });
+      await page.click('.prod[data-k="zig"] [data-add]');
+      await page.waitForTimeout(450);
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.fill('#o-name', 'Test Buyer');
+      await page.fill('#o-ph', '9876543210');
+      await page.fill('#o-ad', '12 Alkapuri Society, RC Dutt Road');
+      await page.fill('#o-ct', 'Vadodara');
+      await page.evaluate(() => { const i = document.querySelector('#o-pin'), d = new DataTransfer(); d.setData('text/plain', '390 007'); i.focus(); i.dispatchEvent(new ClipboardEvent('paste', { clipboardData: d, bubbles: true, cancelable: true })); });
+      eq(await page.locator('#o-pin').inputValue(), '390007', L + ': pasted PIN is normalized');
+      await page.waitForTimeout(100);
+      await page.reload({ waitUntil: 'load' });
+      await page.waitForTimeout(1400);
+      eq(await page.locator('#o-name').inputValue(), 'Test Buyer', L + ': name draft survives reload');
+      eq(await page.locator('#o-pin').inputValue(), '390007', L + ': PIN draft survives reload');
+      eq(await page.evaluate(() => JSON.parse(localStorage.getItem('ss_cart2') || '[]').length), 1, L + ': cart survives reload');
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.evaluate(() => history.back());
+      await page.waitForSelector('#v-cart:not([hidden])');
+      eq(await page.evaluate(() => document.querySelector('#drawer').hidden), false, L + ': Back returns to cart step');
+      await page.evaluate(() => history.back());
+      await page.waitForFunction(() => document.querySelector('#drawer').hidden);
+      eq(await page.evaluate(() => document.querySelector('#drawer').hidden), true, L + ': second Back closes drawer in-page');
+
+      await page.click('#cartbtn');
+      await page.waitForSelector('#drawer:not([hidden])');
+      await page.click('#go');
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.waitForTimeout(400); await page.click('#order-btn');
+      await page.waitForSelector('#v-pay:not([hidden])');
+      const oidBefore = await page.locator('#oid').textContent();
+      await page.evaluate(() => history.back());
+      await page.waitForSelector('#v-det:not([hidden])');
+      await page.fill('#o-name', 'Repeat Buyer');
+      await page.waitForTimeout(400);
+      await page.click('#order-btn');
+      await page.waitForSelector('#v-pay:not([hidden])');
+      const oidAfter = await page.locator('#oid').textContent();
+      eq(oidAfter, oidBefore, L + ': going Back and continuing reuses the pending order ID');
+
+      const popupPromise = ctx.waitForEvent('page');
+      await page.click('#sendwa');
+      const popup = await popupPromise;
+      await popup.waitForLoadState('domcontentloaded').catch(() => {});
+      await popup.close();
+      await page.waitForSelector('#sentbox:not([hidden])');
+      const afterOpen = await page.evaluate(() => {
+        const p = JSON.parse(localStorage.getItem('ss_pending') || 'null');
+        return { sent: !!(p && p.sent), opened: !!(p && p.opened), cart: JSON.parse(localStorage.getItem('ss_cart2') || '[]').length };
+      });
+      eq(afterOpen, { sent: false, opened: true, cart: 1 }, L + ': opening WhatsApp does not falsely mark the order sent');
+      await page.click('#newcart');
+      const afterConfirm = await page.evaluate(() => ({
+        pending: localStorage.getItem('ss_pending'),
+        cart: JSON.parse(localStorage.getItem('ss_cart2') || '[]').length,
+        lastSent: JSON.parse(localStorage.getItem('ss_last_sent') || 'null')?.sent || false,
+        name: document.querySelector('#o-name').value
+      }));
+      eq(afterConfirm, { pending: null, cart: 0, lastSent: true, name: '' }, L + ': explicit sent confirmation clears order and details');
+      await page.evaluate(() => history.back());
+      await page.waitForFunction(() => document.querySelector('#drawer').hidden);
+      eq(await page.evaluate(() => document.querySelector('#drawer').hidden), true, L + ': Back after a new cart cannot reopen stale payment');
+      eq(errs(log), [], L + ': console clean');
+      await ctx.close();
+    }
+
   } catch (e) { fail++; fails.push('CRASH: ' + (e && e.stack || e)); }
   await b.close(); s.close();
   console.log('core.cjs: ' + pass + ' passed, ' + fail + ' failed (' + Math.round((Date.now() - T0) / 1000) + 's)');

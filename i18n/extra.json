@@ -466,5 +466,113 @@
   "en": "{a} for a zigzag M, up to {b} for a solid XL",
   "gu": "Zigzag M નું {a} થી લઈને Solid XL નું {b} સુધી",
   "hi": "zigzag M के लिए {a}, solid XL के लिए {b} तक"
+ },
+ {
+  "kind": "pattern",
+  "en": "Cart changed. Check previous order #{id} with Jelam before paying again.",
+  "gu": "કાર્ટ બદલાયો છે. ફરીથી ચુકવણી કરતાં પહેલાં Jelam સાથે અગાઉના ઑર્ડર #{id} વિશે તપાસો.",
+  "hi": "कार्ट बदल गया है। दोबारा भुगतान करने से पहले Jelam से पिछले ऑर्डर #{id} के बारे में पुष्टि करें।"
+ },
+ {
+  "kind": "text",
+  "en": "Could not copy. Please select and copy the text manually.",
+  "gu": "કૉપી થઈ શક્યું નથી. કૃપા કરીને લખાણ પસંદ કરીને જાતે કૉપી કરો.",
+  "hi": "कॉपी नहीं हो पाया। कृपया टेक्स्ट चुनकर खुद कॉपी करें।"
+ },
+ {
+  "kind": "text",
+  "en": "A previous order was marked sent. Its items were removed to avoid a duplicate order.",
+  "gu": "અગાઉનો ઑર્ડર મોકલાયેલો તરીકે નોંધાયો હતો. ફરીથી ઑર્ડર ન થાય તે માટે તેની વસ્તુઓ દૂર કરી છે.",
+  "hi": "पिछले ऑर्डर को भेजा हुआ माना गया था। दोबारा ऑर्डर से बचने के लिए उसकी चीज़ें हटा दी गई हैं।"
+ },
+ {
+  "kind": "text",
+  "en": "I’ve sent it — start a new cart",
+  "gu": "મેં ઑર્ડર મોકલી દીધો છે — નવું કાર્ટ શરૂ કરો",
+  "hi": "मैंने ऑर्डर भेज दिया है — नया कार्ट शुरू करें"
+ },
+ {
+  "kind": "pattern",
+  "en": "Return to order #{id}",
+  "gu": "ઑર્ડર #{id} પર પાછા જાઓ",
+  "hi": "ऑर्डर #{id} पर वापस जाएँ"
+ },
+ {
+  "kind": "text",
+  "en": "Stroke the pile",
+  "gu": "રૂંવાટીને હાથ ફેરવો",
+  "hi": "मैट के रेशों पर हाथ फेरें"
+ },
+ {
+  "kind": "text",
+  "en": "Tap the mat to step on it",
+  "gu": "પગલાંનો અનુભવ જોવા મેટને ટૅપ કરો",
+  "hi": "पैर के निशान देखने के लिए मैट पर टैप करें"
+ },
+ {
+  "kind": "text",
+  "en": "Welcome back.",
+  "gu": "ફરી સ્વાગત છે.",
+  "hi": "वापस आने पर आपका स्वागत है।"
+ },
+ {
+  "kind": "text",
+  "en": "Paying safely",
+  "gu": "સુરક્ષિત રીતે ચુકવણી કરો",
+  "hi": "सुरक्षित तरीके से भुगतान करें"
+ },
+ {
+  "kind": "text",
+  "en": "Pay only to panchaljelam@oksbi or UPI number 90994 41429.",
+  "gu": "ફક્ત panchaljelam@oksbi અથવા UPI નંબર 90994 41429 પર જ ચુકવણી કરો.",
+  "hi": "भुगतान केवल panchaljelam@oksbi या UPI नंबर 90994 41429 पर ही करें।"
+ },
+ {
+  "kind": "text",
+  "en": "Your order and payment are confirmed on WhatsApp from +91 90994 41429.",
+  "gu": "+91 90994 41429 પરથી WhatsApp પર તમારા ઑર્ડર અને ચુકવણીની પુષ્ટિ થાય છે.",
+  "hi": "+91 90994 41429 से WhatsApp पर आपके ऑर्डर और भुगतान की पुष्टि की जाती है।"
+ },
+ {
+  "kind": "text",
+  "en": "Outside Vadodara, the delivery charge is confirmed with you on a call.",
+  "gu": "વડોદરા બહારની ડિલિવરીનો ચાર્જ તમને કૉલ પર જણાવીને નક્કી કરવામાં આવે છે.",
+  "hi": "वडोदरा के बाहर डिलीवरी शुल्क आपको कॉल पर बताकर तय किया जाता है।"
+ },
+ {
+  "kind": "text",
+  "en": "Within reply hours, until 8pm",
+  "gu": "જવાબ આપવાના સમયમાં, રાત્રે 8 વાગ્યા સુધી",
+  "hi": "जवाब देने के समय में, रात 8 बजे तक"
+ },
+ {
+  "kind": "text",
+  "en": "Replies from 10am today",
+  "gu": "આજે સવારે 10 વાગ્યાથી જવાબ મળશે",
+  "hi": "आज सुबह 10 बजे से जवाब मिलेगा"
+ },
+ {
+  "kind": "text",
+  "en": "Replies from 10am tomorrow",
+  "gu": "આવતીકાલે સવારે 10 વાગ્યાથી જવાબ મળશે",
+  "hi": "कल सुबह 10 बजे से जवाब मिलेगा"
+ },
+ {
+  "kind": "text",
+  "en": "Closed today. We reply when we reopen.",
+  "gu": "આજે બંધ છે. ફરી શરૂ કર્યા પછી જવાબ આપીશું.",
+  "hi": "आज बंद है। दोबारा खुलने पर जवाब देंगे।"
+ },
+ {
+  "kind": "text",
+  "en": "Closed tomorrow. We reply when we reopen.",
+  "gu": "આવતીકાલે બંધ છે. ફરી શરૂ કર્યા પછી જવાબ આપીશું.",
+  "hi": "कल बंद रहेगा। दोबारा खुलने पर जवाब देंगे।"
+ },
+ {
+  "kind": "text",
+  "en": "Tap a spot to see the mat we suggest.",
+  "gu": "અમે સૂચવેલી મેટ જોવા જગ્યા પસંદ કરો.",
+  "hi": "हमारी सुझाई मैट देखने के लिए जगह चुनें।"
  }
 ]
