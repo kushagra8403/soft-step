@@ -125,8 +125,12 @@ jobs:
           const html = fs.readFileSync('/tmp/softsteps-dist/index.html', 'utf8');
           const sourcePage = fs.readFileSync('work-admin/site/softsteps.html', 'utf8');
           const paletteSource = fs.readFileSync('design2/quiet.css', 'utf8').trim();
-          const paletteMarker = '/* Kora Quiet palette and component overrides. Source: design2/quiet.css. */\n' + paletteSource + '\n</style>';
-          if (!sourcePage.includes(paletteMarker)) throw new Error('Embedded Kora Quiet CSS is out of sync with design2/quiet.css');
+          const normalizedPage = sourcePage.replace(/\r\n/g, '\n');
+          const normalizedPalette = paletteSource.replace(/\r\n/g, '\n').trim();
+          const paletteStart = normalizedPage.indexOf('/* Kora Quiet palette and component overrides. Source: design2/quiet.css. */');
+          const paletteEnd = paletteStart < 0 ? -1 : normalizedPage.indexOf('</style>', paletteStart);
+          const embeddedPalette = paletteStart < 0 || paletteEnd < 0 ? '' : normalizedPage.slice(normalizedPage.indexOf('\n', paletteStart) + 1, paletteEnd).trim();
+          if (embeddedPalette !== normalizedPalette) throw new Error('Embedded Kora Quiet CSS is out of sync with design2/quiet.css');
           if (!sourcePage.includes('id="r-zig" data-k="zig" data-def="0"') || !sourcePage.includes('img/z1.webp" alt="Multicolour Zigzag Rug in Forest green &amp; black"')) throw new Error('Zigzag Forest default selection/image mismatch');
           for (const image of ['img/z1.webp', 'img/m/z1.avif', 'img/m/z1.webp']) {
             if (!fs.existsSync(path.join('work-admin/site', image))) throw new Error('Missing Forest default asset: ' + image);
