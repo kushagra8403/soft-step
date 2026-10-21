@@ -574,5 +574,35 @@
   "en": "Tap a spot to see the mat we suggest.",
   "gu": "અમે સૂચવેલી મેટ જોવા જગ્યા પસંદ કરો.",
   "hi": "हमारी सुझाई मैट देखने के लिए जगह चुनें।"
+ },
+ {
+  "kind": "text",
+  "en": "A previous order",
+  "gu": "પહેલાનો ઓર્ડર",
+  "hi": "पहले का एक ऑर्डर"
+ },
+ {
+  "kind": "text",
+  "en": "was started. If you already paid, do not pay again; contact Jelam first.",
+  "gu": "શરૂ થયો હતો. જો તમે પહેલેથી પેમેન્ટ કર્યું હોય, તો ફરી પેમેન્ટ ન કરો; પહેલાં જેલમનો સંપર્ક કરો.",
+  "hi": "शुरू किया गया था। अगर आपने पहले ही भुगतान कर दिया है, तो दोबारा भुगतान न करें; पहले Jelam से संपर्क करें।"
+ },
+ {
+  "kind": "text",
+  "en": "I have not paid for that previous order.",
+  "gu": "મેં એ પહેલાંના ઓર્ડરનું પેમેન્ટ કર્યું નથી.",
+  "hi": "मैंने उस पिछले ऑर्डर का भुगतान नहीं किया है।"
+ },
+ {
+  "kind": "text",
+  "en": "Contact Jelam about this order",
+  "gu": "આ ઓર્ડર વિશે જેલમનો સંપર્ક કરો",
+  "hi": "इस ऑर्डर के बारे में Jelam से संपर्क करें"
+ },
+ {
+  "kind": "text",
+  "en": "Please confirm you have not paid for the previous order, or contact Jelam first.",
+  "gu": "કૃપા કરીને ખાતરી કરો કે પહેલાંના ઓર્ડરનું પેમેન્ટ કર્યું નથી, નહીં તો પહેલાં જેલમનો સંપર્ક કરો.",
+  "hi": "कृपया पुष्टि करें कि आपने पिछले ऑर्डर का भुगतान नहीं किया है, या पहले Jelam से संपर्क करें।"
  }
 ]
