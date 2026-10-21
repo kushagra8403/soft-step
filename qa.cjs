@@ -45,14 +45,32 @@ if (require.main === module) (async () => {
     const ctx = await b.newContext({ viewport: { width: w, height: h }, reducedMotion: rm ? 'reduce' : 'no-preference', deviceScaleFactor: 1 });
     const page = await ctx.newPage(); await prep(page, log);
     await page.addInitScript(() => {
-      const v = window.__ssVitals = { lcp: null, cls: 0 };
+      const v = window.__ssVitals = { lcp: null, cls: 0, shifts: [] };
       try {
         new PerformanceObserver(list => { for (const e of list.getEntries()) v.lcp = e.startTime; })
           .observe({ type: 'largest-contentful-paint', buffered: true });
       } catch (e) {}
       try {
         new PerformanceObserver(list => {
-          for (const e of list.getEntries()) if (!e.hadRecentInput && Number.isFinite(e.value)) v.cls += e.value;
+          for (const e of list.getEntries()) if (!e.hadRecentInput && Number.isFinite(e.value)) {
+            v.cls += e.value;
+            v.shifts.push({
+              value: e.value,
+              startTime: Math.round(e.startTime),
+              sources: (e.sources || []).slice(0, 5).map(s => {
+                const el = s.node;
+                if (!el) return { selector: '(unknown)' };
+                const id = el.id ? '#' + el.id : '';
+                const cls = typeof el.className === 'string' && el.className.trim()
+                  ? '.' + el.className.trim().split(/\\s+/).slice(0, 3).join('.') : '';
+                return {
+                  selector: el.tagName.toLowerCase() + id + cls,
+                  previous: s.previousRect && { x: Math.round(s.previousRect.x), y: Math.round(s.previousRect.y), w: Math.round(s.previousRect.width), h: Math.round(s.previousRect.height) },
+                  current: s.currentRect && { x: Math.round(s.currentRect.x), y: Math.round(s.currentRect.y), w: Math.round(s.currentRect.width), h: Math.round(s.currentRect.height) }
+                };
+              })
+            });
+          }
         }).observe({ type: 'layout-shift', buffered: true });
       } catch (e) {}
     });
