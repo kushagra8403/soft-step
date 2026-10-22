@@ -235,7 +235,9 @@
   }
   try {
     var hero = doc.getElementById("hero");
-    if (hero && hero.parentNode) hero.parentNode.insertBefore(strip(), hero);
+    /* the hero's strip is in the page markup (so it cannot shift the layout when this script runs); add it only if missing */
+    var pre = hero && hero.previousElementSibling;
+    if (hero && hero.parentNode && !(pre && pre.classList.contains("langs"))) hero.parentNode.insertBefore(strip(), hero);
     var mnav = doc.querySelector("#menu nav"); if (mnav) mnav.parentNode.insertBefore(strip(), mnav.nextSibling);
     var foot = doc.querySelector(".foot .foot-row"); if (foot) foot.parentNode.insertBefore(strip(), foot.nextSibling);
     doc.addEventListener("click", function (e) {
