@@ -604,5 +604,227 @@
   "en": "Please confirm you have not paid for the previous order, or contact Jelam first.",
   "gu": "કૃપા કરીને ખાતરી કરો કે પહેલાંના ઓર્ડરનું પેમેન્ટ કર્યું નથી, નહીં તો પહેલાં જેલમનો સંપર્ક કરો.",
   "hi": "कृपया पुष्टि करें कि आपने पिछले ऑर्डर का भुगतान नहीं किया है, या पहले Jelam से संपर्क करें।"
+ },
+ {
+  "kind": "text",
+  "en": "Sign in",
+  "gu": "સાઇન ઇન",
+  "hi": "साइन इन"
+ },
+ {
+  "kind": "text",
+  "en": "Create account",
+  "gu": "ખાતું બનાવો",
+  "hi": "खाता बनाएं"
+ },
+ {
+  "kind": "text",
+  "en": "Email",
+  "gu": "ઇમેઇલ",
+  "hi": "ईमेल"
+ },
+ {
+  "kind": "text",
+  "en": "Password",
+  "gu": "પાસવર્ડ",
+  "hi": "पासवर्ड"
+ },
+ {
+  "kind": "text",
+  "en": "Forgot password?",
+  "gu": "પાસવર્ડ ભૂલી ગયા?",
+  "hi": "पासवर्ड भूल गए?"
+ },
+ {
+  "kind": "text",
+  "en": "Sign out",
+  "gu": "સાઇન આઉટ",
+  "hi": "साइन आउट"
+ },
+ {
+  "kind": "text",
+  "en": "My account",
+  "gu": "મારું ખાતું",
+  "hi": "मेरा खाता"
+ },
+ {
+  "kind": "text",
+  "en": "My orders",
+  "gu": "મારા ઓર્ડર",
+  "hi": "मेरे ऑर्डर"
+ },
+ {
+  "kind": "text",
+  "en": "No orders yet.",
+  "gu": "હજી કોઈ ઓર્ડર નથી.",
+  "hi": "अभी तक कोई ऑर्डर नहीं।"
+ },
+ {
+  "kind": "text",
+  "en": "Loading…",
+  "gu": "લોડ થઈ રહ્યું છે…",
+  "hi": "लोड हो रहा है…"
+ },
+ {
+  "kind": "text",
+  "en": "Please wait…",
+  "gu": "કૃપા કરીને રાહ જુઓ…",
+  "hi": "कृपया प्रतीक्षा करें…"
+ },
+ {
+  "kind": "text",
+  "en": "Set new password",
+  "gu": "નવો પાસવર્ડ સેટ કરો",
+  "hi": "नया पासवर्ड सेट करें"
+ },
+ {
+  "kind": "text",
+  "en": "New password",
+  "gu": "નવો પાસવર્ડ",
+  "hi": "नया पासवर्ड"
+ },
+ {
+  "kind": "text",
+  "en": "Save password",
+  "gu": "પાસવર્ડ સાચવો",
+  "hi": "पासवर्ड सहेजें"
+ },
+ {
+  "kind": "text",
+  "en": "Want email updates for this order?",
+  "gu": "આ ઓર્ડરના અપડેટ ઇમેઇલ પર જોઈએ છે?",
+  "hi": "इस ऑर्डर के अपडेट ईमेल पर चाहिए?"
+ },
+ {
+  "kind": "text",
+  "en": "Order updates will be emailed to your account address.",
+  "gu": "ઓર્ડરના અપડેટ તમારા ખાતાના ઇમેઇલ પર મોકલાશે.",
+  "hi": "ऑर्डर के अपडेट आपके खाते के ईमेल पर भेजे जाएंगे।"
+ },
+ {
+  "kind": "text",
+  "en": "Use at least 8 characters. We email you a link to confirm your address.",
+  "gu": "ઓછામાં ઓછા 8 અક્ષર વાપરો. સરનામું પાકું કરવા અમે લિંક ઇમેઇલ કરીશું.",
+  "hi": "कम से कम 8 अक्षर रखें। पता पक्का करने के लिए हम लिंक ईमेल करेंगे।"
+ },
+ {
+  "kind": "text",
+  "en": "Check your email address.",
+  "gu": "તમારું ઇમેઇલ સરનામું ચકાસો.",
+  "hi": "अपना ईमेल पता जांचें।"
+ },
+ {
+  "kind": "text",
+  "en": "Use at least 8 characters for the password.",
+  "gu": "પાસવર્ડમાં ઓછામાં ઓછા 8 અક્ષર વાપરો.",
+  "hi": "पासवर्ड में कम से कम 8 अक्षर रखें।"
+ },
+ {
+  "kind": "text",
+  "en": "Wrong email or password.",
+  "gu": "ઇમેઇલ અથવા પાસવર્ડ ખોટો છે.",
+  "hi": "ईमेल या पासवर्ड गलत है।"
+ },
+ {
+  "kind": "text",
+  "en": "Confirm your email first. Check your inbox for the link.",
+  "gu": "પહેલા ઇમેઇલ પાકો કરો. ઇનબોક્સમાં લિંક જુઓ.",
+  "hi": "पहले ईमेल की पुष्टि करें। इनबॉक्स में लिंक देखें।"
+ },
+ {
+  "kind": "text",
+  "en": "That didn't work. Please try again.",
+  "gu": "એ કામ ન થયું. ફરી પ્રયત્ન કરો.",
+  "hi": "यह नहीं हो सका। कृपया फिर कोशिश करें।"
+ },
+ {
+  "kind": "text",
+  "en": "That didn't work. Check your internet and try again.",
+  "gu": "એ કામ ન થયું. ઇન્ટરનેટ ચકાસીને ફરી પ્રયત્ન કરો.",
+  "hi": "यह नहीं हो सका। इंटरनेट जांचकर फिर कोशिश करें।"
+ },
+ {
+  "kind": "text",
+  "en": "Check your email to confirm your account, then sign in.",
+  "gu": "ખાતું પાકું કરવા ઇમેઇલ જુઓ, પછી સાઇન ઇન કરો.",
+  "hi": "खाता पक्का करने के लिए ईमेल देखें, फिर साइन इन करें।"
+ },
+ {
+  "kind": "text",
+  "en": "Type your email above first.",
+  "gu": "પહેલા ઉપર તમારો ઇમેઇલ લખો.",
+  "hi": "पहले ऊपर अपना ईमेल लिखें।"
+ },
+ {
+  "kind": "text",
+  "en": "Reset link sent. Check your email.",
+  "gu": "રીસેટ લિંક મોકલી. ઇમેઇલ જુઓ.",
+  "hi": "रीसेट लिंक भेजी गई। ईमેल देखें।"
+ },
+ {
+  "kind": "text",
+  "en": "Your password is updated.",
+  "gu": "તમારો પાસવર્ડ બદલાઈ ગયો.",
+  "hi": "आपका पासवर्ड बदल गया।"
+ },
+ {
+  "kind": "text",
+  "en": "Order received",
+  "gu": "ઓર્ડર મળ્યો",
+  "hi": "ऑर्डर मिला"
+ },
+ {
+  "kind": "text",
+  "en": "Payment confirmed",
+  "gu": "પેમેન્ટ પાકું થયું",
+  "hi": "पेमेंट की पुष्टि हुई"
+ },
+ {
+  "kind": "text",
+  "en": "Packed",
+  "gu": "પેક થયું",
+  "hi": "पैक हो गया"
+ },
+ {
+  "kind": "text",
+  "en": "Shipped",
+  "gu": "મોકલ્યું",
+  "hi": "भेज दिया गया"
+ },
+ {
+  "kind": "text",
+  "en": "Delivered",
+  "gu": "પહોંચી ગયું",
+  "hi": "पहुंच गया"
+ },
+ {
+  "kind": "text",
+  "en": "Cancelled",
+  "gu": "રદ થયું",
+  "hi": "रद्द"
+ },
+ {
+  "kind": "text",
+  "en": "Order saved. A confirmation email is on its way.",
+  "gu": "ઓર્ડર સચવાયો. કન્ફર્મેશન ઇમેઇલ આવી રહ્યો છે.",
+  "hi": "ऑर्डर सहेजा गया। कन्फर्मेशन ईमेल आ रहा है।"
+ },
+ {
+  "kind": "text",
+  "en": "Order saved to your account.",
+  "gu": "ઓર્ડર તમારા ખાતામાં સચવાયો.",
+  "hi": "ऑर्डर आपके खाते में सहेजा गया।"
+ },
+ {
+  "kind": "text",
+  "en": "We couldn't save this order to your account. Your WhatsApp order still works.",
+  "gu": "આ ઓર્ડર ખાતામાં સાચવી ન શક્યા. તમારો WhatsApp ઓર્ડર હજી ચાલે છે.",
+  "hi": "यह ऑर्डर खाते में सहेज नहीं सके। आपका WhatsApp ऑर्डर फिर भी काम करेगा।"
+ },
+ {
+  "kind": "text",
+  "en": "Sign-in could not load. Check your internet and try again.",
+  "gu": "સાઇન ઇન લોડ ન થયું. ઇન્ટરનેટ ચકાસીને ફરી પ્રયત્ન કરો.",
+  "hi": "साइन इन लोड नहीं हुआ। इंटरनेट जांचकर फिर कोशिश करें।"
  }
 ]

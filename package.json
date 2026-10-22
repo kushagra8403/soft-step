@@ -1,0 +1,9 @@
+{
+  "name": "soft-steps-functions",
+  "private": true,
+  "description": "Netlify Functions for Soft Steps customer sign-in, orders and order emails.",
+  "dependencies": {
+    "@supabase/supabase-js": "2.45.4",
+    "nodemailer": "6.9.15"
+  }
+}

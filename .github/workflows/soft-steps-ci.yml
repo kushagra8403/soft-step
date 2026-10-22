@@ -40,6 +40,10 @@ jobs:
           node --check work-admin/site/lang.js
           node --check work-admin/site/wow.js
           node --check work-admin/site/extras.js
+          node --check work-admin/site/account.js
+          for f in netlify/functions/*.js; do node --check "$f"; done
+          npm install --no-save --no-package-lock @supabase/supabase-js@2.45.4 nodemailer@6.9.15
+          node netlify/tests/functions.cjs
           node --check work-admin/site/lang-gu.js
           node --check work-admin/site/lang-hi.js
           node --check work-admin/tests/core.cjs
