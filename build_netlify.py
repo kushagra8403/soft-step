@@ -5,7 +5,7 @@ structured data, icons, robots/sitemap and cache headers."""
 import os, re, shutil, sys, json
 from PIL import Image
 SRC, DIST = sys.argv[1], sys.argv[2]
-URL = "https://softsteps-home-lhci.netlify.app/"
+URL = os.environ.get("SITE_URL", "https://softstepshome.netlify.app/")   # the public address; override with SITE_URL=https://... if it changes
 ROOT = os.path.dirname(os.path.abspath(__file__))
 if os.path.exists(DIST): shutil.rmtree(DIST)
 os.makedirs(DIST)
