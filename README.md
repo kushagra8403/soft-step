@@ -10,5 +10,6 @@ Live site: https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH — planned: https:
 - `work-admin/` — newer working copy: stock/price catalog layer + owner admin (`admin.js`)
 - `i18n/` — translations and the build tool
 - `build_netlify.py` — builds a Netlify-ready folder
+- `account.js`, `netlify/functions/`, `supabase/schema.sql`, `SETUP-ACCOUNTS.md` — optional customer sign-in, saved orders, order emails and the owner's order list (setup steps in `SETUP-ACCOUNTS.md`)
 - `qa.cjs`, `audit/`, `libs/` — Playwright test harness
 - `design2/` — colour research and the specs for the new effects

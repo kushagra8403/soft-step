@@ -117,12 +117,15 @@ ld = {"@context": "https://schema.org", "@type": "Store", "name": "Soft Steps", 
       "makesOffer": [{"@type": "Offer", "itemOffered": o} for o in offers]}
 title = "Soft Steps · Rugs, doormats & bath mats in Vadodara"
 desc = re.search(r'<meta name="description" content="([^"]+)"', page).group(1)
+# The Netlify git build has SUPABASE_URL set; a Drop upload or local build does not, so those never probe for the order functions.
+ACCOUNTS_META = '<meta name="ss-accounts" content="on">' if os.environ.get('SUPABASE_URL') else ''
 head = f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="canonical" href="{URL}">
+{ACCOUNTS_META}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Soft Steps">
 <meta property="og:title" content="{title}">

@@ -1998,7 +1998,7 @@ $("#order-btn").onclick=function(){
   var previous=previousPending();if(previous){syncPreviousOrderGuard();if(!$("#prev-order-unpaid").checked){$("#oerr").textContent="Please confirm you have not paid for the previous order, or contact Jelam first.";$("#prev-order-unpaid").focus();return}}
    var t=total(),reusePend=pend&&!pend.sent&&pend.sig===sig()&&pend.t===t,oid=reusePend?pend.oid:"SS-"+Date.now().toString(36).toUpperCase().slice(-6),gift=$("#o-gift-on").checked?v("#o-gift"):"";
   lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(/^390\d{3}$/.test(pin)?" (free delivery in Vadodara)":(/^391\d{3}$/.test(pin)?" (Vadodara district delivery charges to be confirmed)":" + delivery outside Vadodara (please confirm charges)"))+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+(gift?"\n\nGift note: "+gift:"")+"\n\nI will share the UPI payment screenshot here.";
-  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false,details:collectDetails()};savePend();if(previous){try{localStorage.removeItem("ss_previous_pending")}catch(e){}$("#prev-order-unpaid").checked=false;$("#prev-order-guard").hidden=true}clearDetailsDraft();fillPay(pend);
+  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false,details:collectDetails()};savePend();if(window.SSACCT)SSACCT.record(oid,cart.map(function(x){return {name:P[x.k].name,size:x.size,colour:x.colour,q:x.q,p:x.p}}),pend.details,gift);if(previous){try{localStorage.removeItem("ss_previous_pending")}catch(e){}$("#prev-order-unpaid").checked=false;$("#prev-order-guard").hidden=true}clearDetailsDraft();fillPay(pend);
   step("pay");render();
 };
 function copyText(text,btn){if(!btn||btn._cp)return;btn._cp=true;var original=btn.dataset.copyLabel||btn.textContent;if(!btn.dataset.copyLabel)btn.dataset.copyLabel=original;var timer;var done=function(){btn.textContent="Copied";clearTimeout(timer);timer=setTimeout(function(){btn.textContent=original;btn._cp=false},1500)};
@@ -2029,7 +2029,7 @@ window.SS={P:P,SLIDES:SLIDES,SIZEIDX:SIZEIDX,catalog:CAT,catalogDefault:CATDEF,s
   render:render,openD:openD,closeD:closeD,show:show,fieldForeground:fgFor,hsSet:hsSet,getHi:function(){return hi},getHs:function(){return hs}};
 })();
 </script>
-<script src="fx.js"></script><script src="features.js"></script><script src="touchfx.js"></script><script src="shop.js"></script><script src="pairs.js"></script><script src="tryon.js"></script><script src="lang.js"></script><script src="wow.js"></script><script src="extras.js"></script>
+<script src="fx.js"></script><script src="features.js"></script><script src="touchfx.js"></script><script src="shop.js"></script><script src="pairs.js"></script><script src="tryon.js"></script><script src="lang.js"></script><script src="wow.js"></script><script src="extras.js"></script><script src="account.js"></script>
 <script>
 /* Shop owner's way in: only a viewer who can edit this artifact (the owner, or an editor) sees the footer link, and
    only then are admin.css and admin.js loaded (once). #admin opens the editor straight away for them and shows a small
