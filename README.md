@@ -2,7 +2,7 @@
 
 One-page shop for Soft Steps (rugs, doormats and bath mats, Vadodara). Plain HTML/CSS/JS, English | ગુજરાતી | हिन्दी.
 
-Live site: https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH — planned: https://softsteps-home.netlify.app
+Live site: https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH — public: https://softstepshome.netlify.app
 
 **Start with [HANDOFF.md](HANDOFF.md)**: folder map, rules, current state and the remaining tasks.
 
