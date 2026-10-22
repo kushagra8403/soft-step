@@ -330,7 +330,7 @@
       }
 
       function firstLoad() {
-        if (!motion() || doc.hidden) return;
+        if (!motion() || doc.hidden || PHONE.matches) return;
         var r = hero.getBoundingClientRect();
         if (r.bottom <= 0 || r.top >= innerHeight) return;
         /* if the page was already on screen well before this module arrived (slow network), the finished
@@ -397,7 +397,7 @@
     (function () {
       var btn = $("#h-play"), dots = $("#dots");
       if (!btn || !dots || !hero || !heroFx) return;
-      var AP = mq("(prefers-reduced-motion:no-preference)");   /* phones too: most visitors are on a phone */
+      var AP = mq("(prefers-reduced-motion:no-preference) and (min-width:621px)");   /* keep automatic hero swaps on larger screens; phones remain user-controlled for stable layout */
       var stopped = false, userPaused = false, off = false, modal = false, shown = null;
       var I_PAUSE = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="3" width="3" height="10" rx="1"/><rect x="9.5" y="3" width="3" height="10" rx="1"/></svg>';
       var I_PLAY = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5.2 3.1v9.8c0 .6.7 1 1.2.7l7.3-4.9c.5-.3.5-1 0-1.3L6.4 2.4c-.5-.3-1.2.1-1.2.7z"/></svg>';

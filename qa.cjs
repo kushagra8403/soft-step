@@ -45,14 +45,32 @@ if (require.main === module) (async () => {
     const ctx = await b.newContext({ viewport: { width: w, height: h }, reducedMotion: rm ? 'reduce' : 'no-preference', deviceScaleFactor: 1 });
     const page = await ctx.newPage(); await prep(page, log);
     await page.addInitScript(() => {
-      const v = window.__ssVitals = { lcp: null, cls: 0 };
+      const v = window.__ssVitals = { lcp: null, cls: 0, shifts: [] };
       try {
         new PerformanceObserver(list => { for (const e of list.getEntries()) v.lcp = e.startTime; })
           .observe({ type: 'largest-contentful-paint', buffered: true });
       } catch (e) {}
       try {
         new PerformanceObserver(list => {
-          for (const e of list.getEntries()) if (!e.hadRecentInput && Number.isFinite(e.value)) v.cls += e.value;
+          for (const e of list.getEntries()) if (!e.hadRecentInput && Number.isFinite(e.value)) {
+            v.cls += e.value;
+            v.shifts.push({
+              value: e.value,
+              startTime: Math.round(e.startTime),
+              sources: (e.sources || []).slice(0, 5).map(s => {
+                const el = s.node;
+                if (!el || !el.tagName) return { selector: '(unknown-node)' };
+                const id = el.id ? '#' + el.id : '';
+                const cls = typeof el.className === 'string' && el.className.trim()
+                  ? '.' + el.className.trim().split(/\s+/).slice(0, 3).join('.') : '';
+                return {
+                  selector: el.tagName.toLowerCase() + id + cls,
+                  previous: s.previousRect && { x: Math.round(s.previousRect.x), y: Math.round(s.previousRect.y), w: Math.round(s.previousRect.width), h: Math.round(s.previousRect.height) },
+                  current: s.currentRect && { x: Math.round(s.currentRect.x), y: Math.round(s.currentRect.y), w: Math.round(s.currentRect.width), h: Math.round(s.currentRect.height) }
+                };
+              })
+            });
+          }
         }).observe({ type: 'layout-shift', buffered: true });
       } catch (e) {}
     });
@@ -61,7 +79,7 @@ if (require.main === module) (async () => {
       await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
     }
     await page.goto(url, { waitUntil: 'load' }); await page.waitForTimeout(2500);
-    const vitals = await page.evaluate(() => ({ lcpMs: window.__ssVitals && window.__ssVitals.lcp, cls: window.__ssVitals && window.__ssVitals.cls }));
+    const vitals = await page.evaluate(() => ({ lcpMs: window.__ssVitals && window.__ssVitals.lcp, cls: window.__ssVitals && window.__ssVitals.cls, shifts: window.__ssVitals && window.__ssVitals.shifts }));
     await page.screenshot({ path: path.join(out, name + '-first.png') });
     await scrollThrough(page);
     const m = await page.evaluate(() => {
@@ -124,6 +142,8 @@ if (require.main === module) (async () => {
   console.log('QA perf (phone is 4× CPU-throttled): ' + JSON.stringify({
     phone: report.phone && report.phone.vitals,
     phoneReduced: report['phone-reduced'] && report['phone-reduced'].vitals,
+    phoneShifts: report.phone && report.phone.vitals && report.phone.vitals.shifts,
+    phoneReducedShifts: report['phone-reduced'] && report['phone-reduced'].vitals && report['phone-reduced'].vitals.shifts,
     layoutWidths: viewportNames.map(n => ({ name: n, client: report[n] && report[n].clientWidth, scroll: report[n] && report[n].scrollWidth }))
   }));
   if (errors.length) throw new Error('Final viewport/checkout QA failed:\\n' + errors.join('\\n'));

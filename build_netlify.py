@@ -5,7 +5,7 @@ structured data, icons, robots/sitemap and cache headers."""
 import os, re, shutil, sys, json
 from PIL import Image
 SRC, DIST = sys.argv[1], sys.argv[2]
-URL = "https://softsteps-home.netlify.app/"
+URL = "https://softsteps-home-lhci.netlify.app/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 if os.path.exists(DIST): shutil.rmtree(DIST)
 os.makedirs(DIST)
@@ -18,7 +18,41 @@ for js in scripts:
     s = s.replace('https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH', URL)
     open(os.path.join(DIST, js), 'w', encoding='utf-8').write(s)
 # images actually referenced (+ phone variants and thumbs)
-img_src = os.path.realpath(os.path.join(SRC, 'img'))
+img_entry = os.path.join(SRC, 'img')
+# Git stores this entry as a symlink (mode 120000). Some source-archive/build
+# pipelines materialise symlinks as a text file containing the link target,
+# so handle both a real symlink/directory and that archive representation.
+if os.path.isdir(img_entry):
+    img_src = os.path.realpath(img_entry)
+elif os.path.isfile(img_entry):
+    try:
+        link_target = open(img_entry, encoding='utf-8').read().strip()
+    except OSError as exc:
+        raise SystemExit(f"Netlify export: cannot read image link {img_entry}: {exc}")
+    candidates = []
+    if link_target and not os.path.isabs(link_target):
+        candidates.append(os.path.normpath(os.path.join(os.path.dirname(img_entry), link_target)))
+        candidates.append(os.path.normpath(os.path.join(ROOT, link_target)))
+    # Deterministic repository fallback for archives that lose the link target.
+    candidates.append(os.path.join(ROOT, 'site-live-v30', 'img'))
+    img_src = next((os.path.realpath(p) for p in candidates if os.path.isdir(p)), None)
+    if img_src is None:
+        raise SystemExit(
+            f"Netlify export: {img_entry} is a file, not an image directory, "
+            f"and its target {link_target!r} could not be resolved. "
+            "Expected the shared image directory at site-live-v30/img."
+        )
+else:
+    fallback = os.path.join(ROOT, 'site-live-v30', 'img')
+    if os.path.isdir(fallback):
+        img_src = os.path.realpath(fallback)
+    else:
+        raise SystemExit(
+            f"Netlify export: image directory not found at {img_entry} "
+            f"or {fallback}."
+        )
+if not os.path.isfile(os.path.join(img_src, 'logo.jpg')):
+    raise SystemExit(f"Netlify export: resolved image directory has no logo.jpg: {img_src}")
 shutil.copytree(img_src, os.path.join(DIST, 'img'), ignore=shutil.ignore_patterns('*.png'))
 shutil.copy(os.path.join(ROOT, 'og', 'og.jpg'), os.path.join(DIST, 'img', 'og.jpg'))
 logo = Image.open(os.path.join(img_src, 'logo.jpg')).convert('RGB')

@@ -32,7 +32,7 @@
 <meta name="theme-color" content="#8A3A1A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,100,0;1,9..144,300..600,100,0&family=Hind+Vadodara:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,100,0;1,9..144,300..600,100,0&family=Hind+Vadodara:wght@400;500;600&display=optional">
 <link rel="preload" as="image" href="img/m/s4.avif" type="image/avif" media="(max-width: 760px)" fetchpriority="high">
 <link rel="preload" as="image" href="img/s4.webp" media="(min-width: 761px)" fetchpriority="high">
 <style>
@@ -587,6 +587,7 @@ input::placeholder,textarea::placeholder{color:#7d7064}
 form.enq{display:grid;gap:16px;margin-top:8px}
 .done{display:grid;gap:12px;padding:16px;border-radius:18px;background:var(--kora)}
 .err{color:var(--kumkum);font-size:15px;font-weight:600}
+.prev-order-guard{border:1px solid var(--edge);border-radius:12px;padding:12px;margin:10px 0;font-size:14px}.prev-order-guard[hidden]{display:none}.prev-order-msg{margin:0 0 8px}.prev-order-guard .check{margin:8px 0}.prev-order-guard .link{display:inline-block;margin-top:4px}
 .err:empty{display:none}
 @media(max-width:860px){.faq-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:440px){.clist li{grid-template-columns:minmax(0,1fr) auto}.clist .k{grid-column:1/-1;margin-bottom:-8px;font-size:14px;color:var(--mitti)}.two{grid-template-columns:1fr}.specs div{grid-template-columns:1fr;gap:2px}.qa details p{padding-right:0}}
@@ -632,6 +633,8 @@ form.enq{display:grid;gap:16px;margin-top:8px}
   .drawer:not([hidden]){animation:drawerin .3s var(--e-out)}
 }
 @media(prefers-reduced-motion:no-preference) and (hover:none){.lamp{animation:drift 18s ease-in-out infinite alternate}}
+/* Keep the mobile hero's layout stable: the ambient lamp drift is decorative, not structural. */
+@media(max-width:620px){.lamp{animation:none!important}}
 
 /* ---------- Overlays: cart bar, dock, toast, fly ---------- */
 .cbar{position:fixed;z-index:15;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(480px,calc(100% - 32px));min-height:60px;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 8px 8px 22px;border:0;border-radius:999px;background:var(--kajal);color:var(--chalk);box-shadow:var(--sh-float);font:600 15px/1.2 var(--text)}
@@ -1122,6 +1125,10 @@ dialog::backdrop{background:rgba(31,27,24,.45)}
 .menu-wa{border-top-color:var(--sut);color:var(--mitti)}
 .menu-wa a{color:var(--kajal)}
 .menu-wa .copy{background:transparent;color:var(--kajal)}
+.langs{display:flex;justify-content:flex-end;gap:4px;margin:0 0 8px;padding:0}
+.langs button{min-height:36px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:var(--mitti);font:500 14px/1 var(--text)}
+.langs button[aria-pressed=true]{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--sut)}
+@media(hover:none),(pointer:coarse){.langs button{min-height:44px}}
 :root #menu .langs button{color:var(--mitti)}
 :root #menu .langs button[aria-pressed=true]{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--sut)}
 
@@ -1183,6 +1190,7 @@ dialog::backdrop{background:rgba(31,27,24,.45)}
 <div class="page">
 <div class="wrap">
 
+<div class="langs" role="group" aria-label="Language / ભાષા / भाषा" data-noi18n><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="gu" lang="gu" aria-pressed="false">ગુજરાતી</button><button type="button" data-lang="hi" lang="hi" aria-pressed="false">हिन्दी</button></div>
 <header class="hero field" id="hero" aria-label="Featured rug">
   <h1 class="sr-only">Soft Steps: rugs, doormats and bath mats from Vadodara</h1>
   <p class="sr-only" id="h-live" aria-live="polite"></p>
@@ -1613,6 +1621,11 @@ Total: ₹997 (free delivery in Vadodara)<small>Sent from the site</small></div>
   <div class="df" id="f-det" hidden>
     <div class="rowx"><span>Total</span><span class="total" id="tot">₹0</span></div>
     <p class="err" id="oerr" role="alert"></p>
+    <div id="prev-order-guard" class="prev-order-guard" hidden role="group" aria-labelledby="prev-order-warning">
+      <p id="prev-order-warning" class="prev-order-msg"><span>A previous order</span> <b id="prev-order-id"></b> <span>was started. If you already paid, do not pay again; contact Jelam first.</span></p>
+      <label class="check" for="prev-order-unpaid"><input type="checkbox" id="prev-order-unpaid"><span>I have not paid for that previous order.</span></label>
+      <a class="link" id="prev-order-contact" href="https://wa.me/919099441429" target="_blank" rel="noopener">Contact Jelam about this order</a>
+    </div>
     <div class="rowx" style="gap:8px"><button type="button" class="pill quiet" id="back">Back</button><button type="button" class="pill" style="flex:1" id="order-btn">Continue to payment <span class="chev" aria-hidden="true">›</span></button></div>
   </div>
   <div class="db thanks" id="v-pay" hidden>
@@ -1775,7 +1788,7 @@ function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:
 function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FDFCFA";
   var L=[0,2,4].map(function(i){var v=parseInt(m[1].substr(i,2),16)/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
   var y=.2126*L[0]+.7152*L[1]+.0722*L[2];if(y>=.23)return "#1F1B18";if(y>=.18)return "#000000";return "#FFFFFF"}
-function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FDFCFA"?"#1F1B18":"#FDFCFA";el.dataset.tone=fg==="#FDFCFA"?"dark":"light";
+function paint(el,hex,from){var fg=fgFor(hex),lt=fg==="#FDFCFA"||fg==="#FFFFFF",on=lt?"#1F1B18":"#FDFCFA";el.dataset.tone=lt?"dark":"light";
   if(from&&fx("dye",el,hex,fg,on,from))return;
   el.style.setProperty("--f",hex);el.style.setProperty("--fg",fg);el.style.setProperty("--on",on)}
 function radio(group,btn){$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
@@ -1925,20 +1938,22 @@ function sig(){return JSON.stringify(cart.map(function(x){return [x.k,x.size,x.c
 function savePend(){try{if(pend)localStorage.setItem("ss_pending",JSON.stringify(pend));else localStorage.removeItem("ss_pending")}catch(e){}}
 function fillPay(o){lastMsg=o.msg;$("#sendwa").href="https://wa.me/"+PH+"?text="+encodeURIComponent(o.msg);$("#oid").textContent="#"+o.oid;$("#oname").textContent=o.nm;
   $("#payamt").textContent=inr(o.t)+(o.out?" + delivery once confirmed":"");$("#upil").href="upi://pay?pa="+UPI+"&pn=Jelam%20Panchal&am="+o.t+"&cu=INR&tn="+encodeURIComponent("Soft Steps "+o.oid);$("#sentbox").hidden=!(o.sent||o.opened)}
+function previousPending(){try{var p=JSON.parse(localStorage.getItem("ss_previous_pending")||"null");return p&&typeof p.oid==="string"&&typeof p.msg==="string"&&typeof p.t==="number"&&p.sent!==true?p:null}catch(e){return null}}
+function syncPreviousOrderGuard(){var g=$("#prev-order-guard"),p=previousPending(),show=!!p&&!$("#v-det").hidden;if(!g)return;g.hidden=!show;if(show){$("#prev-order-id").textContent="#"+p.oid;$("#prev-order-contact").href="https://wa.me/"+PH+"?text="+encodeURIComponent("I need help with previous Soft Steps order "+p.oid+" before making another payment.")}else $("#prev-order-unpaid").checked=false}
 /* Lines keep their colour and size; price and size text always come from the catalog (P). */
 function lineIdx(x){var i=SIZEIDX[String(x.size).split(" ")[0]];return i==null?-1:i}
 function refresh(x){var z=P[x.k]&&P[x.k].sizes[lineIdx(x)];if(z){x.p=z[3];x.size=z[0]+" "+z[1]}}
 function lineOK(x){return canBuy(x.k,x.colour,lineIdx(x))}
 function render(){
   cart.forEach(refresh);var bad=cart.filter(function(x){return !lineOK(x)}).length;
-  if(pend&&!pend.sent&&(pend.sig!==sig()||pend.t!==total()||bad)){try{localStorage.setItem("ss_previous_pending",JSON.stringify(pend));if(pend.details)localStorage.setItem("ss_details2",JSON.stringify(pend.details))}catch(e){}var oldOid=pend.oid;pend=null;savePend();toast("Cart changed. Check previous order #"+oldOid+" with Jelam before paying again.")}
+  if(pend&&!pend.sent&&(pend.sig!==sig()||pend.t!==total()||bad)){try{localStorage.setItem("ss_previous_pending",JSON.stringify(Object.assign({},pend,{needsPaymentCheck:true,previousAt:Date.now()})));if(pend.details)localStorage.setItem("ss_details2",JSON.stringify(pend.details))}catch(e){}var oldOid=pend.oid;pend=null;savePend();toast("Cart changed. Check previous order #"+oldOid+" with Jelam before paying again.")}
   var n=count();$("#cnt").textContent=n;$("#cnt").hidden=!n;$("#cartbtn").setAttribute("aria-label","Open cart, "+n+(n===1?" item":" items"));
   $("#cbar").hidden=!n||!$("#drawer").hidden;$("#cbn").textContent=pend&&!pend.sent?(pend.opened?"Return to order #"+pend.oid:"Finish order #"+pend.oid):"View cart · "+n+(n>1?" items":" item");$("#cbt").textContent=inr(total());
   $("#v-cart").innerHTML=cart.length?cart.map(function(x,i){var ok=lineOK(x);return '<div class="line'+(ok?"":" oos")+'">'+(window.SS&&SS.lineThumb?SS.lineThumb(x.k,x.colour):'<img src="'+imgFor(x.k,x.colour)+'" alt="">')+'<div><b>'+esc(P[x.k].name)+'</b><small>'+esc(x.colour)+'</small><small>'+esc(x.size)+' · '+inr(x.p)+' each</small>'+(ok?'':'<small class="oosn">Now out of stock</small>')+'<div class="stepper"><button type="button" data-i="'+i+'" data-d="-1" aria-label="One less, '+esc(x.colour+" "+P[x.k].name)+'">−</button><output>'+x.q+'</output><button type="button" data-i="'+i+'" data-d="1" aria-label="One more, '+esc(x.colour+" "+P[x.k].name)+'"'+(ok?'':' disabled')+'>+</button></div><button type="button" class="link rm" data-i="'+i+'" data-d="0" aria-label="Remove '+esc(x.colour+" "+P[x.k].name)+'">Remove</button></div><span class="amt">'+inr(x.p*x.q)+'</span></div>'}).join(""):'<div class="empty"><p>Your cart is empty.</p><button type="button" class="pill quiet" id="browse">Browse mats</button></div>';
   $("#sub").textContent=inr(total());$("#go").disabled=!cart.length||bad>0;$("#cart-oos").hidden=!bad;
   var br=$("#browse");if(br)br.onclick=function(){closeD();var rm=false;try{rm=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}$("#shop").scrollIntoView({behavior:rm?"auto":"smooth"})};
   save();
-  fx("rendered",n);
+  fx("rendered",n);syncPreviousOrderGuard();
 }
 $("#v-cart").addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;var i=+b.dataset.i,d=+b.dataset.d,x=cart[i],gone=!d;if(!d)cart.splice(i,1);else{x.q+=d;if(x.q<1){cart.splice(i,1);gone=true}}render();
   /* render() rebuilds the lines, so put focus back on the same control (or the next sensible one) and say what changed */
@@ -1948,7 +1963,7 @@ var lastFocus=null,titles={cart:"Your cart",det:"Delivery details",pay:"Pay & se
 function view(v){VIEWS.forEach(function(x,i){var li=$$("#prog li")[i];$("#v-"+x).hidden=x!==v;$("#f-"+x).hidden=x!==v;li.classList.toggle("on",VIEWS.indexOf(x)>=i);if(x===v)li.setAttribute("aria-current","step");else li.removeAttribute("aria-current")});$("#dtitle").textContent=titles[v];$("#v-"+v).scrollTop=0}
 function pushCheckoutState(v){try{var st=history.state&&typeof history.state==="object"?Object.assign({},history.state):{};if(!checkoutEntries){var base=Object.assign({},st);base.__softStepsBase=true;base.__softStepsEpoch=checkoutEpoch;delete base.__softStepsCheckout;delete base.__softStepsStep;delete base.__softStepsOrder;history.pushState(base,"",location.href);checkoutEntries=1;st={}}st.__softStepsCheckout=true;st.__softStepsStep=v;st.__softStepsOrder=pend&&!pend.sent?pend.oid:null;st.__softStepsEpoch=checkoutEpoch;history.pushState(st,"",location.href);checkoutEntries++}catch(e){}}
 /* A step change hides the button that was pressed, so focus moves to the new step's title. */
-function step(v,fromPop){view(v);if(!fromPop&&!$("#drawer").hidden)pushCheckoutState(v);try{$("#dtitle").focus({preventScroll:true})}catch(e){}}
+function step(v,fromPop){view(v);syncPreviousOrderGuard();if(!fromPop&&!$("#drawer").hidden)pushCheckoutState(v);try{$("#dtitle").focus({preventScroll:true})}catch(e){}}
 function openD(v){var wasOpen=!$("#drawer").hidden;lastFocus=document.activeElement;var target=pend&&(!v||v==="cart")?"pay":v||"cart",current=VIEWS.filter(function(x){return !$("#v-"+x).hidden})[0];view(target);$("#drawer").hidden=false;$("#scrim").hidden=false;$("#cbar").hidden=true;document.body.style.overflow="hidden";if(!wasOpen||current!==target)pushCheckoutState(target);$("#dclose").focus();fx("drawer",true)}
 function closeD(fromPop){var back=fromPop?0:Math.max(0,checkoutEntries-1);checkoutEntries=0;$("#drawer").hidden=true;$("#scrim").hidden=true;document.body.style.overflow="";render();fx("drawer",false);if(lastFocus&&lastFocus.focus)lastFocus.focus();if(back)try{history.go(-back)}catch(e){}}
 window.addEventListener("popstate",function(e){if($("#drawer").hidden){checkoutEntries=0;return}checkoutEntries=Math.max(0,checkoutEntries-1);var st=e.state;if(st&&st.__softStepsBase===true){if(st.__softStepsEpoch!==checkoutEpoch){view("cart");try{history.replaceState(Object.assign({},st,{__softStepsEpoch:checkoutEpoch}),"",location.href)}catch(x){}try{$("#dtitle").focus({preventScroll:true})}catch(x){}return}closeD(true);return}if(st&&st.__softStepsCheckout===true&&VIEWS.indexOf(st.__softStepsStep)>=0){var stale=st.__softStepsEpoch!==checkoutEpoch||(st.__softStepsOrder&&(!pend||st.__softStepsOrder!==pend.oid));if(stale){view("cart");try{history.replaceState(Object.assign({},st,{__softStepsStep:"cart",__softStepsOrder:pend&&!pend.sent?pend.oid:null,__softStepsEpoch:checkoutEpoch}),"",location.href)}catch(x){}}else view(st.__softStepsStep);try{$("#dtitle").focus({preventScroll:true})}catch(x){}return}closeD(true)});
@@ -1967,7 +1982,7 @@ $("#go").onclick=function(){if(!cart.length||!cart.every(lineOK))return;summary(
 $("#back").onclick=function(){step("cart")};
 $$("input[name=dl]").forEach(function(r){r.onchange=summary});
 var pinInput=$("#o-pin");pinInput.addEventListener("input",function(){var v=pinInput.value.replace(/\D/g,"").slice(0,6);if(v!==pinInput.value)pinInput.value=v});pinInput.addEventListener("paste",function(e){var v="";try{v=(e.clipboardData||window.clipboardData).getData("text")}catch(x){}if(!v)return;e.preventDefault();pinInput.value=v.replace(/\D/g,"").slice(0,6);pinInput.dispatchEvent(new Event("input",{bubbles:true}))});
-var fastActionAt=0,fastActionEl=null;document.addEventListener("click",function(e){var el=e.target.closest&&e.target.closest("[data-add],#go,#order-btn,#v-cart button[data-i]");if(!el)return;var now=Date.now();if(el===fastActionEl&&now-fastActionAt<350){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();return}fastActionAt=now;fastActionEl=el},true);
+var fastActionAt=0,fastActionKey="";document.addEventListener("click",function(e){var el=e.target.closest&&e.target.closest("[data-add],#go,#order-btn,#v-cart button[data-i]");if(!el)return;var key;if(el.matches("[data-add]")){var card=el.closest(".prod");key="add:"+(card&&card.dataset.k||el.getAttribute("data-add")||"unknown")}else if(el.matches("#v-cart button[data-i]")){key="cart:"+el.dataset.i+":"+el.dataset.d}else{key=el.id||el.tagName}var now=Date.now();if(key===fastActionKey&&now-fastActionAt<350){e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();return}fastActionAt=now;fastActionKey=key},true);
 $("#order-btn").onclick=function(){
   var v=function(id){return $(id).value.trim()},nm=v("#o-name"),ph=v("#o-ph"),ad=v("#o-ad"),ct=v("#o-ct"),pin=v("#o-pin").replace(/\D/g,"").slice(0,6),em=v("#o-email");$("#o-pin").value=pin;var pinRadio=$('input[name="dl"][value="'+(/^390\d{3}$/.test(pin)?"vad":"out")+'"]');if(/^[1-9]\d{5}$/.test(pin)&&pinRadio){pinRadio.checked=true;pinRadio.dispatchEvent(new Event("change"))}
   var pd=ph.replace(/[\s()+-]/g,"").replace(/^(91|0)(?=\d{10}$)/,""),err="",bad=null;
@@ -1980,9 +1995,10 @@ $("#order-btn").onclick=function(){
   ["#o-name","#o-ph","#o-ad","#o-ct","#o-pin","#o-email"].forEach(function(id){$(id).removeAttribute("aria-invalid");$(id).removeAttribute("aria-describedby")});
   $("#oerr").textContent=err;if(bad){$(bad).setAttribute("aria-invalid","true");$(bad).setAttribute("aria-describedby","oerr");$(bad).focus();return}
   if(!cart.every(lineOK)){step("cart");render();return}
-  var t=total(),reusePend=pend&&!pend.sent&&pend.sig===sig()&&pend.t===t,oid=reusePend?pend.oid:"SS-"+Date.now().toString(36).toUpperCase().slice(-6),gift=$("#o-gift-on").checked?v("#o-gift"):"";
+  var previous=previousPending();if(previous){syncPreviousOrderGuard();if(!$("#prev-order-unpaid").checked){$("#oerr").textContent="Please confirm you have not paid for the previous order, or contact Jelam first.";$("#prev-order-unpaid").focus();return}}
+   var t=total(),reusePend=pend&&!pend.sent&&pend.sig===sig()&&pend.t===t,oid=reusePend?pend.oid:"SS-"+Date.now().toString(36).toUpperCase().slice(-6),gift=$("#o-gift-on").checked?v("#o-gift"):"";
   lastMsg="New order "+oid+" – Soft Steps\n\n"+cart.map(function(x){return "• "+P[x.k].name+", "+x.size+" ("+x.colour+") × "+x.q+" = "+inr(x.p*x.q)}).join("\n")+"\n\nTotal: "+inr(t)+(/^390\d{3}$/.test(pin)?" (free delivery in Vadodara)":(/^391\d{3}$/.test(pin)?" (Vadodara district delivery charges to be confirmed)":" + delivery outside Vadodara (please confirm charges)"))+"\n\nName: "+nm+"\nPhone: "+ph+(em?"\nEmail: "+em:"")+"\nAddress: "+ad+", "+ct+" "+pin+(gift?"\n\nGift note: "+gift:"")+"\n\nI will share the UPI payment screenshot here.";
-  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false,details:collectDetails()};savePend();clearDetailsDraft();fillPay(pend);
+  pend={oid:oid,msg:lastMsg,t:t,nm:nm.split(" ")[0],out:dl()==="out",sig:sig(),at:Date.now(),sent:false,details:collectDetails()};savePend();if(previous){try{localStorage.removeItem("ss_previous_pending")}catch(e){}$("#prev-order-unpaid").checked=false;$("#prev-order-guard").hidden=true}clearDetailsDraft();fillPay(pend);
   step("pay");render();
 };
 function copyText(text,btn){if(!btn||btn._cp)return;btn._cp=true;var original=btn.dataset.copyLabel||btn.textContent;if(!btn.dataset.copyLabel)btn.dataset.copyLabel=original;var timer;var done=function(){btn.textContent="Copied";clearTimeout(timer);timer=setTimeout(function(){btn.textContent=original;btn._cp=false},1500)};
