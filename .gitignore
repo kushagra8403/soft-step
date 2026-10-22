@@ -4,3 +4,7 @@ qa-out/
 dist/
 __pycache__/
 .pytest_cache/
+work-admin/shots/
+work-admin/shots-integ/
+work-admin/tests/www*/
+work-admin/tests/integ-v*.html
