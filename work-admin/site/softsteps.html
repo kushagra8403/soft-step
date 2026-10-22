@@ -1125,6 +1125,10 @@ dialog::backdrop{background:rgba(31,27,24,.45)}
 .menu-wa{border-top-color:var(--sut);color:var(--mitti)}
 .menu-wa a{color:var(--kajal)}
 .menu-wa .copy{background:transparent;color:var(--kajal)}
+.langs{display:flex;justify-content:flex-end;gap:4px;margin:0 0 8px;padding:0}
+.langs button{min-height:36px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:var(--mitti);font:500 14px/1 var(--text)}
+.langs button[aria-pressed=true]{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--sut)}
+@media(hover:none),(pointer:coarse){.langs button{min-height:44px}}
 :root #menu .langs button{color:var(--mitti)}
 :root #menu .langs button[aria-pressed=true]{background:var(--chalk);color:var(--kajal);box-shadow:inset 0 0 0 1px var(--sut)}
 
@@ -1186,6 +1190,7 @@ dialog::backdrop{background:rgba(31,27,24,.45)}
 <div class="page">
 <div class="wrap">
 
+<div class="langs" role="group" aria-label="Language / ભાષા / भाषा" data-noi18n><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="gu" lang="gu" aria-pressed="false">ગુજરાતી</button><button type="button" data-lang="hi" lang="hi" aria-pressed="false">हिन्दी</button></div>
 <header class="hero field" id="hero" aria-label="Featured rug">
   <h1 class="sr-only">Soft Steps: rugs, doormats and bath mats from Vadodara</h1>
   <p class="sr-only" id="h-live" aria-live="polite"></p>
@@ -1783,7 +1788,7 @@ function imgFor(k,colour){var b=swatch(k,colour),i=b&&$("img",b);return i?i.src:
 function fgFor(hex){var h=String(hex).toLowerCase();if(FG[h])return FG[h];var m=/^#([0-9a-f]{6})$/.exec(h);if(!m)return "#FDFCFA";
   var L=[0,2,4].map(function(i){var v=parseInt(m[1].substr(i,2),16)/255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)});
   var y=.2126*L[0]+.7152*L[1]+.0722*L[2];if(y>=.23)return "#1F1B18";if(y>=.18)return "#000000";return "#FFFFFF"}
-function paint(el,hex,from){var fg=fgFor(hex),on=fg==="#FDFCFA"?"#1F1B18":"#FDFCFA";el.dataset.tone=fg==="#FDFCFA"?"dark":"light";
+function paint(el,hex,from){var fg=fgFor(hex),lt=fg==="#FDFCFA"||fg==="#FFFFFF",on=lt?"#1F1B18":"#FDFCFA";el.dataset.tone=lt?"dark":"light";
   if(from&&fx("dye",el,hex,fg,on,from))return;
   el.style.setProperty("--f",hex);el.style.setProperty("--fg",fg);el.style.setProperty("--on",on)}
 function radio(group,btn){$$('[role="radio"]',group).forEach(function(x){x.setAttribute("aria-checked",x===btn?"true":"false");x.tabIndex=x===btn?0:-1})}
