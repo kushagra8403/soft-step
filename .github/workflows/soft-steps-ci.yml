@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 22
       - name: Install Playwright
-        run: npm install --no-save --no-package-lock playwright@1.64.1
+        run: npm install --no-save --no-package-lock playwright@1.64.1 @supabase/supabase-js@2.45.4 nodemailer@6.9.15
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Check JavaScript syntax
@@ -42,7 +42,6 @@ jobs:
           node --check work-admin/site/extras.js
           node --check work-admin/site/account.js
           for f in netlify/functions/*.js; do node --check "$f"; done
-          npm install --no-save --no-package-lock @supabase/supabase-js@2.45.4 nodemailer@6.9.15
           node netlify/tests/functions.cjs
           node --check work-admin/site/lang-gu.js
           node --check work-admin/site/lang-hi.js
