@@ -34,7 +34,11 @@ exports.handler = async function (event) {
     return L.json(ex.data.user_id === user.id ? 200 : 409, ex.data.user_id === user.id ? { ok: true, duplicate: true } : { error: "oid_taken" });
   }
   const ins = await db.from("orders").insert(o);
-  if (ins.error) { console.error("insert failed", ins.error.message); return L.json(500, { error: "save" }); }
+  if (ins.error) {
+    /* two requests for one order id can both pass the check above; the unique constraint lets only one in */
+    if (ins.error.code === "23505") return L.json(200, { ok: true, duplicate: true });
+    console.error("insert failed", ins.error.message); return L.json(500, { error: "save" });
+  }
 
   const m = L.customerMail(o, "received");
   const sent = await L.sendMail(o.email, m.subject, m.text, m.html);

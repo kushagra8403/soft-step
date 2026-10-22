@@ -11,7 +11,7 @@ function q(table) {
   const api = {
     select() { return api; }, order() { return api; }, limit(n) { lim = n; return api; },
     eq(k, v) { f.push([k, v]); return api; },
-    insert(o) { rows.push(Object.assign({ id: "id" + rows.length, status: "received", created_at: "2026-10-22T00:00:00Z" }, o)); return Promise.resolve({ error: null }); },
+    insert(o) { if (o.oid === "SS-RACE1") return Promise.resolve({ error: { code: "23505", message: "dup" } }); rows.push(Object.assign({ id: "id" + rows.length, status: "received", created_at: "2026-10-22T00:00:00Z" }, o)); return Promise.resolve({ error: null }); },
     update(p) { op = "update"; patch = p; return api; },
     maybeSingle() { const m = rows.filter(r => f.every(([k, v]) => r[k] === v)); if (op === "update" && m[0]) Object.assign(m[0], patch); return Promise.resolve({ data: m[0] || null, error: null }); },
     then(res) { res({ data: rows.filter(r => f.every(([k, v]) => r[k] === v)).slice(0, lim), error: null }); }
@@ -38,6 +38,7 @@ const order = { oid: "SS-AB12CD", items: [{ name: "Solid Premium Rug", size: "M"
   assert.equal(mails.length, 2); assert.equal(mails[0].to, "cust@example.com"); assert.equal(mails[1].to, "owner@example.com");
   r = await fn("place-order")(ev("POST", "tc", order)); assert.equal(JSON.parse(r.body).duplicate, true); assert.equal(mails.length, 2, "no second email");
   r = await fn("place-order")(ev("POST", "ta", order)); assert.equal(r.statusCode, 409, "order id belongs to someone else");
+  r = await fn("place-order")(ev("POST", "tc", Object.assign({}, order, { oid: "SS-RACE1" }))); assert.equal(JSON.parse(r.body).duplicate, true, "unique-violation race is a duplicate, not an error");
   r = await fn("my-orders")(ev("GET", "tc")); assert.equal(JSON.parse(r.body).orders.length, 1); assert.equal(JSON.parse(r.body).admin, false);
   r = await fn("my-orders")(ev("GET", "ta")); assert.equal(JSON.parse(r.body).admin, true, "admin match ignores case");
   r = await fn("admin-orders")(ev("GET", "tc")); assert.equal(r.statusCode, 403);
