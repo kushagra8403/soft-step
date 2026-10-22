@@ -3,7 +3,7 @@
 - `main` == what is live: claude.ai artifact **version 31** (https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH) built from `work-admin/site/` (Kora Quiet palette, 5 wow effects `wow.js`, 3 extras `extras.js`, stock/price catalog layer, owner admin `admin.js`). Published with capabilities `{artifact, user, assets}`.
 - Done since the text below was written: checkout/core bugs fixed (PR #1/#3), colour palette chosen and applied, effects + extras built, admin built and tested (core 269, admin 172, integration 216, paint 12), phone CLS fixed (language strip now in the markup), invisible hero buttons on dark rugs fixed, CI green on `main`.
 - Security checks run on the live build: XSS payloads through every catalog field, tampered localStorage (`ss_cart2`, `ss_pending`, `ss_saved`, `ss_pin`, `ss_lang`) and hostile URL hashes — nothing executes; admin builds DOM with textContent only (CI enforces it).
-- Still open: (1) the owner must try the admin once with the real claude.ai login (open the site with `#admin`); (2) deploy to Netlify (`python3 build_netlify.py work-admin/site dist`, zip `dist/`, drag to app.netlify.com/drop, name `softsteps-home`) — PR #2 (`fix/netlify-security-headers`) conflicts with `main` and is superseded by the headers already in `netlify.toml`; (3) owner-only items in section 2; (4) the rest of the original checklist below is historical.
+- Still open: (1) the owner must try the admin once with the real claude.ai login (open the site with `#admin`); (2) deploy to Netlify (`python3 build_netlify.py work-admin/site dist`, zip `dist/`, drag to app.netlify.com/drop, name `softstepshome`) — PR #2 (`fix/netlify-security-headers`) conflicts with `main` and is superseded by the headers already in `netlify.toml`; (3) owner-only items in section 2; (4) the rest of the original checklist below is historical.
 
 ---
 
@@ -18,7 +18,7 @@ Checkout: cart → details → UPI payment → order sent on WhatsApp (+91 90994
 Languages: English | ગુજરાતી | हिन्दी (DOM translation engine, dictionaries built from JSON).
 
 - **Live site (version 30):** https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH  (a claude.ai Artifact, shared "anyone with the link"). Its exact files are in `site-live-v30/`.
-- **Planned public address:** https://softsteps-home.netlify.app (not deployed yet; the previous AI's network could not reach Netlify). `build_netlify.py` builds the deploy folder; `netlify-dist-v30-old/` is an older build (v30, without admin/colours/effects).
+- **Public address:** https://softstepshome.netlify.app (not deployed yet; the previous AI's network could not reach Netlify). `build_netlify.py` builds the deploy folder; `netlify-dist-v30-old/` is an older build (v30, without admin/colours/effects).
 - Brand concept: "Umbaro (ઉંબરો), the threshold" — the doorstep. Fonts: Fraunces + Hind Vadodara (Google Fonts only). Full original design spec: `SPEC.md`.
 
 ## 2. Non-negotiable rules (from the owner)
@@ -73,7 +73,7 @@ Full build-ready specs are in `design2/EFFECTS.md`. Effects: (W1) **Brush the pi
 
 ### E. Publish
 1. Merge A–D into one folder, rebuild languages, run `qa.cjs` and the test scripts.
-2. Publish to the claude.ai Artifact (an AI with the Artifact tool: publish `softsteps.html` as the page and each other file via `files`; keep the capabilities `{artifact:{}, user:{}, assets:{}}` declared for the admin) — OR build for Netlify: `python3 build_netlify.py <final-folder> dist` and zip `dist/` for the owner to drag onto https://app.netlify.com/drop, then rename the site to `softsteps-home`. (If the platform's network allows `api.netlify.com`, deploy directly.)
+2. Publish to the claude.ai Artifact (an AI with the Artifact tool: publish `softsteps.html` as the page and each other file via `files`; keep the capabilities `{artifact:{}, user:{}, assets:{}}` declared for the admin) — OR build for Netlify: `python3 build_netlify.py <final-folder> dist` and zip `dist/` for the owner to drag onto https://app.netlify.com/drop, then rename the site to `softstepshome`. (If the platform's network allows `api.netlify.com`, deploy directly.)
 3. Do not publish anything the owner has not seen if it changes the look dramatically — show screenshots first.
 
 ## 7. Suggested order for the next AI
