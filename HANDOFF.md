@@ -1,3 +1,12 @@
+# STATUS UPDATE (22 Oct 2026) — read this first
+
+- `main` == what is live: claude.ai artifact **version 31** (https://claude.ai/artifact/CspLRioTiMjWF3nz8qj3WH) built from `work-admin/site/` (Kora Quiet palette, 5 wow effects `wow.js`, 3 extras `extras.js`, stock/price catalog layer, owner admin `admin.js`). Published with capabilities `{artifact, user, assets}`.
+- Done since the text below was written: checkout/core bugs fixed (PR #1/#3), colour palette chosen and applied, effects + extras built, admin built and tested (core 269, admin 172, integration 216, paint 12), phone CLS fixed (language strip now in the markup), invisible hero buttons on dark rugs fixed, CI green on `main`.
+- Security checks run on the live build: XSS payloads through every catalog field, tampered localStorage (`ss_cart2`, `ss_pending`, `ss_saved`, `ss_pin`, `ss_lang`) and hostile URL hashes — nothing executes; admin builds DOM with textContent only (CI enforces it).
+- Still open: (1) the owner must try the admin once with the real claude.ai login (open the site with `#admin`); (2) deploy to Netlify (`python3 build_netlify.py work-admin/site dist`, zip `dist/`, drag to app.netlify.com/drop, name `softsteps-home`) — PR #2 (`fix/netlify-security-headers`) conflicts with `main` and is superseded by the headers already in `netlify.toml`; (3) owner-only items in section 2; (4) the rest of the original checklist below is historical.
+
+---
+
 # Soft Steps — project handoff and remaining tasks
 
 Give this whole folder (or the zip) to the next AI. Read this file first.
