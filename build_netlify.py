@@ -154,7 +154,7 @@ for filename, html in support_pages.items():
         f.write(html)
 # Permanent redirects for common legacy entry points; avoid redirecting unknown paths.
 with open(os.path.join(DIST, '_redirects'), 'w', encoding='utf-8') as f:
-    f.write('/index.html / 301!\\n')
+    f.write('/index.html / 301!\n')
 # Append support links to the shop without changing the product/checkout flow.
 index_path = os.path.join(DIST, 'index.html')
 with open(index_path, encoding='utf-8') as f:
@@ -165,7 +165,7 @@ with open(index_path, 'w', encoding='utf-8') as f:
     f.write(index_html)
 # Keep the sitemap aligned with pages actually emitted by this build.
 with open(os.path.join(DIST, 'sitemap.xml'), 'w', encoding='utf-8') as f:
-    f.write(f'<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{URL}{path}</loc></url>' for path in ('', 'contact.html', 'privacy.html')) + '</urlset>\\n')
+    f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{URL}{path}</loc></url>' for path in ('', 'contact.html', 'privacy.html')) + '</urlset>\n')
 
 open(os.path.join(DIST, 'netlify.toml'), 'w').write('''[build]
   publish = "."
