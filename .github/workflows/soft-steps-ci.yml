@@ -144,7 +144,7 @@ jobs:
             if (!fs.existsSync(path.join(dist, file))) throw new Error('Missing launch artifact: ' + file);
           }
           const robots = fs.readFileSync(path.join(dist, 'robots.txt'), 'utf8');
-          if (!/^User-agent: \\*\\s*$/m.test(robots) || !/^Allow: \/\\s*$/m.test(robots)) throw new Error('robots.txt must allow public crawl');
+          if (!/^User-agent: \*\s*$/m.test(robots) || !/^Allow: \/\s*$/m.test(robots)) throw new Error('robots.txt must allow public crawl');
           if (!robots.includes('Sitemap: https://softsteps-home.netlify.app/sitemap.xml')) throw new Error('robots.txt sitemap URL does not match canonical host');
           const sitemap = fs.readFileSync(path.join(dist, 'sitemap.xml'), 'utf8');
           for (const url of ['https://softsteps-home.netlify.app/', 'https://softsteps-home.netlify.app/contact.html', 'https://softsteps-home.netlify.app/privacy.html']) {
@@ -152,12 +152,12 @@ jobs:
           }
           for (const file of ['index.html', 'contact.html', 'privacy.html', '404.html']) {
             const page = fs.readFileSync(path.join(dist, file), 'utf8');
-            if (!/<title>[^<]+<\\/title>/i.test(page)) throw new Error(file + ' missing title');
-            if (!/<link rel="canonical" href="https:\\/\\/softsteps-home\\.netlify\\.app\\//i.test(page)) throw new Error(file + ' missing canonical URL');
-            if ((page.match(/<h1\\b/gi) || []).length !== 1) throw new Error(file + ' must contain exactly one H1');
+            if (!/<title>[^<]+<\/title>/i.test(page)) throw new Error(file + ' missing title');
+            if (!/<link rel="canonical" href="https:\/\/softsteps-home\.netlify\.app\//i.test(page)) throw new Error(file + ' missing canonical URL');
+            if ((page.match(/<h1\b/gi) || []).length !== 1) throw new Error(file + ' must contain exactly one H1');
           }
           const contact = fs.readFileSync(path.join(dist, 'contact.html'), 'utf8');
-          if (!/<form\\b[^>]*name="soft-steps-contact"[^>]*data-netlify="true"/i.test(contact) ||
+          if (!/<form\b[^>]*name="soft-steps-contact"[^>]*data-netlify="true"/i.test(contact) ||
               !/<input[^>]+name="form-name"[^>]+value="soft-steps-contact"/i.test(contact) ||
               !/name="email"[^>]+type="email"|type="email"[^>]+name="email"/i.test(contact) ||
               !/netlify-honeypot="bot-field"/i.test(contact)) {
