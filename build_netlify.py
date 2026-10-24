@@ -5,7 +5,7 @@ structured data, icons, robots/sitemap and cache headers."""
 import os, re, shutil, sys, json
 from PIL import Image
 SRC, DIST = sys.argv[1], sys.argv[2]
-URL = "https://softsteps-home-lhci.netlify.app/"
+URL = "https://softsteps-home.netlify.app/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 if os.path.exists(DIST): shutil.rmtree(DIST)
 os.makedirs(DIST)
@@ -142,6 +142,31 @@ page = re.sub(r'<title>[^<]*</title>', f'<title>{title}</title>', page, count=1)
 open(os.path.join(DIST, 'index.html'), 'w', encoding='utf-8').write(head + page)
 open(os.path.join(DIST, 'robots.txt'), 'w').write(f"User-agent: *\nAllow: /\nSitemap: {URL}sitemap.xml\n")
 open(os.path.join(DIST, 'sitemap.xml'), 'w').write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>{URL}</loc></url></urlset>\n')
+# Publish small, crawlable support pages alongside the static shop.
+# Netlify Forms handles contact submissions after deployment; no API key is embedded.
+support_pages = {
+    'contact.html': f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contact Soft Steps | Rugs & mats in Vadodara</title><meta name="description" content="Contact Soft Steps in Vadodara about rugs, doormats, bath mats, availability and orders."><link rel="canonical" href="{URL}contact.html"><meta name="robots" content="index,follow"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;500;600&display=swap"><style>body{{max-width:720px;margin:40px auto;padding:0 20px;background:#F2EADC;color:#1B1D2B;font:17px/1.6 'Hind Vadodara',system-ui,sans-serif}}a{{color:#1F2E57}}label{{display:block;margin-top:16px;font-weight:600}}input,textarea{{box-sizing:border-box;width:100%;padding:12px;border:1px solid #8F806F;border-radius:8px;font:inherit}}button{{margin-top:18px;padding:12px 22px;border:0;border-radius:24px;background:#1F2E57;color:white;font:inherit;cursor:pointer}}</style></head><body><p><a href="/">← Soft Steps home</a></p><h1>Contact Soft Steps</h1><p>Questions about rugs, doormats, bath mats or an order? Send a message below, or contact us at <a href="mailto:softsteps.home@gmail.com">softsteps.home@gmail.com</a> / <a href="https://wa.me/919099441429">WhatsApp</a>.</p><form name="soft-steps-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="soft-steps-contact"><p hidden><label>Do not fill this in <input name="bot-field"></label></p><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required maxlength="100"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254"><label for="order">Order reference (optional)</label><input id="order" name="order_reference" maxlength="100"><label for="message">Message</label><textarea id="message" name="message" rows="6" required maxlength="4000"></textarea><label><input type="checkbox" name="privacy_acknowledged" value="yes" required style="width:auto"> I have read the <a href="/privacy.html">Privacy Policy</a>.</label><button type="submit">Send message</button></form><p>We use the details you provide only to respond to your enquiry. See our <a href="/privacy.html">Privacy Policy</a>.</p></body></html>""",
+    'privacy.html': f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy Policy | Soft Steps</title><meta name="description" content="How Soft Steps handles contact enquiries, order details and website data."><link rel="canonical" href="{URL}privacy.html"></head><body style="max-width:760px;margin:40px auto;padding:0 20px;font:17px/1.6 system-ui,sans-serif"><p><a href="/">← Soft Steps home</a></p><h1>Privacy Policy</h1><p><strong>Last updated: 24 October 2026</strong></p><p>Soft Steps is a home business based in Vadodara, Gujarat, India. This policy explains how information shared with us through this website is handled.</p><h2>Information you provide</h2><p>If you contact us, we may receive your name, email address, message and any order reference you choose to provide. To fulfil an order, we may also need delivery/contact details and information you send through WhatsApp.</p><h2>How we use it</h2><p>We use these details to reply to enquiries, confirm and fulfil orders, provide customer support, and keep necessary business records. We do not sell your personal information.</p><h2>Service providers</h2><p>Website hosting and contact-form processing may be provided by Netlify. Orders and customer messages may use WhatsApp. Those services process information under their own terms and privacy policies.</p><h2>Retention and security</h2><p>We keep information only as long as reasonably needed for the purposes above, customer service and applicable legal/accounting obligations. Please do not send payment-card details, passwords or other highly sensitive information through the form.</p><h2>Your choices</h2><p>You can ask to access, correct or delete information you have sent, subject to legal record-keeping requirements, by emailing <a href="mailto:softsteps.home@gmail.com">softsteps.home@gmail.com</a>.</p><h2>Cookies, analytics and changes</h2><p>This policy will be updated if the site adds analytics, advertising cookies or other tracking. Analytics is not represented as enabled by this release. This static site may process basic technical logs through its hosting provider.</p><h2>Contact</h2><p>Soft Steps, Vadodara, Gujarat, India. Email: <a href="mailto:softsteps.home@gmail.com">softsteps.home@gmail.com</a>.</p></body></html>""",
+    '404.html': f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | Soft Steps</title><meta name="robots" content="noindex,follow"><link rel="canonical" href="{URL}404.html"></head><body style="max-width:680px;margin:12vh auto;padding:0 24px;background:#F2EADC;color:#1B1D2B;font:18px/1.6 system-ui,sans-serif"><p>SOFT STEPS</p><h1>We couldn’t find that page.</h1><p>The page may have moved, or the address may be incorrect.</p><p><a href="/">Return to the shop</a> · <a href="/contact.html">Contact us</a></p></body></html>""",
+}
+for filename, html in support_pages.items():
+    with open(os.path.join(DIST, filename), 'w', encoding='utf-8') as f:
+        f.write(html)
+# Permanent redirects for common legacy entry points; avoid redirecting unknown paths.
+with open(os.path.join(DIST, '_redirects'), 'w', encoding='utf-8') as f:
+    f.write('/index.html / 301!\\n')
+# Append support links to the shop without changing the product/checkout flow.
+index_path = os.path.join(DIST, 'index.html')
+with open(index_path, encoding='utf-8') as f:
+    index_html = f.read()
+support_nav = '<footer class="page" style="padding-top:24px;padding-bottom:32px;text-align:center;font:15px/1.8 system-ui,sans-serif"><a href="/contact.html">Contact</a> · <a href="/privacy.html">Privacy policy</a></footer>'
+index_html = index_html.replace('</body>', support_nav + '</body>') if '</body>' in index_html else index_html + support_nav
+with open(index_path, 'w', encoding='utf-8') as f:
+    f.write(index_html)
+# Keep the sitemap aligned with pages actually emitted by this build.
+with open(os.path.join(DIST, 'sitemap.xml'), 'w', encoding='utf-8') as f:
+    f.write(f'<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{URL}{path}</loc></url>' for path in ('', 'contact.html', 'privacy.html')) + '</urlset>\\n')
+
 open(os.path.join(DIST, 'netlify.toml'), 'w').write('''[build]
   publish = "."
   command = ""
